@@ -1,12 +1,15 @@
 package com.example.jackieelliott.team60application.controllers;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
+import android.content.DialogInterface;
 
 import com.example.jackieelliott.team60application.R;
 
@@ -18,6 +21,8 @@ public class LoginActivity extends Activity {
 
     Button login;
     Button cancel;
+    EditText loginField;
+    EditText passField;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,17 @@ public class LoginActivity extends Activity {
         final Context context = this;
 
         login = (Button) findViewById(R.id.login_button);
+        loginField = (EditText) findViewById(R.id.username_text);
+        passField = (EditText) findViewById(R.id.editText2);
+        final AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
+        alertDialog.setTitle("Error");
+        alertDialog.setMessage("Wrong Username/Password");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
         login.setOnClickListener(new View.OnClickListener() {
 
@@ -39,7 +55,12 @@ public class LoginActivity extends Activity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, HomeActivity.class);
-                startActivity(intent);
+                if (loginField.getText().toString().equals("user")
+                        && passField.getText().toString().equals("pass")) {
+                    startActivity(intent);
+                } else {
+                    alertDialog.show();
+                }
 
             }
 
