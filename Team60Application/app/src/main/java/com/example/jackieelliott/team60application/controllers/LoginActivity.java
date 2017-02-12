@@ -16,12 +16,55 @@ import com.example.jackieelliott.team60application.R;
 
 public class LoginActivity extends Activity {
 
-    Button button;
+    Button login;
+    Button cancel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
+        addListenerOnButtonLogin();
+        addListenerOnButtonCancel();
+    }
+
+    public void addListenerOnButtonLogin() {
+
+        final Context context = this;
+
+        login = (Button) findViewById(R.id.login_button);
+
+        login.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent intent = new Intent(context, HomeActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
+
+    }
+
+    public void addListenerOnButtonCancel() {
+
+        final Context context = this;
+
+        cancel = (Button) findViewById(R.id.login_Cancel);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent intent = new Intent(context, WelcomePageActivity.class);
+                startActivity(intent);
+
+            }
+
+        });
+
     }
 
 }
