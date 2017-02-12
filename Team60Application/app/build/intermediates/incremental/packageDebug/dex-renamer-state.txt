@@ -1,0 +1,7 @@
+#Sun Feb 12 16:20:39 EST 2017
+base.0=/Users/Alon/Documents/Gatech/Semester4/CS2340/WaterApp/ProjectManagement/Team60Application/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_7ebda563d99176080e4471e8dfcc0a558ad56142
+renamed.1=classes.dex
+renamed.0=classes2.dex
+file.1=/Users/Alon/Documents/Gatech/Semester4/CS2340/WaterApp/ProjectManagement/Team60Application/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1ea706de4b3155fa74488ddd842ff40c57638745/classes.dex
+base.1=/Users/Alon/Documents/Gatech/Semester4/CS2340/WaterApp/ProjectManagement/Team60Application/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1ea706de4b3155fa74488ddd842ff40c57638745
+file.0=/Users/Alon/Documents/Gatech/Semester4/CS2340/WaterApp/ProjectManagement/Team60Application/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_7ebda563d99176080e4471e8dfcc0a558ad56142/classes.dex
