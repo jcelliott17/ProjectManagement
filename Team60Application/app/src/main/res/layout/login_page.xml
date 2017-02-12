@@ -22,7 +22,7 @@
         android:inputType="textPersonName"
         android:text="Username"
         android:ems="10"
-        android:id="@+id/editText" />
+        android:id="@+id/username_text" />
 
     <TextView
         android:text="Password"

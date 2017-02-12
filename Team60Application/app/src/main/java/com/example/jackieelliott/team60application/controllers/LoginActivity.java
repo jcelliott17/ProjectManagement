@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 
 import com.example.jackieelliott.team60application.R;
 
@@ -18,6 +19,8 @@ public class LoginActivity extends Activity {
 
     Button login;
     Button cancel;
+    EditText loginField;
+    EditText passField;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,9 @@ public class LoginActivity extends Activity {
         final Context context = this;
 
         login = (Button) findViewById(R.id.login_button);
+        loginField = (EditText) findViewById(R.id.username_text);
+        passField = (EditText) findViewById(R.id.editText2);
+
 
         login.setOnClickListener(new View.OnClickListener() {
 
@@ -39,7 +45,10 @@ public class LoginActivity extends Activity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, HomeActivity.class);
-                startActivity(intent);
+                if (loginField.getText().toString().equals("user")
+                        && passField.getText().toString().equals("pass")) {
+                    startActivity(intent);
+                }
 
             }
 
