@@ -25,7 +25,10 @@
             android:label="Team60Application"
             android:name=".controllers.RegisterUserActivity" >
         </activity>
-
+        <activity
+            android:label="Team60Application"
+            android:name=".controllers.LoginActivity" >
+        </activity>
     </application>
 
 </manifest>
