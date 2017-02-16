@@ -11,7 +11,18 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.content.DialogInterface;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ArrayList;
+
+import com.example.jackieelliott.team60application.Model.AccountTypes;
+import com.example.jackieelliott.team60application.Model.Admin;
+import com.example.jackieelliott.team60application.Model.Manager;
+import com.example.jackieelliott.team60application.Model.User;
+import com.example.jackieelliott.team60application.Model.Worker;
 import com.example.jackieelliott.team60application.R;
+
+import java.util.List;
 
 /**
  * Created by JackieElliott on 2/8/17.
@@ -23,6 +34,10 @@ public class LoginActivity extends Activity {
     Button cancel;
     EditText loginField;
     EditText passField;
+    ArrayList<User> userList;
+    ArrayList<Worker> workerList;
+    ArrayList<Manager> managerList;
+    ArrayList<Admin> adminList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +45,12 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login_page);
         addListenerOnButtonLogin();
         addListenerOnButtonCancel();
+        Bundle b = getIntent().getExtras();
+        userList = b.getParcelableArrayList("UserList");
+        workerList = b.getParcelableArrayList("WorkerList");
+        managerList = b.getParcelableArrayList("ManagerList");
+        adminList = b.getParcelableArrayList("AdminList");
+
     }
 
     public void addListenerOnButtonLogin() {
@@ -53,10 +74,43 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-
-                Intent intent = new Intent(context, HomeActivity.class);
-                if (loginField.getText().toString().equals("user")
-                        && passField.getText().toString().equals("pass")) {
+                boolean login = false;
+                for (int i = 0; i < userList.size(); i++) {
+                    if (userList.get(i).getUsername().equals(loginField.getText().toString())
+                            && passField.getText().toString().equals(userList.get(i).getPassword())) {
+                        login = true;
+                    }
+                }
+                if (!login) {
+                    for (int i = 0; i < workerList.size(); i++) {
+                        if (workerList.get(i).getUsername().equals(loginField.getText().toString())
+                                && passField.getText().toString().equals(workerList.get(i).getPassword())) {
+                            login = true;
+                        }
+                    }
+                }
+                if (!login) {
+                    for (int i = 0; i < managerList.size(); i++) {
+                        if (managerList.get(i).getUsername().equals(loginField.getText().toString())
+                                && passField.getText().toString().equals(managerList.get(i).getPassword())) {
+                            login = true;
+                        }
+                    }
+                }
+                if (!login) {
+                    for (int i = 0; i < adminList.size(); i++) {
+                        if (adminList.get(i).getUsername().equals(loginField.getText().toString())
+                                && passField.getText().toString().equals(adminList.get(i).getPassword())) {
+                            login = true;
+                        }
+                    }
+                }
+                if (login) {
+                    Intent intent = new Intent(context, HomeActivity.class);
+                    intent.putParcelableArrayListExtra("UserList", userList);
+                    intent.putParcelableArrayListExtra("WorkerList", workerList);
+                    intent.putParcelableArrayListExtra("ManagerList", managerList);
+                    intent.putParcelableArrayListExtra("AdminList", adminList);
                     startActivity(intent);
                 } else {
                     alertDialog.show();
@@ -80,6 +134,10 @@ public class LoginActivity extends Activity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, WelcomePageActivity.class);
+                intent.putParcelableArrayListExtra("UserList", userList);
+                intent.putParcelableArrayListExtra("WorkerList", workerList);
+                intent.putParcelableArrayListExtra("ManagerList", managerList);
+                intent.putParcelableArrayListExtra("AdminList", adminList);
                 startActivity(intent);
 
             }
@@ -97,5 +155,4 @@ public class LoginActivity extends Activity {
         //TODO: Replace this with your own logic
         return password.length() > 4;
     }
-
 }
