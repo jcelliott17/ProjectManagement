@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <TextView
-        android:text="Please create a username and password"
+        android:text="Enter Registration Info:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/instruction_text"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:layout_weight="0.09" />
 
     <TextView
         android:text="Username:"
@@ -36,11 +38,24 @@
         android:ems="10"
         android:id="@+id/editText3" />
 
+    <TextView
+        android:text="Account:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView7" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_weight="0.05" />
+
     <Button
         android:text="Register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/registerOnRegisterPage" />
+        android:id="@+id/registerOnRegisterPage"
+        android:elevation="0dp" />
 
     <Button
         android:text="Cancel"
