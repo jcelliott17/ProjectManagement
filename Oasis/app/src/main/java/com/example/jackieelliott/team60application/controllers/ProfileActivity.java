@@ -57,6 +57,8 @@ public class ProfileActivity extends Activity {
         backButton = (Button) findViewById(R.id.backButton);
         email = (EditText) findViewById(R.id.emailText);
         homeAddress = (EditText) findViewById(R.id.addressText);
+        username = (TextView) findViewById(R.id.usernameText);
+        accountType = (TextView) findViewById(R.id.accountText);
 
         backButton.setOnClickListener(new View.OnClickListener() {
 
