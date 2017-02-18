@@ -33,6 +33,10 @@
             android:label="Team60Application"
             android:name=".controllers.HomeActivity" >
         </activity>
+		<activity
+            android:label="Team60Application"
+            android:name=".controllers.ProfileActivity" >
+        </activity>
     </application>
 
 </manifest>
