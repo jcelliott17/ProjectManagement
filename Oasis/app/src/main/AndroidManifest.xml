@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jackieelliott.team60application">
+    package="com.example.jackieelliott.Oasis">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -15,27 +15,27 @@
         android:theme="@style/AppTheme">
         <activity
             android:label="Oasis"
-            android:name=".controllers.WelcomePageActivity" >
+            android:name="com.example.jackieelliott.Oasis.controllers.WelcomePageActivity" >
             <intent-filter >
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:label="Team60Application"
-            android:name=".controllers.RegisterUserActivity" >
+            android:label="Oasis"
+            android:name="com.example.jackieelliott.Oasis.controllers.RegisterUserActivity" >
         </activity>
         <activity
-            android:label="Team60Application"
-            android:name=".controllers.LoginActivity" >
+            android:label="Oasis"
+            android:name="com.example.jackieelliott.Oasis.controllers.LoginActivity" >
         </activity>
         <activity
-            android:label="Team60Application"
-            android:name=".controllers.HomeActivity" >
+            android:label="Oasis"
+            android:name="com.example.jackieelliott.Oasis.controllers.HomeActivity" >
         </activity>
 		<activity
-            android:label="Team60Application"
-            android:name=".controllers.ProfileActivity" >
+            android:label="Oasis"
+            android:name="com.example.jackieelliott.Oasis.controllers.ProfileActivity" >
         </activity>
     </application>
 
