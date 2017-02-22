@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <TextView
-        android:text="Welcome to Our Application"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/welcome_text"
-        android:layout_weight="0.23"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="36sp" />
+        android:layout_height="match_parent"
+        android:layout_weight="0.05">
 
-    <Button
-        android:text="Login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/login_button"
-        android:layout_weight="0.05"
-        android:onClick="onLoginPressed" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/welcome_screen"
+            android:id="@+id/imageView2" />
 
-    <Button
-        android:text="Register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/register_button"
-        android:layout_weight="0.06" />
+        <Button
+            android:text="Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/login_button"
+            android:layout_weight="0.05"
+            android:onClick="onLoginPressed"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:text="Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_button"
+            android:layout_weight="0.06"
+            android:layout_below="@+id/login_button"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp" />
+    </RelativeLayout>
+
 </LinearLayout>
