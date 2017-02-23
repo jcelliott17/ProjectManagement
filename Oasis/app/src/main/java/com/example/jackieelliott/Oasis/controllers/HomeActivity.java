@@ -23,6 +23,7 @@ public class HomeActivity extends Activity {
 
     Button logoutButton;
     Button profileButton;
+    Button reportButton;
     ArrayList<User> userList;
     ArrayList<Worker> workerList;
     ArrayList<Manager> managerList;
@@ -74,6 +75,26 @@ public class HomeActivity extends Activity {
 
 
                 Intent intent = new Intent(context, ProfileActivity.class);
+                intent.putParcelableArrayListExtra("UserList", userList);
+                intent.putParcelableArrayListExtra("WorkerList", workerList);
+                intent.putParcelableArrayListExtra("ManagerList", managerList);
+                intent.putParcelableArrayListExtra("AdminList", adminList);
+                startActivity(intent);
+
+            }
+
+        });
+
+        reportButton = (Button) findViewById(R.id.report_button);
+
+        reportButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+
+
+                Intent intent = new Intent(context, ReportActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
