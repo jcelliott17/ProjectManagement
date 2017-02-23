@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
@@ -32,6 +33,7 @@ public class LoginActivity extends Activity {
     ArrayList<Worker> workerList;
     ArrayList<Manager> managerList;
     ArrayList<Admin> adminList;
+    User currentUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class LoginActivity extends Activity {
         workerList = b.getParcelableArrayList("WorkerList");
         managerList = b.getParcelableArrayList("ManagerList");
         adminList = b.getParcelableArrayList("AdminList");
+        currentUser = b.getParcelable("CurrentUser");
 
     }
 
@@ -73,6 +76,7 @@ public class LoginActivity extends Activity {
                     if (userList.get(i).getUsername().equals(loginField.getText().toString())
                             && passField.getText().toString().equals(userList.get(i).getPassword())) {
                         login = true;
+                        currentUser = userList.get(i);
                     }
                 }
                 if (!login) {
@@ -80,6 +84,7 @@ public class LoginActivity extends Activity {
                         if (workerList.get(i).getUsername().equals(loginField.getText().toString())
                                 && passField.getText().toString().equals(workerList.get(i).getPassword())) {
                             login = true;
+                            currentUser = workerList.get(i);
                         }
                     }
                 }
@@ -88,6 +93,8 @@ public class LoginActivity extends Activity {
                         if (managerList.get(i).getUsername().equals(loginField.getText().toString())
                                 && passField.getText().toString().equals(managerList.get(i).getPassword())) {
                             login = true;
+
+                            currentUser = managerList.get(i);
                         }
                     }
                 }
@@ -96,6 +103,7 @@ public class LoginActivity extends Activity {
                         if (adminList.get(i).getUsername().equals(loginField.getText().toString())
                                 && passField.getText().toString().equals(adminList.get(i).getPassword())) {
                             login = true;
+                            currentUser = adminList.get(i);
                         }
                     }
                 }
@@ -105,6 +113,7 @@ public class LoginActivity extends Activity {
                     intent.putParcelableArrayListExtra("WorkerList", workerList);
                     intent.putParcelableArrayListExtra("ManagerList", managerList);
                     intent.putParcelableArrayListExtra("AdminList", adminList);
+                    intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 } else {
                     alertDialog.show();

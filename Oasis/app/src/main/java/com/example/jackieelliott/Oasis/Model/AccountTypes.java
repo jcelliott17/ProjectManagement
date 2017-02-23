@@ -7,5 +7,4 @@ public class AccountTypes {
     public enum AccountType {
         User, Worker, Manager, Admin
     }
-
 }

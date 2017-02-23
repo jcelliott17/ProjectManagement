@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,22 +28,58 @@ public class HomeActivity extends Activity {
     ArrayList<Worker> workerList;
     ArrayList<Manager> managerList;
     ArrayList<Admin> adminList;
+    User currentUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
-        addListenerOnButtonLogout();
         Bundle b = getIntent().getExtras();
         userList = b.getParcelableArrayList("UserList");
         workerList = b.getParcelableArrayList("WorkerList");
         managerList = b.getParcelableArrayList("ManagerList");
         adminList = b.getParcelableArrayList("AdminList");
+        currentUser = b.getParcelable("CurrentUser");
+        addListenerOnButtonLogout();
+
     }
 
     public void addListenerOnButtonLogout() {
 
         final Context context = this;
+
+        for (int i = 0; i < userList.size(); i++) {
+            if (userList.get(i).getUsername().equals(currentUser.getUsername())
+                    && currentUser.getPassword().equals(userList.get(i).getPassword())) {
+                userList.remove(i);
+                userList.add(i, currentUser);
+            }
+        }
+            for (int i = 0; i < workerList.size(); i++) {
+                if (workerList.get(i).getUsername().equals(currentUser.getUsername())
+                        && currentUser.getPassword().equals(workerList.get(i).getPassword())) {
+                    workerList.remove(i);
+                    workerList.add(i, (Worker) currentUser);
+                }
+            }
+
+
+            for (int i = 0; i < managerList.size(); i++) {
+                if (managerList.get(i).getUsername().equals(currentUser.getUsername())
+                        && currentUser.getPassword().equals(managerList.get(i).getPassword())) {
+                    managerList.remove(i);
+                    managerList.add(i, (Manager) currentUser);
+                }
+            }
+
+            for (int i = 0; i < adminList.size(); i++) {
+                if (adminList.get(i).getUsername().equals(currentUser.getUsername())
+                        && currentUser.getPassword().equals(adminList.get(i).getPassword())) {
+                    adminList.remove(i);
+                    adminList.add(i, (Admin) currentUser);
+                }
+            }
+
 
         logoutButton = (Button) findViewById(R.id.logout_button);
 
@@ -50,16 +87,14 @@ public class HomeActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-
-
-
                 Intent intent = new Intent(context, WelcomePageActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putExtra("CurrentUser", currentUser);
+                Log.d("TESomh", currentUser.getEmailAddress());
                 startActivity(intent);
-
             }
 
         });
@@ -70,16 +105,13 @@ public class HomeActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-
-
-
                 Intent intent = new Intent(context, ProfileActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
-
             }
 
         });

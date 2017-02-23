@@ -12,7 +12,17 @@ public class User implements Parcelable{
     private String _username;
     private String _password;
     //private Profile _profile;
+    private String _homeAddress;
+    private String _emailAddress;
+    private String _accountType;
 
+    public User(String userName, String password) {
+        _username = userName;
+        _password = password;
+        _accountType = "";
+        _emailAddress = "";
+        _homeAddress = "";
+    }
     /*
      * Getters and Setters
      */
@@ -24,19 +34,34 @@ public class User implements Parcelable{
 
     public void setPassword(String password) { _password = password; }
 
-    public User(String userName, String password) {
-        _username = userName;
-        _password = password;
-    }
+    public String getHomeAddress() { return _homeAddress; }
+
+    public void setHomeAddress(String homeAddress) { _homeAddress = homeAddress; }
+
+    public String getEmailAddress() { return _emailAddress; }
+
+    public void setEmailAddress(String emailAddress) { _emailAddress = emailAddress; }
+
+    public String getAccountType() { return _accountType; }
+
+    public void setAccountType(String accountType) { _accountType = accountType; }
+
+    //public Profile getProfile() {
+       // return _profile;
+    //}
 
 
     /* *********************************
    * These methods are required by the parcelable interface
    *
    */
-    private User(Parcel in) {
+    public User(Parcel in) {
         _username = in.readString();
         _password = in.readString();
+        _homeAddress = in.readString();
+        _emailAddress = in.readString();
+        _accountType = in.readString();
+        //_profile = in.readParcelable( Profile.class.getClassLoader());
     }
 
     @Override
@@ -51,6 +76,10 @@ public class User implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_username);
         dest.writeString(_password);
+        dest.writeString(_homeAddress);
+        dest.writeString(_emailAddress);
+        dest.writeString(_accountType);
+        //dest.writeParcelable(_profile, flags);
     }
 
     public static final Parcelable.Creator<User> CREATOR

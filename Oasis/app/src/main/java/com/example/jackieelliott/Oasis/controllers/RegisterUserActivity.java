@@ -17,6 +17,7 @@ import com.example.jackieelliott.Oasis.Model.Worker;
 import com.example.jackieelliott.Oasis.Model.Manager;
 import com.example.jackieelliott.Oasis.Model.Admin;
 import com.example.jackieelliott.Oasis.R;
+import com.example.jackieelliott.Oasis.Model.Profile;
 
 /**
  * Created by JackieElliott on 2/8/17.
@@ -33,6 +34,7 @@ public class RegisterUserActivity extends Activity{
     ArrayList<Worker> workerList;
     ArrayList<Manager> managerList;
     ArrayList<Admin> adminList;
+    User currentUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class RegisterUserActivity extends Activity{
         workerList = b.getParcelableArrayList("WorkerList");
         managerList = b.getParcelableArrayList("ManagerList");
         adminList = b.getParcelableArrayList("AdminList");
+        currentUser = b.getParcelable("CurrentUser");
 
     }
 
@@ -72,21 +75,26 @@ public class RegisterUserActivity extends Activity{
                 if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.User) {
                     User user = new User(userNameField.getText().toString(), passField.getText().toString());
                     userList.add(user);
+                    currentUser = user;
                 } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Worker) {
                     Worker worker = new Worker(userNameField.getText().toString(), passField.getText().toString());
                     workerList.add(worker);
+                    currentUser = worker;
                 } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Manager) {
                     Manager manager = new Manager(userNameField.getText().toString(), passField.getText().toString());
                     managerList.add(manager);
+                    currentUser = manager;
                 } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Admin) {
                     Admin admin = new Admin(userNameField.getText().toString(), passField.getText().toString());
                     adminList.add(admin);
+                    currentUser = admin;
                 }
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 
@@ -110,6 +118,7 @@ public class RegisterUserActivity extends Activity{
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
             }
