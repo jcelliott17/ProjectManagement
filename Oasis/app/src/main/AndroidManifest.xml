@@ -37,6 +37,10 @@
             android:label="Oasis"
             android:name="com.example.jackieelliott.Oasis.controllers.ProfileActivity" >
         </activity>
+        <activity
+            android:label="Oasis"
+            android:name="com.example.jackieelliott.Oasis.controllers.ReportActivity" >
+        </activity>
     </application>
 
 </manifest>
