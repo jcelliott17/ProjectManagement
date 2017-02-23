@@ -52,6 +52,7 @@ public class ProfileActivity extends Activity {
         username.setText(currentUser.getUsername());
         email = (EditText) findViewById(R.id.emailText);
         homeAddress = (EditText) findViewById(R.id.addressText);
+        accountType.setText(currentUser.getAccountType());
 
         if (currentUser != null) {
             if (currentUser.getEmailAddress() != null){

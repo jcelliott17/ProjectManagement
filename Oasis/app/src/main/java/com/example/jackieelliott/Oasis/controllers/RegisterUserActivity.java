@@ -76,18 +76,22 @@ public class RegisterUserActivity extends Activity{
                     User user = new User(userNameField.getText().toString(), passField.getText().toString());
                     userList.add(user);
                     currentUser = user;
+                    currentUser.setAccountType("User");
                 } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Worker) {
                     Worker worker = new Worker(userNameField.getText().toString(), passField.getText().toString());
                     workerList.add(worker);
                     currentUser = worker;
+                    currentUser.setAccountType("Worker");
                 } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Manager) {
                     Manager manager = new Manager(userNameField.getText().toString(), passField.getText().toString());
                     managerList.add(manager);
                     currentUser = manager;
+                    currentUser.setAccountType("Manager");
                 } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Admin) {
                     Admin admin = new Admin(userNameField.getText().toString(), passField.getText().toString());
                     adminList.add(admin);
                     currentUser = admin;
+                    currentUser.setAccountType("Admin");
                 }
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
