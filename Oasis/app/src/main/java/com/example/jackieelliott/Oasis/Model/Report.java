@@ -5,4 +5,7 @@ package com.example.jackieelliott.Oasis.Model;
  */
 
 public class Report {
+
+     // More to come
+
 }

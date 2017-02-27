@@ -54,6 +54,8 @@ public class ProfileActivity extends Activity {
         homeAddress = (EditText) findViewById(R.id.addressText);
         accountType.setText(currentUser.getAccountType());
 
+        // Gets the information of the current user if the email/ home
+        // address already exists.
         if (currentUser != null) {
             if (currentUser.getEmailAddress() != null){
                 email.setText(currentUser.getEmailAddress());

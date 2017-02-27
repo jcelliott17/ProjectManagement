@@ -9,6 +9,10 @@ import android.os.Parcelable;
 
 public class Profile implements Parcelable {
 
+    /*
+    We are currently not using this class
+     */
+
     private String _homeAddress;
     private String _emailAddress;
     private String _accountType;

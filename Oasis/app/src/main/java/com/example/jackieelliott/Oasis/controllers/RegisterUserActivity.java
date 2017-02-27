@@ -34,6 +34,8 @@ public class RegisterUserActivity extends Activity{
     ArrayList<Worker> workerList;
     ArrayList<Manager> managerList;
     ArrayList<Admin> adminList;
+    //currentUser created to keep track of who is using the application
+    //this will be removed once the database starts working
     User currentUser;
 
     @Override
@@ -71,7 +73,14 @@ public class RegisterUserActivity extends Activity{
 
             @Override
             public void onClick(View arg0) {
+                // Here we did not account for if that user already exists
+                // A warning should pop up here and let them know if that username already
+                // exists?
 
+                /*
+                Determines what type of user to create based on selection. Then sets the current user to the user
+                created.
+                 */
                 if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.User) {
                     User user = new User(userNameField.getText().toString(), passField.getText().toString());
                     userList.add(user);
@@ -93,6 +102,7 @@ public class RegisterUserActivity extends Activity{
                     currentUser = admin;
                     currentUser.setAccountType("Admin");
                 }
+                // Passes information amoung models
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("WorkerList", workerList);

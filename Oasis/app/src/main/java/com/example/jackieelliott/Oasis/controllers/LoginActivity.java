@@ -71,6 +71,11 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
+                /*
+                Searches for login username. Warning should pop up if the user name does not exist.
+                If the user name and password combination exist then the current user is set the user
+                found.
+                 */
                 boolean login = false;
                 for (int i = 0; i < userList.size(); i++) {
                     if (userList.get(i).getUsername().equals(loginField.getText().toString())
@@ -108,6 +113,9 @@ public class LoginActivity extends Activity {
                     }
                 }
                 if (login) {
+
+                    // Passed information amoung activities
+
                     Intent intent = new Intent(context, HomeActivity.class);
                     intent.putParcelableArrayListExtra("UserList", userList);
                     intent.putParcelableArrayListExtra("WorkerList", workerList);
@@ -135,7 +143,7 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-
+                // Passes information amount activities
                 Intent intent = new Intent(context, WelcomePageActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("WorkerList", workerList);

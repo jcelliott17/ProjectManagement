@@ -9,12 +9,17 @@ import android.os.Parcelable;
 
 public class User implements Parcelable{
 
+    /**
+     * Attributes of the User class
+     */
+
     private String _username;
     private String _password;
     //private Profile _profile;
     private String _homeAddress;
     private String _emailAddress;
     private String _accountType;
+
 
     public User(String userName, String password) {
         _username = userName;

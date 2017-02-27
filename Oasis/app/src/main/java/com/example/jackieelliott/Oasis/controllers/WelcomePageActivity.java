@@ -23,6 +23,7 @@ public class WelcomePageActivity extends AppCompatActivity {
 
     Button button;
     Button button2;
+    //These lists allow for information to persist. Eventually will be replaced by data base
     ArrayList<User> userList;
     ArrayList<Worker> workerList;
     ArrayList<Manager> managerList;

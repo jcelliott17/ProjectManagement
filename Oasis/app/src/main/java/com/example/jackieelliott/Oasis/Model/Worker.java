@@ -10,9 +10,9 @@ import android.os.Parcelable;
 public class Worker extends User{
 
     /**
-     *
-     * @param userName
-     * @param password
+     * Constructor for the worker class
+     * @param userName Username for the worker
+     * @param password Password for the worker
      */
     public Worker(String userName, String password) {
         super(userName, password);

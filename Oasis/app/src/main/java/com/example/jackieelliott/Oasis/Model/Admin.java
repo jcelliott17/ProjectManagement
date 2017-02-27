@@ -10,9 +10,9 @@ import android.os.Parcelable;
 public class Admin extends Manager {
 
     /**
-     *
-     * @param userName
-     * @param password
+     * This is a constructor
+     * @param userName username of the admin
+     * @param password password of the admin
      */
     public Admin(String userName, String password) {
         super(userName, password);

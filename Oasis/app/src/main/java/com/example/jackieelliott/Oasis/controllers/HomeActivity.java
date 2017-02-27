@@ -45,15 +45,22 @@ public class HomeActivity extends Activity {
 
     }
 
+
     public void addListenerOnButtonLogout() {
 
+        /*
+        Sets the user that you originally used to create current user to the updated current user
+        which could potentially contain new address/ home email.
+         */
         final Context context = this;
+
 
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getUsername().equals(currentUser.getUsername())
                     && currentUser.getPassword().equals(userList.get(i).getPassword())) {
                 userList.remove(i);
-                userList.add(i, currentUser);
+                userList.add(i, currentUser); // replaces the user with the updated current user
+                // This is necessary because of pass by value
             }
         }
             for (int i = 0; i < workerList.size(); i++) {
