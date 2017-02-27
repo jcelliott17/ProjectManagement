@@ -33,6 +33,9 @@ public class ReportActivity extends Activity {
     ArrayList<Admin> adminList;
 
     @Override
+    /**
+     * Creates the Report Acticity with the necessary information.
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report_page);
@@ -44,6 +47,9 @@ public class ReportActivity extends Activity {
         adminList = b.getParcelableArrayList("AdminList");
     }
 
+    /**
+     * Adds functionality to the logout button.
+     */
     public void addListenerOnButtonLogout() {
 
         final Context context = this;

@@ -39,6 +39,9 @@ public class RegisterUserActivity extends Activity{
     User currentUser;
 
     @Override
+    /**
+     * Creates the report activity page.
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_page);
@@ -60,6 +63,9 @@ public class RegisterUserActivity extends Activity{
 
     }
 
+    /**
+     * Adds functionality to the register button.
+     */
     public void addListenerOnButtonRegister() {
 
         final Context context = this;
@@ -116,6 +122,9 @@ public class RegisterUserActivity extends Activity{
 
     }
 
+    /**
+     * Added functionality to the cancel button on the register page.
+     */
     public void addListenerOnButtonCancel() {
 
         final Context context = this;

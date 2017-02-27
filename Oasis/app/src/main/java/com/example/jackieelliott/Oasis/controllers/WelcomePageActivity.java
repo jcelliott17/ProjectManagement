@@ -30,6 +30,9 @@ public class WelcomePageActivity extends AppCompatActivity {
     ArrayList<Admin> adminList;
 
     @Override
+    /**
+     * Creates the Welcome using the passed information.
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_page);
@@ -49,6 +52,9 @@ public class WelcomePageActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Adds functionality to the register button.
+     */
     public void addListenerOnButton() {
 
         final Context context = this;
@@ -73,6 +79,9 @@ public class WelcomePageActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Adds functionality to the login button.
+     */
     public void addListenerOnButtonLogin() {
 
         final Context context = this;

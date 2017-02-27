@@ -39,10 +39,14 @@ public class ProfileActivity extends Activity {
     User currentUser;
 
     @Override
+    /**
+     * Creates the Profile activity which has the necessary information
+     * transfered with it.
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
-        addListenerOnButtonLogout();
+        addListenerOnButtonBack();
         Bundle b = getIntent().getExtras();
         userList = b.getParcelableArrayList("UserList");
         workerList = b.getParcelableArrayList("WorkerList");
@@ -70,7 +74,10 @@ public class ProfileActivity extends Activity {
         }
     }
 
-    public void addListenerOnButtonLogout() {
+    /**
+     * Adds functionality to the back button on the the profile page.
+     */
+    public void addListenerOnButtonBack() {
 
         final Context context = this;
 

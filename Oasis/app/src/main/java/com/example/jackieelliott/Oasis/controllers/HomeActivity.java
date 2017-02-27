@@ -32,6 +32,9 @@ public class HomeActivity extends Activity {
     User currentUser;
 
     @Override
+    /**
+     * On the creation of the Home activity this information is uploaded and updated.
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
@@ -45,7 +48,9 @@ public class HomeActivity extends Activity {
 
     }
 
-
+    /**
+     * Adds functionality to the logout button
+     */
     public void addListenerOnButtonLogout() {
 
         /*
