@@ -14,11 +14,17 @@ public class Report implements Parcelable {
     private String _condition;
     private String _typeOfWater;
     private int _timeAndDate;
+    private int _reportNumber;
 
     public Report (String name, String location) {
         _reportName = name;
         _location = location;
     }
+
+    public int getReportNumber() { return _reportNumber; }
+
+    public void setReportNumber(int number) { _reportNumber = number; }
+
     public String getCondition() {
         return _condition;
     }
@@ -59,11 +65,12 @@ public class Report implements Parcelable {
         _condition = in.readString();
         _typeOfWater = in.readString();
         _timeAndDate = in.readInt();
+        _reportNumber = in.readInt();
     }
 
     @Override
     public String toString() {
-        return "Name: " + _reportName + " Location: " + _location;
+        return "Report Number: " + _reportNumber + " Name: " + _reportName + " Location: " + _location;
     }
 
     @Override
@@ -81,6 +88,7 @@ public class Report implements Parcelable {
         dest.writeString(_condition);
         dest.writeString(_typeOfWater);
         dest.writeInt(_timeAndDate);
+        dest.writeInt(_reportNumber);
     }
 
     public static final Parcelable.Creator<Report> CREATOR

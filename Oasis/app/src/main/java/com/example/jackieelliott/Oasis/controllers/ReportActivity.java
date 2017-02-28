@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -132,14 +133,13 @@ public class ReportActivity extends Activity {
 
         createReportButton.setOnClickListener(new View.OnClickListener() {
 
-
-
             @Override
             public void onClick(View arg0) {
 
                 Report newReport = new Report(reportTitle.getText().toString(), reportLocation.getText().toString());
                 newReport.setCondition(conditionWaterSpinner.getSelectedItem().toString());
                 newReport.setTypeOfWater(typeWaterSpinner.getSelectedItem().toString());
+                newReport.setReportNumber(reportList.size() + 1);
                 reportList.add(newReport);
 
                 Intent intent = new Intent(context, HomeActivity.class);
@@ -150,15 +150,9 @@ public class ReportActivity extends Activity {
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
-
             }
 
         });
 
     }
-
-
-
-
-
 }
