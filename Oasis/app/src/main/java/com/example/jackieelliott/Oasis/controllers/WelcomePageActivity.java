@@ -11,6 +11,7 @@ import com.example.jackieelliott.Oasis.Model.Admin;
 import com.example.jackieelliott.Oasis.Model.Manager;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Worker;
+import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class WelcomePageActivity extends AppCompatActivity {
     ArrayList<Worker> workerList;
     ArrayList<Manager> managerList;
     ArrayList<Admin> adminList;
+    ArrayList<Report> reportList;
 
     @Override
     /**
@@ -43,12 +45,14 @@ public class WelcomePageActivity extends AppCompatActivity {
             workerList = new ArrayList<>();
             managerList = new ArrayList<>();
             adminList = new ArrayList<>();
+            reportList = new ArrayList<>();
         } else {
             Bundle b = getIntent().getExtras();
             userList = b.getParcelableArrayList("UserList");
             workerList = b.getParcelableArrayList("WorkerList");
             managerList = b.getParcelableArrayList("ManagerList");
             adminList = b.getParcelableArrayList("AdminList");
+            reportList = b.getParcelableArrayList("ReportList");
         }
     }
 
@@ -71,6 +75,7 @@ public class WelcomePageActivity extends AppCompatActivity {
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
                 startActivity(intent);
 
             }
@@ -98,6 +103,7 @@ public class WelcomePageActivity extends AppCompatActivity {
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
                 startActivity(intent);
 
             }

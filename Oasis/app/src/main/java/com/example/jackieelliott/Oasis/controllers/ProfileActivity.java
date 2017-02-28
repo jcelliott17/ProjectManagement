@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.jackieelliott.Oasis.Model.Admin;
 import com.example.jackieelliott.Oasis.Model.Manager;
 import com.example.jackieelliott.Oasis.Model.Profile;
+import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Worker;
 import com.example.jackieelliott.Oasis.R;
@@ -36,6 +37,7 @@ public class ProfileActivity extends Activity {
     ArrayList<Worker> workerList;
     ArrayList<Manager> managerList;
     ArrayList<Admin> adminList;
+    ArrayList<Report> reportList;
     User currentUser;
 
     @Override
@@ -52,7 +54,9 @@ public class ProfileActivity extends Activity {
         workerList = b.getParcelableArrayList("WorkerList");
         managerList = b.getParcelableArrayList("ManagerList");
         adminList = b.getParcelableArrayList("AdminList");
+        reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
+
         username.setText(currentUser.getUsername());
         email = (EditText) findViewById(R.id.emailText);
         homeAddress = (EditText) findViewById(R.id.addressText);
@@ -107,6 +111,7 @@ public class ProfileActivity extends Activity {
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 

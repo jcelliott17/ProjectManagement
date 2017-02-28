@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import com.example.jackieelliott.Oasis.Model.Admin;
 import com.example.jackieelliott.Oasis.Model.Manager;
+import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Worker;
 import com.example.jackieelliott.Oasis.R;
@@ -33,6 +34,7 @@ public class LoginActivity extends Activity {
     ArrayList<Worker> workerList;
     ArrayList<Manager> managerList;
     ArrayList<Admin> adminList;
+    ArrayList<Report> reportList;
     User currentUser;
 
     @Override
@@ -46,6 +48,7 @@ public class LoginActivity extends Activity {
         workerList = b.getParcelableArrayList("WorkerList");
         managerList = b.getParcelableArrayList("ManagerList");
         adminList = b.getParcelableArrayList("AdminList");
+        reportList  = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
 
     }
@@ -121,6 +124,7 @@ public class LoginActivity extends Activity {
                     intent.putParcelableArrayListExtra("WorkerList", workerList);
                     intent.putParcelableArrayListExtra("ManagerList", managerList);
                     intent.putParcelableArrayListExtra("AdminList", adminList);
+                    intent.putParcelableArrayListExtra("ReportList", reportList);
                     intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 } else {
@@ -149,6 +153,7 @@ public class LoginActivity extends Activity {
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
                 startActivity(intent);
 
             }

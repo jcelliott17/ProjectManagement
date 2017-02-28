@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import com.example.jackieelliott.Oasis.Model.AccountTypes;
+import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Worker;
 import com.example.jackieelliott.Oasis.Model.Manager;
@@ -34,6 +35,7 @@ public class RegisterUserActivity extends Activity{
     ArrayList<Worker> workerList;
     ArrayList<Manager> managerList;
     ArrayList<Admin> adminList;
+    ArrayList<Report> reportList;
     //currentUser created to keep track of who is using the application
     //this will be removed once the database starts working
     User currentUser;
@@ -59,6 +61,7 @@ public class RegisterUserActivity extends Activity{
         workerList = b.getParcelableArrayList("WorkerList");
         managerList = b.getParcelableArrayList("ManagerList");
         adminList = b.getParcelableArrayList("AdminList");
+        reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
 
     }
@@ -114,6 +117,7 @@ public class RegisterUserActivity extends Activity{
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
@@ -141,6 +145,7 @@ public class RegisterUserActivity extends Activity{
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 

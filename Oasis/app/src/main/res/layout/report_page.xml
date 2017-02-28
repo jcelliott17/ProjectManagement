@@ -8,14 +8,80 @@
         android:text="Submit a report:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/reportText"
+        android:id="@+id/report_textview"
         android:textSize="24sp"
+        android:layout_weight="0.03" />
+
+    <TextView
+        android:text="Title of Report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/report_title_textview"
+        android:layout_weight="0.03" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Enter report name"
+        android:ems="10"
+        android:id="@+id/report_title_textedit"
+        android:layout_weight="0.03" />
+
+    <TextView
+        android:text="Location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/location_textview"
+        android:layout_weight="0.03" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Enter report location"
+        android:ems="10"
+        android:id="@+id/location_textedit"
+        android:layout_weight="0.03" />
+
+    <TextView
+        android:text="Type of Water"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/type_water_textview"
+        android:layout_weight="0.03" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/type_water_spinner"
+        android:layout_weight="0.03" />
+
+    <TextView
+        android:text="Condition of Water"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/water_condition_textView"
+        android:layout_weight="0.03" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/water_condition_spinner"
+        android:layout_weight="0.03" />
+
+    <Button
+        android:text="Create Report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/create_report_button"
         android:layout_weight="0.03" />
 
     <Button
         android:text="Back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/backButton" />
+        android:id="@+id/backButton"
+        android:layout_weight="0.04" />
 
 </LinearLayout>

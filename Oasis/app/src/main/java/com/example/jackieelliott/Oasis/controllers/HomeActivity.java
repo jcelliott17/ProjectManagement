@@ -12,6 +12,7 @@ import com.example.jackieelliott.Oasis.Model.Admin;
 import com.example.jackieelliott.Oasis.Model.Manager;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Worker;
+import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class HomeActivity extends Activity {
     ArrayList<Worker> workerList;
     ArrayList<Manager> managerList;
     ArrayList<Admin> adminList;
+    ArrayList<Report> reportList;
     User currentUser;
 
     @Override
@@ -44,6 +46,9 @@ public class HomeActivity extends Activity {
         managerList = b.getParcelableArrayList("ManagerList");
         adminList = b.getParcelableArrayList("AdminList");
         currentUser = b.getParcelable("CurrentUser");
+        reportList = b.getParcelableArrayList("ReportList");
+        logoutButton = (Button) findViewById(R.id.logout_button);
+        reportButton = (Button) findViewById(R.id.report_button);
         addListenerOnButtonLogout();
 
     }
@@ -94,7 +99,7 @@ public class HomeActivity extends Activity {
             }
 
 
-        logoutButton = (Button) findViewById(R.id.logout_button);
+        //logoutButton = (Button) findViewById(R.id.logout_button);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
 
@@ -105,8 +110,8 @@ public class HomeActivity extends Activity {
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
-                Log.d("TESomh", currentUser.getEmailAddress());
                 startActivity(intent);
             }
 
@@ -123,6 +128,7 @@ public class HomeActivity extends Activity {
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
@@ -136,13 +142,13 @@ public class HomeActivity extends Activity {
             @Override
             public void onClick(View arg0) {
 
-
-
                 Intent intent = new Intent(context, ReportActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
                 intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
             }
