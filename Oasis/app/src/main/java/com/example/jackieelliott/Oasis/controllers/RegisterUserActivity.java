@@ -63,7 +63,6 @@ public class RegisterUserActivity extends Activity{
         adminList = b.getParcelableArrayList("AdminList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
-
     }
 
     /**

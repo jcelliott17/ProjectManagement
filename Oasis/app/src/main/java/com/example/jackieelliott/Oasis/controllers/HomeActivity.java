@@ -6,8 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
+import com.example.jackieelliott.Oasis.Model.AccountTypes;
 import com.example.jackieelliott.Oasis.Model.Admin;
 import com.example.jackieelliott.Oasis.Model.Manager;
 import com.example.jackieelliott.Oasis.Model.User;
@@ -26,6 +29,7 @@ public class HomeActivity extends Activity {
     Button logoutButton;
     Button profileButton;
     Button reportButton;
+    ListView reportsList;
     ArrayList<User> userList;
     ArrayList<Worker> workerList;
     ArrayList<Manager> managerList;
@@ -49,7 +53,17 @@ public class HomeActivity extends Activity {
         reportList = b.getParcelableArrayList("ReportList");
         logoutButton = (Button) findViewById(R.id.logout_button);
         reportButton = (Button) findViewById(R.id.report_button);
+        reportsList = (ListView) findViewById(R.id.reports_list);
         addListenerOnButtonLogout();
+
+
+        String[] reports = new String[reportList.size()];
+        for(int i = 0; i < reportList.size(); i++) {
+            reports[i] = reportList.get(i).toString();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, reports);
+        reportsList.setAdapter(adapter);
 
     }
 
