@@ -39,6 +39,12 @@ public class Report implements Parcelable {
         return _reportName;
     }
 
+    public void setReportName(String name) { _reportName = name; }
+
+    public String getLocation () { return _location; }
+
+    public void setLocation(String location) { _location = location; }
+
     public int getTimeAndDate() {
         return _timeAndDate;
     }
@@ -55,8 +61,9 @@ public class Report implements Parcelable {
         _timeAndDate = in.readInt();
     }
 
+    @Override
     public String toString() {
-        return "Name: " + _reportName + "Location: " + _location;
+        return "Name: " + _reportName + " Location: " + _location;
     }
 
     @Override

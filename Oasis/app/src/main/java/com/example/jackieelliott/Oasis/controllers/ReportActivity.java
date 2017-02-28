@@ -1,7 +1,9 @@
 package com.example.jackieelliott.Oasis.controllers;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -128,15 +130,17 @@ public class ReportActivity extends Activity {
         typeWaterSpinner = (Spinner) findViewById(R.id.type_water_spinner);
         conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);*/
 
-        Report newReport = new Report(reportTitle.getText().toString(), reportLocation.getText().toString());
-        newReport.setCondition(conditionWaterSpinner.getSelectedItem().toString());
-        newReport.setTypeOfWater(typeWaterSpinner.getSelectedItem().toString());
-        reportList.add(newReport);
-
         createReportButton.setOnClickListener(new View.OnClickListener() {
+
+
 
             @Override
             public void onClick(View arg0) {
+
+                Report newReport = new Report(reportTitle.getText().toString(), reportLocation.getText().toString());
+                newReport.setCondition(conditionWaterSpinner.getSelectedItem().toString());
+                newReport.setTypeOfWater(typeWaterSpinner.getSelectedItem().toString());
+                reportList.add(newReport);
 
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
