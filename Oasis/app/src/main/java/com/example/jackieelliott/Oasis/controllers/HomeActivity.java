@@ -26,20 +26,21 @@ import java.util.ArrayList;
 
 public class HomeActivity extends Activity {
 
-    Button logoutButton;
-    Button profileButton;
-    Button reportButton;
-    ListView reportsList;
-    ArrayList<User> userList;
-    ArrayList<Worker> workerList;
-    ArrayList<Manager> managerList;
-    ArrayList<Admin> adminList;
-    ArrayList<Report> reportList;
-    User currentUser;
+    private Button logoutButton;
+    private Button profileButton;
+    private Button reportButton;
+    private ListView reportsList;
+    private ArrayList<User> userList;
+    private ArrayList<Worker> workerList;
+    private ArrayList<Manager> managerList;
+    private ArrayList<Admin> adminList;
+    private ArrayList<Report> reportList;
+    private User currentUser;
 
     @Override
     /**
-     * On the creation of the Home activity this information is uploaded and updated.
+     * On the creation of the Home activity this
+     * information is uploaded and updated.
      */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,11 +59,12 @@ public class HomeActivity extends Activity {
 
 
         String[] reports = new String[reportList.size()];
-        for(int i = 0; i < reportList.size(); i++) {
+        for (int i = 0; i < reportList.size(); i++) {
             reports[i] = reportList.get(i).toString();
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1, reports);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.
+                R.layout.simple_list_item_1, reports);
         reportsList.setAdapter(adapter);
 
     }
@@ -73,7 +75,8 @@ public class HomeActivity extends Activity {
     public void addListenerOnButtonLogout() {
 
         /*
-        Sets the user that you originally used to create current user to the updated current user
+        Sets the user that you originally used to create
+        current user to the updated current user
         which could potentially contain new address/ home email.
          */
         final Context context = this;
@@ -81,36 +84,43 @@ public class HomeActivity extends Activity {
 
         for (int i = 0; i < userList.size(); i++) {
             if (userList.get(i).getUsername().equals(currentUser.getUsername())
-                    && currentUser.getPassword().equals(userList.get(i).getPassword())) {
+                    && currentUser.getPassword().equals(userList.get(i)
+                    .getPassword())) {
                 userList.remove(i);
-                userList.add(i, currentUser); // replaces the user with the updated current user
+                userList.add(i, currentUser); // replaces the user with the
+                // updated current user
                 // This is necessary because of pass by value
             }
         }
-            for (int i = 0; i < workerList.size(); i++) {
-                if (workerList.get(i).getUsername().equals(currentUser.getUsername())
-                        && currentUser.getPassword().equals(workerList.get(i).getPassword())) {
-                    workerList.remove(i);
-                    workerList.add(i, (Worker) currentUser);
-                }
+        for (int i = 0; i < workerList.size(); i++) {
+            if (workerList.get(i).getUsername().equals(currentUser
+                    .getUsername())
+                    && currentUser.getPassword().equals(workerList.get(i)
+                    .getPassword())) {
+                workerList.remove(i);
+                workerList.add(i, (Worker) currentUser);
             }
+        }
 
 
-            for (int i = 0; i < managerList.size(); i++) {
-                if (managerList.get(i).getUsername().equals(currentUser.getUsername())
-                        && currentUser.getPassword().equals(managerList.get(i).getPassword())) {
-                    managerList.remove(i);
-                    managerList.add(i, (Manager) currentUser);
-                }
+        for (int i = 0; i < managerList.size(); i++) {
+            if (managerList.get(i).getUsername().equals(currentUser
+                    .getUsername())
+                    && currentUser.getPassword().equals(managerList.get(i)
+                    .getPassword())) {
+                managerList.remove(i);
+                managerList.add(i, (Manager) currentUser);
             }
+        }
 
-            for (int i = 0; i < adminList.size(); i++) {
-                if (adminList.get(i).getUsername().equals(currentUser.getUsername())
-                        && currentUser.getPassword().equals(adminList.get(i).getPassword())) {
-                    adminList.remove(i);
-                    adminList.add(i, (Admin) currentUser);
-                }
+        for (int i = 0; i < adminList.size(); i++) {
+            if (adminList.get(i).getUsername().equals(currentUser.getUsername())
+                    && currentUser.getPassword().equals(adminList.get(i)
+                    .getPassword())) {
+                adminList.remove(i);
+                adminList.add(i, (Admin) currentUser);
             }
+        }
 
 
         //logoutButton = (Button) findViewById(R.id.logout_button);

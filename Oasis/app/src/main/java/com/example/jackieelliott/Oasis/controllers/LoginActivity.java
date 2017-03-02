@@ -26,16 +26,16 @@ import com.example.jackieelliott.Oasis.R;
 
 public class LoginActivity extends Activity {
 
-    Button login;
-    Button cancel;
-    EditText loginField;
-    EditText passField;
-    ArrayList<User> userList;
-    ArrayList<Worker> workerList;
-    ArrayList<Manager> managerList;
-    ArrayList<Admin> adminList;
-    ArrayList<Report> reportList;
-    User currentUser;
+    private Button login;
+    private Button cancel;
+    private EditText loginField;
+    private EditText passField;
+    private ArrayList<User> userList;
+    private ArrayList<Worker> workerList;
+    private ArrayList<Manager> managerList;
+    private ArrayList<Admin> adminList;
+    private ArrayList<Report> reportList;
+    private User currentUser;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,9 @@ public class LoginActivity extends Activity {
 
     }
 
+    /**
+     *
+     */
     public void addListenerOnButtonLogin() {
 
         final Context context = this;
@@ -60,7 +63,8 @@ public class LoginActivity extends Activity {
         login = (Button) findViewById(R.id.login_button);
         loginField = (EditText) findViewById(R.id.username_text);
         passField = (EditText) findViewById(R.id.editText2);
-        final AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity.this).create();
+        final AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity
+                .this).create();
         alertDialog.setTitle("Error");
         alertDialog.setMessage("Wrong Username/Password");
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
@@ -75,22 +79,26 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View arg0) {
                 /*
-                Searches for login username. Warning should pop up if the user name does not exist.
-                If the user name and password combination exist then the current user is set the user
+                Searches for login username. Warning should pop up if the
+                user name does not exist. If the user name and password
+                combination exist then the current user is set the user
                 found.
                  */
                 boolean login = false;
                 for (int i = 0; i < userList.size(); i++) {
-                    if (userList.get(i).getUsername().equals(loginField.getText().toString())
-                            && passField.getText().toString().equals(userList.get(i).getPassword())) {
+                    if (userList.get(i).getUsername().equals(loginField
+                            .getText().toString()) && passField.getText()
+                            .toString().equals(userList.get(i).getPassword())) {
                         login = true;
                         currentUser = userList.get(i);
                     }
                 }
                 if (!login) {
                     for (int i = 0; i < workerList.size(); i++) {
-                        if (workerList.get(i).getUsername().equals(loginField.getText().toString())
-                                && passField.getText().toString().equals(workerList.get(i).getPassword())) {
+                        if (workerList.get(i).getUsername().equals(loginField
+                                .getText().toString()) && passField.getText()
+                                .toString().equals(workerList.get(i)
+                                        .getPassword())) {
                             login = true;
                             currentUser = workerList.get(i);
                         }
@@ -98,8 +106,10 @@ public class LoginActivity extends Activity {
                 }
                 if (!login) {
                     for (int i = 0; i < managerList.size(); i++) {
-                        if (managerList.get(i).getUsername().equals(loginField.getText().toString())
-                                && passField.getText().toString().equals(managerList.get(i).getPassword())) {
+                        if (managerList.get(i).getUsername().equals(loginField
+                                .getText().toString()) && passField.getText()
+                                .toString().equals(managerList.get(i)
+                                        .getPassword())) {
                             login = true;
 
                             currentUser = managerList.get(i);
@@ -108,8 +118,10 @@ public class LoginActivity extends Activity {
                 }
                 if (!login) {
                     for (int i = 0; i < adminList.size(); i++) {
-                        if (adminList.get(i).getUsername().equals(loginField.getText().toString())
-                                && passField.getText().toString().equals(adminList.get(i).getPassword())) {
+                        if (adminList.get(i).getUsername().equals(loginField
+                                .getText().toString()) && passField.getText()
+                                .toString().equals(adminList.get(i)
+                                        .getPassword())) {
                             login = true;
                             currentUser = adminList.get(i);
                         }
@@ -121,10 +133,13 @@ public class LoginActivity extends Activity {
 
                     Intent intent = new Intent(context, HomeActivity.class);
                     intent.putParcelableArrayListExtra("UserList", userList);
-                    intent.putParcelableArrayListExtra("WorkerList", workerList);
-                    intent.putParcelableArrayListExtra("ManagerList", managerList);
+                    intent.putParcelableArrayListExtra("WorkerList",
+                            workerList);
+                    intent.putParcelableArrayListExtra("ManagerList",
+                            managerList);
                     intent.putParcelableArrayListExtra("AdminList", adminList);
-                    intent.putParcelableArrayListExtra("ReportList", reportList);
+                    intent.putParcelableArrayListExtra("ReportList",
+                            reportList);
                     intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 } else {
@@ -137,6 +152,9 @@ public class LoginActivity extends Activity {
 
     }
 
+    /**
+     *
+     */
     public void addListenerOnButtonCancel() {
 
         final Context context = this;
@@ -162,11 +180,21 @@ public class LoginActivity extends Activity {
 
     }
 
+    /**
+     *
+     * @param email
+     * @return
+     */
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
+    /**
+     *
+     * @param password
+     * @return
+     */
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
