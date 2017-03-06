@@ -12,7 +12,7 @@
             android:text="Profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button"
+            android:id="@+id/button2"
             android:elevation="0dp"
             android:layout_weight="1.71" />
 
@@ -29,6 +29,13 @@
             android:id="@+id/logout_button" />
 
     </LinearLayout>
+
+    <Button
+        android:text="Temp Map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tempmap"
+        android:elevation="0dp" />
 
     <TextView
         android:text="Reports List"

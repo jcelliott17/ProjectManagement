@@ -17,6 +17,7 @@ import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Worker;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
+import com.example.jackieelliott.team60application.GoogleMapsActivity;
 
 import java.util.ArrayList;
 
@@ -29,6 +30,7 @@ public class HomeActivity extends Activity {
     private Button logoutButton;
     private Button profileButton;
     private Button reportButton;
+    private Button tempmap;
     private ListView reportsList;
     private ArrayList<User> userList;
     private ArrayList<Worker> workerList;
@@ -54,6 +56,7 @@ public class HomeActivity extends Activity {
         reportList = b.getParcelableArrayList("ReportList");
         logoutButton = (Button) findViewById(R.id.logout_button);
         reportButton = (Button) findViewById(R.id.report_button);
+        tempmap = (Button) findViewById(R.id.tempmap);
         reportsList = (ListView) findViewById(R.id.reports_list);
         addListenerOnButtonLogout();
 
@@ -141,7 +144,7 @@ public class HomeActivity extends Activity {
 
         });
 
-        profileButton = (Button) findViewById(R.id.button);
+        profileButton = (Button) findViewById(R.id.button2);
 
         profileButton.setOnClickListener(new View.OnClickListener() {
 
@@ -167,6 +170,24 @@ public class HomeActivity extends Activity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, ReportActivity.class);
+                intent.putParcelableArrayListExtra("UserList", userList);
+                intent.putParcelableArrayListExtra("WorkerList", workerList);
+                intent.putParcelableArrayListExtra("ManagerList", managerList);
+                intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putExtra("CurrentUser", currentUser);
+                startActivity(intent);
+
+            }
+
+        });
+
+        tempmap.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent intent = new Intent(context, GoogleMapsActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("WorkerList", workerList);
                 intent.putParcelableArrayListExtra("ManagerList", managerList);
