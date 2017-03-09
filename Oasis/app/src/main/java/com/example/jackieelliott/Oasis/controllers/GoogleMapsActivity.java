@@ -1,8 +1,19 @@
 package com.example.jackieelliott.team60application;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 
+import com.example.jackieelliott.Oasis.Model.Admin;
+import com.example.jackieelliott.Oasis.Model.Manager;
+import com.example.jackieelliott.Oasis.Model.Report;
+import com.example.jackieelliott.Oasis.Model.User;
+import com.example.jackieelliott.Oasis.Model.Worker;
+import com.example.jackieelliott.Oasis.controllers.HomeActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -11,18 +22,69 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.jackieelliott.Oasis.R;
 
+import java.util.ArrayList;
+
 public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private Button backButton;
+    private ListView reportsList;
+    private ArrayList<User> userList;
+    private ArrayList<Worker> workerList;
+    private ArrayList<Manager> managerList;
+    private ArrayList<Admin> adminList;
+    private ArrayList<Report> reportList;
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.home_page);
+        Bundle b = getIntent().getExtras();
+        userList = b.getParcelableArrayList("UserList");
+        workerList = b.getParcelableArrayList("WorkerList");
+        managerList = b.getParcelableArrayList("ManagerList");
+        adminList = b.getParcelableArrayList("AdminList");
+        currentUser = b.getParcelable("CurrentUser");
+        reportList = b.getParcelableArrayList("ReportList");
+        reportsList = (ListView) findViewById(R.id.reports_list);
+        backButton = (Button) findViewById(R.id.backButton);
         setContentView(R.layout.activity_google_maps);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        addListenerOnButtonBack();
+    }
+
+    /**
+     * Adds functionality to the Back button.
+     */
+    public void addListenerOnButtonBack() {
+
+        final Context context = this;
+
+        backButton = (Button)findViewById(R.id.backButton);
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent intent = new Intent(context, HomeActivity.class);
+                intent.putParcelableArrayListExtra("UserList", userList);
+                intent.putParcelableArrayListExtra("WorkerList", workerList);
+                intent.putParcelableArrayListExtra("ManagerList", managerList);
+                intent.putParcelableArrayListExtra("AdminList", adminList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putExtra("CurrentUser", currentUser);
+                startActivity(intent);
+
+            }
+
+        });
     }
 
 
@@ -39,9 +101,48 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        //LatLng sydney = new LatLng(-34, 151);
+        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                // Creating a marker
+                MarkerOptions markerOptions = new MarkerOptions();
+
+                // Setting the position for the marker
+                markerOptions.position(latLng);
+
+
+                // Clears the previously touched position
+                // mMap.clear();
+                Report a = new Report("newly added", latLng.latitude, latLng.longitude);
+                a.setReportNumber(reportList.size() + 1);
+                reportList.add(a);
+
+                // Setting the title for the marker.
+                // This will be displayed on taping the marker
+                markerOptions.title(reportList.get(reportList.size() - 1).getReportName());
+                markerOptions.snippet(reportList.get(reportList.size() - 1).toString());
+
+                // Animating to the touched position
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                // Placing a marker on the touched position
+                mMap.addMarker(markerOptions);
+            }
+        });
+
+        for (Report r : reportList) {
+            LatLng loc = new LatLng(r.getLatitude(), r.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(loc).title(r.getReportName()).snippet(r.toString()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
+        }
     }
+
+
 }
+

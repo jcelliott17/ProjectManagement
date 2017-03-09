@@ -39,7 +39,8 @@ public class ReportActivity extends Activity {
     Button createReportButton;
     TextView reportText;
     EditText reportTitle;
-    EditText reportLocation;
+    EditText reportLatitude;
+    EditText reportLongitude;
     Spinner typeWaterSpinner;
     Spinner conditionWaterSpinner;
     ArrayList<User> userList;
@@ -66,7 +67,8 @@ public class ReportActivity extends Activity {
         currentUser = b.getParcelable("CurrentUser");
 
         reportTitle = (EditText) findViewById(R.id.report_title_textedit);
-        reportLocation = (EditText) findViewById(R.id.location_textedit);
+        reportLatitude = (EditText) findViewById(R.id.latitude_text);
+        reportLongitude = (EditText) findViewById(R.id.longitude_text);
 
         typeWaterSpinner = (Spinner) findViewById(R.id.type_water_spinner);
 
@@ -137,7 +139,9 @@ public class ReportActivity extends Activity {
             @Override
             public void onClick(View arg0) {
 
-                Report newReport = new Report(reportTitle.getText().toString(), reportLocation.getText().toString());
+                Report newReport = new Report(reportTitle.getText().toString());
+                newReport.setLatitude((Integer.parseInt(reportLatitude.getText().toString())));
+                newReport.setLongitude((Integer.parseInt(reportLongitude.getText().toString())));
                 newReport.setCondition(conditionWaterSpinner.getSelectedItem().toString());
                 newReport.setTypeOfWater(typeWaterSpinner.getSelectedItem().toString());
                 newReport.setReportNumber(reportList.size() + 1);

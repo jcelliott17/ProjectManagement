@@ -32,17 +32,31 @@
         android:text="Location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/location_textview"
-        android:layout_weight="0.03" />
+        android:id="@+id/location_textview" />
 
-    <EditText
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Enter report location"
-        android:ems="10"
-        android:id="@+id/location_textedit"
-        android:layout_weight="0.03" />
+        android:layout_height="47dp">
+
+        <EditText
+            android:layout_width="197dp"
+            android:layout_height="wrap_content"
+            android:text="Enter latitude"
+            android:ems="10"
+            android:id="@+id/latitude_text"
+            android:layout_weight="1"
+            android:inputType="numberSigned|numberDecimal" />
+
+        <EditText
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:text="Enter longitude"
+            android:ems="10"
+            android:id="@+id/longitude_text"
+            android:layout_weight="1"
+            android:inputType="numberSigned|numberDecimal" />
+    </LinearLayout>
 
     <TextView
         android:text="Type of Water"

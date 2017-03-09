@@ -10,15 +10,21 @@ import android.os.Parcelable;
 public class Report implements Parcelable {
 
     private String _reportName;
-    private String _location;
+    private double _latitude;
+    private double _longitude;
     private String _condition;
     private String _typeOfWater;
     private int _timeAndDate;
     private int _reportNumber;
 
-    public Report (String name, String location) {
+    public Report (String name) {
         _reportName = name;
-        _location = location;
+    }
+
+    public Report(String name, double latitude, double longitude) {
+        _reportName = name;
+        _latitude = latitude;
+        _longitude = longitude;
     }
 
     public int getReportNumber() { return _reportNumber; }
@@ -47,9 +53,13 @@ public class Report implements Parcelable {
 
     public void setReportName(String name) { _reportName = name; }
 
-    public String getLocation () { return _location; }
+    public double getLatitude () { return _latitude; }
 
-    public void setLocation(String location) { _location = location; }
+    public void setLatitude(double latitude) { _latitude = latitude; }
+
+    public double getLongitude () { return _longitude; }
+
+    public void setLongitude(double longitude) { _longitude = longitude; }
 
     public int getTimeAndDate() {
         return _timeAndDate;
@@ -61,7 +71,8 @@ public class Report implements Parcelable {
 
     public Report(Parcel in) {
         _reportName = in.readString();
-        _location = in.readString();
+        _latitude = in.readDouble();
+        _longitude = in.readDouble();
         _condition = in.readString();
         _typeOfWater = in.readString();
         _timeAndDate = in.readInt();
@@ -70,7 +81,7 @@ public class Report implements Parcelable {
 
     @Override
     public String toString() {
-        return "Report Number: " + _reportNumber + " Name: " + _reportName + " Location: " + _location;
+        return "Report Number: " + _reportNumber + " Name: " + _reportName + " Location: " + _latitude + " " + _longitude;
     }
 
     @Override
@@ -84,7 +95,8 @@ public class Report implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_reportName);
-        dest.writeString(_location);
+        dest.writeDouble(_latitude);
+        dest.writeDouble(_longitude);
         dest.writeString(_condition);
         dest.writeString(_typeOfWater);
         dest.writeInt(_timeAndDate);
