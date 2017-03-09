@@ -26,7 +26,8 @@
         android:text="Enter report name"
         android:ems="10"
         android:id="@+id/report_title_textedit"
-        android:layout_weight="0.03" />
+        android:layout_weight="0.03"
+        android:selectAllOnFocus="true" />
 
     <TextView
         android:text="Location"
@@ -46,7 +47,8 @@
             android:ems="10"
             android:id="@+id/latitude_text"
             android:layout_weight="1"
-            android:inputType="numberSigned|numberDecimal" />
+            android:inputType="numberSigned|numberDecimal"
+            android:selectAllOnFocus="true" />
 
         <EditText
             android:layout_width="187dp"
@@ -55,7 +57,8 @@
             android:ems="10"
             android:id="@+id/longitude_text"
             android:layout_weight="1"
-            android:inputType="numberSigned|numberDecimal" />
+            android:inputType="numberSigned|numberDecimal"
+            android:selectAllOnFocus="true" />
     </LinearLayout>
 
     <TextView
