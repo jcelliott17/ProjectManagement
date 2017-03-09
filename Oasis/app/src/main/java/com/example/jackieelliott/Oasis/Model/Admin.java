@@ -14,8 +14,8 @@ public class Admin extends Manager {
      * @param userName username of the admin
      * @param password password of the admin
      */
-    public Admin(String userName, String password) {
-        super(userName, password);
+    public Admin(String userName, String password, int permission) {
+        super(userName, password, permission);
     }
 
 

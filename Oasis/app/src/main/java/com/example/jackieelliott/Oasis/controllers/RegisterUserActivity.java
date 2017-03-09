@@ -90,22 +90,22 @@ public class RegisterUserActivity extends Activity{
                 created.
                  */
                 if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.User) {
-                    User user = new User(userNameField.getText().toString(), passField.getText().toString());
+                    User user = new User(userNameField.getText().toString(), passField.getText().toString(), 1);
                     userList.add(user);
                     currentUser = user;
                     currentUser.setAccountType("User");
                 } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Worker) {
-                    Worker worker = new Worker(userNameField.getText().toString(), passField.getText().toString());
+                    Worker worker = new Worker(userNameField.getText().toString(), passField.getText().toString(), 2);
                     workerList.add(worker);
                     currentUser = worker;
                     currentUser.setAccountType("Worker");
                 } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Manager) {
-                    Manager manager = new Manager(userNameField.getText().toString(), passField.getText().toString());
+                    Manager manager = new Manager(userNameField.getText().toString(), passField.getText().toString(), 3);
                     managerList.add(manager);
                     currentUser = manager;
                     currentUser.setAccountType("Manager");
                 } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Admin) {
-                    Admin admin = new Admin(userNameField.getText().toString(), passField.getText().toString());
+                    Admin admin = new Admin(userNameField.getText().toString(), passField.getText().toString(), 4);
                     adminList.add(admin);
                     currentUser = admin;
                     currentUser.setAccountType("Admin");

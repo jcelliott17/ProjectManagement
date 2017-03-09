@@ -14,8 +14,9 @@ public class Worker extends User{
      * @param userName Username for the worker
      * @param password Password for the worker
      */
-    public Worker(String userName, String password) {
-        super(userName, password);
+    public Worker(String userName, String password, int permission) {
+        super(userName, password, permission);
+
     }
 
 

@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by Alon on 2/16/17.
  */
 
-public class User implements Parcelable{
+public class User implements Parcelable {
 
     /**
      * Attributes of the User class
@@ -19,18 +19,25 @@ public class User implements Parcelable{
     private String _homeAddress;
     private String _emailAddress;
     private String _accountType;
+    private int _permission;
 
 
-    public User(String userName, String password) {
+    public User(String userName, String password, int permission) {
         _username = userName;
         _password = password;
         _accountType = "";
         _emailAddress = "";
         _homeAddress = "";
+        _permission = permission;
     }
     /*
      * Getters and Setters
      */
+
+    public int getPermission() { return _permission; }
+
+    public void setPermission(int permission) { _permission = permission; }
+
     public String getUsername() { return _username; }
 
     public void setUsername(String userName) { _username = userName; }
@@ -66,6 +73,7 @@ public class User implements Parcelable{
         _homeAddress = in.readString();
         _emailAddress = in.readString();
         _accountType = in.readString();
+        _permission = in.readInt();
         //_profile = in.readParcelable( Profile.class.getClassLoader());
     }
 
@@ -84,6 +92,7 @@ public class User implements Parcelable{
         dest.writeString(_homeAddress);
         dest.writeString(_emailAddress);
         dest.writeString(_accountType);
+        dest.writeInt(_permission);
         //dest.writeParcelable(_profile, flags);
     }
 

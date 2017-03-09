@@ -14,8 +14,8 @@ public class Manager extends Worker {
      * @param userName username of the manager
      * @param password password for the manager
      */
-    public Manager(String userName, String password) {
-        super(userName, password);
+    public Manager(String userName, String password, int permission) {
+        super(userName, password, permission);
     }
 
 

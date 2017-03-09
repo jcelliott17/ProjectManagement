@@ -127,13 +127,6 @@ public class ReportActivity extends Activity {
 
         createReportButton = (Button) findViewById(R.id.create_report_button);
 
-        /*backButton = (Button) findViewById(R.id.backButton);
-        reportText = (TextView) findViewById(R.id.reportText);
-        reportTitle = (EditText) findViewById(R.id.report_title_textedit);
-        reportLocation = (EditText) findViewById(R.id.location_textedit);
-        typeWaterSpinner = (Spinner) findViewById(R.id.type_water_spinner);
-        conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);*/
-
         createReportButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
