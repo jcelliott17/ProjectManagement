@@ -33,11 +33,11 @@ public class ProfileActivity extends Activity {
     ArrayList<Report> reportList;
     User currentUser;
 
-    @Override
     /**
      * Creates the Profile activity which has the necessary information
      * transfered with it.
      */
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);

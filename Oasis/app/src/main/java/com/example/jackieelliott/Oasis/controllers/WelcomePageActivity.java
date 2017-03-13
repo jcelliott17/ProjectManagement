@@ -26,10 +26,10 @@ public class WelcomePageActivity extends AppCompatActivity {
     ArrayList<User> userList;
     ArrayList<Report> reportList;
 
-    @Override
     /**
      * Creates the Welcome using the passed information.
      */
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_page);

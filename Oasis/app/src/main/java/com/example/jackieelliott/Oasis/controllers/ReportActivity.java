@@ -48,10 +48,10 @@ public class ReportActivity extends Activity {
     ArrayList<Report> reportList;
     User currentUser;
 
-    @Override
     /**
      * Creates the Report Acticity with the necessary information.
      */
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -116,6 +116,9 @@ public class ReportActivity extends Activity {
 
     }
 
+    /**
+     * adds functionality to create report button
+     */
     public void addListenerOnButtonCreateReport() {
 
         final Context context = this;

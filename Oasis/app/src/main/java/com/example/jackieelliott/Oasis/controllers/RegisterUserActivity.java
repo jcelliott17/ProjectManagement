@@ -34,10 +34,10 @@ public class RegisterUserActivity extends Activity{
     //this will be removed once the database starts working
     User currentUser;
 
-    @Override
     /**
      * Creates the report activity page.
      */
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_page);

@@ -39,6 +39,10 @@ public class QualityReportActivity extends Activity{
     ArrayList<Report> reportList;
     User currentUser;
 
+    /**
+     * sets up activity when it is first created
+     * @param savedInstanceState
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -69,6 +73,9 @@ public class QualityReportActivity extends Activity{
         addListenerOnButtonCreateReport();
     }
 
+    /**
+     * adds functionality to back button
+     */
     public void addListenerOnButtonBack() {
 
         final Context context = this;
@@ -98,6 +105,9 @@ public class QualityReportActivity extends Activity{
 
     }
 
+    /**
+     * adds functionality to create report button
+     */
     public void addListenerOnButtonCreateReport() {
 
         final Context context = this;

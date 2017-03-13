@@ -17,42 +17,67 @@ public class Profile implements Parcelable {
     private String _emailAddress;
     private String _accountType;
 
+    /**
+     * constructor
+     */
     public Profile () {
 
     }
 
+    /**
+     * gets address
+     * @return String home address
+     */
     public String getHomeAddress() {
         return _homeAddress;
     }
 
+    /**
+     * sets address
+     * @param homeAddress String home address
+     */
     public void setHomeAddress(String homeAddress) {
         _homeAddress = homeAddress;
     }
 
+    /**
+     * gets email address
+     * @return String email address
+     */
     public String getEmailAddress() {
         return _emailAddress;
     }
 
+    /**
+     * sets email address
+     * @param emailAddress String email Address
+     */
     public void setEmailAddress(String emailAddress) {
         _emailAddress = emailAddress;
     }
 
-    /* *********************************
-  * These methods are required by the parcelable interface
-  *
-  */
+    /**
+     * constructor for parcelable interface
+     * @param in Parcel
+     */
     public Profile(Parcel in) {
         _homeAddress = in.readString();
         _emailAddress = in.readString();
     }
 
+    /**
+     * describes contents
+     * @return
+     */
     @Override
     public int describeContents() {
         return 0;
     }
 
-    /* *************************
-       If you add new instance vars to Student, you will need to add them to the write
+    /**
+     * allows addition of new instance variables to Student
+     * @param dest
+     * @param flags
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {

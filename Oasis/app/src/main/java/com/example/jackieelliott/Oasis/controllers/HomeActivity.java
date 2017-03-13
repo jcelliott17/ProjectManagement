@@ -35,11 +35,11 @@ public class HomeActivity extends Activity {
     private ArrayList<Report> reportList;
     private User currentUser;
 
-    @Override
     /**
      * On the creation of the Home activity this
      * information is uploaded and updated.
      */
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);

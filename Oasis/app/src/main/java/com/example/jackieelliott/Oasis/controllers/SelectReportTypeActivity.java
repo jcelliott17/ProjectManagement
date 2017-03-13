@@ -33,6 +33,10 @@ public class SelectReportTypeActivity extends Activity {
     ArrayList<Report> reportList;
     User currentUser;
 
+    /**
+     * sets up activity when it is first created
+     * @param savedInstanceState
+     */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -80,6 +84,9 @@ public class SelectReportTypeActivity extends Activity {
 
     }
 
+    /**
+     * adds functionality to the next button
+     */
     public void addListenerOnButtonNext() {
 
         final Context context = this;

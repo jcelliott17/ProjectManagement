@@ -30,6 +30,10 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     private ArrayList<Report> reportList;
     private User currentUser;
 
+    /**
+     * sets up activity when it is first created
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

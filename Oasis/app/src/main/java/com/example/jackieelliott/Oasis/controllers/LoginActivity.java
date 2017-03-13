@@ -32,6 +32,10 @@ public class LoginActivity extends Activity {
     private ArrayList<Report> reportList;
     private User currentUser;
 
+    /**
+     * sets up activity when it is first created
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +50,7 @@ public class LoginActivity extends Activity {
     }
 
     /**
-     *
+     * adds functionality to login button
      */
     public void addListenerOnButtonLogin() {
 
@@ -106,7 +110,7 @@ public class LoginActivity extends Activity {
     }
 
     /**
-     *
+     * adds functionality to cancel button
      */
     public void addListenerOnButtonCancel() {
 
@@ -131,9 +135,9 @@ public class LoginActivity extends Activity {
     }
 
     /**
-     *
-     * @param email
-     * @return
+     * checks that user email is valid
+     * @param email String email addresss
+     * @return boolean
      */
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
@@ -141,9 +145,9 @@ public class LoginActivity extends Activity {
     }
 
     /**
-     *
-     * @param password
-     * @return
+     * checks that user password is valid
+     * @param password String password
+     * @return boolean
      */
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
