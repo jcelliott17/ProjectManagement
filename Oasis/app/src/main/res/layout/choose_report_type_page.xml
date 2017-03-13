@@ -29,5 +29,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/back_button"
         android:layout_weight="0.04"
-        style="@style/Widget.AppCompat.Button" />
+        style="@style/Widget.AppCompat.Button"
+        android:visibility="visible" />
 </LinearLayout>

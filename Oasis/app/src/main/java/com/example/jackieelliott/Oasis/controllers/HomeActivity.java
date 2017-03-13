@@ -16,6 +16,7 @@ import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
 import com.example.jackieelliott.team60application.GoogleMapsActivity;
+import com.example.jackieelliott.Oasis.controllers.SelectReportTypeActivity;
 
 import java.util.ArrayList;
 
@@ -126,12 +127,19 @@ public class HomeActivity extends Activity {
             @Override
             public void onClick(View arg0) {
 
-                Intent intent = new Intent(context, ReportActivity.class);
-                intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("ReportList", reportList);
-                intent.putExtra("CurrentUser", currentUser);
-                startActivity(intent);
-
+                if (currentUser.getPermission() > 2) {
+                    Intent intent = new Intent(context, SelectReportTypeActivity.class);
+                    intent.putParcelableArrayListExtra("UserList", userList);
+                    intent.putParcelableArrayListExtra("ReportList", reportList);
+                    intent.putExtra("CurrentUser", currentUser);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(context, ReportActivity.class);
+                    intent.putParcelableArrayListExtra("UserList", userList);
+                    intent.putParcelableArrayListExtra("ReportList", reportList);
+                    intent.putExtra("CurrentUser", currentUser);
+                    startActivity(intent);
+                }
             }
 
         });
