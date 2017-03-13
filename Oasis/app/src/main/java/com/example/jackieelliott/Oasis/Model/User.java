@@ -12,7 +12,6 @@ public class User implements Parcelable {
     /**
      * Attributes of the User class
      */
-
     private String _username;
     private String _password;
     //private Profile _profile;
@@ -29,7 +28,9 @@ public class User implements Parcelable {
         _emailAddress = "";
         _homeAddress = "";
         _permission = permission;
+
     }
+
     /*
      * Getters and Setters
      */

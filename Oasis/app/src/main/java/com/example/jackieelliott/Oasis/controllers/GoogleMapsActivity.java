@@ -8,11 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.jackieelliott.Oasis.Model.Admin;
-import com.example.jackieelliott.Oasis.Model.Manager;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
-import com.example.jackieelliott.Oasis.Model.Worker;
 import com.example.jackieelliott.Oasis.controllers.HomeActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,9 +27,6 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     private Button backButton;
     private ListView reportsList;
     private ArrayList<User> userList;
-    private ArrayList<Worker> workerList;
-    private ArrayList<Manager> managerList;
-    private ArrayList<Admin> adminList;
     private ArrayList<Report> reportList;
     private User currentUser;
 
@@ -42,9 +36,6 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         setContentView(R.layout.home_page);
         Bundle b = getIntent().getExtras();
         userList = b.getParcelableArrayList("UserList");
-        workerList = b.getParcelableArrayList("WorkerList");
-        managerList = b.getParcelableArrayList("ManagerList");
-        adminList = b.getParcelableArrayList("AdminList");
         currentUser = b.getParcelable("CurrentUser");
         reportList = b.getParcelableArrayList("ReportList");
         reportsList = (ListView) findViewById(R.id.reports_list);
@@ -75,9 +66,6 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);

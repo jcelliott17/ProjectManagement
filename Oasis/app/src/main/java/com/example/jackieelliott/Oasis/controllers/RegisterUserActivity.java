@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import com.example.jackieelliott.Oasis.Model.AccountTypes;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
-import com.example.jackieelliott.Oasis.Model.Worker;
-import com.example.jackieelliott.Oasis.Model.Manager;
-import com.example.jackieelliott.Oasis.Model.Admin;
 import com.example.jackieelliott.Oasis.R;
 import com.example.jackieelliott.Oasis.Model.Profile;
 
@@ -32,9 +29,6 @@ public class RegisterUserActivity extends Activity{
     EditText userNameField;
     EditText passField;
     ArrayList<User> userList;
-    ArrayList<Worker> workerList;
-    ArrayList<Manager> managerList;
-    ArrayList<Admin> adminList;
     ArrayList<Report> reportList;
     //currentUser created to keep track of who is using the application
     //this will be removed once the database starts working
@@ -58,9 +52,6 @@ public class RegisterUserActivity extends Activity{
 
         Bundle b = getIntent().getExtras();
         userList = b.getParcelableArrayList("UserList");
-        workerList = b.getParcelableArrayList("WorkerList");
-        managerList = b.getParcelableArrayList("ManagerList");
-        adminList = b.getParcelableArrayList("AdminList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
     }
@@ -95,27 +86,24 @@ public class RegisterUserActivity extends Activity{
                     currentUser = user;
                     currentUser.setAccountType("User");
                 } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Worker) {
-                    Worker worker = new Worker(userNameField.getText().toString(), passField.getText().toString(), 2);
-                    workerList.add(worker);
-                    currentUser = worker;
+                    User user = new User(userNameField.getText().toString(), passField.getText().toString(), 2);
+                    userList.add(user);
+                    currentUser = user;
                     currentUser.setAccountType("Worker");
                 } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Manager) {
-                    Manager manager = new Manager(userNameField.getText().toString(), passField.getText().toString(), 3);
-                    managerList.add(manager);
-                    currentUser = manager;
+                    User user = new User(userNameField.getText().toString(), passField.getText().toString(), 3);
+                    userList.add(user);
+                    currentUser = user;
                     currentUser.setAccountType("Manager");
                 } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Admin) {
-                    Admin admin = new Admin(userNameField.getText().toString(), passField.getText().toString(), 4);
-                    adminList.add(admin);
-                    currentUser = admin;
+                    User user = new User(userNameField.getText().toString(), passField.getText().toString(), 3);
+                    userList.add(user);
+                    currentUser = user;
                     currentUser.setAccountType("Admin");
                 }
                 // Passes information amoung models
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
@@ -141,9 +129,6 @@ public class RegisterUserActivity extends Activity{
 
                 Intent intent = new Intent(context, WelcomePageActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);

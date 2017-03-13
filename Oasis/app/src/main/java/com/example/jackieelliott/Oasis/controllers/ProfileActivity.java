@@ -12,12 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.jackieelliott.Oasis.Model.Admin;
-import com.example.jackieelliott.Oasis.Model.Manager;
-import com.example.jackieelliott.Oasis.Model.Profile;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
-import com.example.jackieelliott.Oasis.Model.Worker;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
@@ -34,9 +30,6 @@ public class ProfileActivity extends Activity {
     TextView username;
     TextView accountType;
     ArrayList<User> userList;
-    ArrayList<Worker> workerList;
-    ArrayList<Manager> managerList;
-    ArrayList<Admin> adminList;
     ArrayList<Report> reportList;
     User currentUser;
 
@@ -51,9 +44,6 @@ public class ProfileActivity extends Activity {
         addListenerOnButtonBack();
         Bundle b = getIntent().getExtras();
         userList = b.getParcelableArrayList("UserList");
-        workerList = b.getParcelableArrayList("WorkerList");
-        managerList = b.getParcelableArrayList("ManagerList");
-        adminList = b.getParcelableArrayList("AdminList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
 
@@ -108,9 +98,6 @@ public class ProfileActivity extends Activity {
 
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);

@@ -13,11 +13,9 @@ import android.content.DialogInterface;
 
 import java.util.ArrayList;
 
-import com.example.jackieelliott.Oasis.Model.Admin;
-import com.example.jackieelliott.Oasis.Model.Manager;
+
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
-import com.example.jackieelliott.Oasis.Model.Worker;
 import com.example.jackieelliott.Oasis.R;
 
 /**
@@ -31,9 +29,6 @@ public class LoginActivity extends Activity {
     private EditText loginField;
     private EditText passField;
     private ArrayList<User> userList;
-    private ArrayList<Worker> workerList;
-    private ArrayList<Manager> managerList;
-    private ArrayList<Admin> adminList;
     private ArrayList<Report> reportList;
     private User currentUser;
 
@@ -45,9 +40,6 @@ public class LoginActivity extends Activity {
         addListenerOnButtonCancel();
         Bundle b = getIntent().getExtras();
         userList = b.getParcelableArrayList("UserList");
-        workerList = b.getParcelableArrayList("WorkerList");
-        managerList = b.getParcelableArrayList("ManagerList");
-        adminList = b.getParcelableArrayList("AdminList");
         reportList  = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
 
@@ -93,51 +85,12 @@ public class LoginActivity extends Activity {
                         currentUser = userList.get(i);
                     }
                 }
-                if (!login) {
-                    for (int i = 0; i < workerList.size(); i++) {
-                        if (workerList.get(i).getUsername().equals(loginField
-                                .getText().toString()) && passField.getText()
-                                .toString().equals(workerList.get(i)
-                                        .getPassword())) {
-                            login = true;
-                            currentUser = workerList.get(i);
-                        }
-                    }
-                }
-                if (!login) {
-                    for (int i = 0; i < managerList.size(); i++) {
-                        if (managerList.get(i).getUsername().equals(loginField
-                                .getText().toString()) && passField.getText()
-                                .toString().equals(managerList.get(i)
-                                        .getPassword())) {
-                            login = true;
-
-                            currentUser = managerList.get(i);
-                        }
-                    }
-                }
-                if (!login) {
-                    for (int i = 0; i < adminList.size(); i++) {
-                        if (adminList.get(i).getUsername().equals(loginField
-                                .getText().toString()) && passField.getText()
-                                .toString().equals(adminList.get(i)
-                                        .getPassword())) {
-                            login = true;
-                            currentUser = adminList.get(i);
-                        }
-                    }
-                }
                 if (login) {
 
                     // Passed information amoung activities
 
                     Intent intent = new Intent(context, HomeActivity.class);
                     intent.putParcelableArrayListExtra("UserList", userList);
-                    intent.putParcelableArrayListExtra("WorkerList",
-                            workerList);
-                    intent.putParcelableArrayListExtra("ManagerList",
-                            managerList);
-                    intent.putParcelableArrayListExtra("AdminList", adminList);
                     intent.putParcelableArrayListExtra("ReportList",
                             reportList);
                     intent.putExtra("CurrentUser", currentUser);
@@ -168,9 +121,6 @@ public class LoginActivity extends Activity {
                 // Passes information amount activities
                 Intent intent = new Intent(context, WelcomePageActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 startActivity(intent);
 

@@ -15,14 +15,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.jackieelliott.Oasis.Model.AccountTypes;
-import com.example.jackieelliott.Oasis.Model.Admin;
-import com.example.jackieelliott.Oasis.Model.Manager;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.WaterCondition;
 import com.example.jackieelliott.Oasis.Model.WaterType;
-import com.example.jackieelliott.Oasis.Model.Worker;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
+import com.example.jackieelliott.Oasis.Model.ReportType;
 import com.example.jackieelliott.team60application.GoogleMapsActivity;
 
 import org.w3c.dom.Text;
@@ -37,16 +35,16 @@ public class ReportActivity extends Activity {
 
     Button backButton;
     Button createReportButton;
+    Button back_button;
+    Button next_button;
     TextView reportText;
     EditText reportTitle;
     EditText reportLatitude;
     EditText reportLongitude;
     Spinner typeWaterSpinner;
     Spinner conditionWaterSpinner;
+    Spinner chooseReportTypeSpinner;
     ArrayList<User> userList;
-    ArrayList<Worker> workerList;
-    ArrayList<Manager> managerList;
-    ArrayList<Admin> adminList;
     ArrayList<Report> reportList;
     User currentUser;
 
@@ -56,15 +54,14 @@ public class ReportActivity extends Activity {
      */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.report_page);
-        addListenerOnButtonBack();
+
         Bundle b = getIntent().getExtras();
         userList = b.getParcelableArrayList("UserList");
-        workerList = b.getParcelableArrayList("WorkerList");
-        managerList = b.getParcelableArrayList("ManagerList");
-        adminList = b.getParcelableArrayList("AdminList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
+
 
         reportTitle = (EditText) findViewById(R.id.report_title_textedit);
         reportLatitude = (EditText) findViewById(R.id.latitude_text);
@@ -72,16 +69,16 @@ public class ReportActivity extends Activity {
 
         typeWaterSpinner = (Spinner) findViewById(R.id.type_water_spinner);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, WaterType.values());
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, WaterType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         typeWaterSpinner.setAdapter(adapter);
 
         conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this,android.R.layout.simple_spinner_item, WaterCondition.values());
+        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, WaterCondition.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         conditionWaterSpinner.setAdapter(adapter2);
-
+        addListenerOnButtonBack();
         addListenerOnButtonCreateReport();
     }
 
@@ -91,6 +88,7 @@ public class ReportActivity extends Activity {
     public void addListenerOnButtonBack() {
 
         final Context context = this;
+
 
         backButton = (Button) findViewById(R.id.backButton);
         /*
@@ -103,19 +101,16 @@ public class ReportActivity extends Activity {
 
         backButton.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View arg0) {
+                @Override
+                public void onClick(View arg0) {
 
-                Intent intent = new Intent(context, HomeActivity.class);
-                intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
-                intent.putParcelableArrayListExtra("ReportList", reportList);
-                intent.putExtra("CurrentUser", currentUser);
-                startActivity(intent);
+                    Intent intent = new Intent(context, HomeActivity.class);
+                    intent.putParcelableArrayListExtra("UserList", userList);
+                    intent.putParcelableArrayListExtra("ReportList", reportList);
+                    intent.putExtra("CurrentUser", currentUser);
+                    startActivity(intent);
 
-            }
+                }
 
         });
 
@@ -133,8 +128,8 @@ public class ReportActivity extends Activity {
             public void onClick(View arg0) {
 
                 Report newReport = new Report(reportTitle.getText().toString());
-                newReport.setLatitude((Integer.parseInt(reportLatitude.getText().toString())));
-                newReport.setLongitude((Integer.parseInt(reportLongitude.getText().toString())));
+                newReport.setLatitude((Double.parseDouble(reportLatitude.getText().toString())));
+                newReport.setLongitude((Double.parseDouble(reportLongitude.getText().toString())));
                 newReport.setCondition(conditionWaterSpinner.getSelectedItem().toString());
                 newReport.setTypeOfWater(typeWaterSpinner.getSelectedItem().toString());
                 newReport.setReportNumber(reportList.size() + 1);
@@ -142,9 +137,6 @@ public class ReportActivity extends Activity {
 
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);

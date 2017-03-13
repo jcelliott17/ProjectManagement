@@ -11,10 +11,8 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.jackieelliott.Oasis.Model.AccountTypes;
-import com.example.jackieelliott.Oasis.Model.Admin;
-import com.example.jackieelliott.Oasis.Model.Manager;
+
 import com.example.jackieelliott.Oasis.Model.User;
-import com.example.jackieelliott.Oasis.Model.Worker;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
 import com.example.jackieelliott.team60application.GoogleMapsActivity;
@@ -33,9 +31,6 @@ public class HomeActivity extends Activity {
     private Button tempmap;
     private ListView reportsList;
     private ArrayList<User> userList;
-    private ArrayList<Worker> workerList;
-    private ArrayList<Manager> managerList;
-    private ArrayList<Admin> adminList;
     private ArrayList<Report> reportList;
     private User currentUser;
 
@@ -49,9 +44,6 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.home_page);
         Bundle b = getIntent().getExtras();
         userList = b.getParcelableArrayList("UserList");
-        workerList = b.getParcelableArrayList("WorkerList");
-        managerList = b.getParcelableArrayList("ManagerList");
-        adminList = b.getParcelableArrayList("AdminList");
         currentUser = b.getParcelable("CurrentUser");
         reportList = b.getParcelableArrayList("ReportList");
         logoutButton = (Button) findViewById(R.id.logout_button);
@@ -95,35 +87,6 @@ public class HomeActivity extends Activity {
                 // This is necessary because of pass by value
             }
         }
-        for (int i = 0; i < workerList.size(); i++) {
-            if (workerList.get(i).getUsername().equals(currentUser
-                    .getUsername())
-                    && currentUser.getPassword().equals(workerList.get(i)
-                    .getPassword())) {
-                workerList.remove(i);
-                workerList.add(i, (Worker) currentUser);
-            }
-        }
-
-
-        for (int i = 0; i < managerList.size(); i++) {
-            if (managerList.get(i).getUsername().equals(currentUser
-                    .getUsername())
-                    && currentUser.getPassword().equals(managerList.get(i)
-                    .getPassword())) {
-                managerList.remove(i);
-                managerList.add(i, (Manager) currentUser);
-            }
-        }
-
-        for (int i = 0; i < adminList.size(); i++) {
-            if (adminList.get(i).getUsername().equals(currentUser.getUsername())
-                    && currentUser.getPassword().equals(adminList.get(i)
-                    .getPassword())) {
-                adminList.remove(i);
-                adminList.add(i, (Admin) currentUser);
-            }
-        }
 
 
         //logoutButton = (Button) findViewById(R.id.logout_button);
@@ -134,9 +97,6 @@ public class HomeActivity extends Activity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, WelcomePageActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
@@ -152,9 +112,6 @@ public class HomeActivity extends Activity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, ProfileActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
@@ -171,9 +128,6 @@ public class HomeActivity extends Activity {
 
                 Intent intent = new Intent(context, ReportActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
@@ -189,9 +143,6 @@ public class HomeActivity extends Activity {
 
                 Intent intent = new Intent(context, GoogleMapsActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);

@@ -7,10 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.jackieelliott.Oasis.Model.Admin;
-import com.example.jackieelliott.Oasis.Model.Manager;
+
 import com.example.jackieelliott.Oasis.Model.User;
-import com.example.jackieelliott.Oasis.Model.Worker;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
 
@@ -26,9 +24,6 @@ public class WelcomePageActivity extends AppCompatActivity {
     Button button2;
     //These lists allow for information to persist. Eventually will be replaced by data base
     ArrayList<User> userList;
-    ArrayList<Worker> workerList;
-    ArrayList<Manager> managerList;
-    ArrayList<Admin> adminList;
     ArrayList<Report> reportList;
 
     @Override
@@ -42,16 +37,10 @@ public class WelcomePageActivity extends AppCompatActivity {
         addListenerOnButtonLogin();
         if (getIntent().getExtras() == null) {
             userList = new ArrayList<>();
-            workerList = new ArrayList<>();
-            managerList = new ArrayList<>();
-            adminList = new ArrayList<>();
             reportList = new ArrayList<>();
         } else {
             Bundle b = getIntent().getExtras();
             userList = b.getParcelableArrayList("UserList");
-            workerList = b.getParcelableArrayList("WorkerList");
-            managerList = b.getParcelableArrayList("ManagerList");
-            adminList = b.getParcelableArrayList("AdminList");
             reportList = b.getParcelableArrayList("ReportList");
         }
     }
@@ -72,9 +61,6 @@ public class WelcomePageActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(context, RegisterUserActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 startActivity(intent);
 
@@ -100,9 +86,6 @@ public class WelcomePageActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(context, LoginActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("WorkerList", workerList);
-                intent.putParcelableArrayListExtra("ManagerList", managerList);
-                intent.putParcelableArrayListExtra("AdminList", adminList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 startActivity(intent);
 
