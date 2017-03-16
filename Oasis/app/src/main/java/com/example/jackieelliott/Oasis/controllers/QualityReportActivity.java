@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.jackieelliott.Oasis.Model.PurityType;
+import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.WaterCondition;
@@ -40,6 +41,7 @@ public class QualityReportActivity extends Activity {
     Spinner chooseReportTypeSpinner;
     ArrayList<User> userList;
     ArrayList<Report> reportList;
+    ArrayList<QualityReport> qualityList;
     User currentUser;
 
     /**
@@ -55,6 +57,7 @@ public class QualityReportActivity extends Activity {
         userList = b.getParcelableArrayList("UserList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
+        qualityList = b.getParcelable("QualityList");
 
 
         reportTitle = (EditText) findViewById(R.id.report_title_textedit);
@@ -95,6 +98,7 @@ public class QualityReportActivity extends Activity {
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
@@ -128,6 +132,7 @@ public class QualityReportActivity extends Activity {
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
@@ -31,6 +32,7 @@ public class ProfileActivity extends Activity {
     TextView accountType;
     ArrayList<User> userList;
     ArrayList<Report> reportList;
+    ArrayList<QualityReport> qualityList;
     User currentUser;
 
     /**
@@ -46,6 +48,7 @@ public class ProfileActivity extends Activity {
         userList = b.getParcelableArrayList("UserList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
+        qualityList = b.getParcelableArrayList("QualityList");
 
         username.setText(currentUser.getUsername());
         email = (EditText) findViewById(R.id.emailText);
@@ -99,6 +102,7 @@ public class ProfileActivity extends Activity {
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
