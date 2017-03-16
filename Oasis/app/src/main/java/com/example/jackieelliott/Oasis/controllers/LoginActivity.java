@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import java.util.ArrayList;
 
 
+import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
@@ -30,6 +31,7 @@ public class LoginActivity extends Activity {
     private EditText passField;
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
+    private ArrayList<QualityReport> qualityList;
     private User currentUser;
 
     /**
@@ -46,6 +48,7 @@ public class LoginActivity extends Activity {
         userList = b.getParcelableArrayList("UserList");
         reportList  = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
+        qualityList = b.getParcelableArrayList("QualityList");
 
     }
 
@@ -98,6 +101,7 @@ public class LoginActivity extends Activity {
                     intent.putParcelableArrayListExtra("ReportList",
                             reportList);
                     intent.putExtra("CurrentUser", currentUser);
+                    intent.putParcelableArrayListExtra("QualityList", qualityList);
                     startActivity(intent);
                 } else {
                     alertDialog.show();
@@ -126,6 +130,7 @@ public class LoginActivity extends Activity {
                 Intent intent = new Intent(context, WelcomePageActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
 
             }

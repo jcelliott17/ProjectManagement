@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 
+import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
@@ -25,6 +26,7 @@ public class WelcomePageActivity extends AppCompatActivity {
     //These lists allow for information to persist. Eventually will be replaced by data base
     ArrayList<User> userList;
     ArrayList<Report> reportList;
+    ArrayList<QualityReport> qualityList;
 
     /**
      * Creates the Welcome using the passed information.
@@ -38,10 +40,12 @@ public class WelcomePageActivity extends AppCompatActivity {
         if (getIntent().getExtras() == null) {
             userList = new ArrayList<>();
             reportList = new ArrayList<>();
+            qualityList = new ArrayList<>();
         } else {
             Bundle b = getIntent().getExtras();
             userList = b.getParcelableArrayList("UserList");
             reportList = b.getParcelableArrayList("ReportList");
+            qualityList = b.getParcelableArrayList("QualityList");
         }
     }
 
@@ -62,6 +66,7 @@ public class WelcomePageActivity extends AppCompatActivity {
                 Intent intent = new Intent(context, RegisterUserActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
 
             }
@@ -87,6 +92,7 @@ public class WelcomePageActivity extends AppCompatActivity {
                 Intent intent = new Intent(context, LoginActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
 
             }

@@ -12,6 +12,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 
 import com.example.jackieelliott.Oasis.Model.AccountTypes;
+import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
@@ -30,6 +31,7 @@ public class RegisterUserActivity extends Activity{
     EditText passField;
     ArrayList<User> userList;
     ArrayList<Report> reportList;
+    ArrayList<QualityReport> qualityList;
     //currentUser created to keep track of who is using the application
     //this will be removed once the database starts working
     User currentUser;
@@ -54,6 +56,7 @@ public class RegisterUserActivity extends Activity{
         userList = b.getParcelableArrayList("UserList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
+        qualityList = b.getParcelableArrayList("QualityList");
     }
 
     /**
@@ -105,6 +108,7 @@ public class RegisterUserActivity extends Activity{
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
@@ -130,6 +134,7 @@ public class RegisterUserActivity extends Activity{
                 Intent intent = new Intent(context, WelcomePageActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 

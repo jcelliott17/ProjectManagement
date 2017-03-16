@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.controllers.HomeActivity;
@@ -28,6 +29,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     private ListView reportsList;
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
+    private ArrayList<QualityReport> qualityList;
     private User currentUser;
 
     /**
@@ -42,6 +44,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         userList = b.getParcelableArrayList("UserList");
         currentUser = b.getParcelable("CurrentUser");
         reportList = b.getParcelableArrayList("ReportList");
+        qualityList = b.getParcelableArrayList("QualityList");
         reportsList = (ListView) findViewById(R.id.reports_list);
         backButton = (Button) findViewById(R.id.backButton);
         setContentView(R.layout.activity_google_maps);
@@ -71,6 +74,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 

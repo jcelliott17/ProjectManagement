@@ -30,12 +30,27 @@
 
     </LinearLayout>
 
-    <Button
-        android:text="Temp Map"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tempmap"
-        android:elevation="0dp" />
+        android:layout_height="match_parent">
+
+        <Button
+            android:text="Water Map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tempmap"
+            android:elevation="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="Quality Report List"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/qualitylist_button"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <TextView
         android:text="Reports List"
