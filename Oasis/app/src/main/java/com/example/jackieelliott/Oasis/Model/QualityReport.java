@@ -13,7 +13,8 @@ public class QualityReport implements Parcelable {
     private double _latitude;
     private double _longitude;
     private String _condition;
-    private String _typeOfWater;
+    private double _virus;
+    private double _contaminant;
     private int _timeAndDate;
     private int _reportNumber;
 
@@ -69,17 +70,21 @@ public class QualityReport implements Parcelable {
      * get water type
      * @return String type of water
      */
-    public String getTypeOfWater() {
-        return _typeOfWater;
+    public Double getVirus() {
+        return _virus;
     }
 
     /**
      * set water type
-     * @param typeOfWater String type of water
+     * @param virus String type of water
      */
-    public void setTypeOfWater(String typeOfWater) {
-        _typeOfWater = typeOfWater;
+    public void setVirus(Double virus) {
+        _virus = virus;
     }
+
+    public Double getContaminant() { return _contaminant; }
+
+    public void setContanminant(Double contanminant) { _contaminant = contanminant; }
 
     /**
      * get report name
@@ -140,7 +145,8 @@ public class QualityReport implements Parcelable {
         _latitude = in.readDouble();
         _longitude = in.readDouble();
         _condition = in.readString();
-        _typeOfWater = in.readString();
+        _virus = in.readDouble();
+        _contaminant = in.readDouble();
         _timeAndDate = in.readInt();
         _reportNumber = in.readInt();
     }
@@ -151,7 +157,8 @@ public class QualityReport implements Parcelable {
      */
     @Override
     public String toString() {
-        return "Report Number: " + _reportNumber + " Name: " + _reportName + " Location: " + _latitude + " " + _longitude;
+        return "Report Number: " + _reportNumber + " Name: " + _reportName + " Location: " + _latitude + " " + _longitude
+                + " Virus PPM: " + _virus;
     }
 
     /**
@@ -174,7 +181,8 @@ public class QualityReport implements Parcelable {
         dest.writeDouble(_latitude);
         dest.writeDouble(_longitude);
         dest.writeString(_condition);
-        dest.writeString(_typeOfWater);
+        dest.writeDouble(_virus);
+        dest.writeDouble(_contaminant)
         dest.writeInt(_timeAndDate);
         dest.writeInt(_reportNumber);
     }

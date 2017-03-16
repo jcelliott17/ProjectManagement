@@ -122,12 +122,14 @@ public class QualityReportActivity extends Activity {
             @Override
             public void onClick(View arg0) {
 
-                Report newReport = new Report(reportTitle.getText().toString());
+                QualityReport newReport = new QualityReport(reportTitle.getText().toString());
                 newReport.setLatitude((Double.parseDouble(reportLatitude.getText().toString())));
                 newReport.setLongitude((Double.parseDouble(reportLongitude.getText().toString())));
                 newReport.setCondition(conditionWaterSpinner.getSelectedItem().toString());
+                newReport.setVirus(Double.parseDouble(virusEdit.getText().toString()));
+                newReport.setContanminant(Double.parseDouble(contaminantEdit.getText().toString()));
                 newReport.setReportNumber(reportList.size() + 1);
-                reportList.add(newReport);
+                qualityList.add(newReport);
 
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
