@@ -1,6 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:text="Submit a report:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/report_textview"
+        android:textSize="24sp"
+        android:layout_weight="0.03" />
+
+    <TextView
+        android:text="Title of Report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/report_title_textview"
+        android:layout_weight="0.03" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Enter report name"
+        android:ems="10"
+        android:id="@+id/report_title_textedit"
+        android:layout_weight="0.03"
+        android:selectAllOnFocus="true" />
+
+    <TextView
+        android:text="Location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/location_textview" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="47dp">
+
+        <EditText
+            android:layout_width="197dp"
+            android:layout_height="wrap_content"
+            android:text="Enter latitude"
+            android:ems="10"
+            android:id="@+id/latitude_text"
+            android:layout_weight="1"
+            android:inputType="numberSigned|numberDecimal"
+            android:selectAllOnFocus="true" />
+
+        <EditText
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:text="Enter longitude"
+            android:ems="10"
+            android:id="@+id/longitude_text"
+            android:layout_weight="1"
+            android:inputType="numberSigned|numberDecimal"
+            android:selectAllOnFocus="true" />
+    </LinearLayout>
+
+    <TextView
+        android:text="Condition of Water"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/water_condition_textView"
+        android:layout_weight="0.03" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/water_condition_spinner"
+        android:layout_weight="0.03" />
+
+    <TextView
+        android:text="Virus PPM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/virusPPMView"
+        android:layout_weight="0.03" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Virus PPM"
+        android:ems="10"
+        android:id="@+id/virusPPMText"
+        android:layout_weight="0.03"
+        android:selectAllOnFocus="true"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:text="Contaminant PPM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/contaminantPPMView"
+        android:layout_weight="0.03" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter Contaminant PPM"
+        android:ems="10"
+        android:id="@+id/contaminantPPMText"
+        android:layout_weight="0.03"
+        android:selectAllOnFocus="true"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:text="Create Report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/create_report_button"
+        android:layout_weight="0.03" />
+
+    <Button
+        android:text="Back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/backButton"
+        android:layout_weight="0.04" />
 
 </LinearLayout>

@@ -11,10 +11,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.jackieelliott.Oasis.Model.PurityType;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.WaterCondition;
-import com.example.jackieelliott.Oasis.Model.WaterType;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
@@ -23,16 +23,19 @@ import java.util.ArrayList;
  * Created by JackieElliott on 3/13/17.
  */
 
-public class QualityReportActivity extends Activity{
+public class QualityReportActivity extends Activity {
     Button backButton;
     Button createReportButton;
     Button back_button;
     Button next_button;
     TextView reportText;
+    TextView virusView;
+    EditText virusEdit;
+    TextView contaminantView;
+    EditText contaminantEdit;
     EditText reportTitle;
     EditText reportLatitude;
     EditText reportLongitude;
-    Spinner typeWaterSpinner;
     Spinner conditionWaterSpinner;
     Spinner chooseReportTypeSpinner;
     ArrayList<User> userList;
@@ -46,7 +49,7 @@ public class QualityReportActivity extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.report_page);
+        setContentView(R.layout.quality_report_page);
 
         Bundle b = getIntent().getExtras();
         userList = b.getParcelableArrayList("UserList");
@@ -57,16 +60,13 @@ public class QualityReportActivity extends Activity{
         reportTitle = (EditText) findViewById(R.id.report_title_textedit);
         reportLatitude = (EditText) findViewById(R.id.latitude_text);
         reportLongitude = (EditText) findViewById(R.id.longitude_text);
+        virusEdit = (EditText) findViewById(R.id.virusPPMText);
+        contaminantEdit = (EditText) findViewById(R.id.contaminantPPMText);
 
-        typeWaterSpinner = (Spinner) findViewById(R.id.type_water_spinner);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, WaterType.values());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        typeWaterSpinner.setAdapter(adapter);
 
         conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, WaterCondition.values());
+        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, PurityType.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         conditionWaterSpinner.setAdapter(adapter2);
         addListenerOnButtonBack();
@@ -84,7 +84,6 @@ public class QualityReportActivity extends Activity{
         backButton = (Button) findViewById(R.id.backButton);
         reportText = (TextView) findViewById(R.id.report_textview);
         reportTitle = (EditText) findViewById(R.id.report_title_textedit);
-        typeWaterSpinner = (Spinner) findViewById(R.id.type_water_spinner);
         conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 
 
@@ -123,7 +122,6 @@ public class QualityReportActivity extends Activity{
                 newReport.setLatitude((Double.parseDouble(reportLatitude.getText().toString())));
                 newReport.setLongitude((Double.parseDouble(reportLongitude.getText().toString())));
                 newReport.setCondition(conditionWaterSpinner.getSelectedItem().toString());
-                newReport.setTypeOfWater(typeWaterSpinner.getSelectedItem().toString());
                 newReport.setReportNumber(reportList.size() + 1);
                 reportList.add(newReport);
 
