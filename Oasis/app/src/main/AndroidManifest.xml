@@ -44,6 +44,9 @@
         <activity
             android:name=".controllers.ReportActivity"
             android:label="Oasis"></activity>
+		<activity
+            android:name=".controllers.QualityReportActivity"
+            android:label="Oasis"></activity>
         <activity
             android:name=".controllers.SelectReportTypeActivity"
             android:label="Oasis"></activity>
