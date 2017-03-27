@@ -57,7 +57,7 @@ public class QualityReportActivity extends Activity {
         userList = b.getParcelableArrayList("UserList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelable("QualityList");
+        qualityList = b.getParcelableArrayList("QualityList");
 
 
         reportTitle = (EditText) findViewById(R.id.report_title_textedit);

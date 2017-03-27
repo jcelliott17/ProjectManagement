@@ -182,7 +182,7 @@ public class QualityReport implements Parcelable {
         dest.writeDouble(_longitude);
         dest.writeString(_condition);
         dest.writeDouble(_virus);
-        dest.writeDouble(_contaminant)
+        dest.writeDouble(_contaminant);
         dest.writeInt(_timeAndDate);
         dest.writeInt(_reportNumber);
     }

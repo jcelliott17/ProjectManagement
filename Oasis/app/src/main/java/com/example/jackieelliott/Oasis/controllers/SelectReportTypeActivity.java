@@ -48,7 +48,7 @@ public class SelectReportTypeActivity extends Activity {
         userList = b.getParcelableArrayList("UserList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelable("QualityList");
+        qualityList = b.getParcelableArrayList("QualityList");
 
         chooseReportTypeSpinner = (Spinner) findViewById(R.id.select_report_type);
 
