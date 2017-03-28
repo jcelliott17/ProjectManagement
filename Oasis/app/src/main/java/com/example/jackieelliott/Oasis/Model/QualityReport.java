@@ -3,6 +3,12 @@ package com.example.jackieelliott.Oasis.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.jjoe64.graphview.series.DataPoint;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by JackieElliott on 2/20/17.
  */
@@ -138,6 +144,20 @@ public class QualityReport implements Parcelable {
      */
     public void setTimeAndDate(int timeAndDate) {
         _timeAndDate = timeAndDate;
+    }
+
+    //Returns a list of quality reports in a given year
+    public static List<QualityReport> getReportsByYear(int year, ArrayList<QualityReport> qualityList) {
+        List<QualityReport> reportsByYear = new ArrayList<>();
+        if (qualityList == null) {
+            return reportsByYear;
+        }
+        for (QualityReport report: qualityList) {
+            if (report.getTimeAndDate() == year) {
+                reportsByYear.add(report);
+            }
+        }
+        return reportsByYear;
     }
 
     public QualityReport(Parcel in) {

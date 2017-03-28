@@ -22,7 +22,7 @@ import com.example.jackieelliott.Oasis.Model.WaterType;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
 import com.example.jackieelliott.Oasis.Model.ReportType;
-import com.example.jackieelliott.team60application.GoogleMapsActivity;
+import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
 
 import org.w3c.dom.Text;
 

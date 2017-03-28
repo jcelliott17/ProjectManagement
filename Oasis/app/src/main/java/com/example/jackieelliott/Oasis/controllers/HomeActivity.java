@@ -16,7 +16,7 @@ import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
-import com.example.jackieelliott.team60application.GoogleMapsActivity;
+import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
 import com.example.jackieelliott.Oasis.controllers.SelectReportTypeActivity;
 
 import java.util.ArrayList;
