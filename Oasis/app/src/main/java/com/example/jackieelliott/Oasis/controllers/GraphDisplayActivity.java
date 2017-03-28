@@ -26,6 +26,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class GraphDisplayActivity extends Activity {
@@ -37,6 +38,7 @@ public class GraphDisplayActivity extends Activity {
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
     private User currentUser;
+    private LinkedList<QualityReport>[] monthlyQualityList;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,13 +95,39 @@ public class GraphDisplayActivity extends Activity {
      */
     //datatype is virus or contaminant
     private void getData(int year, String dataType) {
-        List<QualityReport> reportsByYear = QualityReport.getReportsByYear(year, qualityList);
-        if (reportsByYear.size() != 0) {
-            for (QualityReport report : qualityList) {
-                series.appendData(new DataPoint(report.getTimeAndDate(), report.getContaminant()), true, 12);
+        LinkedList<QualityReport>[] reportsByYear = getReportsByYear(year, qualityList);
+        int month = 1;
+        for (LinkedList<QualityReport> reportsByMonth: reportsByYear) {
+            if (reportsByMonth != null) {
+                int average = 0;
+                for (QualityReport report: reportsByMonth) {
+                    average += report.getContaminant();
+                }
+                average = average/ reportsByMonth.size();
+                series.appendData(new DataPoint(month, average), true, 12);
             }
-
+            month++;
         }
         scatterPlot.addSeries(series);
+    }
+
+    //Returns a list of quality reports in a given year
+    //Use deprecated Date code because android wouldn't support localDateTime
+    public LinkedList<QualityReport>[] getReportsByYear(int year, ArrayList<QualityReport> qualityList) {
+        monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
+        if (qualityList == null) {
+            return monthlyQualityList;
+        }
+
+        for (QualityReport report: qualityList) {
+            if (report.getTimeAndDate().getYear() == year) {
+                if (monthlyQualityList[report.getTimeAndDate().getMonth()] == null) {
+                    monthlyQualityList[report.getTimeAndDate().getMonth()] = new LinkedList<QualityReport>();
+                }
+                monthlyQualityList[report.getTimeAndDate().getMonth()].add(report);
+            }
+        }
+
+        return monthlyQualityList;
     }
 }

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import java.util.Date;
 
 import com.example.jackieelliott.Oasis.Model.PurityType;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
@@ -129,6 +130,7 @@ public class QualityReportActivity extends Activity {
                 newReport.setVirus(Double.parseDouble(virusEdit.getText().toString()));
                 newReport.setContanminant(Double.parseDouble(contaminantEdit.getText().toString()));
                 newReport.setReportNumber(reportList.size() + 1);
+                newReport.setTimeAndDate(new Date());
                 qualityList.add(newReport);
 
                 Intent intent = new Intent(context, HomeActivity.class);

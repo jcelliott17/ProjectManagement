@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.jjoe64.graphview.series.DataPoint;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class QualityReport implements Parcelable {
     private String _condition;
     private double _virus;
     private double _contaminant;
-    private int _timeAndDate;
+    private Date _timeAndDate;
     private int _reportNumber;
 
     /**
@@ -134,7 +135,7 @@ public class QualityReport implements Parcelable {
      * get time and date
      * @return int time and date
      */
-    public int getTimeAndDate() {
+    public Date getTimeAndDate() {
         return _timeAndDate;
     }
 
@@ -142,23 +143,10 @@ public class QualityReport implements Parcelable {
      * set time and date
      * @param timeAndDate integer time and date
      */
-    public void setTimeAndDate(int timeAndDate) {
+    public void setTimeAndDate(Date timeAndDate) {
         _timeAndDate = timeAndDate;
     }
 
-    //Returns a list of quality reports in a given year
-    public static List<QualityReport> getReportsByYear(int year, ArrayList<QualityReport> qualityList) {
-        List<QualityReport> reportsByYear = new ArrayList<>();
-        if (qualityList == null) {
-            return reportsByYear;
-        }
-        for (QualityReport report: qualityList) {
-            if (report.getTimeAndDate() == year) {
-                reportsByYear.add(report);
-            }
-        }
-        return reportsByYear;
-    }
 
     public QualityReport(Parcel in) {
         _reportName = in.readString();
@@ -167,7 +155,7 @@ public class QualityReport implements Parcelable {
         _condition = in.readString();
         _virus = in.readDouble();
         _contaminant = in.readDouble();
-        _timeAndDate = in.readInt();
+        _timeAndDate = new Date(in.readLong());
         _reportNumber = in.readInt();
     }
 
@@ -203,7 +191,7 @@ public class QualityReport implements Parcelable {
         dest.writeString(_condition);
         dest.writeDouble(_virus);
         dest.writeDouble(_contaminant);
-        dest.writeInt(_timeAndDate);
+        dest.writeLong(_timeAndDate.getTime());
         dest.writeInt(_reportNumber);
     }
 
