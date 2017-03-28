@@ -35,9 +35,9 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by JackieElliott on 2/8/17.
  */
 
-public class RegisterUserActivity extends Activity{
+public class RegisterUserActivity extends Activity {
 
-    Button registerBotton;
+    Button registerButton;
     Button cancelButton;
     private Spinner accountTypeSpinner;
     private FirebaseAuth mAuth;
@@ -136,14 +136,28 @@ public class RegisterUserActivity extends Activity{
                         } else {
                             Toast.makeText(RegisterUserActivity.this, "You're in!",
                                     Toast.LENGTH_SHORT).show();
-
                             Intent intent = new Intent(context, HomeActivity.class);
                             intent.putParcelableArrayListExtra("UserList", userList);
                             startActivity(intent);
+                            makeNewUser();
+                            goToHome();
                         }
                         //task.
                     }
                 });
+    }
+
+    private void makeNewUser() {
+        Object userObject;
+        userObject = new User(emailField.getText().toString(), passField.getText().toString(), 1);
+        //userList.add(user);
+        mDatabase.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(userObject);
+    }
+
+    private void goToHome() {
+        Intent intent = new Intent(context, HomeActivity.class);
+        intent.putParcelableArrayListExtra("UserList", userList);
+        startActivity(intent);
     }
 
     private boolean validateForm() {
@@ -175,11 +189,11 @@ public class RegisterUserActivity extends Activity{
 
         context = this;
 
-        registerBotton = (Button) findViewById(R.id.registerOnRegisterPage);
+        registerButton = (Button) findViewById(R.id.registerOnRegisterPage);
         emailField = (EditText) findViewById(R.id.username_text);
         passField = (EditText) findViewById(R.id.editText3);
 
-        registerBotton.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {

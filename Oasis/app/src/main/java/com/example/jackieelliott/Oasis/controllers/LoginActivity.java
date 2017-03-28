@@ -43,6 +43,7 @@ public class LoginActivity extends Activity {
     private ArrayList<QualityReport> qualityList;
     private User currentUser;
 
+    private Context context;
     private static final String TAG = "LoginActivity-TAG";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -88,8 +89,7 @@ public class LoginActivity extends Activity {
      * adds functionality to login button
      */
     public void addListenerOnButtonLogin() {
-
-        final Context context = this;
+        context = this;
 
         login = (Button) findViewById(R.id.login_button);
         loginField = (EditText) findViewById(R.id.username_text);
@@ -112,9 +112,12 @@ public class LoginActivity extends Activity {
 
                 if (validateForm()) {
                     signIn();
+<<<<<<< HEAD
                     Intent intent = new Intent(context, HomeActivity.class);
                     intent.putParcelableArrayListExtra("UserList", userList);
                     startActivity(intent);
+=======
+>>>>>>> Edits for login and register
                 } else {
                     alertDialog.show();
                 }
@@ -192,11 +195,24 @@ public class LoginActivity extends Activity {
                             Log.w(TAG, "signInWithEmail", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "You're in!",
+                                    Toast.LENGTH_SHORT).show();
+                            goToHome();
                         }
 
                         // ...
                     }
                 });
+    }
+
+    private void goToHome() {
+        Intent intent = new Intent(context, HomeActivity.class);
+        intent.putParcelableArrayListExtra("UserList", userList);
+        intent.putParcelableArrayListExtra("WorkerList", workerList);
+        intent.putParcelableArrayListExtra("ManagerList", managerList);
+        intent.putParcelableArrayListExtra("AdminList", adminList);
+        startActivity(intent);
     }
 
     private boolean validateForm() {
