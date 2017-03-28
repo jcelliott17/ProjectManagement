@@ -24,17 +24,17 @@ import com.example.jackieelliott.Oasis.Model.Profile;
 
 public class RegisterUserActivity extends Activity{
 
-    Button registerBotton;
-    Button cancelButton;
+    private Button registerBotton;
+    private Button cancelButton;
     private Spinner accountTypeSpinner;
-    EditText userNameField;
-    EditText passField;
-    ArrayList<User> userList;
-    ArrayList<Report> reportList;
-    ArrayList<QualityReport> qualityList;
+    private EditText userNameField;
+    private EditText passField;
+    private ArrayList<User> userList;
+    private ArrayList<Report> reportList;
+    private ArrayList<QualityReport> qualityList;
     //currentUser created to keep track of who is using the application
     //this will be removed once the database starts working
-    User currentUser;
+    private User currentUser;
 
     /**
      * Creates the report activity page.

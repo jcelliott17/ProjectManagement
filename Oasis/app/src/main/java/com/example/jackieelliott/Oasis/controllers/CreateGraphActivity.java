@@ -12,8 +12,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.example.jackieelliott.Oasis.Model.AccountTypes;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
+import com.example.jackieelliott.Oasis.Model.HistoryGraph;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
 
@@ -35,6 +37,7 @@ public class CreateGraphActivity extends Activity{
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
+    private ArrayList<HistoryGraph> historyGraphList;
     private User currentUser;
 
     /**
@@ -51,10 +54,21 @@ public class CreateGraphActivity extends Activity{
         longitude = (EditText) findViewById(R.id.long_editText);
         createGraph = (Button) findViewById(R.id.create_graph_button);
         back = (Button) findViewById(R.id.back_button);
+
+        //Creates the functionality for the spinner
+        dataType = (Spinner) findViewById(R.id.data_type_spinner);
+
+        String[] spinnerItems = {"Contaminant","Virus"};
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, spinnerItems);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataType.setAdapter(adapter);
+
         userList = b.getParcelableArrayList("UserList");
         currentUser = b.getParcelable("CurrentUser");
         reportList = b.getParcelableArrayList("ReportList");
         qualityList = b.getParcelableArrayList("QualityList");
+
+        historyGraphList = new ArrayList<HistoryGraph>();
 
         addListenerOnButtonCreateGraph();
         addListenerOnButtonBack();
@@ -70,10 +84,20 @@ public class CreateGraphActivity extends Activity{
 
             @Override
             public void onClick(View arg0) {
+                if (year.getText() != null) {
+                    //HistoryGraph graph = new HistoryGraph(Integer.parseInt(year.getText().toString()),
+                            //Integer.parseInt(latitude.getText().toString()), Integer.parseInt(longitude
+                            //.getText().toString()), dataType.getSelectedItem().toString());
+                    historyGraphList.add(new HistoryGraph(Integer.parseInt(year.getText().toString()),
+                            Integer.parseInt(latitude.getText().toString()), Integer.parseInt(longitude
+                            .getText().toString()), dataType.getSelectedItem().toString()));
+                }
+
                 Intent intent = new Intent(context, GraphDisplayActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                intent.putParcelableArrayListExtra("GraphList", historyGraphList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }

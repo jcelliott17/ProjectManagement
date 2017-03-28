@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.example.jackieelliott.Oasis.Model.HistoryGraph;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
@@ -37,6 +38,7 @@ public class GraphDisplayActivity extends Activity {
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
+    private ArrayList<HistoryGraph> historyGraphList;
     private User currentUser;
     private LinkedList<QualityReport>[] monthlyQualityList;
 
@@ -51,22 +53,28 @@ public class GraphDisplayActivity extends Activity {
         currentUser = b.getParcelable("CurrentUser");
         reportList = b.getParcelableArrayList("ReportList");
         qualityList = b.getParcelableArrayList("QualityList");
+        historyGraphList = b.getParcelableArrayList("GraphList");
 
-        double y,x;
-        x = -5.0;
+        //double y,x;
+        //x = -5.0;
         //Creates the graph view
         scatterPlot = (GraphView) findViewById(R.id.graph);
         //Sets labels on axises
         GridLabelRenderer gridLabel = scatterPlot.getGridLabelRenderer();
         gridLabel.setHorizontalAxisTitle("Months");
-        gridLabel.setVerticalAxisTitle("PPM");
+        gridLabel.setVerticalAxisTitle(historyGraphList.get(0).getyAxis() + "PPM");
+
+
         series = new PointsGraphSeries<DataPoint>();
-        for (int i = 0; i < 10; i++) {
-            x = x + 10;
-            y = x;
-            series.appendData(new DataPoint(x, y), true, 10);
-        }
-        scatterPlot.addSeries(series);
+
+        getData(historyGraphList.get(0).getYear(), historyGraphList.get(0).getLatitude(),
+                historyGraphList.get(0).getLongitude(), historyGraphList.get(0).getyAxis());
+        //for (int i = 0; i < 10; i++) {
+           // x = x + 10;
+            //y = x;
+            //series.appendData(new DataPoint(x, y), true, 10);
+        //}
+        //scatterPlot.addSeries(series);
         addListenerOnButtonBack();
     }
 
@@ -77,6 +85,7 @@ public class GraphDisplayActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
+                historyGraphList.clear();
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
@@ -89,19 +98,24 @@ public class GraphDisplayActivity extends Activity {
     }
 
     /**
+     * Gets the data values for a given year and plots the points on the graph
      *
-     * @param year
-     * @param dataType
+     * @param year specified year for reports
+     * @param dataType virus or contaminant
      */
     //datatype is virus or contaminant
-    private void getData(int year, String dataType) {
-        LinkedList<QualityReport>[] reportsByYear = getReportsByYear(year, qualityList);
+    private void getData(int year, int latitude, int longitude, String dataType) {
+        LinkedList<QualityReport>[] reportsByYear = sortReports(year, latitude, longitude, qualityList);
         int month = 1;
         for (LinkedList<QualityReport> reportsByMonth: reportsByYear) {
             if (reportsByMonth != null) {
                 int average = 0;
                 for (QualityReport report: reportsByMonth) {
-                    average += report.getContaminant();
+                    if (dataType.equals("Virus")) {
+                        average += report.getVirus();
+                    } else {
+                        average += report.getContaminant();
+                    }
                 }
                 average = average/ reportsByMonth.size();
                 series.appendData(new DataPoint(month, average), true, 12);
@@ -113,14 +127,25 @@ public class GraphDisplayActivity extends Activity {
 
     //Returns a list of quality reports in a given year
     //Use deprecated Date code because android wouldn't support localDateTime
-    public LinkedList<QualityReport>[] getReportsByYear(int year, ArrayList<QualityReport> qualityList) {
+    /**
+     * Gets the reports from a specified year and sorts them by month
+     *
+     *
+     * @param year specified year for reports
+     * @param qualityList list of reports
+     * @return An array of linked lists
+     */
+
+
+    private LinkedList<QualityReport>[] sortReports(int year, int latitude, int longitude,
+                                                         ArrayList<QualityReport> qualityList) {
         monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
         if (qualityList == null) {
             return monthlyQualityList;
         }
 
         for (QualityReport report: qualityList) {
-            if (report.getTimeAndDate().getYear() == year) {
+            if (report.getTimeAndDate().getYear() == year && report.getLatitude() == latitude && report.getLongitude() == longitude) {
                 if (monthlyQualityList[report.getTimeAndDate().getMonth()] == null) {
                     monthlyQualityList[report.getTimeAndDate().getMonth()] = new LinkedList<QualityReport>();
                 }
