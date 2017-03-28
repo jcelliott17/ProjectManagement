@@ -5,11 +5,13 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
 import android.content.DialogInterface;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,6 +20,13 @@ import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by JackieElliott on 2/8/17.
@@ -34,6 +43,12 @@ public class LoginActivity extends Activity {
     private ArrayList<QualityReport> qualityList;
     private User currentUser;
 
+    private static final String TAG = "LoginActivity-TAG";
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference mDatabase;
+    private DatabaseReference accountEndPoint;
+
     /**
      * sets up activity when it is first created
      * @param savedInstanceState
@@ -49,7 +64,24 @@ public class LoginActivity extends Activity {
         reportList  = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
         qualityList = b.getParcelableArrayList("QualityList");
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        accountEndPoint = mDatabase.child("accounts");
 
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+        };
     }
 
     /**
@@ -77,13 +109,16 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
+
+                if (validateForm()) {
+                    signIn();
+                    Intent intent = new Intent(context, HomeActivity.class);
+                    intent.putParcelableArrayListExtra("UserList", userList);
+                    startActivity(intent);
+                } else {
+                    alertDialog.show();
+                }
                 /*
-                Searches for login username. Warning should pop up if the
-                user name does not exist. If the user name and password
-                combination exist then the current user is set the user
-                found.
-                 */
-                boolean login = false;
                 for (int i = 0; i < userList.size(); i++) {
                     if (userList.get(i).getUsername().equals(loginField
                             .getText().toString()) && passField.getText()
@@ -92,6 +127,7 @@ public class LoginActivity extends Activity {
                         currentUser = userList.get(i);
                     }
                 }
+
                 if (login) {
 
                     // Passed information amoung activities
@@ -106,6 +142,7 @@ public class LoginActivity extends Activity {
                 } else {
                     alertDialog.show();
                 }
+                */
 
             }
 
@@ -139,6 +176,35 @@ public class LoginActivity extends Activity {
 
     }
 
+    private void signIn() {
+        String email = loginField.getText().toString();
+        String password = passField.getText().toString();
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "signInWithEmail", task.getException());
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
+    }
+
+    private boolean validateForm() {
+        return (isEmailValid(loginField.getText().toString())
+            && isPasswordValid(passField.getText().toString()));
+    }
+
+
     /**
      * checks that user email is valid
      * @param email String email addresss
@@ -157,5 +223,19 @@ public class LoginActivity extends Activity {
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 }
