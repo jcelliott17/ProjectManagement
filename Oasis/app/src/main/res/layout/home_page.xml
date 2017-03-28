@@ -18,7 +18,7 @@
 
         <Button
             android:text="Submit Report"
-            android:layout_width="143dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/report_button" />
 
@@ -37,11 +37,17 @@
 
         <Button
             android:text="Water Map"
-            android:layout_width="match_parent"
+            android:layout_width="117dp"
             android:layout_height="wrap_content"
             android:id="@+id/tempmap"
-            android:elevation="0dp"
-            android:layout_weight="1" />
+            android:elevation="0dp" />
+
+        <Button
+            android:text="Graph"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/graph_button"
+            android:visibility="visible" />
 
         <Button
             android:text="Quality Report List"
