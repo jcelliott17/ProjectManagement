@@ -37,7 +37,7 @@ public class CreateGraphActivity extends Activity{
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private ArrayList<HistoryGraph> historyGraphList;
+    private HistoryGraph historyGraphList;
     private User currentUser;
 
     /**
@@ -68,7 +68,6 @@ public class CreateGraphActivity extends Activity{
         reportList = b.getParcelableArrayList("ReportList");
         qualityList = b.getParcelableArrayList("QualityList");
 
-        historyGraphList = new ArrayList<HistoryGraph>();
 
         addListenerOnButtonCreateGraph();
         addListenerOnButtonBack();
@@ -84,20 +83,20 @@ public class CreateGraphActivity extends Activity{
 
             @Override
             public void onClick(View arg0) {
-                if (year.getText() != null) {
                     //HistoryGraph graph = new HistoryGraph(Integer.parseInt(year.getText().toString()),
                             //Integer.parseInt(latitude.getText().toString()), Integer.parseInt(longitude
                             //.getText().toString()), dataType.getSelectedItem().toString());
-                    historyGraphList.add(new HistoryGraph(Integer.parseInt(year.getText().toString()),
+                Log.d("myTag", dataType.getSelectedItem().toString());
+                    historyGraphList = (new HistoryGraph(Integer.parseInt(year.getText().toString()),
                             Integer.parseInt(latitude.getText().toString()), Integer.parseInt(longitude
                             .getText().toString()), dataType.getSelectedItem().toString()));
-                }
 
+                Log.d("myTags", year.getText().toString());
                 Intent intent = new Intent(context, GraphDisplayActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                intent.putParcelableArrayListExtra("GraphList", historyGraphList);
+                intent.putExtra("Graph", historyGraphList);
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }

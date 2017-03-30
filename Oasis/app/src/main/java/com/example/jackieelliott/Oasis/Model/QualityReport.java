@@ -166,7 +166,7 @@ public class QualityReport implements Parcelable {
     @Override
     public String toString() {
         return "Report Number: " + _reportNumber + " Name: " + _reportName + " Location: " + _latitude + " " + _longitude
-                + " Virus PPM: " + _virus;
+                + " Virus PPM: " + _virus + " Date: " + _timeAndDate.toString();
     }
 
     /**
