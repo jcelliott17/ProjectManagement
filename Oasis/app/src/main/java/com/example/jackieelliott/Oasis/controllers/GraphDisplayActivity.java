@@ -10,11 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
 
 import com.example.jackieelliott.Oasis.Model.HistoryGraph;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
@@ -24,12 +20,10 @@ import com.example.jackieelliott.Oasis.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 //Overriding the toString() method
 //we do not want to override the toString method in this class
@@ -64,8 +58,6 @@ public class GraphDisplayActivity extends Activity {
         //Sets labels on axises
 
         GridLabelRenderer gridLabel = this.scatterPlot.getGridLabelRenderer();
-        gridLabel.setHorizontalAxisTitle("Months");
-
         gridLabel.setVerticalAxisTitle(this.historyGraph.getYAxis() + " PPM");
 
         this.series = new PointsGraphSeries<DataPoint>();
@@ -165,7 +157,6 @@ public class GraphDisplayActivity extends Activity {
                     this.monthlyQualityList[report.getTimeAndDate().getMonth()] = new LinkedList<QualityReport>();
                 }
                 this.monthlyQualityList[report.getTimeAndDate().getMonth()].add(report);
-                Log.d("myTag", Integer.toString(report.getTimeAndDate().getMonth()));
             }
         }
         return this.monthlyQualityList;

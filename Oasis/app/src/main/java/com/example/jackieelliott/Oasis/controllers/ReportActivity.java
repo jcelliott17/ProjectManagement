@@ -1,12 +1,9 @@
 package com.example.jackieelliott.Oasis.controllers;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,17 +11,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.jackieelliott.Oasis.Model.AccountTypes;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.WaterCondition;
 import com.example.jackieelliott.Oasis.Model.WaterType;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
-import com.example.jackieelliott.Oasis.Model.ReportType;
-import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 

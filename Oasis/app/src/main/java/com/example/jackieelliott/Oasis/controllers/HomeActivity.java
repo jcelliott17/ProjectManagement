@@ -4,20 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.jackieelliott.Oasis.Model.AccountTypes;
-
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
-import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
-import com.example.jackieelliott.Oasis.controllers.SelectReportTypeActivity;
+
 
 import java.util.ArrayList;
 
@@ -61,7 +57,6 @@ public class HomeActivity extends Activity {
         this.graphButton = (Button) findViewById(R.id.graph_button);
         this.tempMap = (Button) findViewById(R.id.tempmap);
         this.reportsList = (ListView) findViewById(R.id.reports_list);
-
         addListenerOnButtonLogout();
 
         String[] reports = new String[this.reportList.size()];

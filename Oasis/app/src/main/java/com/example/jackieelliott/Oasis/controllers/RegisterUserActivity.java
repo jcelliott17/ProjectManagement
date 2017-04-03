@@ -16,7 +16,6 @@ import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
-import com.example.jackieelliott.Oasis.Model.Profile;
 
 /**
  * Created by JackieElliott on 2/8/17.

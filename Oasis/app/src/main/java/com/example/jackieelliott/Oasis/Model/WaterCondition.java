@@ -8,5 +8,8 @@ package com.example.jackieelliott.Oasis.Model;
  * Possible allowed water conditions
  */
 public enum WaterCondition {
-    Waste, TreatableClear, TreatableMuddy, Potable
+    @SuppressWarnings("EnumeratedConstantNamingConvention")Waste,
+    @SuppressWarnings("EnumeratedConstantNamingConvention")TreatableClear,
+    @SuppressWarnings("EnumeratedConstantNamingConvention")TreatableMuddy,
+    @SuppressWarnings("EnumeratedConstantNamingConvention")Potable
 }

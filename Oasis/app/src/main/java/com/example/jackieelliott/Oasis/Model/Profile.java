@@ -10,6 +10,8 @@ import android.os.Parcelable;
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+
+@SuppressWarnings("ClassNamingConvention")
 public class Profile implements Parcelable {
 
     /*

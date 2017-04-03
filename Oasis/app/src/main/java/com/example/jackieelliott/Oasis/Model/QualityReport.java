@@ -2,13 +2,7 @@ package com.example.jackieelliott.Oasis.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.jjoe64.graphview.series.DataPoint;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by JackieElliott on 2/20/17.

@@ -4,15 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.example.jackieelliott.Oasis.Model.AccountTypes;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.HistoryGraph;
@@ -51,7 +48,6 @@ public class CreateGraphActivity extends Activity{
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_setup_page);
-
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         this.year = (EditText) findViewById(R.id.year_editText);
@@ -78,7 +74,7 @@ public class CreateGraphActivity extends Activity{
         addListenerOnButtonBack();
 
     }
-
+    
     public final void addListenerOnButtonCreateGraph() {
         final Context context = this;
 
@@ -99,7 +95,6 @@ public class CreateGraphActivity extends Activity{
                 //noinspection UnqualifiedFieldAccess
                 intent.putExtra("Graph", historyGraphList);
                 //noinspection UnqualifiedFieldAccess
-
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }

@@ -5,6 +5,8 @@ package com.example.jackieelliott.Oasis.Model;
  */
 
 public enum PurityType {
-    Safe, Treatable, Unsafe
+    @SuppressWarnings("EnumeratedConstantNamingConvention")Safe,
+    @SuppressWarnings("EnumeratedConstantNamingConvention")Treatable,
+    @SuppressWarnings("EnumeratedConstantNamingConvention")Unsafe
 }
 
