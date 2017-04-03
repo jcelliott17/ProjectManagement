@@ -37,7 +37,7 @@ public class CreateGraphActivity extends Activity{
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-   private HistoryGraph historyGraphList;
+    private HistoryGraph historyGraphList;
     private User currentUser;
 
     /**
