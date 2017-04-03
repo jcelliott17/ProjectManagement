@@ -45,6 +45,7 @@ public class GraphDisplayActivity extends Activity {
     private User currentUser;
     private LinkedList<QualityReport>[] monthlyQualityList;
 
+    @Override
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_page);
@@ -66,7 +67,7 @@ public class GraphDisplayActivity extends Activity {
         GridLabelRenderer gridLabel = scatterPlot.getGridLabelRenderer();
         gridLabel.setVerticalAxisTitle(historyGraph.getYAxis() + " PPM");
 
-        this.series = new PointsGraphSeries<DataPoint>();
+        this.series = new PointsGraphSeries<>();
 
         getData(historyGraph.getYear(), historyGraph.getLatitude(),
                 historyGraph.getLongitude(), historyGraph.getYAxis());
@@ -165,7 +166,7 @@ public class GraphDisplayActivity extends Activity {
             Date timeAndDate = report.getTimeAndDate();
             if (timeAndDate.getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
                 if (this.monthlyQualityList[timeAndDate.getMonth()] == null) {
-                    this.monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<QualityReport>();
+                    this.monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<>();
                 }
                 this.monthlyQualityList[timeAndDate.getMonth()].add(report);
             }

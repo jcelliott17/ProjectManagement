@@ -94,7 +94,7 @@ public class HistoryGraph implements Parcelable {
      * @param dest destination
      * @param flags required parcelable interface
      */
-    //@Override
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.yAxis);
         dest.writeInt(this.year);
@@ -104,10 +104,12 @@ public class HistoryGraph implements Parcelable {
 
     public static final Parcelable.Creator<HistoryGraph> CREATOR
             = new Parcelable.Creator<HistoryGraph>() {
+        @Override
         public HistoryGraph createFromParcel(Parcel in) {
             return new HistoryGraph(in);
         }
 
+        @Override
         public HistoryGraph[] newArray(int size) {
             return new HistoryGraph[size];
         }

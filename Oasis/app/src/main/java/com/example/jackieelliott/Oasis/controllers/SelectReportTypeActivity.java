@@ -39,6 +39,7 @@ public class SelectReportTypeActivity extends Activity {
      * sets up activity when it is first created
      * @param savedInstanceState saved instance state
      */
+    @Override
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -107,7 +108,7 @@ public class SelectReportTypeActivity extends Activity {
             public void onClick(View arg0) {
 
                 //noinspection UnqualifiedFieldAccess
-                if (chooseReportTypeSpinner.getSelectedItem().toString() == "Quality") {
+                if (chooseReportTypeSpinner.getSelectedItem().toString().equals("Quality")) {
                     Intent intent = new Intent(context, QualityReportActivity.class);
                     //noinspection UnqualifiedFieldAccess,UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("UserList", userList);

@@ -46,6 +46,7 @@ public class QualityReportActivity extends Activity {
      * sets up activity when it is first created
      * @param savedInstanceState saved instance tag
      */
+    @Override
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

@@ -214,10 +214,12 @@ public class QualityReport implements Parcelable {
 
     public static final Creator<QualityReport> CREATOR
             = new Creator<QualityReport>() {
+        @Override
         public QualityReport createFromParcel(Parcel in) {
             return new QualityReport(in);
         }
 
+        @Override
         public QualityReport[] newArray(int size) {
             return new QualityReport[size];
         }

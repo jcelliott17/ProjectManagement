@@ -190,10 +190,12 @@ public class Report implements Parcelable {
 
     public static final Parcelable.Creator<Report> CREATOR
             = new Parcelable.Creator<Report>() {
+        @Override
         public Report createFromParcel(Parcel in) {
             return new Report(in);
         }
 
+        @Override
         public Report[] newArray(int size) {
             return new Report[size];
         }
