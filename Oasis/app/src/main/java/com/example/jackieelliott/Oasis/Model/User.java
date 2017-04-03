@@ -16,13 +16,13 @@ public class User implements Parcelable {
     /**
      * Attributes of the User class
      */
-    private String _username;
-    private String _password;
+    private final String _username;
+    private final String _password;
     //private Profile _profile;
     private String _homeAddress;
     private String _emailAddress;
     private String _accountType;
-    private int _permission;
+    private final int _permission;
 
 
     /**
@@ -52,11 +52,13 @@ public class User implements Parcelable {
      */
     public int getPermission() { return this._permission; }
 
-    /**
-     * Setter
-     * @param permission permission
-     */
-    public void setPermission(int permission) { this._permission = permission; }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * Setter
+//     * @param permission permission
+//     */
+//    public void setPermission(int permission) { this._permission = permission; }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
     /**
      * Getter
@@ -64,11 +66,13 @@ public class User implements Parcelable {
      */
     public String getUsername() { return this._username; }
 
-    /**
-     * Setter
-     * @param userName username
-     */
-    public void setUsername(String userName) { this._username = userName; }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * Setter
+//     * @param userName username
+//     */
+//    public void setUsername(String userName) { this._username = userName; }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
     /**
      * Getter
@@ -76,11 +80,13 @@ public class User implements Parcelable {
      */
     public String getPassword() { return this._password; }
 
-    /**
-     * Setter
-     * @param password password
-     */
-    public void setPassword(String password) { this._password = password; }
+// --Commented out by Inspection START (4/2/17, 11:12 PM):
+//    /**
+//     * Setter
+//     * @param password password
+//     */
+//    public void setPassword(String password) { this._password = password; }
+// --Commented out by Inspection STOP (4/2/17, 11:12 PM)
 
     /**
      * Getter
@@ -122,7 +128,7 @@ public class User implements Parcelable {
      * Constructor for user required by parcelable
      * @param in input
      */
-    public User(Parcel in) {
+    private User(Parcel in) {
         super();
         this._username = in.readString();
         this._password = in.readString();

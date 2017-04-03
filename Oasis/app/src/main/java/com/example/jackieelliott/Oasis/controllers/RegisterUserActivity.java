@@ -64,7 +64,7 @@ public class RegisterUserActivity extends Activity{
     /**
      * Adds functionality to the register button.
      */
-    public final void addListenerOnButtonRegister() {
+    private void addListenerOnButtonRegister() {
 
         final Context context = this;
 
@@ -143,7 +143,7 @@ public class RegisterUserActivity extends Activity{
     /**
      * Added functionality to the cancel button on the register page.
      */
-    public final void addListenerOnButtonCancel() {
+    private void addListenerOnButtonCancel() {
 
         final Context context = this;
 

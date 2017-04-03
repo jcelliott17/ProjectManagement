@@ -18,55 +18,65 @@ public class Profile implements Parcelable {
     We are currently not using this class
      */
 
-    private String _homeAddress;
-    private String _emailAddress;
-    private String _accountType;
+    private final String _homeAddress;
+    private final String _emailAddress;
+    // --Commented out by Inspection (4/2/17, 11:10 PM):private String _accountType;
 
-    /**
-     * constructor
-     */
-    public Profile () {
-        super();
-    }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * constructor
+//     */
+//    public Profile () {
+//        super();
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
-    /**
-     * gets address
-     * @return String home address
-     */
-    public String getHomeAddress() {
-        return this._homeAddress;
-    }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * gets address
+//     * @return String home address
+//     */
+//    public String getHomeAddress() {
+//        return this._homeAddress;
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
-    /**
-     * sets address
-     * @param homeAddress String home address
-     */
-    public void setHomeAddress(String homeAddress) {
-        this._homeAddress = homeAddress;
-    }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * sets address
+//     * @param homeAddress String home address
+//     */
+//    public void setHomeAddress(String homeAddress) {
+//        this._homeAddress = homeAddress;
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
-    /**
-     * gets email address
-     * @return String email address
-     */
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * gets email address
+//     * @return String email address
+//     */
+//
+//    public String getEmailAddress() {
+//        return this._emailAddress;
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
-    public String getEmailAddress() {
-        return this._emailAddress;
-    }
-
-    /**
-     * sets email address
-     * @param emailAddress String email Address
-     */
-    public void setEmailAddress(String emailAddress) {
-        this._emailAddress = emailAddress;
-    }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * sets email address
+//     * @param emailAddress String email Address
+//     */
+//    public void setEmailAddress(String emailAddress) {
+//        this._emailAddress = emailAddress;
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
     /**
      * constructor for parcelable interface
      * @param in Parcel
      */
-    public Profile(Parcel in) {
+    private Profile(Parcel in) {
         super();
         this._homeAddress = in.readString();
         this._emailAddress = in.readString();

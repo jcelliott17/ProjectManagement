@@ -17,20 +17,22 @@ public class HistoryGraph implements Parcelable {
     private final double longitude;
     private final String yAxis;
 
-    /**
-     * Constructor for a History Graph
-     * @param year year of graph
-     * @param latitude location info
-     * @param longitude location info
-     * @param yAxis label
-     */
-    public HistoryGraph(int year, double latitude, double longitude, String yAxis) {
-        super();
-        this.year = year;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.yAxis = yAxis;
-    }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * Constructor for a History Graph
+//     * @param year year of graph
+//     * @param latitude location info
+//     * @param longitude location info
+//     * @param yAxis label
+//     */
+//    public HistoryGraph(int year, double latitude, double longitude, String yAxis) {
+//        super();
+//        this.year = year;
+//        this.latitude = latitude;
+//        this.longitude = longitude;
+//        this.yAxis = yAxis;
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
 
     /**
@@ -72,7 +74,7 @@ public class HistoryGraph implements Parcelable {
      * Method required by parcelable
      * @param in parable requirement
      */
-    public HistoryGraph(Parcel in) {
+    private HistoryGraph(Parcel in) {
         super();
         this.yAxis = in.readString();
         this.year = in.readInt();

@@ -57,7 +57,7 @@ public class LoginActivity extends Activity {
     /**
      * adds functionality to login button
      */
-    public final void addListenerOnButtonLogin() {
+    private void addListenerOnButtonLogin() {
 
         final Context context = this;
 
@@ -127,7 +127,7 @@ public class LoginActivity extends Activity {
     /**
      * adds functionality to cancel button
      */
-    public final void addListenerOnButtonCancel() {
+    private void addListenerOnButtonCancel() {
 
         final Context context = this;
 

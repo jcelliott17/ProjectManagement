@@ -63,7 +63,7 @@ public class QualityListActivity extends Activity {
     /**
      * Adds functionality to the logout button
      */
-    public final void addListenerOnButtonBack() {
+    private void addListenerOnButtonBack() {
 
         final Context context = this;
 

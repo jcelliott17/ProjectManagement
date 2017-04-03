@@ -11,7 +11,7 @@ import android.os.Parcelable;
 @SuppressWarnings("ClassNamingConvention")
 public class Report implements Parcelable {
 
-    private String _reportName;
+    private final String _reportName;
     private double _latitude;
     private double _longitude;
     private String _condition;
@@ -40,11 +40,13 @@ public class Report implements Parcelable {
         this._longitude = longitude;
     }
 
-    /**
-     * get report number
-     * @return integer report number
-     */
-    public int getReportNumber() { return this._reportNumber; }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * get report number
+//     * @return integer report number
+//     */
+//    public int getReportNumber() { return this._reportNumber; }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
     /**
      * set report number
@@ -52,13 +54,15 @@ public class Report implements Parcelable {
      */
     public void setReportNumber(int number) { this._reportNumber = number; }
 
-    /**
-     * get condition
-     * @return String condition
-     */
-    public String getCondition() {
-        return this._condition;
-    }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * get condition
+//     * @return String condition
+//     */
+//    public String getCondition() {
+//        return this._condition;
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
     /**
      * set condition
@@ -68,13 +72,15 @@ public class Report implements Parcelable {
         this._condition = condition;
     }
 
-    /**
-     * get water type
-     * @return String type of water
-     */
-    public String getTypeOfWater() {
-        return this._typeOfWater;
-    }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * get water type
+//     * @return String type of water
+//     */
+//    public String getTypeOfWater() {
+//        return this._typeOfWater;
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
     /**
      * set water type
@@ -92,11 +98,13 @@ public class Report implements Parcelable {
         return this._reportName;
     }
 
-    /**
-     * set report name
-     * @param name String report name
-     */
-    public void setReportName(String name) { this._reportName = name; }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * set report name
+//     * @param name String report name
+//     */
+//    public void setReportName(String name) { this._reportName = name; }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
     /**
      * get latitude
@@ -122,28 +130,32 @@ public class Report implements Parcelable {
      */
     public void setLongitude(double longitude) { this._longitude = longitude; }
 
-    /**
-     * get time and date
-     * @return int time and date
-     */
-    public int getTimeAndDate() {
-        return this._timeAndDate;
-    }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * get time and date
+//     * @return int time and date
+//     */
+//    public int getTimeAndDate() {
+//        return this._timeAndDate;
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
-    /**
-     * set time and date
-     * @param timeAndDate integer time and date
-     */
-    public void setTimeAndDate(int timeAndDate) {
-        this._timeAndDate = timeAndDate;
-    }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * set time and date
+//     * @param timeAndDate integer time and date
+//     */
+//    public void setTimeAndDate(int timeAndDate) {
+//        this._timeAndDate = timeAndDate;
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
 
     /**
      * Constructor required for parcelable
      * @param in input
      */
-    public Report(Parcel in) {
+    private Report(Parcel in) {
         super();
         this._reportName = in.readString();
         this._latitude = in.readDouble();

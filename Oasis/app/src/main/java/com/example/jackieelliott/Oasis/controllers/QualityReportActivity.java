@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class QualityReportActivity extends Activity {
     private Button backButton;
     private Button createReportButton;
-    private TextView reportText;
+    // --Commented out by Inspection (4/2/17, 11:11 PM):private TextView reportText;
     private EditText virusEdit;
     private EditText contaminantEdit;
     private EditText reportTitle;
@@ -78,7 +78,7 @@ public class QualityReportActivity extends Activity {
     /**
      * adds functionality to back button
      */
-    public final void addListenerOnButtonBack() {
+    private void addListenerOnButtonBack() {
 
         final Context context = this;
 
@@ -114,7 +114,7 @@ public class QualityReportActivity extends Activity {
     /**
      * adds functionality to create report button
      */
-    public final void addListenerOnButtonCreateReport() {
+    private void addListenerOnButtonCreateReport() {
 
         final Context context = this;
 

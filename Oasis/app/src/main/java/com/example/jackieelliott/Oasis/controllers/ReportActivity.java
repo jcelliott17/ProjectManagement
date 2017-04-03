@@ -79,7 +79,7 @@ public class ReportActivity extends Activity {
     /**
      * Adds functionality to the Back button.
      */
-    public final void addListenerOnButtonBack() {
+    private void addListenerOnButtonBack() {
 
         final Context context = this;
 
@@ -110,7 +110,7 @@ public class ReportActivity extends Activity {
     /**
      * adds functionality to create report button
      */
-    public final void addListenerOnButtonCreateReport() {
+    private void addListenerOnButtonCreateReport() {
 
         final Context context = this;
 
