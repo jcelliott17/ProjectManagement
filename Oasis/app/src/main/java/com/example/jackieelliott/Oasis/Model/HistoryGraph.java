@@ -13,11 +13,11 @@ import android.os.Parcelable;
 public class HistoryGraph implements Parcelable {
 
     private int year;
-    private int latitude;
-    private int longitude;
+    private double latitude;
+    private double longitude;
     private String yAxis;
 
-    public HistoryGraph(int year, int latitude, int longitude, String yAxis) {
+    public HistoryGraph(int year, double latitude, double longitude, String yAxis) {
         this.year = year;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -28,11 +28,11 @@ public class HistoryGraph implements Parcelable {
         return year;
     }
 
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public int getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
@@ -45,10 +45,10 @@ public class HistoryGraph implements Parcelable {
 
 
     public HistoryGraph(Parcel in) {
-        year = in.readInt();
         yAxis = in.readString();
-        latitude = in.readInt();
-        longitude = in.readInt();
+        year = in.readInt();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
     }
 
     /**
@@ -69,8 +69,8 @@ public class HistoryGraph implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(yAxis);
         dest.writeInt(year);
-        dest.writeInt(latitude);
-        dest.writeInt(longitude);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
     }
 
     public static final Parcelable.Creator<HistoryGraph> CREATOR
