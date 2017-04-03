@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -56,8 +57,8 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         setContentView(R.layout.activity_google_maps);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        FragmentManager mF = getSupportFragmentManager();
+        SupportMapFragment mapFragment = (SupportMapFragment) mF.findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
         addListenerOnButtonBack();
@@ -130,10 +131,11 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
                 // Setting the title for the marker.
                 // This will be displayed on taping the marker
+                Report report = reportList.get(reportList.size() - 1);
                 //noinspection UnqualifiedFieldAccess
-                markerOptions.title(reportList.get(reportList.size() - 1).getReportName());
+                markerOptions.title(report.getReportName());
                 //noinspection UnqualifiedFieldAccess
-                markerOptions.snippet(reportList.get(reportList.size() - 1).toString());
+                markerOptions.snippet(report.toString());
 
                 // Animating to the touched position
                 //noinspection UnqualifiedFieldAccess
@@ -147,7 +149,9 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         for (Report r : reportList) {
             LatLng loc = new LatLng(r.getLatitude(), r.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(loc).title(r.getReportName()).snippet(r.toString()));
+            MarkerOptions mO = new MarkerOptions();
+            //noinspection ChainedMethodCall     need to chain method here
+            mMap.addMarker(mO.position(loc).title(r.getReportName()).snippet(r.toString()));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
         }
     }
