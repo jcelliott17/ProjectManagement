@@ -21,7 +21,7 @@ public class QualityReport implements Parcelable {
 
     /**
      * constructor
-     * @param name
+     * @param name name of report
      */
     public QualityReport(String name) {
         super();
@@ -30,9 +30,9 @@ public class QualityReport implements Parcelable {
 
     /**
      * constructor
-     * @param name
-     * @param latitude
-     * @param longitude
+     * @param name name of report
+     * @param latitude latitude of water
+     * @param longitude longitude of water
      */
     public QualityReport(String name, double latitude, double longitude) {
         super();
@@ -87,9 +87,18 @@ public class QualityReport implements Parcelable {
         this._virus = virus;
     }
 
+    /**
+     * Getter for contaminant
+     * @return contaminant level
+     */
     public Double getContaminant() { return this._contaminant; }
 
-    public void setContanminant(Double contanminant) { this._contaminant = contanminant; }
+    /**
+     * Setter for contaminant
+     * @param contaminant contaminant level
+     */
+    //KEEP THIS VERSION - Jackie
+    public void setContaminant(Double contaminant) { this._contaminant = contaminant; }
 
     /**
      * get report name
@@ -150,6 +159,10 @@ public class QualityReport implements Parcelable {
     }
 
 
+    /**
+     * constructor required for parcelable
+     * @param in input
+     */
     public QualityReport(Parcel in) {
         super();
         this._reportName = in.readString();
@@ -175,7 +188,7 @@ public class QualityReport implements Parcelable {
 
     /**
      * describes contents
-     * @return
+     * @return a num
      */
     @Override
     public final int describeContents() {
@@ -184,8 +197,8 @@ public class QualityReport implements Parcelable {
 
     /**
      * allows addition of new instance variables to Students
-     * @param dest
-     * @param flags
+     * @param dest destination
+     * @param flags flag
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {

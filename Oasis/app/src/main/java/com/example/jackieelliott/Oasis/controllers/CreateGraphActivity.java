@@ -74,7 +74,10 @@ public class CreateGraphActivity extends Activity{
         addListenerOnButtonBack();
 
     }
-    
+
+    /**
+     * Adds functionality to the Create Graph button
+     */
     public final void addListenerOnButtonCreateGraph() {
         final Context context = this;
 
@@ -102,6 +105,9 @@ public class CreateGraphActivity extends Activity{
         });
     }
 
+    /**
+     * Adds functionality to the back button
+     */
     public final void addListenerOnButtonBack() {
         final Context context = this;
 

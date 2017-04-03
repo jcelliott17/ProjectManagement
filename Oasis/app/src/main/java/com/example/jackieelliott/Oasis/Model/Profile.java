@@ -74,7 +74,7 @@ public class Profile implements Parcelable {
 
     /**
      * describes contents
-     * @return
+     * @return a num for parcelable
      */
     @Override
     public final int describeContents() {
@@ -83,8 +83,8 @@ public class Profile implements Parcelable {
 
     /**
      * allows addition of new instance variables to Student
-     * @param dest
-     * @param flags
+     * @param dest destination
+     * @param flags flag
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {

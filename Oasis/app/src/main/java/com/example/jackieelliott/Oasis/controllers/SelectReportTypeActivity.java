@@ -37,7 +37,7 @@ public class SelectReportTypeActivity extends Activity {
 
     /**
      * sets up activity when it is first created
-     * @param savedInstanceState
+     * @param savedInstanceState saved instance state
      */
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

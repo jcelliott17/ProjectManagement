@@ -28,6 +28,9 @@ import java.util.LinkedList;
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+/**
+ * Graph display activity controller
+ */
 public class GraphDisplayActivity extends Activity {
 
     private Button back;
@@ -68,6 +71,9 @@ public class GraphDisplayActivity extends Activity {
         addListenerOnButtonBack();
     }
 
+    /**
+     * Adds functionality to the back button
+     */
     public final void addListenerOnButtonBack() {
         final Context context = this;
 

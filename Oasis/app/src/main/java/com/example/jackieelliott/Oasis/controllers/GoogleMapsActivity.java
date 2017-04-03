@@ -24,6 +24,9 @@ import java.util.ArrayList;
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+/**
+ * Google maps activity controller
+ */
 public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -36,7 +39,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     /**
      * sets up activity when it is first created
-     * @param savedInstanceState
+     * @param savedInstanceState saved instance state
      */
     @Override
     protected final void onCreate(Bundle savedInstanceState) {

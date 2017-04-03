@@ -21,7 +21,7 @@ public class Report implements Parcelable {
 
     /**
      * constructor
-     * @param name
+     * @param name name of report
      */
     public Report (String name) {
         super();
@@ -30,9 +30,9 @@ public class Report implements Parcelable {
 
     /**
      * constructor
-     * @param name
-     * @param latitude
-     * @param longitude
+     * @param name name of report
+     * @param latitude location of report
+     * @param longitude location of report
      */
     public Report(String name, double latitude, double longitude) {
         super();
@@ -140,6 +140,10 @@ public class Report implements Parcelable {
     }
 
 
+    /**
+     * Constructor required for parcelable
+     * @param in input
+     */
     public Report(Parcel in) {
         super();
         this._reportName = in.readString();
@@ -162,7 +166,7 @@ public class Report implements Parcelable {
 
     /**
      * describes contents
-     * @return
+     * @return a num
      */
     @Override
     public final int describeContents() {
@@ -171,8 +175,8 @@ public class Report implements Parcelable {
 
     /**
      * allows addition of new instance variables to Students
-     * @param dest
-     * @param flags
+     * @param dest destination
+     * @param flags flag
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {

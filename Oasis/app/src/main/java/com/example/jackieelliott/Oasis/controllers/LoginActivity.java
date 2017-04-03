@@ -38,7 +38,7 @@ public class LoginActivity extends Activity {
 
     /**
      * sets up activity when it is first created
-     * @param savedInstanceState
+     * @param savedInstanceState saved instance state
      */
     @Override
     public final void onCreate(Bundle savedInstanceState) {

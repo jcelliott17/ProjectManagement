@@ -44,7 +44,7 @@ public class QualityReportActivity extends Activity {
 
     /**
      * sets up activity when it is first created
-     * @param savedInstanceState
+     * @param savedInstanceState saved instance tag
      */
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,7 +133,7 @@ public class QualityReportActivity extends Activity {
                 //noinspection UnqualifiedFieldAccess
                 newReport.setVirus(Double.parseDouble(virusEdit.getText().toString()));
                 //noinspection UnqualifiedFieldAccess
-                newReport.setContanminant(Double.parseDouble(contaminantEdit.getText().toString()));
+                newReport.setContaminant(Double.parseDouble(contaminantEdit.getText().toString()));
                 //noinspection UnqualifiedFieldAccess
                 newReport.setReportNumber(reportList.size() + 1);
                 newReport.setTimeAndDate(new Date());

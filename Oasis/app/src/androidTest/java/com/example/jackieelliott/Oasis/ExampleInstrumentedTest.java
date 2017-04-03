@@ -16,6 +16,10 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+    /**
+     * Test method
+     * @throws Exception if not equal exception thrown
+     */
     @Test
     public final void useAppContext() throws Exception {
         // Context of the app under test.

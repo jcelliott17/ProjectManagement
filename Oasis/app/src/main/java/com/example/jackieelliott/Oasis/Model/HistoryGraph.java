@@ -17,6 +17,13 @@ public class HistoryGraph implements Parcelable {
     private final double longitude;
     private final String yAxis;
 
+    /**
+     * Constructor for a History Graph
+     * @param year year of graph
+     * @param latitude location info
+     * @param longitude location info
+     * @param yAxis label
+     */
     public HistoryGraph(int year, double latitude, double longitude, String yAxis) {
         super();
         this.year = year;
@@ -26,14 +33,26 @@ public class HistoryGraph implements Parcelable {
     }
 
 
+    /**
+     * Getter for year
+     * @return year
+     */
     public int getYear() {
         return this.year;
     }
 
+    /**
+     * Getter for latitude
+     * @return latitude
+     */
     public double getLatitude() {
         return this.latitude;
     }
 
+    /**
+     * Getter for longitude
+     * @return longitude
+     */
     public double getLongitude() {
         return this.longitude;
     }
@@ -41,12 +60,18 @@ public class HistoryGraph implements Parcelable {
     // We are fine with this get method because the
     // variable is yAxis
 
-
+    /**
+     * Getter for yAxis
+     * @return yAxis
+     */
     public String getYAxis() {
         return this.yAxis;
     }
 
-
+    /**
+     * Method required by parcelable
+     * @param in parable requirement
+     */
     public HistoryGraph(Parcel in) {
         super();
         this.yAxis = in.readString();
@@ -57,7 +82,7 @@ public class HistoryGraph implements Parcelable {
 
     /**
      * describes contents
-     * @return
+     * @return a num
      */
     @Override
     public final int describeContents() {
@@ -66,8 +91,8 @@ public class HistoryGraph implements Parcelable {
 
     /**
      * allows addition of new instance variables to Student
-     * @param dest
-     * @param flags
+     * @param dest destination
+     * @param flags required parcelable interface
      */
     //@Override
     public void writeToParcel(Parcel dest, int flags) {

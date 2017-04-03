@@ -25,6 +25,12 @@ public class User implements Parcelable {
     private int _permission;
 
 
+    /**
+     * Constructor for User
+     * @param userName username of user
+     * @param password password of user
+     * @param permission user's permission level
+     */
     public User(String userName, String password, int permission) {
         super();
         this._username = userName;
@@ -40,35 +46,82 @@ public class User implements Parcelable {
      * Getters and Setters
      */
 
+    /**
+     * Getter
+     * @return permission level
+     */
     public int getPermission() { return this._permission; }
 
+    /**
+     * Setter
+     * @param permission permission
+     */
     public void setPermission(int permission) { this._permission = permission; }
 
+    /**
+     * Getter
+     * @return username
+     */
     public String getUsername() { return this._username; }
 
+    /**
+     * Setter
+     * @param userName username
+     */
     public void setUsername(String userName) { this._username = userName; }
 
+    /**
+     * Getter
+     * @return password
+     */
     public String getPassword() { return this._password; }
 
+    /**
+     * Setter
+     * @param password password
+     */
     public void setPassword(String password) { this._password = password; }
 
+    /**
+     * Getter
+     * @return homeAddress
+     */
     public String getHomeAddress() { return this._homeAddress; }
 
+    /**
+     * Setter
+     * @param homeAddress homeAddress
+     */
     public void setHomeAddress(String homeAddress) { this._homeAddress = homeAddress; }
 
+    /**
+     * Getter
+     * @return emailAddress
+     */
     public String getEmailAddress() { return this._emailAddress; }
 
+    /**
+     * Setter
+     * @param emailAddress emailAddress
+     */
     public void setEmailAddress(String emailAddress) { this._emailAddress = emailAddress; }
 
+    /**
+     * Getter
+     * @return accountType
+     */
     public String getAccountType() { return this._accountType; }
 
+    /**
+     * Setter
+     * @param accountType new account type
+     */
     public void setAccountType(String accountType) { this._accountType = accountType; }
 
-
-    /* *********************************
-   * These methods are required by the parcelable interface
-   *
-   */
+    /**
+     * Constructor for user required by parcelable
+     * @param in input
+     */
     public User(Parcel in) {
         super();
         this._username = in.readString();
@@ -80,6 +133,10 @@ public class User implements Parcelable {
         //_profile = in.readParcelable( Profile.class.getClassLoader());
     }
 
+    /**
+     * Required by Parcelable
+     * @return int
+     */
     @Override
     public final int describeContents() {
         return 0;
@@ -87,6 +144,12 @@ public class User implements Parcelable {
 
     /* *************************
        If you add new instance vars to Student, you will need to add them to the write
+     */
+
+    /**
+     * Output method for parcelable
+     * @param dest destination
+     * @param flags flag
      */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
