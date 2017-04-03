@@ -30,7 +30,7 @@ import java.util.ArrayList;
 public class QualityReportActivity extends Activity {
     private Button backButton;
     private Button createReportButton;
-    // --Commented out by Inspection (4/2/17, 11:11 PM):private TextView reportText;
+    private TextView reportText;
     private EditText virusEdit;
     private EditText contaminantEdit;
     private EditText reportTitle;

@@ -32,7 +32,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     private GoogleMap mMap;
     private Button backButton;
-    // --Commented out by Inspection (4/2/17, 11:13 PM):private ListView reportsList;
+    private ListView reportsList;
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;

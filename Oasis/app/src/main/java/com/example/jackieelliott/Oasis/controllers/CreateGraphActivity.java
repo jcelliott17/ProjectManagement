@@ -27,9 +27,9 @@ import java.util.ArrayList;
 
 public class CreateGraphActivity extends Activity{
 
-    // --Commented out by Inspection (4/2/17, 11:12 PM):private EditText year;
+    private EditText year;
     private EditText latitude;
-    // --Commented out by Inspection (4/2/17, 11:12 PM):private EditText longitude;
+    private EditText longitude;
     private Spinner dataType;
     private Button createGraph;
     private Button back;
@@ -37,7 +37,7 @@ public class CreateGraphActivity extends Activity{
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    // --Commented out by Inspection (4/2/17, 11:12 PM):private HistoryGraph historyGraphList;
+   private HistoryGraph historyGraphList;
     private User currentUser;
 
     /**
@@ -60,7 +60,8 @@ public class CreateGraphActivity extends Activity{
         dataType = (Spinner) findViewById(R.id.data_type_spinner);
 
         String[] spinnerItems = {"Contaminant","Virus"};
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, spinnerItems);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+                spinnerItems);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dataType.setAdapter(adapter);
 
