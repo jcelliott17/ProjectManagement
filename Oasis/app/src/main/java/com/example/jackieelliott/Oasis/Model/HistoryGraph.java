@@ -24,22 +24,22 @@ public class HistoryGraph implements Parcelable {
         this.yAxis = yAxis;
     }
 
-    public int getYear() {
+    public final int getYear() {
         return year;
     }
 
-    public double getLatitude() {
+    public final double getLatitude() {
         return latitude;
     }
 
-    public double getLongitude() {
+    public final double getLongitude() {
         return longitude;
     }
 
     // We are fine with this get method because the
     // variable is yAxis
 
-    public String getYAxis() {
+    public final String getYAxis() {
         return yAxis;
     }
 
@@ -56,7 +56,7 @@ public class HistoryGraph implements Parcelable {
      * @return
      */
     @Override
-    public int describeContents() {
+    public final int describeContents() {
         return 0;
     }
 
@@ -66,7 +66,7 @@ public class HistoryGraph implements Parcelable {
      * @param flags
      */
     //@Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public final void writeToParcel(Parcel dest, int flags) {
         dest.writeString(yAxis);
         dest.writeInt(year);
         dest.writeDouble(latitude);

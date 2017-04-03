@@ -22,6 +22,7 @@ import java.util.ArrayList;
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+@SuppressWarnings("ALL")
 public class WelcomePageActivity extends AppCompatActivity {
 
     Button button;
@@ -35,7 +36,7 @@ public class WelcomePageActivity extends AppCompatActivity {
      * Creates the Welcome using the passed information.
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_page);
         addListenerOnButton();
@@ -55,7 +56,7 @@ public class WelcomePageActivity extends AppCompatActivity {
     /**
      * Adds functionality to the register button.
      */
-    public void addListenerOnButton() {
+    public final void addListenerOnButton() {
 
         final Context context = this;
 
@@ -81,7 +82,7 @@ public class WelcomePageActivity extends AppCompatActivity {
     /**
      * Adds functionality to the login button.
      */
-    public void addListenerOnButtonLogin() {
+    public final void addListenerOnButtonLogin() {
 
         final Context context = this;
 

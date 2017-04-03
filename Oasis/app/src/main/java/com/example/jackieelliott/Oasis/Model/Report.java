@@ -44,19 +44,19 @@ public class Report implements Parcelable {
      * get report number
      * @return integer report number
      */
-    public int getReportNumber() { return _reportNumber; }
+    public final int getReportNumber() { return _reportNumber; }
 
     /**
      * set report number
      * @param number integer report number
      */
-    public void setReportNumber(int number) { _reportNumber = number; }
+    public final void setReportNumber(int number) { _reportNumber = number; }
 
     /**
      * get condition
      * @return String condition
      */
-    public String getCondition() {
+    public final String getCondition() {
         return _condition;
     }
 
@@ -64,7 +64,7 @@ public class Report implements Parcelable {
      * set condition
      * @param condition String condition
      */
-    public void setCondition(String condition) {
+    public final void setCondition(String condition) {
         _condition = condition;
     }
 
@@ -72,7 +72,7 @@ public class Report implements Parcelable {
      * get water type
      * @return String type of water
      */
-    public String getTypeOfWater() {
+    public final String getTypeOfWater() {
         return _typeOfWater;
     }
 
@@ -80,7 +80,7 @@ public class Report implements Parcelable {
      * set water type
      * @param typeOfWater String type of water
      */
-    public void setTypeOfWater(String typeOfWater) {
+    public final void setTypeOfWater(String typeOfWater) {
         _typeOfWater = typeOfWater;
     }
 
@@ -88,7 +88,7 @@ public class Report implements Parcelable {
      * get report name
      * @return String report name
      */
-    public String getReportName() {
+    public final String getReportName() {
         return _reportName;
     }
 
@@ -96,37 +96,37 @@ public class Report implements Parcelable {
      * set report name
      * @param name String report name
      */
-    public void setReportName(String name) { _reportName = name; }
+    public final void setReportName(String name) { _reportName = name; }
 
     /**
      * get latitude
      * @return double latitude
      */
-    public double getLatitude () { return _latitude; }
+    public final double getLatitude() { return _latitude; }
 
     /**
      * set latitude
      * @param latitude double latitude
      */
-    public void setLatitude(double latitude) { _latitude = latitude; }
+    public final void setLatitude(double latitude) { _latitude = latitude; }
 
     /**
      * get longitude
      * @return double longitude
      */
-    public double getLongitude () { return _longitude; }
+    public final double getLongitude() { return _longitude; }
 
     /**
      * set longitude
      * @param longitude double longitude
      */
-    public void setLongitude(double longitude) { _longitude = longitude; }
+    public final void setLongitude(double longitude) { _longitude = longitude; }
 
     /**
      * get time and date
      * @return int time and date
      */
-    public int getTimeAndDate() {
+    public final int getTimeAndDate() {
         return _timeAndDate;
     }
 
@@ -134,7 +134,7 @@ public class Report implements Parcelable {
      * set time and date
      * @param timeAndDate integer time and date
      */
-    public void setTimeAndDate(int timeAndDate) {
+    public final void setTimeAndDate(int timeAndDate) {
         _timeAndDate = timeAndDate;
     }
 
@@ -154,7 +154,7 @@ public class Report implements Parcelable {
      * @return String output
      */
     @Override
-    public String toString() {
+    public final String toString() {
         return "Report Number: " + _reportNumber + " Name: " + _reportName + " Location: " + _latitude + " " + _longitude;
     }
 
@@ -163,7 +163,7 @@ public class Report implements Parcelable {
      * @return
      */
     @Override
-    public int describeContents() {
+    public final int describeContents() {
         return 0;
     }
 
@@ -173,7 +173,7 @@ public class Report implements Parcelable {
      * @param flags
      */
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public final void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_reportName);
         dest.writeDouble(_latitude);
         dest.writeDouble(_longitude);

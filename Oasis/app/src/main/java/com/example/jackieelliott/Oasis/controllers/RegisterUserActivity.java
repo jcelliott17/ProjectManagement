@@ -27,7 +27,7 @@ import com.example.jackieelliott.Oasis.Model.Profile;
 
 public class RegisterUserActivity extends Activity{
 
-    private Button registerBotton;
+    private Button registerButton;
     private Button cancelButton;
     private Spinner accountTypeSpinner;
     private EditText userNameField;
@@ -43,7 +43,7 @@ public class RegisterUserActivity extends Activity{
      * Creates the report activity page.
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_page);
         addListenerOnButtonRegister();
@@ -65,16 +65,16 @@ public class RegisterUserActivity extends Activity{
     /**
      * Adds functionality to the register button.
      */
-    public void addListenerOnButtonRegister() {
+    public final void addListenerOnButtonRegister() {
 
         final Context context = this;
 
-        registerBotton = (Button) findViewById(R.id.registerOnRegisterPage);
+        registerButton = (Button) findViewById(R.id.registerOnRegisterPage);
         userNameField = (EditText) findViewById(R.id.username_text);
         passField = (EditText) findViewById(R.id.editText3);
 
 
-        registerBotton.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -107,7 +107,7 @@ public class RegisterUserActivity extends Activity{
                     currentUser = user;
                     currentUser.setAccountType("Admin");
                 }
-                // Passes information amoung models
+                // Passes information among models
                 Intent intent = new Intent(context, HomeActivity.class);
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
@@ -123,7 +123,7 @@ public class RegisterUserActivity extends Activity{
     /**
      * Added functionality to the cancel button on the register page.
      */
-    public void addListenerOnButtonCancel() {
+    public final void addListenerOnButtonCancel() {
 
         final Context context = this;
 

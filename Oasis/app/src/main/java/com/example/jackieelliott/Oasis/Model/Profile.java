@@ -31,7 +31,7 @@ public class Profile implements Parcelable {
      * gets address
      * @return String home address
      */
-    public String getHomeAddress() {
+    public final String getHomeAddress() {
         return _homeAddress;
     }
 
@@ -39,7 +39,7 @@ public class Profile implements Parcelable {
      * sets address
      * @param homeAddress String home address
      */
-    public void setHomeAddress(String homeAddress) {
+    public final void setHomeAddress(String homeAddress) {
         _homeAddress = homeAddress;
     }
 
@@ -47,7 +47,7 @@ public class Profile implements Parcelable {
      * gets email address
      * @return String email address
      */
-    public String getEmailAddress() {
+    public final String getEmailAddress() {
         return _emailAddress;
     }
 
@@ -55,7 +55,7 @@ public class Profile implements Parcelable {
      * sets email address
      * @param emailAddress String email Address
      */
-    public void setEmailAddress(String emailAddress) {
+    public final void setEmailAddress(String emailAddress) {
         _emailAddress = emailAddress;
     }
 
@@ -73,7 +73,7 @@ public class Profile implements Parcelable {
      * @return
      */
     @Override
-    public int describeContents() {
+    public final int describeContents() {
         return 0;
     }
 
@@ -83,7 +83,7 @@ public class Profile implements Parcelable {
      * @param flags
      */
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public final void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_homeAddress);
         dest.writeString(_emailAddress);
     }

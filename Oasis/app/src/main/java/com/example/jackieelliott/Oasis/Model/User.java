@@ -38,29 +38,29 @@ public class User implements Parcelable {
      * Getters and Setters
      */
 
-    public int getPermission() { return _permission; }
+    public final int getPermission() { return _permission; }
 
-    public void setPermission(int permission) { _permission = permission; }
+    public final void setPermission(int permission) { _permission = permission; }
 
-    public String getUsername() { return _username; }
+    public final String getUsername() { return _username; }
 
-    public void setUsername(String userName) { _username = userName; }
+    public final void setUsername(String userName) { _username = userName; }
 
-    public String getPassword() { return _password; }
+    public final String getPassword() { return _password; }
 
-    public void setPassword(String password) { _password = password; }
+    public final void setPassword(String password) { _password = password; }
 
-    public String getHomeAddress() { return _homeAddress; }
+    public final String getHomeAddress() { return _homeAddress; }
 
-    public void setHomeAddress(String homeAddress) { _homeAddress = homeAddress; }
+    public final void setHomeAddress(String homeAddress) { _homeAddress = homeAddress; }
 
-    public String getEmailAddress() { return _emailAddress; }
+    public final String getEmailAddress() { return _emailAddress; }
 
-    public void setEmailAddress(String emailAddress) { _emailAddress = emailAddress; }
+    public final void setEmailAddress(String emailAddress) { _emailAddress = emailAddress; }
 
-    public String getAccountType() { return _accountType; }
+    public final String getAccountType() { return _accountType; }
 
-    public void setAccountType(String accountType) { _accountType = accountType; }
+    public final void setAccountType(String accountType) { _accountType = accountType; }
 
     //public Profile getProfile() {
        // return _profile;
@@ -82,7 +82,7 @@ public class User implements Parcelable {
     }
 
     @Override
-    public int describeContents() {
+    public final int describeContents() {
         return 0;
     }
 
@@ -90,7 +90,7 @@ public class User implements Parcelable {
        If you add new instance vars to Student, you will need to add them to the write
      */
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public final void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_username);
         dest.writeString(_password);
         dest.writeString(_homeAddress);

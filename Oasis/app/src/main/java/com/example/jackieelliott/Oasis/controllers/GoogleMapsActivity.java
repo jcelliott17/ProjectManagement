@@ -40,7 +40,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
      * @param savedInstanceState
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         Bundle b = getIntent().getExtras();
@@ -63,7 +63,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     /**
      * Adds functionality to the Back button.
      */
-    public void addListenerOnButtonBack() {
+    public final void addListenerOnButtonBack() {
 
         final Context context = this;
 
@@ -97,7 +97,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public final void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         //LatLng sydney = new LatLng(-34, 151);

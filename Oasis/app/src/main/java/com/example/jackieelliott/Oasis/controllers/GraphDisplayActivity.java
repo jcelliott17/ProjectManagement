@@ -46,7 +46,7 @@ public class GraphDisplayActivity extends Activity {
     private User currentUser;
     private LinkedList<QualityReport>[] monthlyQualityList;
 
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_page);
         back = (Button) findViewById(R.id.back_button);
@@ -58,8 +58,6 @@ public class GraphDisplayActivity extends Activity {
         qualityList = b.getParcelableArrayList("QualityList");
         historyGraph = b.getParcelable("Graph");
 
-        double y,x;
-        x = -5.0;
         //Creates the graph view
 
         scatterPlot = (GraphView) findViewById(R.id.graph);
@@ -79,7 +77,7 @@ public class GraphDisplayActivity extends Activity {
         addListenerOnButtonBack();
     }
 
-    public void addListenerOnButtonBack() {
+    public final void addListenerOnButtonBack() {
         final Context context = this;
 
         back.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +101,7 @@ public class GraphDisplayActivity extends Activity {
      * @param year specified year for reports
      * @param dataType virus or contaminant
      */
-    //datatype is virus or contaminant
+    //dataType is virus or contaminant
     private void getData(int year, double latitude, double longitude, String dataType) {
         LinkedList<QualityReport>[] reportsByYear = sortReports(year, latitude, longitude, qualityList);
         int month = 1;

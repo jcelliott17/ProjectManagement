@@ -37,7 +37,7 @@ public class QualityListActivity extends Activity {
      * information is uploaded and updated.
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quality_list);
         Bundle b = getIntent().getExtras();
@@ -63,7 +63,7 @@ public class QualityListActivity extends Activity {
     /**
      * Adds functionality to the logout button
      */
-    public void addListenerOnButtonBack() {
+    public final void addListenerOnButtonBack() {
 
         final Context context = this;
 
