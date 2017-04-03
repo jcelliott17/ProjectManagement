@@ -46,7 +46,8 @@ public class HomeActivity extends Activity {
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
-        Bundle b = getIntent().getExtras();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         this.userList = b.getParcelableArrayList("UserList");
         this.currentUser = b.getParcelable("CurrentUser");
         this.reportList = b.getParcelableArrayList("ReportList");
@@ -61,7 +62,8 @@ public class HomeActivity extends Activity {
 
         String[] reports = new String[this.reportList.size()];
         for (int i = 0; i < this.reportList.size(); i++) {
-            reports[i] = this.reportList.get(i).toString();
+            Report r = reportList.get(i);
+            reports[i] = r.toString();
         }
 
         if (this.currentUser.getPermission() < 3) {
@@ -89,9 +91,11 @@ public class HomeActivity extends Activity {
 
 
         for (int i = 0; i < this.userList.size(); i++) {
-            if (this.userList.get(i).getUsername().equals(this.currentUser.getUsername())
-                    && this.currentUser.getPassword().equals(this.userList.get(i)
-                    .getPassword())) {
+            User u = userList.get(i);
+            String userName = u.getUsername();
+            String currentPass= currentUser.getPassword();
+            if (userName.equals(this.currentUser.getUsername())
+                    && currentPass.equals(u.getPassword())) {
                 this.userList.remove(i);
                 this.userList.add(i, this.currentUser); // replaces the user with the
                 // updated current user

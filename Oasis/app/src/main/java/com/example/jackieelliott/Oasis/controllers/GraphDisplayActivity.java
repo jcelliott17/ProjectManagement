@@ -19,10 +19,12 @@ import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 
 //Overriding the toString() method
@@ -45,7 +47,8 @@ public class GraphDisplayActivity extends Activity {
         setContentView(R.layout.graph_page);
         back = (Button) findViewById(R.id.back_button);
 
-        Bundle b = getIntent().getExtras();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         userList = b.getParcelableArrayList("UserList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
@@ -119,18 +122,19 @@ public class GraphDisplayActivity extends Activity {
             }
             month++;
         }
-        scatterPlot.getViewport().setScrollable(true);
-        this.scatterPlot.getViewport().setMinX(1);
-        this.scatterPlot.getViewport().setMaxX(13);
+        Viewport vP = scatterPlot.getViewport();
+        vP.setScrollable(true);
+        vP.setMinX(1);
+        vP.setMaxX(13);
 
-        this.scatterPlot.getViewport().setScrollableY(true);
-        this.scatterPlot.getViewport().setMinY(0);
-        this.scatterPlot.getViewport().setMaxY(max + (.2 * max));
+        vP.setScrollableY(true);
+        vP.setMinY(0);
+        vP.setMaxY(max + (.2 * max));
 
-        this.scatterPlot.getViewport().setYAxisBoundsManual(true);
-        this.scatterPlot.getViewport().setXAxisBoundsManual(true);
+        vP.setYAxisBoundsManual(true);
+        vP.setXAxisBoundsManual(true);
 
-        this.scatterPlot.addSeries(this.series);
+        vP.addSeries(this.series);
     }
 
     //Returns a list of quality reports in a given year
@@ -152,11 +156,12 @@ public class GraphDisplayActivity extends Activity {
             return this.monthlyQualityList;
         }
         for (QualityReport report: qualityList) {
-            if (report.getTimeAndDate().getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
-                if (this.monthlyQualityList[report.getTimeAndDate().getMonth()] == null) {
-                    this.monthlyQualityList[report.getTimeAndDate().getMonth()] = new LinkedList<QualityReport>();
+            Date timeAndDate = report.getTimeAndDate()
+            if (timeAndDate.getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
+                if (this.monthlyQualityList[timeAndDate.getMonth()] == null) {
+                    this.monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<QualityReport>();
                 }
-                this.monthlyQualityList[report.getTimeAndDate().getMonth()].add(report);
+                this.monthlyQualityList[timeAndDate.getMonth()].add(report);
             }
         }
         return this.monthlyQualityList;
