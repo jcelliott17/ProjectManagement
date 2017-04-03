@@ -67,9 +67,6 @@ public class GraphDisplayActivity extends Activity {
         gridLabel.setHorizontalAxisTitle("Months");
 
         gridLabel.setVerticalAxisTitle(this.historyGraph.getYAxis() + " PPM");
-        gridLabel.setVerticalAxisTitle(historyGraph.getYAxis() + " PPM");
-
-
 
         this.series = new PointsGraphSeries<DataPoint>();
 
@@ -130,7 +127,6 @@ public class GraphDisplayActivity extends Activity {
             }
             month++;
         }
-        Log.d("myTag", Integer.toString(max));
         this.scatterPlot.getViewport().setScrollable(true);
         this.scatterPlot.getViewport().setMinX(1);
         this.scatterPlot.getViewport().setMaxX(13);
@@ -163,13 +159,7 @@ public class GraphDisplayActivity extends Activity {
         if (qualityList == null) {
             return this.monthlyQualityList;
         }
-        Log.d("myTag", Double.toString(latitude));
-        Log.d("myTag", Double.toString(longitude));
         for (QualityReport report: qualityList) {
-            Log.d("myTag", Integer.toString(report.getTimeAndDate().getMonth()));
-            Log.d("myTag", Integer.toString(report.getTimeAndDate().getYear()));
-            Log.d("myTag", Double.toString(report.getLatitude()));
-            Log.d("myTag", Double.toString(report.getLongitude()));
             if (report.getTimeAndDate().getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
                 if (this.monthlyQualityList[report.getTimeAndDate().getMonth()] == null) {
                     this.monthlyQualityList[report.getTimeAndDate().getMonth()] = new LinkedList<QualityReport>();
