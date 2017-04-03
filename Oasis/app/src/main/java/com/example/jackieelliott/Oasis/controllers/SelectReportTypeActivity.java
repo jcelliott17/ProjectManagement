@@ -7,54 +7,53 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.ReportType;
 import com.example.jackieelliott.Oasis.Model.User;
-import com.example.jackieelliott.Oasis.Model.WaterCondition;
-import com.example.jackieelliott.Oasis.Model.WaterType;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by JackieElliott on 3/13/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class SelectReportTypeActivity extends Activity {
 
-    Button backButton;
-    Button nextButton;
-    Spinner chooseReportTypeSpinner;
-    ArrayList<User> userList;
-    ArrayList<Report> reportList;
-    ArrayList<QualityReport> qualityList;
-    User currentUser;
+    private Spinner chooseReportTypeSpinner;
+    private ArrayList<User> userList;
+    private ArrayList<Report> reportList;
+    private ArrayList<QualityReport> qualityList;
+    private User currentUser;
 
     /**
      * sets up activity when it is first created
-     * @param savedInstanceState
+     * @param savedInstanceState saved instance state
      */
-    public void onCreate(Bundle savedInstanceState) {
+    @Override
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.choose_report_type_page);
 
         Bundle b = getIntent().getExtras();
-        userList = b.getParcelableArrayList("UserList");
-        reportList = b.getParcelableArrayList("ReportList");
-        currentUser = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelableArrayList("QualityList");
+        this.userList = b.getParcelableArrayList("UserList");
+        this.reportList = b.getParcelableArrayList("ReportList");
+        this.currentUser = b.getParcelable("CurrentUser");
+        this.qualityList = b.getParcelableArrayList("QualityList");
 
-        chooseReportTypeSpinner = (Spinner) findViewById(R.id.select_report_type);
+        this.chooseReportTypeSpinner = (Spinner) findViewById(R.id.select_report_type);
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ReportType.values());
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        chooseReportTypeSpinner.setAdapter(adapter1);
+        this.chooseReportTypeSpinner.setAdapter(adapter1);
 
         addListenerOnButtonBack();
         addListenerOnButtonNext();
@@ -63,12 +62,12 @@ public class SelectReportTypeActivity extends Activity {
     /**
      * Adds functionality to the Back button.
      */
-    public void addListenerOnButtonBack() {
+    private void addListenerOnButtonBack() {
 
         final Context context = this;
 
 
-        backButton = (Button) findViewById(R.id.back_button);
+        Button backButton = (Button) findViewById(R.id.back_button);
 
         backButton.setOnClickListener(new View.OnClickListener() {
 
@@ -76,9 +75,13 @@ public class SelectReportTypeActivity extends Activity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, HomeActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
@@ -91,29 +94,38 @@ public class SelectReportTypeActivity extends Activity {
     /**
      * adds functionality to the next button
      */
-    public void addListenerOnButtonNext() {
+    private void addListenerOnButtonNext() {
 
         final Context context = this;
 
-        nextButton = (Button) findViewById(R.id.next_button);
+        Button nextButton = (Button) findViewById(R.id.next_button);
 
         nextButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-                if (chooseReportTypeSpinner.getSelectedItem().toString() == "Quality") {
+                //noinspection UnqualifiedFieldAccess
+                if (chooseReportTypeSpinner.getSelectedItem().toString().equals("Quality")) {
                     Intent intent = new Intent(context, QualityReportActivity.class);
+                    //noinspection UnqualifiedFieldAccess,UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("UserList", userList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(context, ReportActivity.class);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("UserList", userList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 }

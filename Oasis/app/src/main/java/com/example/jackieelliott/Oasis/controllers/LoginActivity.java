@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.view.View;
 import android.widget.EditText;
@@ -23,10 +22,11 @@ import com.example.jackieelliott.Oasis.R;
  * Created by JackieElliott on 2/8/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class LoginActivity extends Activity {
 
-    private Button login;
-    private Button cancel;
     private EditText loginField;
     private EditText passField;
     private ArrayList<User> userList;
@@ -36,38 +36,40 @@ public class LoginActivity extends Activity {
 
     /**
      * sets up activity when it is first created
-     * @param savedInstanceState
+     * @param savedInstanceState saved instance state
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
         addListenerOnButtonLogin();
         addListenerOnButtonCancel();
         Bundle b = getIntent().getExtras();
-        userList = b.getParcelableArrayList("UserList");
-        reportList  = b.getParcelableArrayList("ReportList");
-        currentUser = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelableArrayList("QualityList");
+        this.userList = b.getParcelableArrayList("UserList");
+        this.reportList  = b.getParcelableArrayList("ReportList");
+        this.currentUser = b.getParcelable("CurrentUser");
+        this.qualityList = b.getParcelableArrayList("QualityList");
 
     }
 
     /**
      * adds functionality to login button
      */
-    public void addListenerOnButtonLogin() {
+    private void addListenerOnButtonLogin() {
 
         final Context context = this;
 
-        login = (Button) findViewById(R.id.login_button);
-        loginField = (EditText) findViewById(R.id.username_text);
-        passField = (EditText) findViewById(R.id.editText2);
+        Button login = (Button) findViewById(R.id.login_button);
+        this.loginField = (EditText) findViewById(R.id.username_text);
+        this.passField = (EditText) findViewById(R.id.editText2);
         final AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity
                 .this).create();
+        //Ignore this issue, portability issues
         alertDialog.setTitle("Error");
         alertDialog.setMessage("Wrong Username/Password");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
@@ -84,23 +86,30 @@ public class LoginActivity extends Activity {
                 found.
                  */
                 boolean login = false;
+                //noinspection UnqualifiedFieldAccess
                 for (int i = 0; i < userList.size(); i++) {
+                    //noinspection UnqualifiedFieldAccess
                     if (userList.get(i).getUsername().equals(loginField
                             .getText().toString()) && passField.getText()
                             .toString().equals(userList.get(i).getPassword())) {
                         login = true;
+                        //noinspection UnqualifiedFieldAccess
                         currentUser = userList.get(i);
                     }
                 }
                 if (login) {
 
-                    // Passed information amoung activities
+                    // Passed information among activities
 
                     Intent intent = new Intent(context, HomeActivity.class);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("UserList", userList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList",
                             reportList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putExtra("CurrentUser", currentUser);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
                     startActivity(intent);
                 } else {
@@ -116,11 +125,11 @@ public class LoginActivity extends Activity {
     /**
      * adds functionality to cancel button
      */
-    public void addListenerOnButtonCancel() {
+    private void addListenerOnButtonCancel() {
 
         final Context context = this;
 
-        cancel = (Button) findViewById(R.id.login_Cancel);
+        Button cancel = (Button) findViewById(R.id.login_Cancel);
 
         cancel.setOnClickListener(new View.OnClickListener() {
 
@@ -128,8 +137,11 @@ public class LoginActivity extends Activity {
             public void onClick(View arg0) {
                 // Passes information amount activities
                 Intent intent = new Intent(context, WelcomePageActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
 
@@ -139,23 +151,4 @@ public class LoginActivity extends Activity {
 
     }
 
-    /**
-     * checks that user email is valid
-     * @param email String email addresss
-     * @return boolean
-     */
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
-
-    /**
-     * checks that user password is valid
-     * @param password String password
-     * @return boolean
-     */
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
-    }
 }

@@ -19,6 +19,10 @@ import java.util.ArrayList;
  * Created by JackieElliott on 2/8/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
+@SuppressWarnings("ALL")
 public class WelcomePageActivity extends AppCompatActivity {
 
     Button button;
@@ -32,40 +36,43 @@ public class WelcomePageActivity extends AppCompatActivity {
      * Creates the Welcome using the passed information.
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_page);
         addListenerOnButton();
         addListenerOnButtonLogin();
         if (getIntent().getExtras() == null) {
-            userList = new ArrayList<>();
-            reportList = new ArrayList<>();
-            qualityList = new ArrayList<>();
+            this.userList = new ArrayList<>();
+            this.reportList = new ArrayList<>();
+            this.qualityList = new ArrayList<>();
         } else {
             Bundle b = getIntent().getExtras();
-            userList = b.getParcelableArrayList("UserList");
-            reportList = b.getParcelableArrayList("ReportList");
-            qualityList = b.getParcelableArrayList("QualityList");
+            this.userList = b.getParcelableArrayList("UserList");
+            this.reportList = b.getParcelableArrayList("ReportList");
+            this.qualityList = b.getParcelableArrayList("QualityList");
         }
     }
 
     /**
      * Adds functionality to the register button.
      */
-    public void addListenerOnButton() {
+    public final void addListenerOnButton() {
 
         final Context context = this;
 
-        button = (Button) findViewById(R.id.register_button);
+        this.button = (Button) findViewById(R.id.register_button);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        this.button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, RegisterUserActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
 
@@ -78,20 +85,23 @@ public class WelcomePageActivity extends AppCompatActivity {
     /**
      * Adds functionality to the login button.
      */
-    public void addListenerOnButtonLogin() {
+    public final void addListenerOnButtonLogin() {
 
         final Context context = this;
 
-        button2 = (Button) findViewById(R.id.login_button);
+        this.button2 = (Button) findViewById(R.id.login_button);
 
-        button2.setOnClickListener(new View.OnClickListener() {
+        this.button2.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, LoginActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
 

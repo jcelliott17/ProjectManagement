@@ -7,72 +7,110 @@ import android.os.Parcelable;
  * Created by JackieElliott on 3/28/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class HistoryGraph implements Parcelable {
 
-    private int year;
-    private int latitude;
-    private int longitude;
-    private String yAxis;
+    private final int year;
+    private final double latitude;
+    private final double longitude;
+    private final String yAxis;
 
-    public HistoryGraph(int year, int latitude, int longitude, String yAxis) {
+    /**
+     * Constructor for a History Graph
+     * @param year year of graph
+     * @param latitude location info
+     * @param longitude location info
+     * @param yAxis label
+     */
+    public HistoryGraph(int year, double latitude, double longitude, String yAxis) {
+        super();
         this.year = year;
         this.latitude = latitude;
         this.longitude = longitude;
         this.yAxis = yAxis;
     }
 
+
+
+    /**
+     * Getter for year
+     * @return year
+     */
     public int getYear() {
-        return year;
+        return this.year;
     }
 
-    public int getLatitude() {
-        return latitude;
+    /**
+     * Getter for latitude
+     * @return latitude
+     */
+    public double getLatitude() {
+        return this.latitude;
     }
 
-    public int getLongitude() {
-        return longitude;
+    /**
+     * Getter for longitude
+     * @return longitude
+     */
+    public double getLongitude() {
+        return this.longitude;
     }
 
-    public String getyAxis() {
-        return yAxis;
+    // We are fine with this get method because the
+    // variable is yAxis
+
+    /**
+     * Getter for yAxis
+     * @return yAxis
+     */
+    public String getYAxis() {
+        return this.yAxis;
     }
 
-
-    public HistoryGraph(Parcel in) {
-        year = in.readInt();
-        yAxis = in.readString();
-        latitude = in.readInt();
-        longitude = in.readInt();
+    /**
+     * Method required by parcelable
+     * @param in parable requirement
+     */
+    private HistoryGraph(Parcel in) {
+        super();
+        this.yAxis = in.readString();
+        this.year = in.readInt();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
     }
 
     /**
      * describes contents
-     * @return
+     * @return a num
      */
     @Override
-    public int describeContents() {
+    public final int describeContents() {
         return 0;
     }
 
     /**
      * allows addition of new instance variables to Student
-     * @param dest
-     * @param flags
+     * @param dest destination
+     * @param flags required parcelable interface
      */
-    //@Override
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(yAxis);
-        dest.writeInt(year);
-        dest.writeInt(latitude);
-        dest.writeInt(longitude);
+        dest.writeString(this.yAxis);
+        dest.writeInt(this.year);
+        dest.writeDouble(this.latitude);
+        dest.writeDouble(this.longitude);
     }
 
     public static final Parcelable.Creator<HistoryGraph> CREATOR
             = new Parcelable.Creator<HistoryGraph>() {
+        @Override
         public HistoryGraph createFromParcel(Parcel in) {
             return new HistoryGraph(in);
         }
 
+        @Override
         public HistoryGraph[] newArray(int size) {
             return new HistoryGraph[size];
         }

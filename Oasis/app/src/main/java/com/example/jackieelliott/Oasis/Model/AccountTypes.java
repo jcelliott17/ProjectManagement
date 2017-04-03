@@ -8,6 +8,9 @@ public class AccountTypes {
      * possible user account types allowed
      */
     public enum AccountType {
-        User, Worker, Manager, Admin
+        @SuppressWarnings("EnumeratedConstantNamingConvention")User,
+        @SuppressWarnings("EnumeratedConstantNamingConvention")Worker,
+        @SuppressWarnings("EnumeratedConstantNamingConvention")Manager,
+        @SuppressWarnings("EnumeratedConstantNamingConvention")Admin
     }
 }
