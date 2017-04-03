@@ -10,11 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Spinner;
 
 import com.example.jackieelliott.Oasis.Model.HistoryGraph;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
@@ -24,12 +20,10 @@ import com.example.jackieelliott.Oasis.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 //Overriding the toString() method
 //we do not want to override the toString method in this class
@@ -61,40 +55,20 @@ public class GraphDisplayActivity extends Activity {
         double y,x;
         x = -5.0;
         //Creates the graph view
-<<<<<<< HEAD
-        this.scatterPlot = (GraphView) findViewById(R.id.graph);
-=======
 
-        scatterPlot = (GraphView) findViewById(R.id.graph);
->>>>>>> 018cd59a2b6d98ce4518847d551e1021b7a8ad7a
+        this.scatterPlot = (GraphView) findViewById(R.id.graph);
         //Sets labels on axises
 
         GridLabelRenderer gridLabel = this.scatterPlot.getGridLabelRenderer();
         gridLabel.setHorizontalAxisTitle("Months");
-<<<<<<< HEAD
-        gridLabel.setVerticalAxisTitle(this.historyGraph.getyAxis() + " PPM");
-=======
-        gridLabel.setVerticalAxisTitle(historyGraph.getYAxis() + " PPM");
-
->>>>>>> 018cd59a2b6d98ce4518847d551e1021b7a8ad7a
+        gridLabel.setVerticalAxisTitle(this.historyGraph.getYAxis() + " PPM");
 
 
         this.series = new PointsGraphSeries<DataPoint>();
 
-<<<<<<< HEAD
         getData(this.historyGraph.getYear(), this.historyGraph.getLatitude(),
-                this.historyGraph.getLongitude(), this.historyGraph.getyAxis());
-        //for (int i = 0; i < 10; i++) {
-           // x = x + 10;
-            //y = x;
-            //series.appendData(new DataPoint(x, y), true, 10);
-        //}
-        //scatterPlot.addSeries(series);
-=======
-        getData(historyGraph.getYear(), historyGraph.getLatitude(),
-                historyGraph.getLongitude(), historyGraph.getYAxis());
+                this.historyGraph.getLongitude(), this.historyGraph.getYAxis());
 
->>>>>>> 018cd59a2b6d98ce4518847d551e1021b7a8ad7a
         addListenerOnButtonBack();
     }
 

@@ -4,20 +4,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.jackieelliott.Oasis.Model.AccountTypes;
-
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
-import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
-import com.example.jackieelliott.Oasis.controllers.SelectReportTypeActivity;
+
 
 import java.util.ArrayList;
 
@@ -51,7 +47,6 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         Bundle b = getIntent().getExtras();
-<<<<<<< HEAD
         this.userList = b.getParcelableArrayList("UserList");
         this.currentUser = b.getParcelable("CurrentUser");
         this.reportList = b.getParcelableArrayList("ReportList");
@@ -60,20 +55,8 @@ public class HomeActivity extends Activity {
         this.reportButton = (Button) findViewById(R.id.report_button);
         this.qualityListButton = (Button) findViewById(R.id.qualitylist_button);
         this.graphButton = (Button) findViewById(R.id.graph_button);
-        this.tempmap = (Button) findViewById(R.id.tempmap);
+        this.tempMap = (Button) findViewById(R.id.tempmap);
         this.reportsList = (ListView) findViewById(R.id.reports_list);
-=======
-        userList = b.getParcelableArrayList("UserList");
-        currentUser = b.getParcelable("CurrentUser");
-        reportList = b.getParcelableArrayList("ReportList");
-        qualityList = b.getParcelableArrayList("QualityList");
-        logoutButton = (Button) findViewById(R.id.logout_button);
-        reportButton = (Button) findViewById(R.id.report_button);
-        qualityListButton = (Button) findViewById(R.id.qualitylist_button);
-        graphButton = (Button) findViewById(R.id.graph_button);
-        tempMap = (Button) findViewById(R.id.tempmap);
-        reportsList = (ListView) findViewById(R.id.reports_list);
->>>>>>> 018cd59a2b6d98ce4518847d551e1021b7a8ad7a
         addListenerOnButtonLogout();
 
         String[] reports = new String[this.reportList.size()];
@@ -193,11 +176,8 @@ public class HomeActivity extends Activity {
 
         });
 
-<<<<<<< HEAD
-        this.tempmap.setOnClickListener(new View.OnClickListener() {
-=======
-        tempMap.setOnClickListener(new View.OnClickListener() {
->>>>>>> 018cd59a2b6d98ce4518847d551e1021b7a8ad7a
+        this.tempMap.setOnClickListener(new View.OnClickListener() {
+
 
             @Override
             public void onClick(View arg0) {

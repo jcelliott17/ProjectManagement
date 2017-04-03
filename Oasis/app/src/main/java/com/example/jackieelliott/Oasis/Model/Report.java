@@ -3,8 +3,6 @@ package com.example.jackieelliott.Oasis.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by JackieElliott on 2/20/17.
