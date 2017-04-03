@@ -30,6 +30,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="cont"
+            android:label="Oasis">
+        </activity>
+        <activity
             android:name=".controllers.RegisterUserActivity"
             android:label="Oasis">
         </activity>
