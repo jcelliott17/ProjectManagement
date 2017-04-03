@@ -104,10 +104,12 @@ public class Profile implements Parcelable {
 
     public static final Parcelable.Creator<Profile> CREATOR
             = new Parcelable.Creator<Profile>() {
+        @Override
         public Profile createFromParcel(Parcel in) {
             return new Profile(in);
         }
 
+        @Override
         public Profile[] newArray(int size) {
             return new Profile[size];
         }

@@ -71,6 +71,7 @@ public class LoginActivity extends Activity {
         alertDialog.setMessage("Wrong Username/Password");
         alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
