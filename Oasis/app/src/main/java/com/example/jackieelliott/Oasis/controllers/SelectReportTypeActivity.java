@@ -63,7 +63,7 @@ public class SelectReportTypeActivity extends Activity {
     /**
      * Adds functionality to the Back button.
      */
-    public final void addListenerOnButtonBack() {
+    private void addListenerOnButtonBack() {
 
         final Context context = this;
 
@@ -95,7 +95,7 @@ public class SelectReportTypeActivity extends Activity {
     /**
      * adds functionality to the next button
      */
-    public final void addListenerOnButtonNext() {
+    private void addListenerOnButtonNext() {
 
         final Context context = this;
 

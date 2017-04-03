@@ -75,7 +75,7 @@ public class ProfileActivity extends Activity {
     /**
      * Adds functionality to the back button on the the profile page.
      */
-    public final void addListenerOnButtonBack() {
+    private void addListenerOnButtonBack() {
 
         final Context context = this;
 

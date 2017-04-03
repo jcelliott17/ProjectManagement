@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class QualityReport implements Parcelable {
 
-    private String _reportName;
+    private final String _reportName;
     private double _latitude;
     private double _longitude;
     private String _condition;
@@ -28,25 +28,29 @@ public class QualityReport implements Parcelable {
         this._reportName = name;
     }
 
-    /**
-     * constructor
-     * @param name name of report
-     * @param latitude latitude of water
-     * @param longitude longitude of water
-     */
-    public QualityReport(String name, double latitude, double longitude) {
-        super();
-        this._reportName = name;
-        this._latitude = latitude;
-        this._longitude = longitude;
-    }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * constructor
+//     * @param name name of report
+//     * @param latitude latitude of water
+//     * @param longitude longitude of water
+//     */
+//    public QualityReport(String name, double latitude, double longitude) {
+//        super();
+//        this._reportName = name;
+//        this._latitude = latitude;
+//        this._longitude = longitude;
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
-    /**
-     * get report number
-     * @return integer report number
-     */
-
-    public int getReportNumber() { return this._reportNumber; }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * get report number
+//     * @return integer report number
+//     */
+//
+//    public int getReportNumber() { return this._reportNumber; }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
     /**
      * set report number
@@ -55,13 +59,15 @@ public class QualityReport implements Parcelable {
 
     public void setReportNumber(int number) { this._reportNumber = number; }
 
-    /**
-     * get condition
-     * @return String condition
-     */
-    public String getCondition() {
-        return this._condition;
-    }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * get condition
+//     * @return String condition
+//     */
+//    public String getCondition() {
+//        return this._condition;
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
     /**
      * set condition
@@ -100,20 +106,24 @@ public class QualityReport implements Parcelable {
     //KEEP THIS VERSION - Jackie
     public void setContaminant(Double contaminant) { this._contaminant = contaminant; }
 
-    /**
-     * get report name
-     * @return String report name
-     */
-    public String getReportName() {
-        return this._reportName;
-    }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * get report name
+//     * @return String report name
+//     */
+//    public String getReportName() {
+//        return this._reportName;
+//    }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
-    /**
-     * set report name
-     * @param name String report name
-     */
-
-    public void setReportName(String name) { this._reportName = name; }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * set report name
+//     * @param name String report name
+//     */
+//
+//    public void setReportName(String name) { this._reportName = name; }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
     /**
      * get latitude
@@ -163,7 +173,7 @@ public class QualityReport implements Parcelable {
      * constructor required for parcelable
      * @param in input
      */
-    public QualityReport(Parcel in) {
+    private QualityReport(Parcel in) {
         super();
         this._reportName = in.readString();
         this._latitude = in.readDouble();

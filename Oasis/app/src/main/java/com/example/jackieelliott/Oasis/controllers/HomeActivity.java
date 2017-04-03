@@ -80,7 +80,7 @@ public class HomeActivity extends Activity {
     /**
      * Adds functionality to the logout button
      */
-    public final void addListenerOnButtonLogout() {
+    private void addListenerOnButtonLogout() {
 
         /*
         Sets the user that you originally used to create

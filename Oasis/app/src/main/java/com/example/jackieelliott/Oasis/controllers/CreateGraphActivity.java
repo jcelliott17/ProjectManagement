@@ -27,9 +27,9 @@ import java.util.ArrayList;
 
 public class CreateGraphActivity extends Activity{
 
-    private EditText year;
+    // --Commented out by Inspection (4/2/17, 11:12 PM):private EditText year;
     private EditText latitude;
-    private EditText longitude;
+    // --Commented out by Inspection (4/2/17, 11:12 PM):private EditText longitude;
     private Spinner dataType;
     private Button createGraph;
     private Button back;
@@ -37,7 +37,7 @@ public class CreateGraphActivity extends Activity{
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private HistoryGraph historyGraphList;
+    // --Commented out by Inspection (4/2/17, 11:12 PM):private HistoryGraph historyGraphList;
     private User currentUser;
 
     /**
