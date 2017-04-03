@@ -32,7 +32,6 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     private GoogleMap mMap;
     private Button backButton;
-    private ListView reportsList;
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
@@ -52,7 +51,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         currentUser = b.getParcelable("CurrentUser");
         reportList = b.getParcelableArrayList("ReportList");
         qualityList = b.getParcelableArrayList("QualityList");
-        reportsList = (ListView) findViewById(R.id.reports_list);
+        ListView reportsList = (ListView) findViewById(R.id.reports_list);
         backButton = (Button) findViewById(R.id.backButton);
         setContentView(R.layout.activity_google_maps);
 

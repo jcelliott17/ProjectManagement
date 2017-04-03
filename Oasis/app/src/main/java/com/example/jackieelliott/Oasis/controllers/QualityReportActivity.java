@@ -28,7 +28,6 @@ import java.util.ArrayList;
 //we do not want to override the toString method in this class
 
 public class QualityReportActivity extends Activity {
-    private TextView reportText;
     private EditText virusEdit;
     private EditText contaminantEdit;
     private EditText reportTitle;
@@ -82,7 +81,7 @@ public class QualityReportActivity extends Activity {
 
 
         Button backButton = (Button) findViewById(R.id.backButton);
-        this.reportText = (TextView) findViewById(R.id.report_textview);
+        TextView reportText = (TextView) findViewById(R.id.report_textview);
         this.reportTitle = (EditText) findViewById(R.id.report_title_textedit);
         this.conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 

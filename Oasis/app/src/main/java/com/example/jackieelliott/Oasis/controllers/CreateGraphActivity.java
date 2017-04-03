@@ -27,11 +27,12 @@ import java.util.ArrayList;
 
 public class CreateGraphActivity extends Activity{
 
-    private EditText year;
-    private EditText longitude;
     private Button createGraph;
     private Button back;
-
+    private EditText year;
+    private EditText latitude;
+    private EditText longitude;
+    private Spinner dataType;
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
@@ -49,13 +50,13 @@ public class CreateGraphActivity extends Activity{
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         year = (EditText) findViewById(R.id.year_editText);
-        EditText latitude = (EditText) findViewById(R.id.lat_editText);
+        latitude = (EditText) findViewById(R.id.lat_editText);
         longitude = (EditText) findViewById(R.id.long_editText);
         createGraph = (Button) findViewById(R.id.create_graph_button);
         back = (Button) findViewById(R.id.back_button);
 
         //Creates the functionality for the spinner
-        Spinner dataType = (Spinner) findViewById(R.id.data_type_spinner);
+        dataType = (Spinner) findViewById(R.id.data_type_spinner);
 
         String[] spinnerItems = {"Contaminant","Virus"};
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, spinnerItems);
@@ -85,6 +86,9 @@ public class CreateGraphActivity extends Activity{
 
             @Override
             public void onClick(View arg0) {
+                historyGraphList = (new HistoryGraph(Integer.parseInt(year.getText().toString()),
+                        Double.parseDouble(latitude.getText().toString()), Double.parseDouble(longitude
+                        .getText().toString()), dataType.getSelectedItem().toString()));
                 Intent intent = new Intent(context, GraphDisplayActivity.class);
                 //do not use this.variable as it cannot find the symbol
                 //noinspection UnqualifiedFieldAccess
