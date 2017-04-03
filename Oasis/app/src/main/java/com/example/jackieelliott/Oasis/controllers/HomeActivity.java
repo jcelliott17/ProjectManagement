@@ -27,12 +27,10 @@ import java.util.ArrayList;
 public class HomeActivity extends Activity {
 
     private Button logoutButton;
-    private Button profileButton;
     private Button reportButton;
     private Button tempMap;
     private Button qualityListButton;
     private Button graphButton;
-    private ListView reportsList;
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
@@ -57,7 +55,7 @@ public class HomeActivity extends Activity {
         this.qualityListButton = (Button) findViewById(R.id.qualitylist_button);
         this.graphButton = (Button) findViewById(R.id.graph_button);
         this.tempMap = (Button) findViewById(R.id.tempmap);
-        this.reportsList = (ListView) findViewById(R.id.reports_list);
+        ListView reportsList = (ListView) findViewById(R.id.reports_list);
         addListenerOnButtonLogout();
 
         String[] reports = new String[this.reportList.size()];
@@ -73,7 +71,7 @@ public class HomeActivity extends Activity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.
                 R.layout.simple_list_item_1, reports);
-        this.reportsList.setAdapter(adapter);
+        reportsList.setAdapter(adapter);
 
     }
 
@@ -124,9 +122,9 @@ public class HomeActivity extends Activity {
 
         });
 
-        this.profileButton = (Button) findViewById(R.id.button2);
+        Button profileButton = (Button) findViewById(R.id.button2);
 
-        this.profileButton.setOnClickListener(new View.OnClickListener() {
+        profileButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {

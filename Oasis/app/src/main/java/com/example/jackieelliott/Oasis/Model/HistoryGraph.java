@@ -17,22 +17,21 @@ public class HistoryGraph implements Parcelable {
     private final double longitude;
     private final String yAxis;
 
-// --Commented out by Inspection START (4/2/17, 11:11 PM):
-//    /**
-//     * Constructor for a History Graph
-//     * @param year year of graph
-//     * @param latitude location info
-//     * @param longitude location info
-//     * @param yAxis label
-//     */
-//    public HistoryGraph(int year, double latitude, double longitude, String yAxis) {
-//        super();
-//        this.year = year;
-//        this.latitude = latitude;
-//        this.longitude = longitude;
-//        this.yAxis = yAxis;
-//    }
-// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
+    /**
+     * Constructor for a History Graph
+     * @param year year of graph
+     * @param latitude location info
+     * @param longitude location info
+     * @param yAxis label
+     */
+    public HistoryGraph(int year, double latitude, double longitude, String yAxis) {
+        super();
+        this.year = year;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.yAxis = yAxis;
+    }
+
 
 
     /**

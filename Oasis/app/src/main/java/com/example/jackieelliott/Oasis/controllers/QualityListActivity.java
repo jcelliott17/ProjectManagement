@@ -26,7 +26,6 @@ import java.util.ArrayList;
 
 public class QualityListActivity extends Activity {
     private Button backButton;
-    private ListView qualityReportList;
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
@@ -46,7 +45,7 @@ public class QualityListActivity extends Activity {
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
         this.backButton = (Button) findViewById(R.id.back_button);
-        this.qualityReportList = (ListView) findViewById(R.id.quality_list);
+        ListView qualityReportList = (ListView) findViewById(R.id.quality_list);
         addListenerOnButtonBack();
 
 
@@ -57,7 +56,7 @@ public class QualityListActivity extends Activity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.
                 R.layout.simple_list_item_1, qualityReports);
-        this.qualityReportList.setAdapter(adapter);
+        qualityReportList.setAdapter(adapter);
     }
 
     /**

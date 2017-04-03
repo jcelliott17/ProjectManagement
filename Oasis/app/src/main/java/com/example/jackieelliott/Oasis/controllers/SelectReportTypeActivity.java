@@ -27,8 +27,6 @@ import java.util.Objects;
 
 public class SelectReportTypeActivity extends Activity {
 
-    private Button backButton;
-    private Button nextButton;
     private Spinner chooseReportTypeSpinner;
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
@@ -69,9 +67,9 @@ public class SelectReportTypeActivity extends Activity {
         final Context context = this;
 
 
-        this.backButton = (Button) findViewById(R.id.back_button);
+        Button backButton = (Button) findViewById(R.id.back_button);
 
-        this.backButton.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -100,9 +98,9 @@ public class SelectReportTypeActivity extends Activity {
 
         final Context context = this;
 
-        this.nextButton = (Button) findViewById(R.id.next_button);
+        Button nextButton = (Button) findViewById(R.id.next_button);
 
-        this.nextButton.setOnClickListener(new View.OnClickListener() {
+        nextButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {

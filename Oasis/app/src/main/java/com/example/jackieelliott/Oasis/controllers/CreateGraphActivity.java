@@ -27,13 +27,12 @@ import java.util.ArrayList;
 
 public class CreateGraphActivity extends Activity{
 
+    private Button createGraph;
+    private Button back;
     private EditText year;
     private EditText latitude;
     private EditText longitude;
     private Spinner dataType;
-    private Button createGraph;
-    private Button back;
-
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
@@ -88,6 +87,9 @@ public class CreateGraphActivity extends Activity{
 
             @Override
             public void onClick(View arg0) {
+                historyGraphList = (new HistoryGraph(Integer.parseInt(year.getText().toString()),
+                        Double.parseDouble(latitude.getText().toString()), Double.parseDouble(longitude
+                        .getText().toString()), dataType.getSelectedItem().toString()));
                 Intent intent = new Intent(context, GraphDisplayActivity.class);
                 //do not use this.variable as it cannot find the symbol
                 //noinspection UnqualifiedFieldAccess

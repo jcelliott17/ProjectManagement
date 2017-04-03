@@ -26,7 +26,6 @@ import java.util.ArrayList;
 
 public class ProfileActivity extends Activity {
 
-    private Button backButton;
     private EditText email;
     private EditText homeAddress;
     private TextView username;
@@ -79,13 +78,13 @@ public class ProfileActivity extends Activity {
 
         final Context context = this;
 
-        this.backButton = (Button) findViewById(R.id.backButton);
+        Button backButton = (Button) findViewById(R.id.backButton);
         this.email = (EditText) findViewById(R.id.emailText);
         this.homeAddress = (EditText) findViewById(R.id.addressText);
         this.username = (TextView) findViewById(R.id.usernameText);
         this.accountType = (TextView) findViewById(R.id.accountText);
 
-        this.backButton.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {

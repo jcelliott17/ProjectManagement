@@ -12,7 +12,7 @@ import android.os.Parcelable;
 
 
 @SuppressWarnings("ClassNamingConvention")
-public class Profile implements Parcelable {
+public final class Profile implements Parcelable {
 
     /*
     We are currently not using this class

@@ -29,8 +29,6 @@ import java.util.ArrayList;
 
 public class ReportActivity extends Activity {
 
-    private Button backButton;
-    private Button createReportButton;
     private EditText reportTitle;
     private EditText reportLatitude;
     private EditText reportLongitude;
@@ -83,9 +81,9 @@ public class ReportActivity extends Activity {
 
         final Context context = this;
 
-        this.backButton = (Button) findViewById(R.id.backButton);
+        Button backButton = (Button) findViewById(R.id.backButton);
 
-        this.backButton.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View arg0) {
@@ -114,9 +112,9 @@ public class ReportActivity extends Activity {
 
         final Context context = this;
 
-        this.createReportButton = (Button) findViewById(R.id.create_report_button);
+        Button createReportButton = (Button) findViewById(R.id.create_report_button);
 
-        this.createReportButton.setOnClickListener(new View.OnClickListener() {
+        createReportButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
