@@ -59,7 +59,8 @@ public class CreateGraphActivity extends Activity{
         dataType = (Spinner) findViewById(R.id.data_type_spinner);
 
         String[] spinnerItems = {"Contaminant","Virus"};
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, spinnerItems);
+        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+                spinnerItems);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dataType.setAdapter(adapter);
 

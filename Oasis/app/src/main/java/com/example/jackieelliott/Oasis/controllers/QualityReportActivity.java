@@ -28,6 +28,7 @@ import java.util.ArrayList;
 //we do not want to override the toString method in this class
 
 public class QualityReportActivity extends Activity {
+
     private EditText virusEdit;
     private EditText contaminantEdit;
     private EditText reportTitle;
