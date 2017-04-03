@@ -25,12 +25,13 @@ public class User implements Parcelable {
 
 
     public User(String userName, String password, int permission) {
-        _username = userName;
-        _password = password;
-        _accountType = "";
-        _emailAddress = "";
-        _homeAddress = "";
-        _permission = permission;
+        super();
+        this._username = userName;
+        this._password = password;
+        this._accountType = "";
+        this._emailAddress = "";
+        this._homeAddress = "";
+        this._permission = permission;
 
     }
 
@@ -38,33 +39,29 @@ public class User implements Parcelable {
      * Getters and Setters
      */
 
-    public final int getPermission() { return _permission; }
+    public int getPermission() { return this._permission; }
 
-    public final void setPermission(int permission) { _permission = permission; }
+    public void setPermission(int permission) { this._permission = permission; }
 
-    public final String getUsername() { return _username; }
+    public String getUsername() { return this._username; }
 
-    public final void setUsername(String userName) { _username = userName; }
+    public void setUsername(String userName) { this._username = userName; }
 
-    public final String getPassword() { return _password; }
+    public String getPassword() { return this._password; }
 
-    public final void setPassword(String password) { _password = password; }
+    public void setPassword(String password) { this._password = password; }
 
-    public final String getHomeAddress() { return _homeAddress; }
+    public String getHomeAddress() { return this._homeAddress; }
 
-    public final void setHomeAddress(String homeAddress) { _homeAddress = homeAddress; }
+    public void setHomeAddress(String homeAddress) { this._homeAddress = homeAddress; }
 
-    public final String getEmailAddress() { return _emailAddress; }
+    public String getEmailAddress() { return this._emailAddress; }
 
-    public final void setEmailAddress(String emailAddress) { _emailAddress = emailAddress; }
+    public void setEmailAddress(String emailAddress) { this._emailAddress = emailAddress; }
 
-    public final String getAccountType() { return _accountType; }
+    public String getAccountType() { return this._accountType; }
 
-    public final void setAccountType(String accountType) { _accountType = accountType; }
-
-    //public Profile getProfile() {
-       // return _profile;
-    //}
+    public void setAccountType(String accountType) { this._accountType = accountType; }
 
 
     /* *********************************
@@ -72,12 +69,13 @@ public class User implements Parcelable {
    *
    */
     public User(Parcel in) {
-        _username = in.readString();
-        _password = in.readString();
-        _homeAddress = in.readString();
-        _emailAddress = in.readString();
-        _accountType = in.readString();
-        _permission = in.readInt();
+        super();
+        this._username = in.readString();
+        this._password = in.readString();
+        this._homeAddress = in.readString();
+        this._emailAddress = in.readString();
+        this._accountType = in.readString();
+        this._permission = in.readInt();
         //_profile = in.readParcelable( Profile.class.getClassLoader());
     }
 
@@ -90,14 +88,13 @@ public class User implements Parcelable {
        If you add new instance vars to Student, you will need to add them to the write
      */
     @Override
-    public final void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(_username);
-        dest.writeString(_password);
-        dest.writeString(_homeAddress);
-        dest.writeString(_emailAddress);
-        dest.writeString(_accountType);
-        dest.writeInt(_permission);
-        //dest.writeParcelable(_profile, flags);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this._username);
+        dest.writeString(this._password);
+        dest.writeString(this._homeAddress);
+        dest.writeString(this._emailAddress);
+        dest.writeString(this._accountType);
+        dest.writeInt(this._permission);
     }
 
     public static final Parcelable.Creator<User> CREATOR

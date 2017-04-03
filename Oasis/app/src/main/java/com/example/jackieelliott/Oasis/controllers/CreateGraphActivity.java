@@ -51,31 +51,27 @@ public class CreateGraphActivity extends Activity{
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_setup_page);
-        Bundle b = getIntent().getExtras();
 
-        userList = b.getParcelableArrayList("UserList");
-        reportList = b.getParcelableArrayList("ReportList");
-        qualityList = b.getParcelableArrayList("QualityList");
-        currentUser = b.getParcelable("CurrentUser");
-
-        year = (EditText) findViewById(R.id.year_editText);
-        latitude = (EditText) findViewById(R.id.lat_editText);
-        longitude = (EditText) findViewById(R.id.long_editText);
-        createGraph = (Button) findViewById(R.id.create_graph_button);
-        back = (Button) findViewById(R.id.back_button);
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        this.year = (EditText) findViewById(R.id.year_editText);
+        this.latitude = (EditText) findViewById(R.id.lat_editText);
+        this.longitude = (EditText) findViewById(R.id.long_editText);
+        this.createGraph = (Button) findViewById(R.id.create_graph_button);
+        this.back = (Button) findViewById(R.id.back_button);
 
         //Creates the functionality for the spinner
-        dataType = (Spinner) findViewById(R.id.data_type_spinner);
+        this.dataType = (Spinner) findViewById(R.id.data_type_spinner);
 
         String[] spinnerItems = {"Contaminant","Virus"};
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, spinnerItems);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dataType.setAdapter(adapter);
+        this.dataType.setAdapter(adapter);
 
-        userList = b.getParcelableArrayList("UserList");
-        currentUser = b.getParcelable("CurrentUser");
-        reportList = b.getParcelableArrayList("ReportList");
-        qualityList = b.getParcelableArrayList("QualityList");
+        this.userList = b.getParcelableArrayList("UserList");
+        this.currentUser = b.getParcelable("CurrentUser");
+        this.reportList = b.getParcelableArrayList("ReportList");
+        this.qualityList = b.getParcelableArrayList("QualityList");
 
 
         addListenerOnButtonCreateGraph();
@@ -86,26 +82,23 @@ public class CreateGraphActivity extends Activity{
     public final void addListenerOnButtonCreateGraph() {
         final Context context = this;
 
-        createGraph = (Button) findViewById(R.id.create_graph_button);
+        this.createGraph = (Button) findViewById(R.id.create_graph_button);
 
-        createGraph.setOnClickListener(new View.OnClickListener() {
+        this.createGraph.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                    //HistoryGraph graph = new HistoryGraph(Integer.parseInt(year.getText().toString()),
-                            //Integer.parseInt(latitude.getText().toString()), Integer.parseInt(longitude
-                            //.getText().toString()), dataType.getSelectedItem().toString());
-                Log.d("myTag", dataType.getSelectedItem().toString());
-                    historyGraphList = (new HistoryGraph(Integer.parseInt(year.getText().toString()),
-                            Integer.parseInt(latitude.getText().toString()), Integer.parseInt(longitude
-                            .getText().toString()), dataType.getSelectedItem().toString()));
-
-                Log.d("myTags", year.getText().toString());
                 Intent intent = new Intent(context, GraphDisplayActivity.class);
+                //do not use this.variable as it cannot find the symbol
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("Graph", historyGraphList);
+                //noinspection UnqualifiedFieldAccess
 
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
@@ -117,14 +110,19 @@ public class CreateGraphActivity extends Activity{
     public final void addListenerOnButtonBack() {
         final Context context = this;
 
-        back.setOnClickListener(new View.OnClickListener() {
+        this.back.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, HomeActivity.class);
+                //do not use this.variable as it cannot find the symbol
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }

@@ -43,13 +43,14 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
-        Bundle b = getIntent().getExtras();
-        userList = b.getParcelableArrayList("UserList");
-        currentUser = b.getParcelable("CurrentUser");
-        reportList = b.getParcelableArrayList("ReportList");
-        qualityList = b.getParcelableArrayList("QualityList");
-        reportsList = (ListView) findViewById(R.id.reports_list);
-        backButton = (Button) findViewById(R.id.backButton);
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        this.userList = b.getParcelableArrayList("UserList");
+        this.currentUser = b.getParcelable("CurrentUser");
+        this.reportList = b.getParcelableArrayList("ReportList");
+        this.qualityList = b.getParcelableArrayList("QualityList");
+        this.reportsList = (ListView) findViewById(R.id.reports_list);
+        this.backButton = (Button) findViewById(R.id.backButton);
         setContentView(R.layout.activity_google_maps);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -67,17 +68,22 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         final Context context = this;
 
-        backButton = (Button)findViewById(R.id.backButton);
+        this.backButton = (Button)findViewById(R.id.backButton);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        this.backButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View arg0) {
+            public void onClick(View arg0a) {
 
                 Intent intent = new Intent(context, HomeActivity.class);
+                //do not use this.variable as it cannot find the symbol
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
@@ -97,14 +103,16 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
      * installed Google Play services and returned to the app.
      */
     @Override
+
     public final void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        this.mMap = googleMap;
+
 
         //LatLng sydney = new LatLng(-34, 151);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+        this.mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng latLng) {
@@ -116,29 +124,34 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
                 markerOptions.position(latLng);
 
 
-                // Clears the previously touched position
-                // mMap.clear();
+                //do not use this.variable as it cannot find the symbol
                 Report a = new Report("newly added", latLng.latitude, latLng.longitude);
+                //noinspection UnqualifiedFieldAccess
                 a.setReportNumber(reportList.size() + 1);
+                //noinspection UnqualifiedFieldAccess
                 reportList.add(a);
 
                 // Setting the title for the marker.
                 // This will be displayed on taping the marker
+                //noinspection UnqualifiedFieldAccess
                 markerOptions.title(reportList.get(reportList.size() - 1).getReportName());
+                //noinspection UnqualifiedFieldAccess
                 markerOptions.snippet(reportList.get(reportList.size() - 1).toString());
 
                 // Animating to the touched position
+                //noinspection UnqualifiedFieldAccess
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
 
                 // Placing a marker on the touched position
+                //noinspection UnqualifiedFieldAccess
                 mMap.addMarker(markerOptions);
             }
         });
 
-        for (Report r : reportList) {
+        for (Report r : this.reportList) {
             LatLng loc = new LatLng(r.getLatitude(), r.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(loc).title(r.getReportName()).snippet(r.toString()));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
+            this.mMap.addMarker(new MarkerOptions().position(loc).title(r.getReportName()).snippet(r.toString()));
+            this.mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
         }
     }
 

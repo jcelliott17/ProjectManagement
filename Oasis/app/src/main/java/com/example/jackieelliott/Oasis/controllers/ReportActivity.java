@@ -59,27 +59,27 @@ public class ReportActivity extends Activity {
         setContentView(R.layout.report_page);
 
         Bundle b = getIntent().getExtras();
-        userList = b.getParcelableArrayList("UserList");
-        reportList = b.getParcelableArrayList("ReportList");
-        currentUser = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelableArrayList("QualityList");
+        this.userList = b.getParcelableArrayList("UserList");
+        this.reportList = b.getParcelableArrayList("ReportList");
+        this.currentUser = b.getParcelable("CurrentUser");
+        this.qualityList = b.getParcelableArrayList("QualityList");
 
 
-        reportTitle = (EditText) findViewById(R.id.report_title_textedit);
-        reportLatitude = (EditText) findViewById(R.id.latitude_text);
-        reportLongitude = (EditText) findViewById(R.id.longitude_text);
+        this.reportTitle = (EditText) findViewById(R.id.report_title_textedit);
+        this.reportLatitude = (EditText) findViewById(R.id.latitude_text);
+        this.reportLongitude = (EditText) findViewById(R.id.longitude_text);
 
-        typeWaterSpinner = (Spinner) findViewById(R.id.type_water_spinner);
+        this.typeWaterSpinner = (Spinner) findViewById(R.id.type_water_spinner);
 
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, WaterType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        typeWaterSpinner.setAdapter(adapter);
+        this.typeWaterSpinner.setAdapter(adapter);
 
-        conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
+        this.conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, WaterCondition.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        conditionWaterSpinner.setAdapter(adapter2);
+        this.conditionWaterSpinner.setAdapter(adapter2);
         addListenerOnButtonBack();
         addListenerOnButtonCreateReport();
     }
@@ -91,18 +91,21 @@ public class ReportActivity extends Activity {
 
         final Context context = this;
 
+        this.backButton = (Button) findViewById(R.id.backButton);
 
-        backButton = (Button) findViewById(R.id.backButton);
-
-        backButton.setOnClickListener(new View.OnClickListener() {
+        this.backButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View arg0) {
 
                     Intent intent = new Intent(context, HomeActivity.class);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("UserList", userList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
 
@@ -119,25 +122,35 @@ public class ReportActivity extends Activity {
 
         final Context context = this;
 
-        createReportButton = (Button) findViewById(R.id.create_report_button);
+        this.createReportButton = (Button) findViewById(R.id.create_report_button);
 
-        createReportButton.setOnClickListener(new View.OnClickListener() {
+        this.createReportButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-                Report newReport = new Report(reportTitle.getText().toString());
+                @SuppressWarnings("UnqualifiedFieldAccess") Report newReport = new Report(reportTitle.getText().toString());
+                //noinspection UnqualifiedFieldAccess
                 newReport.setLatitude((Double.parseDouble(reportLatitude.getText().toString())));
+                //noinspection UnqualifiedFieldAccess
                 newReport.setLongitude((Double.parseDouble(reportLongitude.getText().toString())));
+                //noinspection UnqualifiedFieldAccess
                 newReport.setCondition(conditionWaterSpinner.getSelectedItem().toString());
+                //noinspection UnqualifiedFieldAccess
                 newReport.setTypeOfWater(typeWaterSpinner.getSelectedItem().toString());
+                //noinspection UnqualifiedFieldAccess
                 newReport.setReportNumber(reportList.size() + 1);
+                //noinspection UnqualifiedFieldAccess
                 reportList.add(newReport);
 
                 Intent intent = new Intent(context, HomeActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }

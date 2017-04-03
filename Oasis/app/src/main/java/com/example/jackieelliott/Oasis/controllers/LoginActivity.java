@@ -48,10 +48,10 @@ public class LoginActivity extends Activity {
         addListenerOnButtonLogin();
         addListenerOnButtonCancel();
         Bundle b = getIntent().getExtras();
-        userList = b.getParcelableArrayList("UserList");
-        reportList  = b.getParcelableArrayList("ReportList");
-        currentUser = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelableArrayList("QualityList");
+        this.userList = b.getParcelableArrayList("UserList");
+        this.reportList  = b.getParcelableArrayList("ReportList");
+        this.currentUser = b.getParcelable("CurrentUser");
+        this.qualityList = b.getParcelableArrayList("QualityList");
 
     }
 
@@ -62,9 +62,9 @@ public class LoginActivity extends Activity {
 
         final Context context = this;
 
-        login = (Button) findViewById(R.id.login_button);
-        loginField = (EditText) findViewById(R.id.username_text);
-        passField = (EditText) findViewById(R.id.editText2);
+        this.login = (Button) findViewById(R.id.login_button);
+        this.loginField = (EditText) findViewById(R.id.username_text);
+        this.passField = (EditText) findViewById(R.id.editText2);
         final AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity
                 .this).create();
         //Ignore this issue, portability issues
@@ -77,7 +77,7 @@ public class LoginActivity extends Activity {
                     }
                 });
 
-        login.setOnClickListener(new View.OnClickListener() {
+        this.login.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -88,11 +88,14 @@ public class LoginActivity extends Activity {
                 found.
                  */
                 boolean login = false;
+                //noinspection UnqualifiedFieldAccess
                 for (int i = 0; i < userList.size(); i++) {
+                    //noinspection UnqualifiedFieldAccess
                     if (userList.get(i).getUsername().equals(loginField
                             .getText().toString()) && passField.getText()
                             .toString().equals(userList.get(i).getPassword())) {
                         login = true;
+                        //noinspection UnqualifiedFieldAccess
                         currentUser = userList.get(i);
                     }
                 }
@@ -101,10 +104,14 @@ public class LoginActivity extends Activity {
                     // Passed information among activities
 
                     Intent intent = new Intent(context, HomeActivity.class);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("UserList", userList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList",
                             reportList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putExtra("CurrentUser", currentUser);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
                     startActivity(intent);
                 } else {
@@ -124,16 +131,19 @@ public class LoginActivity extends Activity {
 
         final Context context = this;
 
-        cancel = (Button) findViewById(R.id.login_Cancel);
+        this.cancel = (Button) findViewById(R.id.login_Cancel);
 
-        cancel.setOnClickListener(new View.OnClickListener() {
+        this.cancel.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 // Passes information amount activities
                 Intent intent = new Intent(context, WelcomePageActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
 

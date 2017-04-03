@@ -48,28 +48,28 @@ public class ProfileActivity extends Activity {
         setContentView(R.layout.profile_page);
         addListenerOnButtonBack();
         Bundle b = getIntent().getExtras();
-        userList = b.getParcelableArrayList("UserList");
-        reportList = b.getParcelableArrayList("ReportList");
-        currentUser = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelableArrayList("QualityList");
+        this.userList = b.getParcelableArrayList("UserList");
+        this.reportList = b.getParcelableArrayList("ReportList");
+        this.currentUser = b.getParcelable("CurrentUser");
+        this.qualityList = b.getParcelableArrayList("QualityList");
 
-        username.setText(currentUser.getUsername());
-        email = (EditText) findViewById(R.id.emailText);
-        homeAddress = (EditText) findViewById(R.id.addressText);
-        accountType.setText(currentUser.getAccountType());
+        this.username.setText(this.currentUser.getUsername());
+        this.email = (EditText) findViewById(R.id.emailText);
+        this.homeAddress = (EditText) findViewById(R.id.addressText);
+        this.accountType.setText(this.currentUser.getAccountType());
 
         // Gets the information of the current user if the email/ home
         // address already exists.
-        if (currentUser != null) {
-            if (currentUser.getEmailAddress() != null){
-                email.setText(currentUser.getEmailAddress());
+        if (this.currentUser != null) {
+            if (this.currentUser.getEmailAddress() != null){
+                this.email.setText(this.currentUser.getEmailAddress());
             } else {
-                email.setText("y u null");
+                this.email.setText("y u null");
             }
         }
-        if (currentUser != null) {
-            if (currentUser.getHomeAddress() != null) {
-                homeAddress.setText(currentUser.getHomeAddress());
+        if (this.currentUser != null) {
+            if (this.currentUser.getHomeAddress() != null) {
+                this.homeAddress.setText(this.currentUser.getHomeAddress());
             }
         }
     }
@@ -81,31 +81,38 @@ public class ProfileActivity extends Activity {
 
         final Context context = this;
 
-        backButton = (Button) findViewById(R.id.backButton);
-        email = (EditText) findViewById(R.id.emailText);
-        homeAddress = (EditText) findViewById(R.id.addressText);
-        username = (TextView) findViewById(R.id.usernameText);
-        accountType = (TextView) findViewById(R.id.accountText);
+        this.backButton = (Button) findViewById(R.id.backButton);
+        this.email = (EditText) findViewById(R.id.emailText);
+        this.homeAddress = (EditText) findViewById(R.id.addressText);
+        this.username = (TextView) findViewById(R.id.usernameText);
+        this.accountType = (TextView) findViewById(R.id.accountText);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        this.backButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
                 Log.d("TESTING", "Entered Onclick");
 
+                //noinspection UnqualifiedFieldAccess
                 if (email.getText() != null && currentUser != null) {
-                    Log.d("Input",email.getText().toString());
+                    //noinspection UnqualifiedFieldAccess
                     currentUser.setEmailAddress(email.getText().toString());
                 }
+                //noinspection UnqualifiedFieldAccess
                 if (homeAddress.getText() != null && currentUser != null) {
+                    //noinspection UnqualifiedFieldAccess
                     currentUser.setHomeAddress(homeAddress.getText().toString());
                 }
 
                 Intent intent = new Intent(context, HomeActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 

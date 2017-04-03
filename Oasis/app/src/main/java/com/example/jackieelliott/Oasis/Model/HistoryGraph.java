@@ -12,43 +12,47 @@ import android.os.Parcelable;
 
 public class HistoryGraph implements Parcelable {
 
-    private int year;
-    private double latitude;
-    private double longitude;
-    private String yAxis;
+    private final int year;
+    private final double latitude;
+    private final double longitude;
+    private final String yAxis;
 
     public HistoryGraph(int year, double latitude, double longitude, String yAxis) {
+        super();
         this.year = year;
         this.latitude = latitude;
         this.longitude = longitude;
         this.yAxis = yAxis;
     }
 
-    public final int getYear() {
-        return year;
+
+    public int getYear() {
+        return this.year;
     }
 
-    public final double getLatitude() {
-        return latitude;
+    public double getLatitude() {
+        return this.latitude;
     }
 
-    public final double getLongitude() {
-        return longitude;
+    public double getLongitude() {
+        return this.longitude;
     }
 
     // We are fine with this get method because the
     // variable is yAxis
 
-    public final String getYAxis() {
-        return yAxis;
+
+    public String getYAxis() {
+        return this.yAxis;
     }
 
 
     public HistoryGraph(Parcel in) {
-        yAxis = in.readString();
-        year = in.readInt();
-        latitude = in.readDouble();
-        longitude = in.readDouble();
+        super();
+        this.yAxis = in.readString();
+        this.year = in.readInt();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
     }
 
     /**
@@ -66,11 +70,11 @@ public class HistoryGraph implements Parcelable {
      * @param flags
      */
     //@Override
-    public final void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(yAxis);
-        dest.writeInt(year);
-        dest.writeDouble(latitude);
-        dest.writeDouble(longitude);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.yAxis);
+        dest.writeInt(this.year);
+        dest.writeDouble(this.latitude);
+        dest.writeDouble(this.longitude);
     }
 
     public static final Parcelable.Creator<HistoryGraph> CREATOR

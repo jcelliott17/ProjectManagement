@@ -24,39 +24,40 @@ public class Profile implements Parcelable {
      * constructor
      */
     public Profile () {
-
+        super();
     }
 
     /**
      * gets address
      * @return String home address
      */
-    public final String getHomeAddress() {
-        return _homeAddress;
+    public String getHomeAddress() {
+        return this._homeAddress;
     }
 
     /**
      * sets address
      * @param homeAddress String home address
      */
-    public final void setHomeAddress(String homeAddress) {
-        _homeAddress = homeAddress;
+    public void setHomeAddress(String homeAddress) {
+        this._homeAddress = homeAddress;
     }
 
     /**
      * gets email address
      * @return String email address
      */
-    public final String getEmailAddress() {
-        return _emailAddress;
+
+    public String getEmailAddress() {
+        return this._emailAddress;
     }
 
     /**
      * sets email address
      * @param emailAddress String email Address
      */
-    public final void setEmailAddress(String emailAddress) {
-        _emailAddress = emailAddress;
+    public void setEmailAddress(String emailAddress) {
+        this._emailAddress = emailAddress;
     }
 
     /**
@@ -64,8 +65,9 @@ public class Profile implements Parcelable {
      * @param in Parcel
      */
     public Profile(Parcel in) {
-        _homeAddress = in.readString();
-        _emailAddress = in.readString();
+        super();
+        this._homeAddress = in.readString();
+        this._emailAddress = in.readString();
     }
 
     /**
@@ -83,9 +85,9 @@ public class Profile implements Parcelable {
      * @param flags
      */
     @Override
-    public final void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(_homeAddress);
-        dest.writeString(_emailAddress);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this._homeAddress);
+        dest.writeString(this._emailAddress);
     }
 
     public static final Parcelable.Creator<Profile> CREATOR

@@ -25,7 +25,8 @@ public class Report implements Parcelable {
      * @param name
      */
     public Report (String name) {
-        _reportName = name;
+        super();
+        this._reportName = name;
     }
 
     /**
@@ -35,118 +36,120 @@ public class Report implements Parcelable {
      * @param longitude
      */
     public Report(String name, double latitude, double longitude) {
-        _reportName = name;
-        _latitude = latitude;
-        _longitude = longitude;
+        super();
+        this._reportName = name;
+        this._latitude = latitude;
+        this._longitude = longitude;
     }
 
     /**
      * get report number
      * @return integer report number
      */
-    public final int getReportNumber() { return _reportNumber; }
+    public int getReportNumber() { return this._reportNumber; }
 
     /**
      * set report number
      * @param number integer report number
      */
-    public final void setReportNumber(int number) { _reportNumber = number; }
+    public void setReportNumber(int number) { this._reportNumber = number; }
 
     /**
      * get condition
      * @return String condition
      */
-    public final String getCondition() {
-        return _condition;
+    public String getCondition() {
+        return this._condition;
     }
 
     /**
      * set condition
      * @param condition String condition
      */
-    public final void setCondition(String condition) {
-        _condition = condition;
+    public void setCondition(String condition) {
+        this._condition = condition;
     }
 
     /**
      * get water type
      * @return String type of water
      */
-    public final String getTypeOfWater() {
-        return _typeOfWater;
+    public String getTypeOfWater() {
+        return this._typeOfWater;
     }
 
     /**
      * set water type
      * @param typeOfWater String type of water
      */
-    public final void setTypeOfWater(String typeOfWater) {
-        _typeOfWater = typeOfWater;
+    public void setTypeOfWater(String typeOfWater) {
+        this._typeOfWater = typeOfWater;
     }
 
     /**
      * get report name
      * @return String report name
      */
-    public final String getReportName() {
-        return _reportName;
+    public String getReportName() {
+        return this._reportName;
     }
 
     /**
      * set report name
      * @param name String report name
      */
-    public final void setReportName(String name) { _reportName = name; }
+    public void setReportName(String name) { this._reportName = name; }
 
     /**
      * get latitude
      * @return double latitude
      */
-    public final double getLatitude() { return _latitude; }
+    public double getLatitude () { return this._latitude; }
 
     /**
      * set latitude
      * @param latitude double latitude
      */
-    public final void setLatitude(double latitude) { _latitude = latitude; }
+    public void setLatitude(double latitude) { this._latitude = latitude; }
 
     /**
      * get longitude
      * @return double longitude
      */
-    public final double getLongitude() { return _longitude; }
+    public double getLongitude () { return this._longitude; }
 
     /**
      * set longitude
      * @param longitude double longitude
      */
-    public final void setLongitude(double longitude) { _longitude = longitude; }
+    public void setLongitude(double longitude) { this._longitude = longitude; }
 
     /**
      * get time and date
      * @return int time and date
      */
-    public final int getTimeAndDate() {
-        return _timeAndDate;
+    public int getTimeAndDate() {
+        return this._timeAndDate;
     }
 
     /**
      * set time and date
      * @param timeAndDate integer time and date
      */
-    public final void setTimeAndDate(int timeAndDate) {
-        _timeAndDate = timeAndDate;
+    public void setTimeAndDate(int timeAndDate) {
+        this._timeAndDate = timeAndDate;
     }
 
 
     public Report(Parcel in) {
-        _reportName = in.readString();
-        _latitude = in.readDouble();
-        _longitude = in.readDouble();
-        _condition = in.readString();
-        _typeOfWater = in.readString();
-        _timeAndDate = in.readInt();
-        _reportNumber = in.readInt();
+        super();
+        this._reportName = in.readString();
+        this._latitude = in.readDouble();
+        this._longitude = in.readDouble();
+        this._condition = in.readString();
+        this._typeOfWater = in.readString();
+        this._timeAndDate = in.readInt();
+        this._reportNumber = in.readInt();
     }
 
     /**
@@ -154,8 +157,8 @@ public class Report implements Parcelable {
      * @return String output
      */
     @Override
-    public final String toString() {
-        return "Report Number: " + _reportNumber + " Name: " + _reportName + " Location: " + _latitude + " " + _longitude;
+    public String toString() {
+        return "Report Number: " + this._reportNumber + " Name: " + this._reportName + " Location: " + this._latitude + " " + this._longitude;
     }
 
     /**
@@ -173,14 +176,14 @@ public class Report implements Parcelable {
      * @param flags
      */
     @Override
-    public final void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(_reportName);
-        dest.writeDouble(_latitude);
-        dest.writeDouble(_longitude);
-        dest.writeString(_condition);
-        dest.writeString(_typeOfWater);
-        dest.writeInt(_timeAndDate);
-        dest.writeInt(_reportNumber);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this._reportName);
+        dest.writeDouble(this._latitude);
+        dest.writeDouble(this._longitude);
+        dest.writeString(this._condition);
+        dest.writeString(this._typeOfWater);
+        dest.writeInt(this._timeAndDate);
+        dest.writeInt(this._reportNumber);
     }
 
     public static final Parcelable.Creator<Report> CREATOR
