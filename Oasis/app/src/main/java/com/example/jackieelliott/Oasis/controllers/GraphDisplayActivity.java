@@ -40,7 +40,7 @@ public class GraphDisplayActivity extends Activity {
     private User currentUser;
     private LinkedList<QualityReport>[] monthlyQualityList;
 
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_page);
         this.back = (Button) findViewById(R.id.back_button);
@@ -52,15 +52,12 @@ public class GraphDisplayActivity extends Activity {
         this.qualityList = b.getParcelableArrayList("QualityList");
         this.historyGraph = b.getParcelable("Graph");
 
-        double y,x;
-        x = -5.0;
         //Creates the graph view
-
         this.scatterPlot = (GraphView) findViewById(R.id.graph);
+
         //Sets labels on axises
 
         GridLabelRenderer gridLabel = this.scatterPlot.getGridLabelRenderer();
-        gridLabel.setHorizontalAxisTitle("Months");
         gridLabel.setVerticalAxisTitle(this.historyGraph.getYAxis() + " PPM");
 
 
@@ -72,7 +69,7 @@ public class GraphDisplayActivity extends Activity {
         addListenerOnButtonBack();
     }
 
-    public void addListenerOnButtonBack() {
+    public final void addListenerOnButtonBack() {
         final Context context = this;
 
         this.back.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +97,7 @@ public class GraphDisplayActivity extends Activity {
      * @param year specified year for reports
      * @param dataType virus or contaminant
      */
-    //datatype is virus or contaminant
+    //dataType is virus or contaminant
     private void getData(int year, double latitude, double longitude, String dataType) {
         LinkedList<QualityReport>[] reportsByYear = sortReports(year, latitude, longitude, this.qualityList);
         int month = 1;
@@ -123,7 +120,6 @@ public class GraphDisplayActivity extends Activity {
             }
             month++;
         }
-        Log.d("myTag", Integer.toString(max));
         this.scatterPlot.getViewport().setScrollable(true);
         this.scatterPlot.getViewport().setMinX(1);
         this.scatterPlot.getViewport().setMaxX(13);
@@ -156,19 +152,13 @@ public class GraphDisplayActivity extends Activity {
         if (qualityList == null) {
             return this.monthlyQualityList;
         }
-        Log.d("myTag", Double.toString(latitude));
-        Log.d("myTag", Double.toString(longitude));
+
         for (QualityReport report: qualityList) {
-            Log.d("myTag", Integer.toString(report.getTimeAndDate().getMonth()));
-            Log.d("myTag", Integer.toString(report.getTimeAndDate().getYear()));
-            Log.d("myTag", Double.toString(report.getLatitude()));
-            Log.d("myTag", Double.toString(report.getLongitude()));
             if (report.getTimeAndDate().getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
                 if (this.monthlyQualityList[report.getTimeAndDate().getMonth()] == null) {
                     this.monthlyQualityList[report.getTimeAndDate().getMonth()] = new LinkedList<QualityReport>();
                 }
                 this.monthlyQualityList[report.getTimeAndDate().getMonth()].add(report);
-                Log.d("myTag", Integer.toString(report.getTimeAndDate().getMonth()));
             }
         }
         return this.monthlyQualityList;

@@ -16,6 +16,7 @@ import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by JackieElliott on 3/13/17.
@@ -26,19 +27,19 @@ import java.util.ArrayList;
 
 public class SelectReportTypeActivity extends Activity {
 
-    Button backButton;
-    Button nextButton;
-    Spinner chooseReportTypeSpinner;
-    ArrayList<User> userList;
-    ArrayList<Report> reportList;
-    ArrayList<QualityReport> qualityList;
-    User currentUser;
+    private Button backButton;
+    private Button nextButton;
+    private Spinner chooseReportTypeSpinner;
+    private ArrayList<User> userList;
+    private ArrayList<Report> reportList;
+    private ArrayList<QualityReport> qualityList;
+    private User currentUser;
 
     /**
      * sets up activity when it is first created
      * @param savedInstanceState
      */
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.choose_report_type_page);
@@ -62,7 +63,7 @@ public class SelectReportTypeActivity extends Activity {
     /**
      * Adds functionality to the Back button.
      */
-    public void addListenerOnButtonBack() {
+    public final void addListenerOnButtonBack() {
 
         final Context context = this;
 
@@ -94,7 +95,7 @@ public class SelectReportTypeActivity extends Activity {
     /**
      * adds functionality to the next button
      */
-    public void addListenerOnButtonNext() {
+    public final void addListenerOnButtonNext() {
 
         final Context context = this;
 

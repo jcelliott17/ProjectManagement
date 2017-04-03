@@ -26,22 +26,22 @@ import java.util.ArrayList;
 
 public class ProfileActivity extends Activity {
 
-    Button backButton;
-    EditText email;
-    EditText homeAddress;
-    TextView username;
-    TextView accountType;
-    ArrayList<User> userList;
-    ArrayList<Report> reportList;
-    ArrayList<QualityReport> qualityList;
-    User currentUser;
+    private Button backButton;
+    private EditText email;
+    private EditText homeAddress;
+    private TextView username;
+    private TextView accountType;
+    private ArrayList<User> userList;
+    private ArrayList<Report> reportList;
+    private ArrayList<QualityReport> qualityList;
+    private User currentUser;
 
     /**
      * Creates the Profile activity which has the necessary information
-     * transfered with it.
+     * transferred with it.
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
         addListenerOnButtonBack();
@@ -75,7 +75,7 @@ public class ProfileActivity extends Activity {
     /**
      * Adds functionality to the back button on the the profile page.
      */
-    public void addListenerOnButtonBack() {
+    public final void addListenerOnButtonBack() {
 
         final Context context = this;
 

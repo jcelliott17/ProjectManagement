@@ -45,12 +45,14 @@ public class QualityReport implements Parcelable {
      * get report number
      * @return integer report number
      */
+
     public int getReportNumber() { return this._reportNumber; }
 
     /**
      * set report number
      * @param number integer report number
      */
+
     public void setReportNumber(int number) { this._reportNumber = number; }
 
     /**
@@ -101,12 +103,14 @@ public class QualityReport implements Parcelable {
      * set report name
      * @param name String report name
      */
+
     public void setReportName(String name) { this._reportName = name; }
 
     /**
      * get latitude
      * @return double latitude
      */
+
     public double getLatitude () { return this._latitude; }
 
     /**
@@ -125,7 +129,9 @@ public class QualityReport implements Parcelable {
      * set longitude
      * @param longitude double longitude
      */
+
     public void setLongitude(double longitude) { this._longitude = longitude; }
+
 
     /**
      * get time and date
@@ -161,6 +167,7 @@ public class QualityReport implements Parcelable {
      * @return String output
      */
     @Override
+
     public String toString() {
         return "Report Number: " + this._reportNumber + " Name: " + this._reportName + " Location: " + this._latitude + " " + this._longitude
                 + " Virus PPM: " + this._virus + " Date: " + this._timeAndDate.toString();
@@ -171,7 +178,7 @@ public class QualityReport implements Parcelable {
      * @return
      */
     @Override
-    public int describeContents() {
+    public final int describeContents() {
         return 0;
     }
 

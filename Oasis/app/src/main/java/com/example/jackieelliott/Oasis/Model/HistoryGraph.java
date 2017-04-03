@@ -25,6 +25,7 @@ public class HistoryGraph implements Parcelable {
         this.yAxis = yAxis;
     }
 
+
     public int getYear() {
         return this.year;
     }
@@ -39,6 +40,7 @@ public class HistoryGraph implements Parcelable {
 
     // We are fine with this get method because the
     // variable is yAxis
+
 
     public String getYAxis() {
         return this.yAxis;
@@ -58,7 +60,7 @@ public class HistoryGraph implements Parcelable {
      * @return
      */
     @Override
-    public int describeContents() {
+    public final int describeContents() {
         return 0;
     }
 

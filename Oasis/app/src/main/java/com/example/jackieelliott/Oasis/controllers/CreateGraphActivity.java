@@ -45,7 +45,7 @@ public class CreateGraphActivity extends Activity{
      * information is uploaded and updated.
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_setup_page);
         Intent intent = getIntent();
@@ -75,7 +75,7 @@ public class CreateGraphActivity extends Activity{
 
     }
 
-    public void addListenerOnButtonCreateGraph() {
+    public final void addListenerOnButtonCreateGraph() {
         final Context context = this;
 
         this.createGraph = (Button) findViewById(R.id.create_graph_button);
@@ -102,7 +102,7 @@ public class CreateGraphActivity extends Activity{
         });
     }
 
-    public void addListenerOnButtonBack() {
+    public final void addListenerOnButtonBack() {
         final Context context = this;
 
         this.back.setOnClickListener(new View.OnClickListener() {

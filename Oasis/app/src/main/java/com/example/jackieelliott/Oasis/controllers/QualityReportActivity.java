@@ -28,30 +28,25 @@ import java.util.ArrayList;
 //we do not want to override the toString method in this class
 
 public class QualityReportActivity extends Activity {
-    Button backButton;
-    Button createReportButton;
-    Button back_button;
-    Button next_button;
-    TextView reportText;
-    TextView virusView;
-    EditText virusEdit;
-    TextView contaminantView;
-    EditText contaminantEdit;
-    EditText reportTitle;
-    EditText reportLatitude;
-    EditText reportLongitude;
-    Spinner conditionWaterSpinner;
-    Spinner chooseReportTypeSpinner;
-    ArrayList<User> userList;
-    ArrayList<Report> reportList;
-    ArrayList<QualityReport> qualityList;
-    User currentUser;
+    private Button backButton;
+    private Button createReportButton;
+    private TextView reportText;
+    private EditText virusEdit;
+    private EditText contaminantEdit;
+    private EditText reportTitle;
+    private EditText reportLatitude;
+    private EditText reportLongitude;
+    private Spinner conditionWaterSpinner;
+    private ArrayList<User> userList;
+    private ArrayList<Report> reportList;
+    private ArrayList<QualityReport> qualityList;
+    private User currentUser;
 
     /**
      * sets up activity when it is first created
      * @param savedInstanceState
      */
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.quality_report_page);
@@ -82,7 +77,7 @@ public class QualityReportActivity extends Activity {
     /**
      * adds functionality to back button
      */
-    public void addListenerOnButtonBack() {
+    public final void addListenerOnButtonBack() {
 
         final Context context = this;
 
@@ -118,7 +113,7 @@ public class QualityReportActivity extends Activity {
     /**
      * adds functionality to create report button
      */
-    public void addListenerOnButtonCreateReport() {
+    public final void addListenerOnButtonCreateReport() {
 
         final Context context = this;
 

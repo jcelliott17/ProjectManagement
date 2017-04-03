@@ -41,7 +41,7 @@ public class LoginActivity extends Activity {
      * @param savedInstanceState
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
         addListenerOnButtonLogin();
@@ -57,7 +57,7 @@ public class LoginActivity extends Activity {
     /**
      * adds functionality to login button
      */
-    public void addListenerOnButtonLogin() {
+    public final void addListenerOnButtonLogin() {
 
         final Context context = this;
 
@@ -66,9 +66,10 @@ public class LoginActivity extends Activity {
         this.passField = (EditText) findViewById(R.id.editText2);
         final AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity
                 .this).create();
+        //Ignore this issue, portability issues
         alertDialog.setTitle("Error");
         alertDialog.setMessage("Wrong Username/Password");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -99,7 +100,7 @@ public class LoginActivity extends Activity {
                 }
                 if (login) {
 
-                    // Passed information amoung activities
+                    // Passed information among activities
 
                     Intent intent = new Intent(context, HomeActivity.class);
                     //noinspection UnqualifiedFieldAccess
@@ -125,7 +126,7 @@ public class LoginActivity extends Activity {
     /**
      * adds functionality to cancel button
      */
-    public void addListenerOnButtonCancel() {
+    public final void addListenerOnButtonCancel() {
 
         final Context context = this;
 
@@ -151,23 +152,4 @@ public class LoginActivity extends Activity {
 
     }
 
-    /**
-     * checks that user email is valid
-     * @param email String email addresss
-     * @return boolean
-     */
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
-
-    /**
-     * checks that user password is valid
-     * @param password String password
-     * @return boolean
-     */
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
-    }
 }

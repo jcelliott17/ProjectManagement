@@ -29,27 +29,23 @@ import java.util.ArrayList;
 
 public class ReportActivity extends Activity {
 
-    Button backButton;
-    Button createReportButton;
-    Button back_button;
-    Button next_button;
-    TextView reportText;
-    EditText reportTitle;
-    EditText reportLatitude;
-    EditText reportLongitude;
-    Spinner typeWaterSpinner;
-    Spinner conditionWaterSpinner;
-    Spinner chooseReportTypeSpinner;
-    ArrayList<User> userList;
-    ArrayList<Report> reportList;
-    ArrayList<QualityReport> qualityList;
-    User currentUser;
+    private Button backButton;
+    private Button createReportButton;
+    private EditText reportTitle;
+    private EditText reportLatitude;
+    private EditText reportLongitude;
+    private Spinner typeWaterSpinner;
+    private Spinner conditionWaterSpinner;
+    private ArrayList<User> userList;
+    private ArrayList<Report> reportList;
+    private ArrayList<QualityReport> qualityList;
+    private User currentUser;
 
     /**
-     * Creates the Report Acticity with the necessary information.
+     * Creates the Report Activity with the necessary information.
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.report_page);
@@ -83,19 +79,11 @@ public class ReportActivity extends Activity {
     /**
      * Adds functionality to the Back button.
      */
-    public void addListenerOnButtonBack() {
+    public final void addListenerOnButtonBack() {
 
         final Context context = this;
 
-
         this.backButton = (Button) findViewById(R.id.backButton);
-        /*
-        reportText = (TextView) findViewById(R.id.reportText);
-        reportTitle = (EditText) findViewById(R.id.report_title_textedit);
-        reportLocation = (EditText) findViewById(R.id.location_textedit);
-        typeWaterSpinner = (Spinner) findViewById(R.id.type_water_spinner);
-        conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);*/
-
 
         this.backButton.setOnClickListener(new View.OnClickListener() {
 
@@ -122,7 +110,7 @@ public class ReportActivity extends Activity {
     /**
      * adds functionality to create report button
      */
-    public void addListenerOnButtonCreateReport() {
+    public final void addListenerOnButtonCreateReport() {
 
         final Context context = this;
 

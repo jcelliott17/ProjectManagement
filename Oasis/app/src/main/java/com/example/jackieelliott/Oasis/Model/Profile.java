@@ -47,6 +47,7 @@ public class Profile implements Parcelable {
      * gets email address
      * @return String email address
      */
+
     public String getEmailAddress() {
         return this._emailAddress;
     }
@@ -74,7 +75,7 @@ public class Profile implements Parcelable {
      * @return
      */
     @Override
-    public int describeContents() {
+    public final int describeContents() {
         return 0;
     }
 

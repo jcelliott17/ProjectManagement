@@ -63,10 +63,6 @@ public class User implements Parcelable {
 
     public void setAccountType(String accountType) { this._accountType = accountType; }
 
-    //public Profile getProfile() {
-       // return _profile;
-    //}
-
 
     /* *********************************
    * These methods are required by the parcelable interface
@@ -84,7 +80,7 @@ public class User implements Parcelable {
     }
 
     @Override
-    public int describeContents() {
+    public final int describeContents() {
         return 0;
     }
 
@@ -99,7 +95,6 @@ public class User implements Parcelable {
         dest.writeString(this._emailAddress);
         dest.writeString(this._accountType);
         dest.writeInt(this._permission);
-        //dest.writeParcelable(_profile, flags);
     }
 
     public static final Parcelable.Creator<User> CREATOR
