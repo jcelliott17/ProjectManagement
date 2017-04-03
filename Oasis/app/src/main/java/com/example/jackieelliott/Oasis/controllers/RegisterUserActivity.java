@@ -26,8 +26,6 @@ import com.example.jackieelliott.Oasis.R;
 
 public class RegisterUserActivity extends Activity{
 
-    private Button registerButton;
-    private Button cancelButton;
     private Spinner accountTypeSpinner;
     private EditText userNameField;
     private EditText passField;
@@ -68,12 +66,12 @@ public class RegisterUserActivity extends Activity{
 
         final Context context = this;
 
-        this.registerButton = (Button) findViewById(R.id.registerOnRegisterPage);
+        Button registerButton = (Button) findViewById(R.id.registerOnRegisterPage);
         this.userNameField = (EditText) findViewById(R.id.username_text);
         this.passField = (EditText) findViewById(R.id.editText3);
 
 
-        this.registerButton.setOnClickListener(new View.OnClickListener() {
+        registerButton.setOnClickListener(new View.OnClickListener() {
 
 
             @Override
@@ -147,9 +145,9 @@ public class RegisterUserActivity extends Activity{
 
         final Context context = this;
 
-        this.cancelButton = (Button) findViewById(R.id.cancelOnRegisterPage);
+        Button cancelButton = (Button) findViewById(R.id.cancelOnRegisterPage);
 
-        this.cancelButton.setOnClickListener(new View.OnClickListener() {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {

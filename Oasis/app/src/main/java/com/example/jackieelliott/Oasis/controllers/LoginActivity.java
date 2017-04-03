@@ -27,8 +27,6 @@ import com.example.jackieelliott.Oasis.R;
 
 public class LoginActivity extends Activity {
 
-    private Button login;
-    private Button cancel;
     private EditText loginField;
     private EditText passField;
     private ArrayList<User> userList;
@@ -61,7 +59,7 @@ public class LoginActivity extends Activity {
 
         final Context context = this;
 
-        this.login = (Button) findViewById(R.id.login_button);
+        Button login = (Button) findViewById(R.id.login_button);
         this.loginField = (EditText) findViewById(R.id.username_text);
         this.passField = (EditText) findViewById(R.id.editText2);
         final AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity
@@ -77,7 +75,7 @@ public class LoginActivity extends Activity {
                     }
                 });
 
-        this.login.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -131,9 +129,9 @@ public class LoginActivity extends Activity {
 
         final Context context = this;
 
-        this.cancel = (Button) findViewById(R.id.login_Cancel);
+        Button cancel = (Button) findViewById(R.id.login_Cancel);
 
-        this.cancel.setOnClickListener(new View.OnClickListener() {
+        cancel.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {

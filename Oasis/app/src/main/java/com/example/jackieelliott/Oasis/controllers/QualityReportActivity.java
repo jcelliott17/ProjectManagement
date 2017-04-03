@@ -28,9 +28,7 @@ import java.util.ArrayList;
 //we do not want to override the toString method in this class
 
 public class QualityReportActivity extends Activity {
-    private Button backButton;
-    private Button createReportButton;
-    // --Commented out by Inspection (4/2/17, 11:11 PM):private TextView reportText;
+    private TextView reportText;
     private EditText virusEdit;
     private EditText contaminantEdit;
     private EditText reportTitle;
@@ -83,13 +81,13 @@ public class QualityReportActivity extends Activity {
         final Context context = this;
 
 
-        this.backButton = (Button) findViewById(R.id.backButton);
+        Button backButton = (Button) findViewById(R.id.backButton);
         this.reportText = (TextView) findViewById(R.id.report_textview);
         this.reportTitle = (EditText) findViewById(R.id.report_title_textedit);
         this.conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 
 
-        this.backButton.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -118,9 +116,9 @@ public class QualityReportActivity extends Activity {
 
         final Context context = this;
 
-        this.createReportButton = (Button) findViewById(R.id.create_report_button);
+        Button createReportButton = (Button) findViewById(R.id.create_report_button);
 
-        this.createReportButton.setOnClickListener(new View.OnClickListener() {
+        createReportButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {

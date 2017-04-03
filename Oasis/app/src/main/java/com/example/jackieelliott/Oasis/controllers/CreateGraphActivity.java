@@ -27,17 +27,15 @@ import java.util.ArrayList;
 
 public class CreateGraphActivity extends Activity{
 
-    // --Commented out by Inspection (4/2/17, 11:12 PM):private EditText year;
-    private EditText latitude;
-    // --Commented out by Inspection (4/2/17, 11:12 PM):private EditText longitude;
-    private Spinner dataType;
+    private EditText year;
+    private EditText longitude;
     private Button createGraph;
     private Button back;
 
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    // --Commented out by Inspection (4/2/17, 11:12 PM):private HistoryGraph historyGraphList;
+    private HistoryGraph historyGraphList;
     private User currentUser;
 
     /**
@@ -51,13 +49,13 @@ public class CreateGraphActivity extends Activity{
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         year = (EditText) findViewById(R.id.year_editText);
-        latitude = (EditText) findViewById(R.id.lat_editText);
+        EditText latitude = (EditText) findViewById(R.id.lat_editText);
         longitude = (EditText) findViewById(R.id.long_editText);
         createGraph = (Button) findViewById(R.id.create_graph_button);
         back = (Button) findViewById(R.id.back_button);
 
         //Creates the functionality for the spinner
-        dataType = (Spinner) findViewById(R.id.data_type_spinner);
+        Spinner dataType = (Spinner) findViewById(R.id.data_type_spinner);
 
         String[] spinnerItems = {"Contaminant","Virus"};
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, spinnerItems);

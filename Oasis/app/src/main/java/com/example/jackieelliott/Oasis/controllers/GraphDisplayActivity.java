@@ -41,9 +41,7 @@ public class GraphDisplayActivity extends Activity {
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private HistoryGraph historyGraph;
     private User currentUser;
-    private LinkedList<QualityReport>[] monthlyQualityList;
 
     @Override
     public final void onCreate(Bundle savedInstanceState) {
@@ -57,7 +55,7 @@ public class GraphDisplayActivity extends Activity {
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
         qualityList = b.getParcelableArrayList("QualityList");
-        historyGraph = b.getParcelable("Graph");
+        HistoryGraph historyGraph = b.getParcelable("Graph");
 
         //Creates the graph view
         scatterPlot = (GraphView) findViewById(R.id.graph);
@@ -158,19 +156,19 @@ public class GraphDisplayActivity extends Activity {
 
     private LinkedList<QualityReport>[] sortReports(int year, double latitude, double longitude,
                                                          ArrayList<QualityReport> qualityList) {
-        this.monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
+        LinkedList<QualityReport>[] monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
         if (qualityList == null) {
-            return this.monthlyQualityList;
+            return monthlyQualityList;
         }
         for (QualityReport report: qualityList) {
             Date timeAndDate = report.getTimeAndDate();
             if (timeAndDate.getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
-                if (this.monthlyQualityList[timeAndDate.getMonth()] == null) {
-                    this.monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<>();
+                if (monthlyQualityList[timeAndDate.getMonth()] == null) {
+                    monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<>();
                 }
-                this.monthlyQualityList[timeAndDate.getMonth()].add(report);
+                monthlyQualityList[timeAndDate.getMonth()].add(report);
             }
         }
-        return this.monthlyQualityList;
+        return monthlyQualityList;
     }
 }
