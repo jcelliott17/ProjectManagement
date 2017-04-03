@@ -78,7 +78,7 @@ public class CreateGraphActivity extends Activity{
     /**
      * Adds functionality to the Create Graph button
      */
-    public final void addListenerOnButtonCreateGraph() {
+    private void addListenerOnButtonCreateGraph() {
         final Context context = this;
 
         createGraph = (Button) findViewById(R.id.create_graph_button);
@@ -108,7 +108,7 @@ public class CreateGraphActivity extends Activity{
     /**
      * Adds functionality to the back button
      */
-    public final void addListenerOnButtonBack() {
+    private void addListenerOnButtonBack() {
         final Context context = this;
 
         back.setOnClickListener(new View.OnClickListener() {

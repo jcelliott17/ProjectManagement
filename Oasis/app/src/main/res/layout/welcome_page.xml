@@ -7,21 +7,19 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="0.05">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/welcome_screen"
-            android:id="@+id/imageView2"
             android:scaleType="fitXY" />
 
         <Button
             android:text="Login"
             android:layout_height="wrap_content"
             android:id="@+id/login_button"
-            android:layout_weight="0.05"
             android:onClick="onLoginPressed"
             android:layout_centerVertical="true"
             android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
@@ -34,7 +32,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/register_button"
-            android:layout_weight="0.06"
             android:layout_below="@+id/login_button"
             android:layout_marginTop="15dp"
             android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"

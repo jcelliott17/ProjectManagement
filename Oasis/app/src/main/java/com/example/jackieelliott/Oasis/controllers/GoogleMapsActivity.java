@@ -67,7 +67,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     /**
      * Adds functionality to the Back button.
      */
-    public final void addListenerOnButtonBack() {
+    private void addListenerOnButtonBack() {
 
         final Context context = this;
 
@@ -123,7 +123,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
 
                 //do not use this.variable as it cannot find the symbol
-                Report a = new Report("newly added", latLng.latitude, latLng.longitude);
+                Report a = new Report(latLng.latitude, latLng.longitude);
                 //noinspection UnqualifiedFieldAccess
                 a.setReportNumber(reportList.size() + 1);
                 //noinspection UnqualifiedFieldAccess

@@ -30,13 +30,12 @@ public class Report implements Parcelable {
 
     /**
      * constructor
-     * @param name name of report
      * @param latitude location of report
      * @param longitude location of report
      */
-    public Report(String name, double latitude, double longitude) {
+    public Report(double latitude, double longitude) {
         super();
-        this._reportName = name;
+        this._reportName = "newly added";
         this._latitude = latitude;
         this._longitude = longitude;
     }

@@ -10,7 +10,7 @@
 
         <Button
             android:text="Profile"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/button2"
             android:elevation="0dp"
@@ -52,7 +52,7 @@
 
         <Button
             android:text="View Trends"
-            android:layout_width="76dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/graph_button"
             android:visibility="visible"
@@ -72,7 +72,6 @@
         android:text="Reports List"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView6"
         android:textSize="36sp"
         android:typeface="normal"
         android:fontFamily="sans-serif"

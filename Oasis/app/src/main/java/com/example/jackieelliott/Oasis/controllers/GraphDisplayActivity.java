@@ -77,7 +77,7 @@ public class GraphDisplayActivity extends Activity {
     /**
      * Adds functionality to the back button
      */
-    public final void addListenerOnButtonBack() {
+    private void addListenerOnButtonBack() {
         final Context context = this;
 
         back.setOnClickListener(new View.OnClickListener() {
