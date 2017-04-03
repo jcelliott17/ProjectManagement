@@ -43,28 +43,28 @@ public class GraphDisplayActivity extends Activity {
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_page);
-        this.back = (Button) findViewById(R.id.back_button);
+        back = (Button) findViewById(R.id.back_button);
 
         Bundle b = getIntent().getExtras();
-        this.userList = b.getParcelableArrayList("UserList");
-        this.reportList = b.getParcelableArrayList("ReportList");
-        this.currentUser = b.getParcelable("CurrentUser");
-        this.qualityList = b.getParcelableArrayList("QualityList");
-        this.historyGraph = b.getParcelable("Graph");
+        userList = b.getParcelableArrayList("UserList");
+        reportList = b.getParcelableArrayList("ReportList");
+        currentUser = b.getParcelable("CurrentUser");
+        qualityList = b.getParcelableArrayList("QualityList");
+        historyGraph = b.getParcelable("Graph");
 
         //Creates the graph view
-        this.scatterPlot = (GraphView) findViewById(R.id.graph);
+        scatterPlot = (GraphView) findViewById(R.id.graph);
 
         //Sets labels on axises
 
-        GridLabelRenderer gridLabel = this.scatterPlot.getGridLabelRenderer();
-        gridLabel.setVerticalAxisTitle(this.historyGraph.getYAxis() + " PPM");
+        GridLabelRenderer gridLabel = scatterPlot.getGridLabelRenderer();
+        gridLabel.setVerticalAxisTitle(historyGraph.getYAxis() + " PPM");
 
 
-        this.series = new PointsGraphSeries<DataPoint>();
+        series = new PointsGraphSeries<DataPoint>();
 
-        getData(this.historyGraph.getYear(), this.historyGraph.getLatitude(),
-                this.historyGraph.getLongitude(), this.historyGraph.getYAxis());
+        getData(historyGraph.getYear(), historyGraph.getLatitude(),
+                historyGraph.getLongitude(), historyGraph.getYAxis());
 
         addListenerOnButtonBack();
     }
@@ -72,7 +72,7 @@ public class GraphDisplayActivity extends Activity {
     public final void addListenerOnButtonBack() {
         final Context context = this;
 
-        this.back.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -99,7 +99,7 @@ public class GraphDisplayActivity extends Activity {
      */
     //dataType is virus or contaminant
     private void getData(int year, double latitude, double longitude, String dataType) {
-        LinkedList<QualityReport>[] reportsByYear = sortReports(year, latitude, longitude, this.qualityList);
+        LinkedList<QualityReport>[] reportsByYear = sortReports(year, latitude, longitude, qualityList);
         int month = 1;
         int max = 0;
         for (LinkedList<QualityReport> reportsByMonth: reportsByYear) {
@@ -116,11 +116,11 @@ public class GraphDisplayActivity extends Activity {
                 if (average > max) {
                     max = average;
                 }
-                this.series.appendData(new DataPoint(month + 1, average), true, 12);
+                series.appendData(new DataPoint(month + 1, average), true, 12);
             }
             month++;
         }
-        this.scatterPlot.getViewport().setScrollable(true);
+        scatterPlot.getViewport().setScrollable(true);
         this.scatterPlot.getViewport().setMinX(1);
         this.scatterPlot.getViewport().setMaxX(13);
 
