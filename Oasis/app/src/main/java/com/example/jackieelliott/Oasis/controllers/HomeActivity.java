@@ -25,12 +25,15 @@ import java.util.ArrayList;
  * Created by JackieElliott on 2/12/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class HomeActivity extends Activity {
 
     private Button logoutButton;
     private Button profileButton;
     private Button reportButton;
-    private Button tempmap;
+    private Button tempMap;
     private Button qualityListButton;
     private Button graphButton;
     private ListView reportsList;
@@ -56,7 +59,7 @@ public class HomeActivity extends Activity {
         reportButton = (Button) findViewById(R.id.report_button);
         qualityListButton = (Button) findViewById(R.id.qualitylist_button);
         graphButton = (Button) findViewById(R.id.graph_button);
-        tempmap = (Button) findViewById(R.id.tempmap);
+        tempMap = (Button) findViewById(R.id.tempmap);
         reportsList = (ListView) findViewById(R.id.reports_list);
         addListenerOnButtonLogout();
 
@@ -159,7 +162,7 @@ public class HomeActivity extends Activity {
 
         });
 
-        tempmap.setOnClickListener(new View.OnClickListener() {
+        tempMap.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {

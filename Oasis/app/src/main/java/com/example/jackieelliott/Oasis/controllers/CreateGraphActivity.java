@@ -25,6 +25,9 @@ import java.util.ArrayList;
  * Created by JackieElliott on 3/27/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class CreateGraphActivity extends Activity{
 
     private EditText year;
@@ -49,6 +52,12 @@ public class CreateGraphActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_setup_page);
         Bundle b = getIntent().getExtras();
+
+        userList = b.getParcelableArrayList("UserList");
+        reportList = b.getParcelableArrayList("ReportList");
+        qualityList = b.getParcelableArrayList("QualityList");
+        currentUser = b.getParcelable("CurrentUser");
+
         year = (EditText) findViewById(R.id.year_editText);
         latitude = (EditText) findViewById(R.id.lat_editText);
         longitude = (EditText) findViewById(R.id.long_editText);
@@ -62,11 +71,6 @@ public class CreateGraphActivity extends Activity{
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, spinnerItems);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dataType.setAdapter(adapter);
-
-        userList = b.getParcelableArrayList("UserList");
-        currentUser = b.getParcelable("CurrentUser");
-        reportList = b.getParcelableArrayList("ReportList");
-        qualityList = b.getParcelableArrayList("QualityList");
 
         historyGraphList = new ArrayList<HistoryGraph>();
 
@@ -97,8 +101,8 @@ public class CreateGraphActivity extends Activity{
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                intent.putParcelableArrayListExtra("GraphList", historyGraphList);
                 intent.putExtra("CurrentUser", currentUser);
+                intent.putParcelableArrayListExtra("GraphList", historyGraphList);
                 startActivity(intent);
             }
 

@@ -23,6 +23,9 @@ import com.example.jackieelliott.Oasis.R;
  * Created by JackieElliott on 2/8/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class LoginActivity extends Activity {
 
     private Button login;

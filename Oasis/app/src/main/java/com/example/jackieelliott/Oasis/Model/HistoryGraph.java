@@ -7,6 +7,9 @@ import android.os.Parcelable;
  * Created by JackieElliott on 3/28/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class HistoryGraph implements Parcelable {
 
     private int year;
@@ -33,7 +36,10 @@ public class HistoryGraph implements Parcelable {
         return longitude;
     }
 
-    public String getyAxis() {
+    // We are fine with this get method because the
+    // variable is yAxis
+
+    public String getYAxis() {
         return yAxis;
     }
 

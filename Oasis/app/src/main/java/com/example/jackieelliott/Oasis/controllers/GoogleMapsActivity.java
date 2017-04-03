@@ -22,6 +22,9 @@ import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;

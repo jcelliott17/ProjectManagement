@@ -21,6 +21,9 @@ import java.util.ArrayList;
  * Created by Alon on 3/15/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class QualityListActivity extends Activity {
     private Button backButton;
     private ListView qualityReportList;

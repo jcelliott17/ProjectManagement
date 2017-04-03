@@ -3,6 +3,7 @@ package com.example.jackieelliott.Oasis.controllers;
 /**
  * Created by JackieElliott on 3/27/17.
  */
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +31,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class GraphDisplayActivity extends Activity {
 
     private Button back;
@@ -46,35 +50,33 @@ public class GraphDisplayActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_page);
         Bundle b = getIntent().getExtras();
-        back = (Button) findViewById(R.id.back_button);
 
-        //To be removed
         userList = b.getParcelableArrayList("UserList");
-        currentUser = b.getParcelable("CurrentUser");
         reportList = b.getParcelableArrayList("ReportList");
         qualityList = b.getParcelableArrayList("QualityList");
+        currentUser = b.getParcelable("CurrentUser");
         historyGraphList = b.getParcelableArrayList("GraphList");
 
-        //double y,x;
-        //x = -5.0;
+        back = (Button) findViewById(R.id.back_button);
+        double y,x;
+        x = -5.0;
         //Creates the graph view
+
         scatterPlot = (GraphView) findViewById(R.id.graph);
         //Sets labels on axises
         GridLabelRenderer gridLabel = scatterPlot.getGridLabelRenderer();
         gridLabel.setHorizontalAxisTitle("Months");
-        gridLabel.setVerticalAxisTitle(historyGraphList.get(0).getyAxis() + "PPM");
+        gridLabel.setVerticalAxisTitle(historyGraphList.get(0).getYAxis() + "PPM");
 
 
         series = new PointsGraphSeries<DataPoint>();
 
-        getData(historyGraphList.get(0).getYear(), historyGraphList.get(0).getLatitude(),
-                historyGraphList.get(0).getLongitude(), historyGraphList.get(0).getyAxis());
-        //for (int i = 0; i < 10; i++) {
-           // x = x + 10;
-            //y = x;
-            //series.appendData(new DataPoint(x, y), true, 10);
-        //}
-        //scatterPlot.addSeries(series);
+        for (int i = 0; i < 10; i++) {
+            x = x + 10;
+            y = x;
+            series.appendData(new DataPoint(x, y), true, 10);
+        }
+        scatterPlot.addSeries(series);
         addListenerOnButtonBack();
     }
 
