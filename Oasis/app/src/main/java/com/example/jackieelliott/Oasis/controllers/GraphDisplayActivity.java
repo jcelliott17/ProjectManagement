@@ -3,6 +3,7 @@ package com.example.jackieelliott.Oasis.controllers;
 /**
  * Created by JackieElliott on 3/27/17.
  */
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +31,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class GraphDisplayActivity extends Activity {
 
     private Button back;
@@ -54,19 +58,30 @@ public class GraphDisplayActivity extends Activity {
         this.qualityList = b.getParcelableArrayList("QualityList");
         this.historyGraph = b.getParcelable("Graph");
 
-        //double y,x;
-        //x = -5.0;
+        double y,x;
+        x = -5.0;
         //Creates the graph view
+<<<<<<< HEAD
         this.scatterPlot = (GraphView) findViewById(R.id.graph);
+=======
+
+        scatterPlot = (GraphView) findViewById(R.id.graph);
+>>>>>>> 018cd59a2b6d98ce4518847d551e1021b7a8ad7a
         //Sets labels on axises
 
         GridLabelRenderer gridLabel = this.scatterPlot.getGridLabelRenderer();
         gridLabel.setHorizontalAxisTitle("Months");
+<<<<<<< HEAD
         gridLabel.setVerticalAxisTitle(this.historyGraph.getyAxis() + " PPM");
+=======
+        gridLabel.setVerticalAxisTitle(historyGraph.getYAxis() + " PPM");
+
+>>>>>>> 018cd59a2b6d98ce4518847d551e1021b7a8ad7a
 
 
         this.series = new PointsGraphSeries<DataPoint>();
 
+<<<<<<< HEAD
         getData(this.historyGraph.getYear(), this.historyGraph.getLatitude(),
                 this.historyGraph.getLongitude(), this.historyGraph.getyAxis());
         //for (int i = 0; i < 10; i++) {
@@ -75,6 +90,11 @@ public class GraphDisplayActivity extends Activity {
             //series.appendData(new DataPoint(x, y), true, 10);
         //}
         //scatterPlot.addSeries(series);
+=======
+        getData(historyGraph.getYear(), historyGraph.getLatitude(),
+                historyGraph.getLongitude(), historyGraph.getYAxis());
+
+>>>>>>> 018cd59a2b6d98ce4518847d551e1021b7a8ad7a
         addListenerOnButtonBack();
     }
 

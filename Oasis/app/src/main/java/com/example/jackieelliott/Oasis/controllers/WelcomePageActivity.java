@@ -19,6 +19,9 @@ import java.util.ArrayList;
  * Created by JackieElliott on 2/8/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class WelcomePageActivity extends AppCompatActivity {
 
     Button button;

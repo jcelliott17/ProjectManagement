@@ -22,6 +22,9 @@ import com.example.jackieelliott.Oasis.Model.Profile;
  * Created by JackieElliott on 2/8/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class RegisterUserActivity extends Activity{
 
     private Button registerBotton;

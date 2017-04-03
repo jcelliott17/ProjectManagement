@@ -25,12 +25,15 @@ import java.util.ArrayList;
  * Created by JackieElliott on 2/12/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class HomeActivity extends Activity {
 
     private Button logoutButton;
     private Button profileButton;
     private Button reportButton;
-    private Button tempmap;
+    private Button tempMap;
     private Button qualityListButton;
     private Button graphButton;
     private ListView reportsList;
@@ -48,6 +51,7 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         Bundle b = getIntent().getExtras();
+<<<<<<< HEAD
         this.userList = b.getParcelableArrayList("UserList");
         this.currentUser = b.getParcelable("CurrentUser");
         this.reportList = b.getParcelableArrayList("ReportList");
@@ -58,6 +62,18 @@ public class HomeActivity extends Activity {
         this.graphButton = (Button) findViewById(R.id.graph_button);
         this.tempmap = (Button) findViewById(R.id.tempmap);
         this.reportsList = (ListView) findViewById(R.id.reports_list);
+=======
+        userList = b.getParcelableArrayList("UserList");
+        currentUser = b.getParcelable("CurrentUser");
+        reportList = b.getParcelableArrayList("ReportList");
+        qualityList = b.getParcelableArrayList("QualityList");
+        logoutButton = (Button) findViewById(R.id.logout_button);
+        reportButton = (Button) findViewById(R.id.report_button);
+        qualityListButton = (Button) findViewById(R.id.qualitylist_button);
+        graphButton = (Button) findViewById(R.id.graph_button);
+        tempMap = (Button) findViewById(R.id.tempmap);
+        reportsList = (ListView) findViewById(R.id.reports_list);
+>>>>>>> 018cd59a2b6d98ce4518847d551e1021b7a8ad7a
         addListenerOnButtonLogout();
 
         String[] reports = new String[this.reportList.size()];
@@ -177,7 +193,11 @@ public class HomeActivity extends Activity {
 
         });
 
+<<<<<<< HEAD
         this.tempmap.setOnClickListener(new View.OnClickListener() {
+=======
+        tempMap.setOnClickListener(new View.OnClickListener() {
+>>>>>>> 018cd59a2b6d98ce4518847d551e1021b7a8ad7a
 
             @Override
             public void onClick(View arg0) {

@@ -25,6 +25,9 @@ import java.util.ArrayList;
  * Created by JackieElliott on 3/27/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class CreateGraphActivity extends Activity{
 
     private EditText year;
@@ -48,6 +51,7 @@ public class CreateGraphActivity extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_setup_page);
+<<<<<<< HEAD
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         this.year = (EditText) findViewById(R.id.year_editText);
@@ -55,6 +59,20 @@ public class CreateGraphActivity extends Activity{
         this.longitude = (EditText) findViewById(R.id.long_editText);
         this.createGraph = (Button) findViewById(R.id.create_graph_button);
         this.back = (Button) findViewById(R.id.back_button);
+=======
+        Bundle b = getIntent().getExtras();
+
+        userList = b.getParcelableArrayList("UserList");
+        reportList = b.getParcelableArrayList("ReportList");
+        qualityList = b.getParcelableArrayList("QualityList");
+        currentUser = b.getParcelable("CurrentUser");
+
+        year = (EditText) findViewById(R.id.year_editText);
+        latitude = (EditText) findViewById(R.id.lat_editText);
+        longitude = (EditText) findViewById(R.id.long_editText);
+        createGraph = (Button) findViewById(R.id.create_graph_button);
+        back = (Button) findViewById(R.id.back_button);
+>>>>>>> 018cd59a2b6d98ce4518847d551e1021b7a8ad7a
 
         //Creates the functionality for the spinner
         this.dataType = (Spinner) findViewById(R.id.data_type_spinner);
@@ -94,7 +112,11 @@ public class CreateGraphActivity extends Activity{
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putExtra("Graph", historyGraphList);
+<<<<<<< HEAD
                 //noinspection UnqualifiedFieldAccess
+=======
+
+>>>>>>> 018cd59a2b6d98ce4518847d551e1021b7a8ad7a
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }

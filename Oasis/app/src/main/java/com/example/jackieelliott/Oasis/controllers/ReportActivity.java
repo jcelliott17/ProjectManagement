@@ -32,6 +32,9 @@ import java.util.ArrayList;
  * Created by JackieElliott on 2/12/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class ReportActivity extends Activity {
 
     Button backButton;
