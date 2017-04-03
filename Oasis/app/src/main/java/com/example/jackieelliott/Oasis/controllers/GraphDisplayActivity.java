@@ -45,30 +45,30 @@ public class GraphDisplayActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graph_page);
-        back = (Button) findViewById(R.id.back_button);
+        this.back = (Button) findViewById(R.id.back_button);
 
         Bundle b = getIntent().getExtras();
-        userList = b.getParcelableArrayList("UserList");
-        reportList = b.getParcelableArrayList("ReportList");
-        currentUser = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelableArrayList("QualityList");
-        historyGraph = b.getParcelable("Graph");
+        this.userList = b.getParcelableArrayList("UserList");
+        this.reportList = b.getParcelableArrayList("ReportList");
+        this.currentUser = b.getParcelable("CurrentUser");
+        this.qualityList = b.getParcelableArrayList("QualityList");
+        this.historyGraph = b.getParcelable("Graph");
 
         //double y,x;
         //x = -5.0;
         //Creates the graph view
-        scatterPlot = (GraphView) findViewById(R.id.graph);
+        this.scatterPlot = (GraphView) findViewById(R.id.graph);
         //Sets labels on axises
 
-        GridLabelRenderer gridLabel = scatterPlot.getGridLabelRenderer();
+        GridLabelRenderer gridLabel = this.scatterPlot.getGridLabelRenderer();
         gridLabel.setHorizontalAxisTitle("Months");
-        gridLabel.setVerticalAxisTitle(historyGraph.getyAxis() + " PPM");
+        gridLabel.setVerticalAxisTitle(this.historyGraph.getyAxis() + " PPM");
 
 
-        series = new PointsGraphSeries<DataPoint>();
+        this.series = new PointsGraphSeries<DataPoint>();
 
-        getData(historyGraph.getYear(), historyGraph.getLatitude(),
-                historyGraph.getLongitude(), historyGraph.getyAxis());
+        getData(this.historyGraph.getYear(), this.historyGraph.getLatitude(),
+                this.historyGraph.getLongitude(), this.historyGraph.getyAxis());
         //for (int i = 0; i < 10; i++) {
            // x = x + 10;
             //y = x;
@@ -81,14 +81,18 @@ public class GraphDisplayActivity extends Activity {
     public void addListenerOnButtonBack() {
         final Context context = this;
 
-        back.setOnClickListener(new View.OnClickListener() {
+        this.back.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, HomeActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
@@ -104,14 +108,14 @@ public class GraphDisplayActivity extends Activity {
      */
     //datatype is virus or contaminant
     private void getData(int year, double latitude, double longitude, String dataType) {
-        LinkedList<QualityReport>[] reportsByYear = sortReports(year, latitude, longitude, qualityList);
+        LinkedList<QualityReport>[] reportsByYear = sortReports(year, latitude, longitude, this.qualityList);
         int month = 1;
         int max = 0;
         for (LinkedList<QualityReport> reportsByMonth: reportsByYear) {
             if (reportsByMonth != null) {
                 int average = 0;
                 for (QualityReport report: reportsByMonth) {
-                    if (dataType.equals("Virus")) {
+                    if ("Virus".equals(dataType)) {
                         average += report.getVirus();
                     } else {
                         average += report.getContaminant();
@@ -121,23 +125,23 @@ public class GraphDisplayActivity extends Activity {
                 if (average > max) {
                     max = average;
                 }
-                series.appendData(new DataPoint(month + 1, average), true, 12);
+                this.series.appendData(new DataPoint(month + 1, average), true, 12);
             }
             month++;
         }
         Log.d("myTag", Integer.toString(max));
-        scatterPlot.getViewport().setScrollable(true);
-        scatterPlot.getViewport().setMinX(1);
-        scatterPlot.getViewport().setMaxX(13);
+        this.scatterPlot.getViewport().setScrollable(true);
+        this.scatterPlot.getViewport().setMinX(1);
+        this.scatterPlot.getViewport().setMaxX(13);
 
-        scatterPlot.getViewport().setScrollableY(true);
-        scatterPlot.getViewport().setMinY(0);
-        scatterPlot.getViewport().setMaxY(max + (.2 * max));
+        this.scatterPlot.getViewport().setScrollableY(true);
+        this.scatterPlot.getViewport().setMinY(0);
+        this.scatterPlot.getViewport().setMaxY(max + (.2 * max));
 
-        scatterPlot.getViewport().setYAxisBoundsManual(true);
-        scatterPlot.getViewport().setXAxisBoundsManual(true);
+        this.scatterPlot.getViewport().setYAxisBoundsManual(true);
+        this.scatterPlot.getViewport().setXAxisBoundsManual(true);
 
-        scatterPlot.addSeries(series);
+        this.scatterPlot.addSeries(this.series);
     }
 
     //Returns a list of quality reports in a given year
@@ -154,9 +158,9 @@ public class GraphDisplayActivity extends Activity {
 
     private LinkedList<QualityReport>[] sortReports(int year, double latitude, double longitude,
                                                          ArrayList<QualityReport> qualityList) {
-        monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
+        this.monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
         if (qualityList == null) {
-            return monthlyQualityList;
+            return this.monthlyQualityList;
         }
         Log.d("myTag", Double.toString(latitude));
         Log.d("myTag", Double.toString(longitude));
@@ -166,13 +170,13 @@ public class GraphDisplayActivity extends Activity {
             Log.d("myTag", Double.toString(report.getLatitude()));
             Log.d("myTag", Double.toString(report.getLongitude()));
             if (report.getTimeAndDate().getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
-                if (monthlyQualityList[report.getTimeAndDate().getMonth()] == null) {
-                    monthlyQualityList[report.getTimeAndDate().getMonth()] = new LinkedList<QualityReport>();
+                if (this.monthlyQualityList[report.getTimeAndDate().getMonth()] == null) {
+                    this.monthlyQualityList[report.getTimeAndDate().getMonth()] = new LinkedList<QualityReport>();
                 }
-                monthlyQualityList[report.getTimeAndDate().getMonth()].add(report);
+                this.monthlyQualityList[report.getTimeAndDate().getMonth()].add(report);
                 Log.d("myTag", Integer.toString(report.getTimeAndDate().getMonth()));
             }
         }
-        return monthlyQualityList;
+        return this.monthlyQualityList;
     }
 }

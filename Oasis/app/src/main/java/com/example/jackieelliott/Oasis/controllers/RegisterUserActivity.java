@@ -46,17 +46,17 @@ public class RegisterUserActivity extends Activity{
         addListenerOnButtonRegister();
         addListenerOnButtonCancel();
 
-        accountTypeSpinner = (Spinner) findViewById(R.id.spinner);
+        this.accountTypeSpinner = (Spinner) findViewById(R.id.spinner);
 
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, AccountTypes.AccountType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        accountTypeSpinner.setAdapter(adapter);
+        this.accountTypeSpinner.setAdapter(adapter);
 
         Bundle b = getIntent().getExtras();
-        userList = b.getParcelableArrayList("UserList");
-        reportList = b.getParcelableArrayList("ReportList");
-        currentUser = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelableArrayList("QualityList");
+        this.userList = b.getParcelableArrayList("UserList");
+        this.reportList = b.getParcelableArrayList("ReportList");
+        this.currentUser = b.getParcelable("CurrentUser");
+        this.qualityList = b.getParcelableArrayList("QualityList");
     }
 
     /**
@@ -66,12 +66,12 @@ public class RegisterUserActivity extends Activity{
 
         final Context context = this;
 
-        registerBotton = (Button) findViewById(R.id.registerOnRegisterPage);
-        userNameField = (EditText) findViewById(R.id.username_text);
-        passField = (EditText) findViewById(R.id.editText3);
+        this.registerBotton = (Button) findViewById(R.id.registerOnRegisterPage);
+        this.userNameField = (EditText) findViewById(R.id.username_text);
+        this.passField = (EditText) findViewById(R.id.editText3);
 
 
-        registerBotton.setOnClickListener(new View.OnClickListener() {
+        this.registerBotton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -83,32 +83,52 @@ public class RegisterUserActivity extends Activity{
                 Determines what type of user to create based on selection. Then sets the current user to the user
                 created.
                  */
+                //noinspection UnqualifiedFieldAccess
                 if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.User) {
-                    User user = new User(userNameField.getText().toString(), passField.getText().toString(), 1);
+                    @SuppressWarnings("UnqualifiedFieldAccess") User user = new User(userNameField.getText().toString(), passField.getText().toString(), 1);
+                    //noinspection UnqualifiedFieldAccess
                     userList.add(user);
+                    //noinspection UnqualifiedFieldAccess
                     currentUser = user;
+                    //noinspection UnqualifiedFieldAccess
                     currentUser.setAccountType("User");
-                } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Worker) {
-                    User user = new User(userNameField.getText().toString(), passField.getText().toString(), 2);
-                    userList.add(user);
-                    currentUser = user;
-                    currentUser.setAccountType("Worker");
-                } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Manager) {
-                    User user = new User(userNameField.getText().toString(), passField.getText().toString(), 3);
-                    userList.add(user);
-                    currentUser = user;
-                    currentUser.setAccountType("Manager");
-                } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Admin) {
-                    User user = new User(userNameField.getText().toString(), passField.getText().toString(), 3);
-                    userList.add(user);
-                    currentUser = user;
-                    currentUser.setAccountType("Admin");
+                } else //noinspection UnqualifiedFieldAccess
+                    if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Worker) {
+                    @SuppressWarnings("UnqualifiedFieldAccess") User user = new User(userNameField.getText().toString(), passField.getText().toString(), 2);
+                        //noinspection UnqualifiedFieldAccess
+                        userList.add(user);
+                        //noinspection UnqualifiedFieldAccess
+                        currentUser = user;
+                        //noinspection UnqualifiedFieldAccess
+                        currentUser.setAccountType("Worker");
+                } else //noinspection UnqualifiedFieldAccess
+                        if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Manager) {
+                    @SuppressWarnings("UnqualifiedFieldAccess") User user = new User(userNameField.getText().toString(), passField.getText().toString(), 3);
+                            //noinspection UnqualifiedFieldAccess
+                            userList.add(user);
+                            //noinspection UnqualifiedFieldAccess
+                            currentUser = user;
+                            //noinspection UnqualifiedFieldAccess
+                            currentUser.setAccountType("Manager");
+                } else //noinspection UnqualifiedFieldAccess
+                            if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Admin) {
+                    @SuppressWarnings("UnqualifiedFieldAccess") User user = new User(userNameField.getText().toString(), passField.getText().toString(), 3);
+                                //noinspection UnqualifiedFieldAccess
+                                userList.add(user);
+                                //noinspection UnqualifiedFieldAccess
+                                currentUser = user;
+                                //noinspection UnqualifiedFieldAccess
+                                currentUser.setAccountType("Admin");
                 }
                 // Passes information amoung models
                 Intent intent = new Intent(context, HomeActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
@@ -124,17 +144,21 @@ public class RegisterUserActivity extends Activity{
 
         final Context context = this;
 
-        cancelButton = (Button) findViewById(R.id.cancelOnRegisterPage);
+        this.cancelButton = (Button) findViewById(R.id.cancelOnRegisterPage);
 
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        this.cancelButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, WelcomePageActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 

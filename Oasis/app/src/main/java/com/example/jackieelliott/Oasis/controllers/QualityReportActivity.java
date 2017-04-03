@@ -55,24 +55,24 @@ public class QualityReportActivity extends Activity {
         setContentView(R.layout.quality_report_page);
 
         Bundle b = getIntent().getExtras();
-        userList = b.getParcelableArrayList("UserList");
-        reportList = b.getParcelableArrayList("ReportList");
-        currentUser = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelableArrayList("QualityList");
+        this.userList = b.getParcelableArrayList("UserList");
+        this.reportList = b.getParcelableArrayList("ReportList");
+        this.currentUser = b.getParcelable("CurrentUser");
+        this.qualityList = b.getParcelableArrayList("QualityList");
 
 
-        reportTitle = (EditText) findViewById(R.id.report_title_textedit);
-        reportLatitude = (EditText) findViewById(R.id.latitude_text);
-        reportLongitude = (EditText) findViewById(R.id.longitude_text);
-        virusEdit = (EditText) findViewById(R.id.virusPPMText);
-        contaminantEdit = (EditText) findViewById(R.id.contaminantPPMText);
+        this.reportTitle = (EditText) findViewById(R.id.report_title_textedit);
+        this.reportLatitude = (EditText) findViewById(R.id.latitude_text);
+        this.reportLongitude = (EditText) findViewById(R.id.longitude_text);
+        this.virusEdit = (EditText) findViewById(R.id.virusPPMText);
+        this.contaminantEdit = (EditText) findViewById(R.id.contaminantPPMText);
 
 
-        conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
+        this.conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, PurityType.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        conditionWaterSpinner.setAdapter(adapter2);
+        this.conditionWaterSpinner.setAdapter(adapter2);
         addListenerOnButtonBack();
         addListenerOnButtonCreateReport();
     }
@@ -85,21 +85,25 @@ public class QualityReportActivity extends Activity {
         final Context context = this;
 
 
-        backButton = (Button) findViewById(R.id.backButton);
-        reportText = (TextView) findViewById(R.id.report_textview);
-        reportTitle = (EditText) findViewById(R.id.report_title_textedit);
-        conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
+        this.backButton = (Button) findViewById(R.id.backButton);
+        this.reportText = (TextView) findViewById(R.id.report_textview);
+        this.reportTitle = (EditText) findViewById(R.id.report_title_textedit);
+        this.conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        this.backButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, HomeActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
@@ -116,27 +120,37 @@ public class QualityReportActivity extends Activity {
 
         final Context context = this;
 
-        createReportButton = (Button) findViewById(R.id.create_report_button);
+        this.createReportButton = (Button) findViewById(R.id.create_report_button);
 
-        createReportButton.setOnClickListener(new View.OnClickListener() {
+        this.createReportButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-                QualityReport newReport = new QualityReport(reportTitle.getText().toString());
+                @SuppressWarnings("UnqualifiedFieldAccess") QualityReport newReport = new QualityReport(reportTitle.getText().toString());
                 newReport.setLatitude((Double.parseDouble(reportLatitude.getText().toString())));
+                //noinspection UnqualifiedFieldAccess
                 newReport.setLongitude((Double.parseDouble(reportLongitude.getText().toString())));
+                //noinspection UnqualifiedFieldAccess
                 newReport.setCondition(conditionWaterSpinner.getSelectedItem().toString());
+                //noinspection UnqualifiedFieldAccess
                 newReport.setVirus(Double.parseDouble(virusEdit.getText().toString()));
+                //noinspection UnqualifiedFieldAccess
                 newReport.setContanminant(Double.parseDouble(contaminantEdit.getText().toString()));
+                //noinspection UnqualifiedFieldAccess
                 newReport.setReportNumber(reportList.size() + 1);
                 newReport.setTimeAndDate(new Date());
+                //noinspection UnqualifiedFieldAccess
                 qualityList.add(newReport);
 
                 Intent intent = new Intent(context, HomeActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }

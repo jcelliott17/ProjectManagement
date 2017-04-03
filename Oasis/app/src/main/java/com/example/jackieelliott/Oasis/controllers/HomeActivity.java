@@ -48,31 +48,31 @@ public class HomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         Bundle b = getIntent().getExtras();
-        userList = b.getParcelableArrayList("UserList");
-        currentUser = b.getParcelable("CurrentUser");
-        reportList = b.getParcelableArrayList("ReportList");
-        qualityList = b.getParcelableArrayList("QualityList");
-        logoutButton = (Button) findViewById(R.id.logout_button);
-        reportButton = (Button) findViewById(R.id.report_button);
-        qualityListButton = (Button) findViewById(R.id.qualitylist_button);
-        graphButton = (Button) findViewById(R.id.graph_button);
-        tempmap = (Button) findViewById(R.id.tempmap);
-        reportsList = (ListView) findViewById(R.id.reports_list);
+        this.userList = b.getParcelableArrayList("UserList");
+        this.currentUser = b.getParcelable("CurrentUser");
+        this.reportList = b.getParcelableArrayList("ReportList");
+        this.qualityList = b.getParcelableArrayList("QualityList");
+        this.logoutButton = (Button) findViewById(R.id.logout_button);
+        this.reportButton = (Button) findViewById(R.id.report_button);
+        this.qualityListButton = (Button) findViewById(R.id.qualitylist_button);
+        this.graphButton = (Button) findViewById(R.id.graph_button);
+        this.tempmap = (Button) findViewById(R.id.tempmap);
+        this.reportsList = (ListView) findViewById(R.id.reports_list);
         addListenerOnButtonLogout();
 
-        String[] reports = new String[reportList.size()];
-        for (int i = 0; i < reportList.size(); i++) {
-            reports[i] = reportList.get(i).toString();
+        String[] reports = new String[this.reportList.size()];
+        for (int i = 0; i < this.reportList.size(); i++) {
+            reports[i] = this.reportList.get(i).toString();
         }
 
-        if (currentUser.getPermission() < 3) {
-            qualityListButton.setVisibility(View.GONE);
-            graphButton.setVisibility(View.GONE);
+        if (this.currentUser.getPermission() < 3) {
+            this.qualityListButton.setVisibility(View.GONE);
+            this.graphButton.setVisibility(View.GONE);
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.
                 R.layout.simple_list_item_1, reports);
-        reportsList.setAdapter(adapter);
+        this.reportsList.setAdapter(adapter);
 
     }
 
@@ -89,12 +89,12 @@ public class HomeActivity extends Activity {
         final Context context = this;
 
 
-        for (int i = 0; i < userList.size(); i++) {
-            if (userList.get(i).getUsername().equals(currentUser.getUsername())
-                    && currentUser.getPassword().equals(userList.get(i)
+        for (int i = 0; i < this.userList.size(); i++) {
+            if (this.userList.get(i).getUsername().equals(this.currentUser.getUsername())
+                    && this.currentUser.getPassword().equals(this.userList.get(i)
                     .getPassword())) {
-                userList.remove(i);
-                userList.add(i, currentUser); // replaces the user with the
+                this.userList.remove(i);
+                this.userList.add(i, this.currentUser); // replaces the user with the
                 // updated current user
                 // This is necessary because of pass by value
             }
@@ -103,55 +103,73 @@ public class HomeActivity extends Activity {
 
         //logoutButton = (Button) findViewById(R.id.logout_button);
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        this.logoutButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, WelcomePageActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 
         });
 
-        profileButton = (Button) findViewById(R.id.button2);
+        this.profileButton = (Button) findViewById(R.id.button2);
 
-        profileButton.setOnClickListener(new View.OnClickListener() {
+        this.profileButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, ProfileActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 
         });
 
-        reportButton = (Button) findViewById(R.id.report_button);
+        this.reportButton = (Button) findViewById(R.id.report_button);
 
-        reportButton.setOnClickListener(new View.OnClickListener() {
+        this.reportButton.setOnClickListener(new View.OnClickListener() {
 
+            @SuppressWarnings("UnqualifiedFieldAccess")
             @Override
             public void onClick(View arg0) {
 
+                //noinspection UnqualifiedFieldAccess
                 if (currentUser.getPermission() == 2 || currentUser.getPermission() == 3) {
                     Intent intent = new Intent(context, SelectReportTypeActivity.class);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("UserList", userList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(context, ReportActivity.class);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("UserList", userList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
+                    //noinspection UnqualifiedFieldAccess
                     intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 }
@@ -159,15 +177,19 @@ public class HomeActivity extends Activity {
 
         });
 
-        tempmap.setOnClickListener(new View.OnClickListener() {
+        this.tempmap.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, GoogleMapsActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
@@ -175,15 +197,19 @@ public class HomeActivity extends Activity {
 
         });
 
-        qualityListButton.setOnClickListener(new View.OnClickListener() {
+        this.qualityListButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, QualityListActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
@@ -191,15 +217,19 @@ public class HomeActivity extends Activity {
 
         });
 
-        graphButton.setOnClickListener(new View.OnClickListener() {
+        this.graphButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, CreateGraphActivity.class);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("UserList", userList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                //noinspection UnqualifiedFieldAccess
                 intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
