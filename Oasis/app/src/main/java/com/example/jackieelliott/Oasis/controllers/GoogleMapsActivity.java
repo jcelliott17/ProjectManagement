@@ -44,12 +44,12 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         setContentView(R.layout.home_page);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        this.userList = b.getParcelableArrayList("UserList");
-        this.currentUser = b.getParcelable("CurrentUser");
-        this.reportList = b.getParcelableArrayList("ReportList");
-        this.qualityList = b.getParcelableArrayList("QualityList");
-        this.reportsList = (ListView) findViewById(R.id.reports_list);
-        this.backButton = (Button) findViewById(R.id.backButton);
+        userList = b.getParcelableArrayList("UserList");
+        currentUser = b.getParcelable("CurrentUser");
+        reportList = b.getParcelableArrayList("ReportList");
+        qualityList = b.getParcelableArrayList("QualityList");
+        reportsList = (ListView) findViewById(R.id.reports_list);
+        backButton = (Button) findViewById(R.id.backButton);
         setContentView(R.layout.activity_google_maps);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -67,9 +67,9 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         final Context context = this;
 
-        this.backButton = (Button)findViewById(R.id.backButton);
+        backButton = (Button)findViewById(R.id.backButton);
 
-        this.backButton.setOnClickListener(new View.OnClickListener() {
+        backButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0a) {
@@ -104,14 +104,9 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     @Override
 
     public final void onMapReady(GoogleMap googleMap) {
-        this.mMap = googleMap;
+        mMap = googleMap;
 
-
-        //LatLng sydney = new LatLng(-34, 151);
-        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-
-        this.mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
             @Override
             public void onMapClick(LatLng latLng) {
@@ -147,10 +142,10 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
             }
         });
 
-        for (Report r : this.reportList) {
+        for (Report r : reportList) {
             LatLng loc = new LatLng(r.getLatitude(), r.getLongitude());
-            this.mMap.addMarker(new MarkerOptions().position(loc).title(r.getReportName()).snippet(r.toString()));
-            this.mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
+            mMap.addMarker(new MarkerOptions().position(loc).title(r.getReportName()).snippet(r.toString()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
         }
     }
 

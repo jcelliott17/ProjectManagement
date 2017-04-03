@@ -50,24 +50,24 @@ public class CreateGraphActivity extends Activity{
         setContentView(R.layout.graph_setup_page);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        this.year = (EditText) findViewById(R.id.year_editText);
-        this.latitude = (EditText) findViewById(R.id.lat_editText);
-        this.longitude = (EditText) findViewById(R.id.long_editText);
-        this.createGraph = (Button) findViewById(R.id.create_graph_button);
-        this.back = (Button) findViewById(R.id.back_button);
+        year = (EditText) findViewById(R.id.year_editText);
+        latitude = (EditText) findViewById(R.id.lat_editText);
+        longitude = (EditText) findViewById(R.id.long_editText);
+        createGraph = (Button) findViewById(R.id.create_graph_button);
+        back = (Button) findViewById(R.id.back_button);
 
         //Creates the functionality for the spinner
-        this.dataType = (Spinner) findViewById(R.id.data_type_spinner);
+        dataType = (Spinner) findViewById(R.id.data_type_spinner);
 
         String[] spinnerItems = {"Contaminant","Virus"};
         ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, spinnerItems);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        this.dataType.setAdapter(adapter);
+        dataType.setAdapter(adapter);
 
-        this.userList = b.getParcelableArrayList("UserList");
-        this.currentUser = b.getParcelable("CurrentUser");
-        this.reportList = b.getParcelableArrayList("ReportList");
-        this.qualityList = b.getParcelableArrayList("QualityList");
+        userList = b.getParcelableArrayList("UserList");
+        currentUser = b.getParcelable("CurrentUser");
+        reportList = b.getParcelableArrayList("ReportList");
+        qualityList = b.getParcelableArrayList("QualityList");
 
 
         addListenerOnButtonCreateGraph();
@@ -78,9 +78,9 @@ public class CreateGraphActivity extends Activity{
     public final void addListenerOnButtonCreateGraph() {
         final Context context = this;
 
-        this.createGraph = (Button) findViewById(R.id.create_graph_button);
+        createGraph = (Button) findViewById(R.id.create_graph_button);
 
-        this.createGraph.setOnClickListener(new View.OnClickListener() {
+        createGraph.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -105,7 +105,7 @@ public class CreateGraphActivity extends Activity{
     public final void addListenerOnButtonBack() {
         final Context context = this;
 
-        this.back.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
