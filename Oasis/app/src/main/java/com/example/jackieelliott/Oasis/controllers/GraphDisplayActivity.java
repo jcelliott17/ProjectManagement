@@ -134,7 +134,7 @@ public class GraphDisplayActivity extends Activity {
         vP.setYAxisBoundsManual(true);
         vP.setXAxisBoundsManual(true);
 
-        vP.addSeries(this.series);
+        scatterPlot.addSeries(this.series);
     }
 
     //Returns a list of quality reports in a given year
@@ -156,7 +156,7 @@ public class GraphDisplayActivity extends Activity {
             return this.monthlyQualityList;
         }
         for (QualityReport report: qualityList) {
-            Date timeAndDate = report.getTimeAndDate()
+            Date timeAndDate = report.getTimeAndDate();
             if (timeAndDate.getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
                 if (this.monthlyQualityList[timeAndDate.getMonth()] == null) {
                     this.monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<QualityReport>();

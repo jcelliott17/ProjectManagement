@@ -146,7 +146,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         for (Report r : reportList) {
             LatLng loc = new LatLng(r.getLatitude(), r.getLongitude());
-            MarkerOptions mO = new MarkerOptions;
+            MarkerOptions mO = new MarkerOptions();
             //noinspection ChainedMethodCall     need to chain method here
             mMap.addMarker(mO.position(loc).title(r.getReportName()).snippet(r.toString()));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
