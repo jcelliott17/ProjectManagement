@@ -1,4 +1,4 @@
-package com.example.jackieelliott.team60application;
+package com.example.jackieelliott.Oasis.controllers;
 
 import android.content.Context;
 import android.content.Intent;
@@ -41,11 +41,13 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
         Bundle b = getIntent().getExtras();
+        /*
         userList = b.getParcelableArrayList("UserList");
         currentUser = b.getParcelable("CurrentUser");
         reportList = b.getParcelableArrayList("ReportList");
         qualityList = b.getParcelableArrayList("QualityList");
         reportsList = (ListView) findViewById(R.id.reports_list);
+        */
         backButton = (Button) findViewById(R.id.backButton);
         setContentView(R.layout.activity_google_maps);
 
@@ -72,10 +74,12 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, HomeActivity.class);
+                /*
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
                 intent.putExtra("CurrentUser", currentUser);
+                */
                 startActivity(intent);
 
             }

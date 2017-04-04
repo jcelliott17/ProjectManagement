@@ -37,7 +37,7 @@ public class ProfileActivity extends Activity {
 
     /**
      * Creates the Profile activity which has the necessary information
-     * transfered with it.
+     * transferred with it.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,10 +45,12 @@ public class ProfileActivity extends Activity {
         setContentView(R.layout.profile_page);
         addListenerOnButtonBack();
         Bundle b = getIntent().getExtras();
+        /*
         userList = b.getParcelableArrayList("UserList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
         qualityList = b.getParcelableArrayList("QualityList");
+        */
 
         username.setText(currentUser.getUsername());
         email = (EditText) findViewById(R.id.emailText);
@@ -100,10 +102,12 @@ public class ProfileActivity extends Activity {
                 }
 
                 Intent intent = new Intent(context, HomeActivity.class);
+                /*
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
                 intent.putExtra("CurrentUser", currentUser);
+                */
                 startActivity(intent);
 
             }

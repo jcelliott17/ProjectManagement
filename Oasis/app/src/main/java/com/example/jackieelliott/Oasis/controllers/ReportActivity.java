@@ -22,7 +22,7 @@ import com.example.jackieelliott.Oasis.Model.WaterType;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
 import com.example.jackieelliott.Oasis.Model.ReportType;
-import com.example.jackieelliott.team60application.GoogleMapsActivity;
+import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
 
 import org.w3c.dom.Text;
 
@@ -60,11 +60,12 @@ public class ReportActivity extends Activity {
         setContentView(R.layout.report_page);
 
         Bundle b = getIntent().getExtras();
+        /*
         userList = b.getParcelableArrayList("UserList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
         qualityList = b.getParcelableArrayList("QualityList");
-
+        */
 
         reportTitle = (EditText) findViewById(R.id.report_title_textedit);
         reportLatitude = (EditText) findViewById(R.id.latitude_text);
@@ -108,10 +109,12 @@ public class ReportActivity extends Activity {
                 public void onClick(View arg0) {
 
                     Intent intent = new Intent(context, HomeActivity.class);
+                    /*
                     intent.putParcelableArrayListExtra("UserList", userList);
                     intent.putParcelableArrayListExtra("ReportList", reportList);
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
                     intent.putExtra("CurrentUser", currentUser);
+                    */
                     startActivity(intent);
 
                 }
@@ -143,10 +146,12 @@ public class ReportActivity extends Activity {
                 reportList.add(newReport);
 
                 Intent intent = new Intent(context, HomeActivity.class);
+                /*
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
                 intent.putExtra("CurrentUser", currentUser);
+                */
                 startActivity(intent);
             }
 

@@ -54,10 +54,12 @@ public class QualityReportActivity extends Activity {
         setContentView(R.layout.quality_report_page);
 
         Bundle b = getIntent().getExtras();
+        /*
         userList = b.getParcelableArrayList("UserList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
         qualityList = b.getParcelableArrayList("QualityList");
+        */
 
 
         reportTitle = (EditText) findViewById(R.id.report_title_textedit);
@@ -96,10 +98,12 @@ public class QualityReportActivity extends Activity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, HomeActivity.class);
+                /*
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
                 intent.putExtra("CurrentUser", currentUser);
+                */
                 startActivity(intent);
 
             }
@@ -132,10 +136,12 @@ public class QualityReportActivity extends Activity {
                 qualityList.add(newReport);
 
                 Intent intent = new Intent(context, HomeActivity.class);
+                /*
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
                 intent.putExtra("CurrentUser", currentUser);
+                */
                 startActivity(intent);
             }
 

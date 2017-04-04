@@ -42,10 +42,12 @@ public class WelcomePageActivity extends AppCompatActivity {
             reportList = new ArrayList<>();
             qualityList = new ArrayList<>();
         } else {
+            /*
             Bundle b = getIntent().getExtras();
             userList = b.getParcelableArrayList("UserList");
             reportList = b.getParcelableArrayList("ReportList");
             qualityList = b.getParcelableArrayList("QualityList");
+            */
         }
     }
 
@@ -64,9 +66,11 @@ public class WelcomePageActivity extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, RegisterUserActivity.class);
+                /*
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                */
                 startActivity(intent);
 
             }
@@ -90,9 +94,11 @@ public class WelcomePageActivity extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, LoginActivity.class);
+                /*
                 intent.putParcelableArrayListExtra("UserList", userList);
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
+                */
                 startActivity(intent);
 
             }

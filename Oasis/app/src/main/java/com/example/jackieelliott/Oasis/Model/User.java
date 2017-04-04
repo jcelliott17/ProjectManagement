@@ -7,7 +7,7 @@ import android.os.Parcelable;
  * Created by Alon on 2/16/17.
  */
 
-public class User implements Parcelable {
+public class User { //implements Parcelable {
 
     /**
      * Attributes of the User class
@@ -18,17 +18,25 @@ public class User implements Parcelable {
     private String _homeAddress;
     private String _emailAddress;
     private String _accountType;
+    private String _userID;
     private int _permission;
 
+    public User() {
+        this("default", "default", "default", 1);
+    }
 
-    public User(String userName, String password, int permission) {
+    //public User(String email, String password) {
+    //    this(email, password, "default", 1);
+    //}
+
+    public User(String userName, String password, String userID, int permission) {
         _username = userName;
         _password = password;
         _accountType = "";
         _emailAddress = "";
         _homeAddress = "";
         _permission = permission;
-
+        _userID = userID;
     }
 
     /*
@@ -59,15 +67,19 @@ public class User implements Parcelable {
 
     public void setAccountType(String accountType) { _accountType = accountType; }
 
+    public String getUserID() { return _userID; }
+
+    public void setUserID(String userID) { _userID = userID; }
+
     //public Profile getProfile() {
        // return _profile;
     //}
-
 
     /* *********************************
    * These methods are required by the parcelable interface
    *
    */
+    /*
     public User(Parcel in) {
         _username = in.readString();
         _password = in.readString();
@@ -78,6 +90,7 @@ public class User implements Parcelable {
         //_profile = in.readParcelable( Profile.class.getClassLoader());
     }
 
+    /*
     @Override
     public int describeContents() {
         return 0;
@@ -86,6 +99,7 @@ public class User implements Parcelable {
     /* *************************
        If you add new instance vars to Student, you will need to add them to the write
      */
+    /*
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_username);
@@ -96,7 +110,9 @@ public class User implements Parcelable {
         dest.writeInt(_permission);
         //dest.writeParcelable(_profile, flags);
     }
+    */
 
+    /*
     public static final Parcelable.Creator<User> CREATOR
             = new Parcelable.Creator<User>() {
         public User createFromParcel(Parcel in) {
@@ -106,5 +122,5 @@ public class User implements Parcelable {
         public User[] newArray(int size) {
             return new User[size];
         }
-    };
+    };*/
 }

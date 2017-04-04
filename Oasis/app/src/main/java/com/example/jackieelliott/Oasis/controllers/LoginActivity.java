@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
 import android.view.View;
@@ -38,17 +39,18 @@ public class LoginActivity extends Activity {
     private Button cancel;
     private EditText loginField;
     private EditText passField;
+    /*
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
     private User currentUser;
+    */
 
     private Context context;
     private static final String TAG = "LoginActivity-TAG";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference mDatabase;
-    private DatabaseReference accountEndPoint;
+    private DatabaseReference mUserReference;
 
     /**
      * sets up activity when it is first created
@@ -60,14 +62,9 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login_page);
         addListenerOnButtonLogin();
         addListenerOnButtonCancel();
-        Bundle b = getIntent().getExtras();
-        userList = b.getParcelableArrayList("UserList");
-        reportList  = b.getParcelableArrayList("ReportList");
-        currentUser = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelableArrayList("QualityList");
+
         mAuth = FirebaseAuth.getInstance();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        accountEndPoint = mDatabase.child("accounts");
+        mUserReference = FirebaseDatabase.getInstance().getReference().child("user");
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -97,7 +94,7 @@ public class LoginActivity extends Activity {
         final AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity
                 .this).create();
         alertDialog.setTitle("Error");
-        alertDialog.setMessage("Wrong Username/Password");
+        alertDialog.setMessage("Wrong Username or Password");
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
@@ -112,67 +109,9 @@ public class LoginActivity extends Activity {
 
                 if (validateForm()) {
                     signIn();
-<<<<<<< HEAD
-                    Intent intent = new Intent(context, HomeActivity.class);
-                    intent.putParcelableArrayListExtra("UserList", userList);
-                    startActivity(intent);
-=======
->>>>>>> Edits for login and register
                 } else {
                     alertDialog.show();
                 }
-                /*
-                for (int i = 0; i < userList.size(); i++) {
-                    if (userList.get(i).getUsername().equals(loginField
-                            .getText().toString()) && passField.getText()
-                            .toString().equals(userList.get(i).getPassword())) {
-                        login = true;
-                        currentUser = userList.get(i);
-                    }
-                }
-
-                if (login) {
-
-                    // Passed information amoung activities
-
-                    Intent intent = new Intent(context, HomeActivity.class);
-                    intent.putParcelableArrayListExtra("UserList", userList);
-                    intent.putParcelableArrayListExtra("ReportList",
-                            reportList);
-                    intent.putExtra("CurrentUser", currentUser);
-                    intent.putParcelableArrayListExtra("QualityList", qualityList);
-                    startActivity(intent);
-                } else {
-                    alertDialog.show();
-                }
-                */
-
-            }
-
-        });
-
-    }
-
-    /**
-     * adds functionality to cancel button
-     */
-    public void addListenerOnButtonCancel() {
-
-        final Context context = this;
-
-        cancel = (Button) findViewById(R.id.login_Cancel);
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                // Passes information amount activities
-                Intent intent = new Intent(context, WelcomePageActivity.class);
-                intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("ReportList", reportList);
-                intent.putParcelableArrayListExtra("QualityList", qualityList);
-                startActivity(intent);
-
             }
 
         });
@@ -201,44 +140,73 @@ public class LoginActivity extends Activity {
                             goToHome();
                         }
 
-                        // ...
                     }
                 });
     }
 
+    /**
+     * adds functionality to cancel button
+     */
+    public void addListenerOnButtonCancel() {
+
+        final Context context = this;
+
+        cancel = (Button) findViewById(R.id.login_Cancel);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                // Passes information amount activities
+                Intent intent = new Intent(context, WelcomePageActivity.class);
+                /*
+                intent.putParcelableArrayListExtra("UserList", userList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
+                */
+                startActivity(intent);
+
+            }
+
+        });
+
+    }
+
     private void goToHome() {
+        // Passed information among activities
+
         Intent intent = new Intent(context, HomeActivity.class);
+        /*
         intent.putParcelableArrayListExtra("UserList", userList);
-        intent.putParcelableArrayListExtra("WorkerList", workerList);
-        intent.putParcelableArrayListExtra("ManagerList", managerList);
-        intent.putParcelableArrayListExtra("AdminList", adminList);
+        intent.putParcelableArrayListExtra("ReportList",
+                reportList);
+        intent.putExtra("CurrentUser", currentUser);
+        intent.putParcelableArrayListExtra("QualityList", qualityList);
+        startActivity(intent);
+        */
         startActivity(intent);
     }
 
     private boolean validateForm() {
-        return (isEmailValid(loginField.getText().toString())
-            && isPasswordValid(passField.getText().toString()));
-    }
+        boolean valid = true;
 
+        String email = loginField.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            loginField.setError("Required.");
+            valid = false;
+        } else {
+            loginField.setError(null);
+        }
 
-    /**
-     * checks that user email is valid
-     * @param email String email addresss
-     * @return boolean
-     */
-    private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
-    }
+        String password = passField.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            passField.setError("Required.");
+            valid = false;
+        } else {
+            passField.setError(null);
+        }
 
-    /**
-     * checks that user password is valid
-     * @param password String password
-     * @return boolean
-     */
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return valid;
     }
 
     @Override

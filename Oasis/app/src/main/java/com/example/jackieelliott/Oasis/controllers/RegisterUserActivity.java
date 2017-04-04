@@ -44,16 +44,17 @@ public class RegisterUserActivity extends Activity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private static final String TAG = "RegUserActivity-TAG";
     private DatabaseReference mDatabase;
-    private DatabaseReference accountEndPoint;
     private Context context;
     EditText emailField;
     EditText passField;
-    ArrayList<User> userList;
+    /*ArrayList<User> userList;
     ArrayList<Report> reportList;
     ArrayList<QualityReport> qualityList;
     //currentUser created to keep track of who is using the application
     //this will be removed once the database starts working
+    */
     User currentUser;
+    FirebaseUser firebaseUser;
 
     /**
      * Creates the report activity page.
@@ -72,15 +73,15 @@ public class RegisterUserActivity extends Activity {
         accountTypeSpinner.setAdapter(adapter);
 
         Bundle b = getIntent().getExtras();
+        /*
         userList = b.getParcelableArrayList("UserList");
         reportList = b.getParcelableArrayList("ReportList");
         currentUser = b.getParcelable("CurrentUser");
         qualityList = b.getParcelableArrayList("QualityList");
+        */
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        accountEndPoint = mDatabase.child("accounts");
         mAuth = FirebaseAuth.getInstance();
 
-        // [START auth_state_listener]
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -92,35 +93,71 @@ public class RegisterUserActivity extends Activity {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // [START_EXCLUDE]
-                // updateUI(user);
-                // [END_EXCLUDE]
+
             }
         };
-        // [END auth_state_listener]
     }
 
+    /**
+     * Adds functionality to the register button.
+     */
+    public void addListenerOnButtonRegister() {
 
-    // [START on_start_add_listener]
-    @Override
-    public void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
-    // [END on_start_add_listener]
+        context = this;
 
-    // [START on_stop_remove_listener]
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
+        registerButton = (Button) findViewById(R.id.registerOnRegisterPage);
+        emailField = (EditText) findViewById(R.id.username_text);
+        passField = (EditText) findViewById(R.id.editText3);
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                // Here we did not account for if that user already exists
+                // A warning should pop up here and let them know if that username already
+                // exists?
+
+                if (validateForm()) {
+                    createAccount(emailField.getText().toString(), passField.getText().toString());
+                } else {
+                    Log.d(TAG, "Failed validation");
+                }
+
+            }
+
+        });
+
     }
-    // [END on_stop_remove_listener]
+
+    /**
+     * Added functionality to the cancel button on the register page.
+     */
+    public void addListenerOnButtonCancel() {
+
+        final Context context = this;
+
+        cancelButton = (Button) findViewById(R.id.cancelOnRegisterPage);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent intent = new Intent(context, WelcomePageActivity.class);
+                /*
+                intent.putParcelableArrayListExtra("UserList", userList);
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
+                intent.putExtra("CurrentUser", currentUser);
+                */
+                startActivity(intent);
+
+            }
+
+        });
+    }
 
     private void createAccount(String email, String password) {
-        accountEndPoint.setValue(email + " - " + password);
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -136,27 +173,49 @@ public class RegisterUserActivity extends Activity {
                         } else {
                             Toast.makeText(RegisterUserActivity.this, "You're in!",
                                     Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(context, HomeActivity.class);
-                            intent.putParcelableArrayListExtra("UserList", userList);
-                            startActivity(intent);
                             makeNewUser();
                             goToHome();
                         }
-                        //task.
                     }
                 });
     }
 
+    /*
+      Determines what type of user to create based on selection. Then sets the current user to the user
+      created. Adds new user to Database.
+    */
     private void makeNewUser() {
-        Object userObject;
-        userObject = new User(emailField.getText().toString(), passField.getText().toString(), 1);
+        currentUser = new User(emailField.getText().toString(),
+                            passField.getText().toString(),
+                            mAuth.getCurrentUser().getUid(),
+                            1);
         //userList.add(user);
-        mDatabase.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(userObject);
+        //currentUser = user;
+        int permission = 1;
+        if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.User) {
+            currentUser.setAccountType("User");
+        } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Worker) {
+            permission = 2;
+            currentUser.setAccountType("Worker");
+        } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Manager) {
+            permission = 3;
+            currentUser.setAccountType("Manager");
+        } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Admin) {
+            permission = 4;
+            currentUser.setAccountType("Admin");
+        }
+        currentUser.setPermission(permission);
+        mDatabase.child("user").child(mAuth.getCurrentUser().getUid()).setValue(currentUser);
     }
 
     private void goToHome() {
         Intent intent = new Intent(context, HomeActivity.class);
+        /*
         intent.putParcelableArrayListExtra("UserList", userList);
+        intent.putParcelableArrayListExtra("ReportList", reportList);
+        intent.putParcelableArrayListExtra("QualityList", qualityList);
+        intent.putExtra("CurrentUser", currentUser);
+        */
         startActivity(intent);
     }
 
@@ -182,93 +241,18 @@ public class RegisterUserActivity extends Activity {
         return valid;
     }
 
-    /**
-     * Adds functionality to the register button.
-     */
-    public void addListenerOnButtonRegister() {
-
-        context = this;
-
-        registerButton = (Button) findViewById(R.id.registerOnRegisterPage);
-        emailField = (EditText) findViewById(R.id.username_text);
-        passField = (EditText) findViewById(R.id.editText3);
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                // Here we did not account for if that user already exists
-                // A warning should pop up here and let them know if that username already
-                // exists?
-
-                /*
-                Determines what type of user to create based on selection. Then sets the current user to the user
-                created.
-                 */
-                if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.User) {
-                    User user = new User(emailField.getText().toString(), passField.getText().toString(), 1);
-                    userList.add(user);
-                    currentUser = user;
-                    currentUser.setAccountType("User");
-                } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Worker) {
-                    User user = new User(emailField.getText().toString(), passField.getText().toString(), 2);
-                    userList.add(user);
-                    currentUser = user;
-                    currentUser.setAccountType("Worker");
-                } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Manager) {
-                    User user = new User(emailField.getText().toString(), passField.getText().toString(), 3);
-                    userList.add(user);
-                    currentUser = user;
-                    currentUser.setAccountType("Manager");
-                } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Admin) {
-                    User user = new User(emailField.getText().toString(), passField.getText().toString(), 3);
-                    userList.add(user);
-                    currentUser = user;
-                    currentUser.setAccountType("Admin");
-                }
-                // Passes information amoung models
-                Intent intent = new Intent(context, HomeActivity.class);
-                intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("ReportList", reportList);
-                intent.putParcelableArrayListExtra("QualityList", qualityList);
-                intent.putExtra("CurrentUser", currentUser);
-                startActivity(intent);
-
-                if (validateForm()) {
-                    createAccount(emailField.getText().toString(), passField.getText().toString());
-                } else {
-                    Log.d(TAG, "Failed validation");
-                }
-
-            }
-
-        });
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
-    /**
-     * Added functionality to the cancel button on the register page.
-     */
-    public void addListenerOnButtonCancel() {
-
-        final Context context = this;
-
-        cancelButton = (Button) findViewById(R.id.cancelOnRegisterPage);
-
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-
-                Intent intent = new Intent(context, WelcomePageActivity.class);
-                intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("ReportList", reportList);
-                intent.putParcelableArrayListExtra("QualityList", qualityList);
-                intent.putExtra("CurrentUser", currentUser);
-                startActivity(intent);
-
-            }
-
-        });
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
     }
 
 }
