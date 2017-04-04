@@ -7,13 +7,14 @@ import android.os.Parcelable;
  * Created by Alon on 2/16/17.
  */
 
-public class User { //implements Parcelable {
+@SuppressWarnings("ClassNamingConvention")
+public class User {
 
     /**
      * Attributes of the User class
      */
-    private String _username;
-    private String _password;
+    private final String _username;
+    private final String _password;
     //private Profile _profile;
     private String _homeAddress;
     private String _emailAddress;
@@ -25,102 +26,106 @@ public class User { //implements Parcelable {
         this("default", "default", "default", 1);
     }
 
-    //public User(String email, String password) {
-    //    this(email, password, "default", 1);
-    //}
-
+    /**
+     * Constructor for User
+     * @param userName username of user
+     * @param password password of user
+     * @param permission user's permission level
+     */
     public User(String userName, String password, String userID, int permission) {
-        _username = userName;
-        _password = password;
-        _accountType = "";
-        _emailAddress = "";
-        _homeAddress = "";
-        _permission = permission;
-        _userID = userID;
+        super();
+        this._username = userName;
+        this._password = password;
+        this._permission = permission;
+        this._userID = userID;
+        this._accountType = "";
+        this._emailAddress = "";
+        this._homeAddress = "";
     }
 
     /*
      * Getters and Setters
      */
 
-    public int getPermission() { return _permission; }
+    /**
+     * Getter
+     * @return permission level
+     */
+    public int getPermission() { return this._permission; }
 
-    public void setPermission(int permission) { _permission = permission; }
+    /**
+     * Setter
+     * @param permission permission
+     */
+    public void setPermission(int permission) { this._permission = permission; }
 
-    public String getUsername() { return _username; }
+    /**
+     * Getter
+     * @return username
+     */
+    public String getUsername() { return this._username; }
 
-    public void setUsername(String userName) { _username = userName; }
+// --Commented out by Inspection START (4/2/17, 11:11 PM):
+//    /**
+//     * Setter
+//     * @param userName username
+//     */
+//    public void setUsername(String userName) { this._username = userName; }
+// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
 
-    public String getPassword() { return _password; }
+    /**
+     * Getter
+     * @return password
+     */
+    public String getPassword() { return this._password; }
 
-    public void setPassword(String password) { _password = password; }
+// --Commented out by Inspection START (4/2/17, 11:12 PM):
+//    /**
+//     * Setter
+//     * @param password password
+//     */
+//    public void setPassword(String password) { this._password = password; }
+// --Commented out by Inspection STOP (4/2/17, 11:12 PM)
 
-    public String getHomeAddress() { return _homeAddress; }
+    /**
+     * Getter
+     * @return homeAddress
+     */
+    public String getHomeAddress() { return this._homeAddress; }
 
-    public void setHomeAddress(String homeAddress) { _homeAddress = homeAddress; }
+    /**
+     * Setter
+     * @param homeAddress homeAddress
+     */
+    public void setHomeAddress(String homeAddress) { this._homeAddress = homeAddress; }
 
-    public String getEmailAddress() { return _emailAddress; }
+    /**
+     * Getter
+     * @return emailAddress
+     */
+    public String getEmailAddress() { return this._emailAddress; }
 
-    public void setEmailAddress(String emailAddress) { _emailAddress = emailAddress; }
-
-    public String getAccountType() { return _accountType; }
-
-    public void setAccountType(String accountType) { _accountType = accountType; }
+    /**
+     * Setter
+     * @param emailAddress emailAddress
+     */
+    public void setEmailAddress(String emailAddress) { this._emailAddress = emailAddress; }
 
     public String getUserID() { return _userID; }
 
     public void setUserID(String userID) { _userID = userID; }
 
-    //public Profile getProfile() {
-       // return _profile;
-    //}
 
-    /* *********************************
-   * These methods are required by the parcelable interface
-   *
-   */
-    /*
-    public User(Parcel in) {
-        _username = in.readString();
-        _password = in.readString();
-        _homeAddress = in.readString();
-        _emailAddress = in.readString();
-        _accountType = in.readString();
-        _permission = in.readInt();
-        //_profile = in.readParcelable( Profile.class.getClassLoader());
-    }
-
-    /*
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    /* *************************
-       If you add new instance vars to Student, you will need to add them to the write
+    /**
+     * Getter
+     * @return accountType
      */
-    /*
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(_username);
-        dest.writeString(_password);
-        dest.writeString(_homeAddress);
-        dest.writeString(_emailAddress);
-        dest.writeString(_accountType);
-        dest.writeInt(_permission);
-        //dest.writeParcelable(_profile, flags);
-    }
-    */
+    public String getAccountType() { return this._accountType; }
 
-    /*
-    public static final Parcelable.Creator<User> CREATOR
-            = new Parcelable.Creator<User>() {
-        public User createFromParcel(Parcel in) {
-            return new User(in);
-        }
+    /**
+     * Setter
+     * @param accountType new account type
+     */
+    public void setAccountType(String accountType) { this._accountType = accountType; }
 
-        public User[] newArray(int size) {
-            return new User[size];
-        }
-    };*/
 }

@@ -30,29 +30,49 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="cont"
+            android:label="Oasis">
+        </activity>
+        <activity
             android:name=".controllers.RegisterUserActivity"
-            android:label="Oasis"></activity>
+            android:label="Oasis">
+        </activity>
         <activity
             android:name=".controllers.QualityListActivity"
-            android:label="Oasis"></activity>
+            android:label="Oasis">
+        </activity>
         <activity
             android:name=".controllers.LoginActivity"
-            android:label="Oasis"></activity>
+            android:label="Oasis">
+        </activity>
         <activity
             android:name=".controllers.HomeActivity"
-            android:label="Oasis"></activity>
+            android:label="Oasis">
+        </activity>
         <activity
             android:name=".controllers.ProfileActivity"
-            android:label="Oasis"></activity>
+            android:label="Oasis">
+        </activity>
         <activity
             android:name=".controllers.ReportActivity"
-            android:label="Oasis"></activity>
+            android:label="Oasis">
+        </activity>
 		<activity
             android:name=".controllers.QualityReportActivity"
-            android:label="Oasis"></activity>
+            android:label="Oasis">
+        </activity>
         <activity
             android:name=".controllers.SelectReportTypeActivity"
-            android:label="Oasis"></activity>
+            android:label="Oasis">
+        </activity>
+        <activity
+            android:name=".controllers.CreateGraphActivity"
+            android:label="Oasis">
+        </activity>
+        <activity
+            android:name=".controllers.GraphDisplayActivity"
+            android:label="Oasis">
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -67,7 +87,8 @@
 
         <activity
             android:name="com.example.jackieelliott.team60application.GoogleMapsActivity"
-            android:label="@string/title_activity_google_maps"></activity>
+            android:label="@string/title_activity_google_maps">
+        </activity>
     </application>
 
 </manifest>

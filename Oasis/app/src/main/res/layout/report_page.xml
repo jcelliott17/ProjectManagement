@@ -16,7 +16,6 @@
         android:text="Title of Report"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/report_title_textview"
         android:layout_weight="0.03" />
 
     <EditText
@@ -32,8 +31,7 @@
     <TextView
         android:text="Location"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/location_textview" />
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -65,7 +63,6 @@
         android:text="Type of Water"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/type_water_textview"
         android:layout_weight="0.03" />
 
     <Spinner
@@ -78,7 +75,6 @@
         android:text="Condition of Water"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/water_condition_textView"
         android:layout_weight="0.03" />
 
     <Spinner

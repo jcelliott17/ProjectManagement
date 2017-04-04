@@ -10,45 +10,61 @@
 
         <Button
             android:text="Profile"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/button2"
             android:elevation="0dp"
-            android:layout_weight="1.71" />
+            android:layout_weight="1.71"
+            android:backgroundTint="@color/wallet_holo_blue_light"
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
 
         <Button
             android:text="Submit Report"
-            android:layout_width="143dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/report_button" />
+            android:id="@+id/report_button"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
 
         <Button
             android:text="Logout"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
-            android:id="@+id/logout_button" />
+            android:id="@+id/logout_button"
+            android:backgroundTint="@android:color/holo_blue_bright"
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
 
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
         <Button
             android:text="Water Map"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tempmap"
             android:elevation="0dp"
-            android:layout_weight="1" />
+            android:textSize="12sp" />
+
+        <Button
+            android:text="View Trends"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/graph_button"
+            android:visibility="visible"
+            android:textSize="12sp"
+            android:layout_weight="1.03" />
 
         <Button
             android:text="Quality Report List"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/qualitylist_button"
-            android:layout_weight="1" />
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -56,8 +72,10 @@
         android:text="Reports List"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/textView6"
-        android:textSize="36sp" />
+        android:textSize="36sp"
+        android:typeface="normal"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/colorPrimaryDark" />
 
     <ListView
         android:layout_width="match_parent"

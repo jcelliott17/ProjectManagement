@@ -11,8 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.jackieelliott.Oasis.Model.AccountTypes;
-
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Report;
@@ -33,27 +31,21 @@ import java.util.ArrayList;
  * Created by JackieElliott on 2/12/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class HomeActivity extends Activity {
 
     private Button logoutButton;
-    private Button profileButton;
     private Button reportButton;
-    private Button tempmap;
+    private Button tempMap;
     private Button qualityListButton;
-    /*
-    private ListView reportsList;
-    private ArrayList<User> userList;
-    private ArrayList<Report> reportList;
-    private ArrayList<QualityReport> qualityList;
-    private User currentUser;
-    */
     private static final String TAG = "HomeActivity-TAG";
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private DatabaseReference mUserReference;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private User _user;
-    private Util util;
 
 
     /**
@@ -61,20 +53,13 @@ public class HomeActivity extends Activity {
      * information is uploaded and updated.
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
-        //Bundle b = getIntent().getExtras();
-        /*
-        userList = b.getParcelableArrayList("UserList");
-        //currentUser = b.getParcelable("CurrentUser");
-        reportList = b.getParcelableArrayList("ReportList");
-        qualityList = b.getParcelableArrayList("QualityList");
-        */
         logoutButton = (Button) findViewById(R.id.logout_button);
         reportButton = (Button) findViewById(R.id.report_button);
         qualityListButton = (Button) findViewById(R.id.qualitylist_button);
-        tempmap = (Button) findViewById(R.id.tempmap);
+        tempMap = (Button) findViewById(R.id.tempmap);
         //reportsList = (ListView) findViewById(R.id.reports_list);
         //util = new Util();
         mAuth = FirebaseAuth.getInstance();
@@ -97,19 +82,6 @@ public class HomeActivity extends Activity {
             }
         };
 
-
-        /*
-        String[] reports = new String[reportList.size()];
-        for (int i = 0; i < reportList.size(); i++) {
-            reports[i] = reportList.get(i).toString();
-        }
-        */
-
-        /*
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.
-                R.layout.simple_list_item_1, reports);
-        reportsList.setAdapter(adapter);*/
-
     }
 
     private void addButtonListeners() {
@@ -123,7 +95,7 @@ public class HomeActivity extends Activity {
     /**
      * Adds functionality to the logout button
      */
-    public void addListenerOnButtonLogout() {
+    private void addListenerOnButtonLogout() {
 
         /*
         Sets the user that you originally used to create
@@ -134,15 +106,11 @@ public class HomeActivity extends Activity {
 
         //logoutButton = (Button) findViewById(R.id.logout_button);
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        this.logoutButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, WelcomePageActivity.class);
-        //        intent.putParcelableArrayListExtra("UserList", userList);
-        //        intent.putParcelableArrayListExtra("ReportList", reportList);
-        //        intent.putParcelableArrayListExtra("QualityList", qualityList);
-        //        intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 
@@ -161,17 +129,13 @@ public class HomeActivity extends Activity {
          */
         final Context context = this;
 
-        profileButton = (Button) findViewById(R.id.button2);
+        Button profileButton = (Button) findViewById(R.id.button2);
 
         profileButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, ProfileActivity.class);
-        //        intent.putParcelableArrayListExtra("UserList", userList);
-        //        intent.putParcelableArrayListExtra("ReportList", reportList);
-        //        intent.putParcelableArrayListExtra("QualityList", qualityList);
-        //        intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 
@@ -190,24 +154,21 @@ public class HomeActivity extends Activity {
          */
         final Context context = this;
 
-        reportButton = (Button) findViewById(R.id.report_button);
-        reportButton.setOnClickListener(new View.OnClickListener() {
+        //reportButton = (Button) findViewById(R.id.report_button);
+        //reportButton.setOnClickListener(new View.OnClickListener() {
 
+        this.reportButton = (Button) findViewById(R.id.report_button);
+
+        this.reportButton.setOnClickListener(new View.OnClickListener() {
+
+            @SuppressWarnings("UnqualifiedFieldAccess")
             @Override
             public void onClick(View arg0) {
                 if (_user.getPermission() >= 2) {
                     Intent intent = new Intent(context, SelectReportTypeActivity.class);
-                    //intent.putParcelableArrayListExtra("UserList", userList);
-                    //intent.putParcelableArrayListExtra("ReportList", reportList);
-                    //intent.putParcelableArrayListExtra("QualityList", qualityList);
-                    //intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(context, ReportActivity.class);
-                    //intent.putParcelableArrayListExtra("UserList", userList);
-                    //intent.putParcelableArrayListExtra("ReportList", reportList);
-                    //intent.putParcelableArrayListExtra("QualityList", qualityList);
-                    //intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 }
             }
@@ -227,16 +188,13 @@ public class HomeActivity extends Activity {
          */
         final Context context = this;
 
-        tempmap.setOnClickListener(new View.OnClickListener() {
+        this.tempMap.setOnClickListener(new View.OnClickListener() {
+
 
             @Override
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, GoogleMapsActivity.class);
-                //intent.putParcelableArrayListExtra("UserList", userList);
-                //intent.putParcelableArrayListExtra("ReportList", reportList);
-                //intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
             }
@@ -256,16 +214,12 @@ public class HomeActivity extends Activity {
          */
         final Context context = this;
 
-        qualityListButton.setOnClickListener(new View.OnClickListener() {
+        this.qualityListButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, QualityListActivity.class);
-                //intent.putParcelableArrayListExtra("UserList", userList);
-                //intent.putParcelableArrayListExtra("ReportList", reportList);
-                //intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
             }

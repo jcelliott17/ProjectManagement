@@ -14,9 +14,6 @@ import android.widget.EditText;
 import android.content.DialogInterface;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
-
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
@@ -33,17 +30,18 @@ import com.google.firebase.database.FirebaseDatabase;
  * Created by JackieElliott on 2/8/17.
  */
 
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
 public class LoginActivity extends Activity {
 
-    private Button login;
-    private Button cancel;
     private EditText loginField;
     private EditText passField;
     /*
     private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private User currentUser;
+    private User _user;
     */
 
     private Context context;
@@ -54,10 +52,10 @@ public class LoginActivity extends Activity {
 
     /**
      * sets up activity when it is first created
-     * @param savedInstanceState
+     * @param savedInstanceState saved instance state
      */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
         addListenerOnButtonLogin();
@@ -85,18 +83,21 @@ public class LoginActivity extends Activity {
     /**
      * adds functionality to login button
      */
-    public void addListenerOnButtonLogin() {
-        context = this;
+    private void addListenerOnButtonLogin() {
 
-        login = (Button) findViewById(R.id.login_button);
-        loginField = (EditText) findViewById(R.id.username_text);
-        passField = (EditText) findViewById(R.id.editText2);
+        final Context context = this;
+
+        Button login = (Button) findViewById(R.id.login_button);
+        this.loginField = (EditText) findViewById(R.id.username_text);
+        this.passField = (EditText) findViewById(R.id.editText2);
         final AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity
                 .this).create();
+        //Ignore this issue, portability issues
         alertDialog.setTitle("Error");
-        alertDialog.setMessage("Wrong Username or Password");
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+        alertDialog.setMessage("Wrong Username/Password");
+        alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
@@ -106,7 +107,6 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-
                 if (validateForm()) {
                     signIn();
                 } else {
@@ -147,11 +147,11 @@ public class LoginActivity extends Activity {
     /**
      * adds functionality to cancel button
      */
-    public void addListenerOnButtonCancel() {
+    private void addListenerOnButtonCancel() {
 
         final Context context = this;
 
-        cancel = (Button) findViewById(R.id.login_Cancel);
+        Button cancel = (Button) findViewById(R.id.login_Cancel);
 
         cancel.setOnClickListener(new View.OnClickListener() {
 
@@ -159,11 +159,6 @@ public class LoginActivity extends Activity {
             public void onClick(View arg0) {
                 // Passes information amount activities
                 Intent intent = new Intent(context, WelcomePageActivity.class);
-                /*
-                intent.putParcelableArrayListExtra("UserList", userList);
-                intent.putParcelableArrayListExtra("ReportList", reportList);
-                intent.putParcelableArrayListExtra("QualityList", qualityList);
-                */
                 startActivity(intent);
 
             }
@@ -176,14 +171,6 @@ public class LoginActivity extends Activity {
         // Passed information among activities
 
         Intent intent = new Intent(context, HomeActivity.class);
-        /*
-        intent.putParcelableArrayListExtra("UserList", userList);
-        intent.putParcelableArrayListExtra("ReportList",
-                reportList);
-        intent.putExtra("CurrentUser", currentUser);
-        intent.putParcelableArrayListExtra("QualityList", qualityList);
-        startActivity(intent);
-        */
         startActivity(intent);
     }
 
@@ -222,4 +209,5 @@ public class LoginActivity extends Activity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
 }
