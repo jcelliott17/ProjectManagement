@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.jackieelliott.Oasis.Model.CurrentUser;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Report;
@@ -19,6 +20,7 @@ import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
 import com.example.jackieelliott.Oasis.controllers.SelectReportTypeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,12 +42,15 @@ public class HomeActivity extends Activity {
     private Button reportButton;
     private Button tempMap;
     private Button qualityListButton;
+    private Button graphButton;
+    private ArrayList<Report> reportList;
+    private ArrayList<QualityReport> qualityList;
     private static final String TAG = "HomeActivity-TAG";
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private DatabaseReference mUserReference;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private User _user;
+    private ValueEventListener mUserListener;
 
 
     /**
@@ -56,17 +61,20 @@ public class HomeActivity extends Activity {
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        this.reportList = b.getParcelableArrayList("ReportList");
+        this.qualityList = b.getParcelableArrayList("QualityList");
         logoutButton = (Button) findViewById(R.id.logout_button);
         reportButton = (Button) findViewById(R.id.report_button);
         qualityListButton = (Button) findViewById(R.id.qualitylist_button);
         tempMap = (Button) findViewById(R.id.tempmap);
-        //reportsList = (ListView) findViewById(R.id.reports_list);
-        //util = new Util();
+        graphButton = (Button) findViewById(R.id.graph_button);
+        ListView reportsList = (ListView) findViewById(R.id.reports_list);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mUserReference = FirebaseDatabase.getInstance().getReference()
                 .child("user");
-        addButtonListeners();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -82,6 +90,45 @@ public class HomeActivity extends Activity {
             }
         };
 
+        mUserListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Loop through children for current user
+                Iterable<DataSnapshot> userlist = dataSnapshot.getChildren();
+                for (DataSnapshot user : userlist) {
+                    User candidate = user.getValue(User.class);
+                    Log.d(TAG, "looping!");
+                    if (candidate.getUserID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        CurrentUser.updateUser(candidate);
+                        Log.d(TAG, "Updating user!");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        addButtonListeners();
+
+        String[] reports = new String[this.reportList.size()];
+        for (int i = 0; i < this.reportList.size(); i++) {
+            Report r = reportList.get(i);
+            reports[i] = r.toString();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.
+                R.layout.simple_list_item_1, reports);
+        reportsList.setAdapter(adapter);
+
+
+        if (CurrentUser.getUser().getPermission() <= 2) {
+            qualityListButton.setVisibility(View.GONE);
+            graphButton.setVisibility(View.GONE);
+        }
+
     }
 
     private void addButtonListeners() {
@@ -90,6 +137,7 @@ public class HomeActivity extends Activity {
         addListenerOnButtonReport();
         addListenerOnButtontempmap();
         addListenerOnButtonQualityList();
+        addListenerOnButtonGraph();
     }
 
     /**
@@ -111,6 +159,10 @@ public class HomeActivity extends Activity {
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, WelcomePageActivity.class);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
             }
 
@@ -136,6 +188,10 @@ public class HomeActivity extends Activity {
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, ProfileActivity.class);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
             }
 
@@ -164,11 +220,19 @@ public class HomeActivity extends Activity {
             @SuppressWarnings("UnqualifiedFieldAccess")
             @Override
             public void onClick(View arg0) {
-                if (_user.getPermission() >= 2) {
+                if (CurrentUser.getUser().getPermission() >= 2) {
                     Intent intent = new Intent(context, SelectReportTypeActivity.class);
+                    //noinspection UnqualifiedFieldAccess
+                    intent.putParcelableArrayListExtra("ReportList", reportList);
+                    //noinspection UnqualifiedFieldAccess
+                    intent.putParcelableArrayListExtra("QualityList", qualityList);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(context, ReportActivity.class);
+                    //noinspection UnqualifiedFieldAccess
+                    intent.putParcelableArrayListExtra("ReportList", reportList);
+                    //noinspection UnqualifiedFieldAccess
+                    intent.putParcelableArrayListExtra("QualityList", qualityList);
                     startActivity(intent);
                 }
             }
@@ -195,6 +259,10 @@ public class HomeActivity extends Activity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, GoogleMapsActivity.class);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
 
             }
@@ -220,6 +288,30 @@ public class HomeActivity extends Activity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, QualityListActivity.class);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
+                startActivity(intent);
+
+            }
+
+        });
+    }
+
+    public void addListenerOnButtonGraph() {
+        final Context context = this;
+
+        this.graphButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+
+                Intent intent = new Intent(context, CreateGraphActivity.class);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
 
             }
@@ -231,36 +323,7 @@ public class HomeActivity extends Activity {
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
-
-        ValueEventListener userListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // Loop through children for current user
-                Iterable<DataSnapshot> userlist = dataSnapshot.getChildren();
-                for (DataSnapshot user : userlist) {
-                    User candidate = user.getValue(User.class);
-                    Log.d(TAG, "looping!");
-                    Log.d(TAG, "Username: " + candidate.getUsername());
-                    Log.d(TAG, "User ID: " + candidate.getUserID());
-                    Log.d(TAG, "FB ID: " + FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    if (candidate.getUserID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                        _user = candidate;
-                        Log.d(TAG, "resetting user!");
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-
-        mUserReference.addValueEventListener(userListener);
-
-        /*if (_user.getPermission() <= 2) {
-            qualityListButton.setVisibility(View.GONE);
-        }*/
+        mUserReference.addValueEventListener(mUserListener);
     }
 
     @Override
@@ -269,9 +332,6 @@ public class HomeActivity extends Activity {
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
-        //if (mAuthListener != null) {
-        //    mAuth.removeAuthStateListener(mAuthListener);
-        //}
     }
 
 }

@@ -35,10 +35,8 @@ public class QualityReportActivity extends Activity {
     private EditText reportLatitude;
     private EditText reportLongitude;
     private Spinner conditionWaterSpinner;
-    private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private User currentUser;
 
     /**
      * sets up activity when it is first created
@@ -51,20 +49,8 @@ public class QualityReportActivity extends Activity {
         setContentView(R.layout.quality_report_page);
 
         Bundle b = getIntent().getExtras();
-<<<<<<< HEAD
-        /*
-        userList = b.getParcelableArrayList("UserList");
-        reportList = b.getParcelableArrayList("ReportList");
-        _user = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelableArrayList("QualityList");
-        */
-=======
-        this.userList = b.getParcelableArrayList("UserList");
         this.reportList = b.getParcelableArrayList("ReportList");
-        this.currentUser = b.getParcelable("CurrentUser");
         this.qualityList = b.getParcelableArrayList("QualityList");
->>>>>>> master
-
 
         this.reportTitle = (EditText) findViewById(R.id.report_title_textedit);
         this.reportLatitude = (EditText) findViewById(R.id.latitude_text);
@@ -89,7 +75,6 @@ public class QualityReportActivity extends Activity {
 
         final Context context = this;
 
-
         Button backButton = (Button) findViewById(R.id.backButton);
         TextView reportText = (TextView) findViewById(R.id.report_textview);
         this.reportTitle = (EditText) findViewById(R.id.report_title_textedit);
@@ -102,19 +87,10 @@ public class QualityReportActivity extends Activity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, HomeActivity.class);
-<<<<<<< HEAD
-                /*
-=======
-                //noinspection UnqualifiedFieldAccess
->>>>>>> master
-                intent.putParcelableArrayListExtra("UserList", userList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", _user);
-                */
                 startActivity(intent);
 
             }
@@ -154,19 +130,10 @@ public class QualityReportActivity extends Activity {
                 qualityList.add(newReport);
 
                 Intent intent = new Intent(context, HomeActivity.class);
-<<<<<<< HEAD
-                /*
-=======
-                //noinspection UnqualifiedFieldAccess
->>>>>>> master
-                intent.putParcelableArrayListExtra("UserList", userList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", _user);
-                */
                 startActivity(intent);
             }
 

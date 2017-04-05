@@ -17,13 +17,10 @@ import com.example.jackieelliott.Oasis.Model.WaterCondition;
 import com.example.jackieelliott.Oasis.Model.WaterType;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
-<<<<<<< HEAD
 import com.example.jackieelliott.Oasis.Model.ReportType;
 import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
 
 import org.w3c.dom.Text;
-=======
->>>>>>> master
 
 import java.util.ArrayList;
 
@@ -41,10 +38,8 @@ public class ReportActivity extends Activity {
     private EditText reportLongitude;
     private Spinner typeWaterSpinner;
     private Spinner conditionWaterSpinner;
-    private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private User currentUser;
 
     /**
      * Creates the Report Activity with the necessary information.
@@ -56,20 +51,8 @@ public class ReportActivity extends Activity {
         setContentView(R.layout.report_page);
 
         Bundle b = getIntent().getExtras();
-<<<<<<< HEAD
-        /*
-        userList = b.getParcelableArrayList("UserList");
-        reportList = b.getParcelableArrayList("ReportList");
-        _user = b.getParcelable("CurrentUser");
-        qualityList = b.getParcelableArrayList("QualityList");
-        */
-=======
-        this.userList = b.getParcelableArrayList("UserList");
         this.reportList = b.getParcelableArrayList("ReportList");
-        this.currentUser = b.getParcelable("CurrentUser");
         this.qualityList = b.getParcelableArrayList("QualityList");
-
->>>>>>> master
 
         this.reportTitle = (EditText) findViewById(R.id.report_title_textedit);
         this.reportLatitude = (EditText) findViewById(R.id.latitude_text);
@@ -105,19 +88,10 @@ public class ReportActivity extends Activity {
                 public void onClick(View arg0) {
 
                     Intent intent = new Intent(context, HomeActivity.class);
-<<<<<<< HEAD
-                    /*
-=======
-                    //noinspection UnqualifiedFieldAccess
->>>>>>> master
-                    intent.putParcelableArrayListExtra("UserList", userList);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
-                    //noinspection UnqualifiedFieldAccess
-                    intent.putExtra("CurrentUser", _user);
-                    */
                     startActivity(intent);
 
                 }
@@ -155,19 +129,10 @@ public class ReportActivity extends Activity {
                 reportList.add(newReport);
 
                 Intent intent = new Intent(context, HomeActivity.class);
-<<<<<<< HEAD
-                /*
-=======
-                //noinspection UnqualifiedFieldAccess
->>>>>>> master
-                intent.putParcelableArrayListExtra("UserList", userList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", _user);
-                */
                 startActivity(intent);
             }
 

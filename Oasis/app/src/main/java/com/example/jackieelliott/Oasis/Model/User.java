@@ -13,8 +13,8 @@ public class User {
     /**
      * Attributes of the User class
      */
-    private final String _username;
-    private final String _password;
+    private String _username;
+    private String _password;
     //private Profile _profile;
     private String _homeAddress;
     private String _emailAddress;
@@ -22,6 +22,10 @@ public class User {
     private String _userID;
     private int _permission;
 
+    /**
+     * Default constructor required to store custom
+     * Java objects in Firebase
+     */
     public User() {
         this("default", "default", "default", 1);
     }
@@ -65,13 +69,11 @@ public class User {
      */
     public String getUsername() { return this._username; }
 
-// --Commented out by Inspection START (4/2/17, 11:11 PM):
-//    /**
-//     * Setter
-//     * @param userName username
-//     */
-//    public void setUsername(String userName) { this._username = userName; }
-// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
+    /**
+     * Setter
+     * @param userName username
+     */
+    public void setUsername(String userName) { this._username = userName; }
 
     /**
      * Getter
@@ -79,13 +81,11 @@ public class User {
      */
     public String getPassword() { return this._password; }
 
-// --Commented out by Inspection START (4/2/17, 11:12 PM):
-//    /**
-//     * Setter
-//     * @param password password
-//     */
-//    public void setPassword(String password) { this._password = password; }
-// --Commented out by Inspection STOP (4/2/17, 11:12 PM)
+    /**
+     * Setter
+     * @param password password
+     */
+    public void setPassword(String password) { this._password = password; }
 
     /**
      * Getter

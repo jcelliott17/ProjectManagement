@@ -15,6 +15,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.jackieelliott.Oasis.Model.AccountTypes;
+import com.example.jackieelliott.Oasis.Model.CurrentUser;
+import com.example.jackieelliott.Oasis.Model.QualityReport;
+import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,8 +25,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 
 /**
@@ -33,23 +41,17 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterUserActivity extends Activity {
 
     Button registerButton;
-    Button cancelButton;
     private Spinner accountTypeSpinner;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private ValueEventListener mUserListener;
     private static final String TAG = "RegUserActivity-TAG";
-    private DatabaseReference mDatabase;
+    private DatabaseReference mUserReference;
     private Context context;
     EditText emailField;
     EditText passField;
-    /*ArrayList<User> userList;
     ArrayList<Report> reportList;
     ArrayList<QualityReport> qualityList;
-    //_user created to keep track of who is using the application
-    //this will be removed once the database starts working
-    */
-    User _user;
-    FirebaseUser firebaseUser;
 
     /**
      * Creates the report activity page.
@@ -67,7 +69,11 @@ public class RegisterUserActivity extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.accountTypeSpinner.setAdapter(adapter);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        Bundle b = getIntent().getExtras();
+        this.reportList = b.getParcelableArrayList("ReportList");
+        this.qualityList = b.getParcelableArrayList("QualityList");
+
+        mUserReference = FirebaseDatabase.getInstance().getReference().child("user");
         mAuth = FirebaseAuth.getInstance();
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -81,6 +87,28 @@ public class RegisterUserActivity extends Activity {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
+
+            }
+        };
+
+        mUserListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Loop through children for current user
+                Iterable<DataSnapshot> userlist = dataSnapshot.getChildren();
+                for (DataSnapshot user : userlist) {
+                    User candidate = user.getValue(User.class);
+                    Log.d(TAG, "looping!");
+                    if (candidate.getUserID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        CurrentUser.updateUser(candidate);
+                        Log.d(TAG, "Updating user!");
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         };
@@ -133,6 +161,10 @@ public class RegisterUserActivity extends Activity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, WelcomePageActivity.class);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
 
             }
@@ -168,37 +200,35 @@ public class RegisterUserActivity extends Activity {
       created. Adds new user to Database.
     */
     private void makeNewUser() {
-        _user = new User(emailField.getText().toString(),
+        User newUser = new User(emailField.getText().toString(),
                             passField.getText().toString(),
                             mAuth.getCurrentUser().getUid(),
                             1);
-        //userList.add(user);
-        //_user = user;
+
         int permission = 1;
         if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.User) {
-            _user.setAccountType("User");
+            newUser.setAccountType("User");
         } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Worker) {
             permission = 2;
-            _user.setAccountType("Worker");
+            newUser.setAccountType("Worker");
         } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Manager) {
             permission = 3;
-            _user.setAccountType("Manager");
+            newUser.setAccountType("Manager");
         } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Admin) {
             permission = 4;
-            _user.setAccountType("Admin");
+            newUser.setAccountType("Admin");
         }
-        _user.setPermission(permission);
-        mDatabase.child("user").child(mAuth.getCurrentUser().getUid()).setValue(_user);
+        newUser.setPermission(permission);
+        mUserReference.child(mAuth.getCurrentUser().getUid()).setValue(newUser);
+        CurrentUser.updateUser(newUser);
     }
 
     private void goToHome() {
         Intent intent = new Intent(context, HomeActivity.class);
-        /*
-        intent.putParcelableArrayListExtra("UserList", userList);
+        //noinspection UnqualifiedFieldAccess
         intent.putParcelableArrayListExtra("ReportList", reportList);
+        //noinspection UnqualifiedFieldAccess
         intent.putParcelableArrayListExtra("QualityList", qualityList);
-        intent.putExtra("CurrentUser", _user);
-        */
         startActivity(intent);
     }
 
@@ -228,6 +258,7 @@ public class RegisterUserActivity extends Activity {
     public void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
+        mUserReference.addValueEventListener(mUserListener);
     }
 
     @Override

@@ -33,10 +33,8 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     private GoogleMap mMap;
     private Button backButton;
     private ListView reportsList;
-    private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private User currentUser;
 
     /**
      * sets up activity when it is first created
@@ -48,6 +46,12 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         setContentView(R.layout.home_page);
         backButton = (Button) findViewById(R.id.backButton);
         setContentView(R.layout.activity_google_maps);
+
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        reportList = b.getParcelableArrayList("ReportList");
+        qualityList = b.getParcelableArrayList("QualityList");
+        reportsList = (ListView) findViewById(R.id.reports_list);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         FragmentManager mF = getSupportFragmentManager();
@@ -72,6 +76,10 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
             public void onClick(View arg0a) {
 
                 Intent intent = new Intent(context, HomeActivity.class);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
 
             }

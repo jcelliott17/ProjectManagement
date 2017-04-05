@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.content.DialogInterface;
 import android.widget.Toast;
 
+import com.example.jackieelliott.Oasis.Model.CurrentUser;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
@@ -23,8 +24,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * Created by JackieElliott on 2/8/17.
@@ -37,17 +43,13 @@ public class LoginActivity extends Activity {
 
     private EditText loginField;
     private EditText passField;
-    /*
-    private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private User _user;
-    */
 
-    private Context context;
     private static final String TAG = "LoginActivity-TAG";
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
+    private ValueEventListener mUserListener;
     private DatabaseReference mUserReference;
 
     /**
@@ -60,6 +62,9 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login_page);
         addListenerOnButtonLogin();
         addListenerOnButtonCancel();
+        Bundle b = getIntent().getExtras();
+        this.reportList  = b.getParcelableArrayList("ReportList");
+        this.qualityList = b.getParcelableArrayList("QualityList");
 
         mAuth = FirebaseAuth.getInstance();
         mUserReference = FirebaseDatabase.getInstance().getReference().child("user");
@@ -71,11 +76,34 @@ public class LoginActivity extends Activity {
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    mUserReference.addValueEventListener(mUserListener);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
                 // ...
+            }
+        };
+
+        mUserListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Loop through children for current user
+                Iterable<DataSnapshot> userlist = dataSnapshot.getChildren();
+                for (DataSnapshot user : userlist) {
+                    User candidate = user.getValue(User.class);
+                    Log.d(TAG, "looping!");
+                    if (candidate.getUserID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        CurrentUser.updateUser(candidate);
+                        Log.d(TAG, "Updating user!");
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         };
     }
@@ -137,6 +165,7 @@ public class LoginActivity extends Activity {
                         } else {
                             Toast.makeText(LoginActivity.this, "You're in!",
                                     Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "Cur Perm: " + CurrentUser.getUser().getPermission());
                             goToHome();
                         }
 
@@ -159,6 +188,10 @@ public class LoginActivity extends Activity {
             public void onClick(View arg0) {
                 // Passes information amount activities
                 Intent intent = new Intent(context, WelcomePageActivity.class);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("ReportList", reportList);
+                //noinspection UnqualifiedFieldAccess
+                intent.putParcelableArrayListExtra("QualityList", qualityList);
                 startActivity(intent);
 
             }
@@ -170,7 +203,13 @@ public class LoginActivity extends Activity {
     private void goToHome() {
         // Passed information among activities
 
+        final Context context = this;
+
         Intent intent = new Intent(context, HomeActivity.class);
+        //noinspection UnqualifiedFieldAccess
+        intent.putParcelableArrayListExtra("QualityList", qualityList);
+        //noinspection UnqualifiedFieldAccess
+        intent.putParcelableArrayListExtra("ReportList", reportList);
         startActivity(intent);
     }
 

@@ -33,11 +33,9 @@ public class CreateGraphActivity extends Activity{
     private EditText latitude;
     private EditText longitude;
     private Spinner dataType;
-    private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
     private HistoryGraph historyGraphList;
-    private User currentUser;
 
     /**
      * On the creation of the Home activity this
@@ -64,11 +62,8 @@ public class CreateGraphActivity extends Activity{
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dataType.setAdapter(adapter);
 
-        userList = b.getParcelableArrayList("UserList");
-        currentUser = b.getParcelable("CurrentUser");
         reportList = b.getParcelableArrayList("ReportList");
         qualityList = b.getParcelableArrayList("QualityList");
-
 
         addListenerOnButtonCreateGraph();
         addListenerOnButtonBack();
@@ -91,17 +86,12 @@ public class CreateGraphActivity extends Activity{
                         Double.parseDouble(latitude.getText().toString()), Double.parseDouble(longitude
                         .getText().toString()), dataType.getSelectedItem().toString()));
                 Intent intent = new Intent(context, GraphDisplayActivity.class);
-                //do not use this.variable as it cannot find the symbol
-                //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putExtra("Graph", historyGraphList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 
@@ -119,15 +109,10 @@ public class CreateGraphActivity extends Activity{
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, HomeActivity.class);
-                //do not use this.variable as it cannot find the symbol
-                //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 
