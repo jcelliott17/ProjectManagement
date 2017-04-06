@@ -106,7 +106,7 @@ public class GraphDisplayActivity extends Activity {
      */
     //dataType is virus or contaminant
     private void getData(int year, double latitude, double longitude, String dataType) {
-        LinkedList<QualityReport>[] reportsByYear = sortReports(year, latitude, longitude, qualityList);
+        LinkedList<QualityReport>[] reportsByYear = QualityReport.sortReports(year, latitude, longitude, qualityList);
         int month = 1;
         int max = 0;
         for (LinkedList<QualityReport> reportsByMonth: reportsByYear) {
@@ -140,35 +140,5 @@ public class GraphDisplayActivity extends Activity {
         vP.setXAxisBoundsManual(true);
 
         scatterPlot.addSeries(this.series);
-    }
-
-    //Returns a list of quality reports in a given year
-    //Use deprecated Date code because android wouldn't support localDateTime
-    /**
-     * Gets the reports from a specified year and sorts them by month
-     *
-     *
-     * @param year specified year for reports
-     * @param qualityList list of reports
-     * @return An array of linked lists
-     */
-
-
-    private LinkedList<QualityReport>[] sortReports(int year, double latitude, double longitude,
-                                                         ArrayList<QualityReport> qualityList) {
-        LinkedList<QualityReport>[] monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
-        if (qualityList == null) {
-            return monthlyQualityList;
-        }
-        for (QualityReport report: qualityList) {
-            Date timeAndDate = report.getTimeAndDate();
-            if (timeAndDate.getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
-                if (monthlyQualityList[timeAndDate.getMonth()] == null) {
-                    monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<>();
-                }
-                monthlyQualityList[timeAndDate.getMonth()].add(report);
-            }
-        }
-        return monthlyQualityList;
     }
 }
