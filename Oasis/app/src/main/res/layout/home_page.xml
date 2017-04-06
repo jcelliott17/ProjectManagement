@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,30 +10,33 @@
         android:layout_height="48dp">
 
         <Button
-            android:text="Profile"
+            android:text="@string/profile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/button2"
             android:elevation="0dp"
             android:layout_weight="1.71"
             android:backgroundTint="@color/wallet_holo_blue_light"
-            android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+            tools:ignore="ButtonStyle,UnusedAttribute" />
 
         <Button
-            android:text="Submit Report"
+            android:text="@string/submitRep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/report_button"
             android:backgroundTint="@android:color/holo_blue_dark"
-            android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+            tools:ignore="ButtonStyle,UnusedAttribute" />
 
         <Button
-            android:text="Logout"
+            android:text="@string/logout"
             android:layout_width="123dp"
             android:layout_height="wrap_content"
             android:id="@+id/logout_button"
             android:backgroundTint="@android:color/holo_blue_bright"
-            android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+            tools:ignore="ButtonStyle,UnusedAttribute" />
 
     </LinearLayout>
 
@@ -43,39 +47,43 @@
         android:weightSum="1">
 
         <Button
-            android:text="Water Map"
+            android:text="@string/map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tempmap"
             android:elevation="0dp"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:visibility="visible"
+            tools:ignore="ButtonStyle,UnusedAttribute" />
 
         <Button
-            android:text="View Trends"
+            android:text="@string/trends"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/graph_button"
-            android:visibility="visible"
             android:textSize="12sp"
-            android:layout_weight="1.03" />
+            android:layout_weight="1.03"
+            tools:ignore="ButtonStyle" />
 
         <Button
-            android:text="Quality Report List"
+            android:text="@string/QRL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/qualitylist_button"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
 
     <TextView
-        android:text="Reports List"
+        android:text="@string/repList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="36sp"
         android:typeface="normal"
         android:fontFamily="sans-serif"
-        android:textColor="@color/colorPrimaryDark" />
+        android:textColor="@color/colorPrimaryDark"
+        tools:ignore="UnusedAttribute" />
 
     <ListView
         android:layout_width="match_parent"

@@ -2,6 +2,11 @@ package com.example.jackieelliott.Oasis.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.example.jackieelliott.Oasis.controllers.GraphDisplayActivity;
+import com.jjoe64.graphview.Viewport;
+import com.jjoe64.graphview.series.DataPoint;
+
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -233,6 +238,28 @@ public class QualityReport implements Parcelable {
         }
     };
 
+    /**
+     * Gets the average data values for a given year and plots the points on the graph
+     **/
+    //dataType is virus or contaminant
+    public int getAverage(int[] contaminants, int[] virus, String dataType) {
+        double average = 0;
+        int length;
+        if (virus.length > contaminants.length) {
+            length = virus.length;
+        } else {
+            length = contaminants.length;
+        }
+        for (int i = 0; i < length; i++) {
+            if ("Virus".equals(dataType)) {
+                average += virus[i];
+            } else {
+                average += contaminants[i];
+            }
+        }
+        average = average / length;
+        return (int) average;
+    }
     //Returns a list of quality reports in a given year
     //Use deprecated Date code because android wouldn't support localDateTime
     /**
@@ -245,8 +272,9 @@ public class QualityReport implements Parcelable {
      */
 
 
+     @SuppressWarnings("MagicNumber")
      public static LinkedList<QualityReport>[] sortReports(int year, double latitude, double longitude,
-                                                    ArrayList<QualityReport> qualityList) {
+                                                           Iterable<QualityReport> qualityList) {
         LinkedList<QualityReport>[] monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
         if (qualityList == null) {
             return monthlyQualityList;
@@ -261,5 +289,6 @@ public class QualityReport implements Parcelable {
             }
         }
         return monthlyQualityList;
+
     }
 }

@@ -67,7 +67,7 @@ public class User {
      * Getter
      * @return username
      */
-    public String getUsername() { return this._username; }
+    public CharSequence getUsername() { return this._username; }
 
     /**
      * Setter
@@ -91,7 +91,7 @@ public class User {
      * Getter
      * @return homeAddress
      */
-    public String getHomeAddress() { return this._homeAddress; }
+    public CharSequence getHomeAddress() { return this._homeAddress; }
 
     /**
      * Setter
@@ -103,7 +103,7 @@ public class User {
      * Getter
      * @return emailAddress
      */
-    public String getEmailAddress() { return this._emailAddress; }
+    public CharSequence getEmailAddress() { return this._emailAddress; }
 
     /**
      * Setter
@@ -120,7 +120,7 @@ public class User {
      * Getter
      * @return accountType
      */
-    public String getAccountType() { return this._accountType; }
+    public CharSequence getAccountType() { return this._accountType; }
 
     /**
      * Setter

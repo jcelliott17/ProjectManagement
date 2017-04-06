@@ -38,6 +38,7 @@ public class ProfileActivity extends Activity {
      * Creates the Profile activity which has the necessary information
      * transferred with it.
      */
+    @SuppressWarnings("FeatureEnvy")
     @Override
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +58,6 @@ public class ProfileActivity extends Activity {
         if (CurrentUser.getUser() != null) {
             if (CurrentUser.getUser().getEmailAddress() != null){
                 this.email.setText(CurrentUser.getUser().getEmailAddress());
-            } else {
-                this.email.setText("y u null");
             }
         }
         if (CurrentUser.getUser() != null) {
@@ -71,6 +70,7 @@ public class ProfileActivity extends Activity {
     /**
      * Adds functionality to the back button on the the profile page.
      */
+    @SuppressWarnings("FeatureEnvy")
     private void addListenerOnButtonBack() {
 
         final Context context = this;
@@ -81,6 +81,7 @@ public class ProfileActivity extends Activity {
         this.username = (TextView) findViewById(R.id.usernameText);
         this.accountType = (TextView) findViewById(R.id.accountText);
 
+        //noinspection FeatureEnvy
         backButton.setOnClickListener(new View.OnClickListener() {
 
             @Override

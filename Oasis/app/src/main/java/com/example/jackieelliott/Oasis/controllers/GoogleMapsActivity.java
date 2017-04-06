@@ -97,6 +97,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+    @SuppressWarnings("FeatureEnvy")
     @Override
 
     public final void onMapReady(GoogleMap googleMap) {
@@ -104,6 +105,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
+            @SuppressWarnings("FeatureEnvy")
             @Override
             public void onMapClick(LatLng latLng) {
 

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.example.jackieelliott.Oasis.Model.CurrentUser;
@@ -119,7 +120,7 @@ public class HomeActivity extends Activity {
             reports[i] = r.toString();
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.
+        ListAdapter adapter = new ArrayAdapter(this, android.
                 R.layout.simple_list_item_1, reports);
         reportsList.setAdapter(adapter);
 

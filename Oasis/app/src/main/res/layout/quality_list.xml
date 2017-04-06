@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
     <TextView
-        android:text="Quality Report List"
+        android:text="@string/QRL"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+         />
 
     <ListView
         android:layout_width="match_parent"
@@ -17,7 +19,7 @@
         android:layout_weight="0.97" />
 
     <Button
-        android:text="Back"
+        android:text="@string/back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/back_button" />

@@ -103,12 +103,14 @@ public class ReportActivity extends Activity {
     /**
      * adds functionality to create report button
      */
+    @SuppressWarnings("FeatureEnvy")
     private void addListenerOnButtonCreateReport() {
 
         final Context context = this;
 
         Button createReportButton = (Button) findViewById(R.id.create_report_button);
 
+        //noinspection FeatureEnvy
         createReportButton.setOnClickListener(new View.OnClickListener() {
 
             @Override

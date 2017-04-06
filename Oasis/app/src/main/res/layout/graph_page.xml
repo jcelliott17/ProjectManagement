@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
     <Button
-        android:text="Back"
+        android:text="@string/back"
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="52dp"
         android:id="@+id/back_button" />
+=======
+        android:layout_height="wrap_content"
+        android:id="@+id/back_button"
+        />
+>>>>>>> 20f256eb34dae125f00b22915e9e07b4657c3e66
 
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"

@@ -25,6 +25,7 @@ import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Deque;
 import java.util.LinkedList;
 
 //Overriding the toString() method
@@ -41,6 +42,7 @@ public class GraphDisplayActivity extends Activity {
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
 
+    @SuppressWarnings("FeatureEnvy")
     @Override
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,11 +99,12 @@ public class GraphDisplayActivity extends Activity {
      * @param dataType virus or contaminant
      */
     //dataType is virus or contaminant
+    @SuppressWarnings({"FeatureEnvy", "MagicNumber"})
     private void getData(int year, double latitude, double longitude, String dataType) {
         LinkedList<QualityReport>[] reportsByYear = QualityReport.sortReports(year, latitude, longitude, qualityList);
         int month = 1;
         int max = 0;
-        for (LinkedList<QualityReport> reportsByMonth: reportsByYear) {
+        for (Deque<QualityReport> reportsByMonth: reportsByYear) {
             if (reportsByMonth != null) {
                 int average = 0;
                 for (QualityReport report: reportsByMonth) {

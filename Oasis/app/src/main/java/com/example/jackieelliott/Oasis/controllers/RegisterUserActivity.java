@@ -199,6 +199,7 @@ public class RegisterUserActivity extends Activity {
       Determines what type of user to create based on selection. Then sets the current user to the user
       created. Adds new user to Database.
     */
+    @SuppressWarnings("FeatureEnvy")
     private void makeNewUser() {
         User newUser = new User(emailField.getText().toString(),
                             passField.getText().toString(),

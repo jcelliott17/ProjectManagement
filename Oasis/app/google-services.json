@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "639417582570-thiql2lg5tllmvm48s0ta3ru4kjgj73g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jackieelliott.team60application",
+            "certificate_hash": "5ecde785f0f4ed508ede2f215fcdecd96e010554"
+          }
+        },
+        {
+          "client_id": "639417582570-ifoq2cv3c95ie2saok4ul4mf1ln8at7g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jackieelliott.team60application",
+            "certificate_hash": "c3b778b6608dcad911a260bc2690daafdf68032e"
+          }
+        },
+        {
           "client_id": "639417582570-3kt3kdbea5uulh8tgav1r00s2pfhsolq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
