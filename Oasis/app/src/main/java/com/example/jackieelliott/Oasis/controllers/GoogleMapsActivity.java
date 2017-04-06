@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private Button backButton;
+    private Button backButton2;
     private ListView reportsList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
@@ -44,7 +44,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
-        backButton = (Button) findViewById(R.id.backButton);
+        backButton2 = (Button) findViewById(R.id.backButton2);
         setContentView(R.layout.activity_google_maps);
 
         Intent intent = getIntent();
@@ -68,9 +68,9 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         final Context context = this;
 
-        backButton = (Button)findViewById(R.id.backButton);
+        backButton2 = (Button)findViewById(R.id.backButton2);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        backButton2.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0a) {
