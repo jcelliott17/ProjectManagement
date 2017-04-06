@@ -4,16 +4,28 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.jackieelliott.Oasis.Model.CurrentUser;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
-
+import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
+import com.example.jackieelliott.Oasis.controllers.SelectReportTypeActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -31,10 +43,15 @@ public class HomeActivity extends Activity {
     private Button tempMap;
     private Button qualityListButton;
     private Button graphButton;
-    private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private User currentUser;
+    private static final String TAG = "HomeActivity-TAG";
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private DatabaseReference mUserReference;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private ValueEventListener mUserListener;
+
 
     /**
      * On the creation of the Home activity this
@@ -46,17 +63,55 @@ public class HomeActivity extends Activity {
         setContentView(R.layout.home_page);
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        this.userList = b.getParcelableArrayList("UserList");
-        this.currentUser = b.getParcelable("CurrentUser");
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
-        this.logoutButton = (Button) findViewById(R.id.logout_button);
-        this.reportButton = (Button) findViewById(R.id.report_button);
-        this.qualityListButton = (Button) findViewById(R.id.qualitylist_button);
-        this.graphButton = (Button) findViewById(R.id.graph_button);
-        this.tempMap = (Button) findViewById(R.id.tempmap);
+        logoutButton = (Button) findViewById(R.id.logout_button);
+        reportButton = (Button) findViewById(R.id.report_button);
+        qualityListButton = (Button) findViewById(R.id.qualitylist_button);
+        tempMap = (Button) findViewById(R.id.tempmap);
+        graphButton = (Button) findViewById(R.id.graph_button);
         ListView reportsList = (ListView) findViewById(R.id.reports_list);
-        addListenerOnButtonLogout();
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mUserReference = FirebaseDatabase.getInstance().getReference()
+                .child("user");
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+            }
+        };
+
+        mUserListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Loop through children for current user
+                Iterable<DataSnapshot> userlist = dataSnapshot.getChildren();
+                for (DataSnapshot user : userlist) {
+                    User candidate = user.getValue(User.class);
+                    Log.d(TAG, "looping!");
+                    if (candidate.getUserID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        CurrentUser.updateUser(candidate);
+                        Log.d(TAG, "Updating user!");
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
+        addButtonListeners();
 
         String[] reports = new String[this.reportList.size()];
         for (int i = 0; i < this.reportList.size(); i++) {
@@ -64,15 +119,25 @@ public class HomeActivity extends Activity {
             reports[i] = r.toString();
         }
 
-        if (this.currentUser.getPermission() < 3) {
-            this.qualityListButton.setVisibility(View.GONE);
-            this.graphButton.setVisibility(View.GONE);
-        }
-
         ArrayAdapter<String> adapter = new ArrayAdapter(this, android.
                 R.layout.simple_list_item_1, reports);
         reportsList.setAdapter(adapter);
 
+
+        if (CurrentUser.getUser().getPermission() <= 2) {
+            qualityListButton.setVisibility(View.GONE);
+            graphButton.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void addButtonListeners() {
+        addListenerOnButtonLogout();
+        addListenerOnButtonProfile();
+        addListenerOnButtonReport();
+        addListenerOnButtontempmap();
+        addListenerOnButtonQualityList();
+        addListenerOnButtonGraph();
     }
 
     /**
@@ -87,21 +152,6 @@ public class HomeActivity extends Activity {
          */
         final Context context = this;
 
-
-        for (int i = 0; i < this.userList.size(); i++) {
-            User u = userList.get(i);
-            String userName = u.getUsername();
-            String currentPass= currentUser.getPassword();
-            if (userName.equals(this.currentUser.getUsername())
-                    && currentPass.equals(u.getPassword())) {
-                this.userList.remove(i);
-                this.userList.add(i, this.currentUser); // replaces the user with the
-                // updated current user
-                // This is necessary because of pass by value
-            }
-        }
-
-
         //logoutButton = (Button) findViewById(R.id.logout_button);
 
         this.logoutButton.setOnClickListener(new View.OnClickListener() {
@@ -110,17 +160,26 @@ public class HomeActivity extends Activity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, WelcomePageActivity.class);
                 //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
-                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 
         });
+    }
+
+    /**
+     * Adds functionality to the profile button
+     */
+    public void addListenerOnButtonProfile() {
+
+        /*
+        Sets the user that you originally used to create
+        current user to the updated current user
+        which could potentially contain new address/ home email.
+         */
+        final Context context = this;
 
         Button profileButton = (Button) findViewById(R.id.button2);
 
@@ -130,17 +189,29 @@ public class HomeActivity extends Activity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, ProfileActivity.class);
                 //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
-                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 
         });
+    }
+
+    /**
+     * Adds functionality to the report button
+     */
+    public void addListenerOnButtonReport() {
+
+        /*
+        Sets the user that you originally used to create
+        current user to the updated current user
+        which could potentially contain new address/ home email.
+         */
+        final Context context = this;
+
+        //reportButton = (Button) findViewById(R.id.report_button);
+        //reportButton.setOnClickListener(new View.OnClickListener() {
 
         this.reportButton = (Button) findViewById(R.id.report_button);
 
@@ -149,34 +220,37 @@ public class HomeActivity extends Activity {
             @SuppressWarnings("UnqualifiedFieldAccess")
             @Override
             public void onClick(View arg0) {
-
-                //noinspection UnqualifiedFieldAccess
-                if (currentUser.getPermission() == 2 || currentUser.getPermission() == 3) {
+                if (CurrentUser.getUser().getPermission() >= 2) {
                     Intent intent = new Intent(context, SelectReportTypeActivity.class);
-                    //noinspection UnqualifiedFieldAccess
-                    intent.putParcelableArrayListExtra("UserList", userList);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
-                    //noinspection UnqualifiedFieldAccess
-                    intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(context, ReportActivity.class);
                     //noinspection UnqualifiedFieldAccess
-                    intent.putParcelableArrayListExtra("UserList", userList);
-                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
-                    //noinspection UnqualifiedFieldAccess
-                    intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 }
             }
 
         });
+    }
+
+        /**
+         * Adds functionality to the tempmap button
+         */
+    public void addListenerOnButtontempmap() {
+
+        /*
+        Sets the user that you originally used to create
+        current user to the updated current user
+        which could potentially contain new address/ home email.
+         */
+        final Context context = this;
 
         this.tempMap.setOnClickListener(new View.OnClickListener() {
 
@@ -186,18 +260,27 @@ public class HomeActivity extends Activity {
 
                 Intent intent = new Intent(context, GoogleMapsActivity.class);
                 //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
-                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
             }
 
         });
+    }
+
+        /**
+         * Adds functionality to the quality list button
+         */
+    public void addListenerOnButtonQualityList() {
+
+        /*
+        Sets the user that you originally used to create
+        current user to the updated current user
+        which could potentially contain new address/ home email.
+         */
+        final Context context = this;
 
         this.qualityListButton.setOnClickListener(new View.OnClickListener() {
 
@@ -206,18 +289,18 @@ public class HomeActivity extends Activity {
 
                 Intent intent = new Intent(context, QualityListActivity.class);
                 //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
-                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
             }
 
         });
+    }
+
+    public void addListenerOnButtonGraph() {
+        final Context context = this;
 
         this.graphButton.setOnClickListener(new View.OnClickListener() {
 
@@ -226,20 +309,29 @@ public class HomeActivity extends Activity {
 
                 Intent intent = new Intent(context, CreateGraphActivity.class);
                 //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
-                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
+
             }
 
         });
-
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+        mUserReference.addValueEventListener(mUserListener);
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
 
 }

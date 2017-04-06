@@ -28,10 +28,8 @@ import java.util.Objects;
 public class SelectReportTypeActivity extends Activity {
 
     private Spinner chooseReportTypeSpinner;
-    private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private User currentUser;
 
     /**
      * sets up activity when it is first created
@@ -44,9 +42,7 @@ public class SelectReportTypeActivity extends Activity {
         setContentView(R.layout.choose_report_type_page);
 
         Bundle b = getIntent().getExtras();
-        this.userList = b.getParcelableArrayList("UserList");
         this.reportList = b.getParcelableArrayList("ReportList");
-        this.currentUser = b.getParcelable("CurrentUser");
         this.qualityList = b.getParcelableArrayList("QualityList");
 
         this.chooseReportTypeSpinner = (Spinner) findViewById(R.id.select_report_type);
@@ -76,13 +72,9 @@ public class SelectReportTypeActivity extends Activity {
 
                 Intent intent = new Intent(context, HomeActivity.class);
                 //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
-                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
             }
@@ -108,25 +100,17 @@ public class SelectReportTypeActivity extends Activity {
                 //noinspection UnqualifiedFieldAccess
                 if (chooseReportTypeSpinner.getSelectedItem().toString().equals("Quality")) {
                     Intent intent = new Intent(context, QualityReportActivity.class);
-                    //noinspection UnqualifiedFieldAccess,UnqualifiedFieldAccess
-                    intent.putParcelableArrayListExtra("UserList", userList);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
-                    //noinspection UnqualifiedFieldAccess
-                    intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(context, ReportActivity.class);
                     //noinspection UnqualifiedFieldAccess
-                    intent.putParcelableArrayListExtra("UserList", userList);
-                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
-                    //noinspection UnqualifiedFieldAccess
-                    intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
                 }
             }

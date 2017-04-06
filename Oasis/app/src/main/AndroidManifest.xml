@@ -86,7 +86,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name="com.example.jackieelliott.team60application.GoogleMapsActivity"
+            android:name="com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity"
             android:label="@string/title_activity_google_maps">
         </activity>
     </application>

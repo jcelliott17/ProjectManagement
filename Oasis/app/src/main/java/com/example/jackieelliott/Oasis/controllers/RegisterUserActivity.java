@@ -4,37 +4,54 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import java.util.ArrayList;
+import android.widget.Toast;
 
 import com.example.jackieelliott.Oasis.Model.AccountTypes;
+import com.example.jackieelliott.Oasis.Model.CurrentUser;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 
 /**
  * Created by JackieElliott on 2/8/17.
  */
 
-//Overriding the toString() method
-//we do not want to override the toString method in this class
+public class RegisterUserActivity extends Activity {
 
-public class RegisterUserActivity extends Activity{
-
+    Button registerButton;
     private Spinner accountTypeSpinner;
-    private EditText userNameField;
-    private EditText passField;
-    private ArrayList<User> userList;
-    private ArrayList<Report> reportList;
-    private ArrayList<QualityReport> qualityList;
-    //currentUser created to keep track of who is using the application
-    //this will be removed once the database starts working
-    private User currentUser;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private ValueEventListener mUserListener;
+    private static final String TAG = "RegUserActivity-TAG";
+    private DatabaseReference mUserReference;
+    private Context context;
+    EditText emailField;
+    EditText passField;
+    ArrayList<Report> reportList;
+    ArrayList<QualityReport> qualityList;
 
     /**
      * Creates the report activity page.
@@ -53,10 +70,49 @@ public class RegisterUserActivity extends Activity{
         this.accountTypeSpinner.setAdapter(adapter);
 
         Bundle b = getIntent().getExtras();
-        this.userList = b.getParcelableArrayList("UserList");
         this.reportList = b.getParcelableArrayList("ReportList");
-        this.currentUser = b.getParcelable("CurrentUser");
         this.qualityList = b.getParcelableArrayList("QualityList");
+
+        mUserReference = FirebaseDatabase.getInstance().getReference().child("user");
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d(TAG, "onAuthStateChanged:signed_out");
+                }
+
+            }
+        };
+
+        mUserListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Loop through children for current user
+                Iterable<DataSnapshot> userlist = dataSnapshot.getChildren();
+                for (DataSnapshot user : userlist) {
+                    User candidate = user.getValue(User.class);
+                    Log.d(TAG, "looping!");
+                    if (candidate.getUserID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        CurrentUser.updateUser(candidate);
+                        Log.d(TAG, "Updating user!");
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+
     }
 
     /**
@@ -64,15 +120,13 @@ public class RegisterUserActivity extends Activity{
      */
     private void addListenerOnButtonRegister() {
 
-        final Context context = this;
+        context = this;
 
-        Button registerButton = (Button) findViewById(R.id.registerOnRegisterPage);
-        this.userNameField = (EditText) findViewById(R.id.username_text);
+        registerButton = (Button) findViewById(R.id.registerOnRegisterPage);
+        this.emailField = (EditText) findViewById(R.id.username_text);
         this.passField = (EditText) findViewById(R.id.editText3);
 
-
         registerButton.setOnClickListener(new View.OnClickListener() {
-
 
             @Override
             public void onClick(View arg0) {
@@ -80,58 +134,12 @@ public class RegisterUserActivity extends Activity{
                 // A warning should pop up here and let them know if that username already
                 // exists?
 
-                /*
-                Determines what type of user to create based on selection. Then sets the current user to the user
-                created.
-                 */
-                //noinspection UnqualifiedFieldAccess
-                if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.User) {
-                    @SuppressWarnings("UnqualifiedFieldAccess") User user = new User(userNameField.getText().toString(), passField.getText().toString(), 1);
-                    //noinspection UnqualifiedFieldAccess
-                    userList.add(user);
-                    //noinspection UnqualifiedFieldAccess
-                    currentUser = user;
-                    //noinspection UnqualifiedFieldAccess
-                    currentUser.setAccountType("User");
-                } else //noinspection UnqualifiedFieldAccess
-                    if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Worker) {
-                    @SuppressWarnings("UnqualifiedFieldAccess") User user = new User(userNameField.getText().toString(), passField.getText().toString(), 2);
-                        //noinspection UnqualifiedFieldAccess
-                        userList.add(user);
-                        //noinspection UnqualifiedFieldAccess
-                        currentUser = user;
-                        //noinspection UnqualifiedFieldAccess
-                        currentUser.setAccountType("Worker");
-                } else //noinspection UnqualifiedFieldAccess
-                        if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Manager) {
-                    @SuppressWarnings("UnqualifiedFieldAccess") User user = new User(userNameField.getText().toString(), passField.getText().toString(), 3);
-                            //noinspection UnqualifiedFieldAccess
-                            userList.add(user);
-                            //noinspection UnqualifiedFieldAccess
-                            currentUser = user;
-                            //noinspection UnqualifiedFieldAccess
-                            currentUser.setAccountType("Manager");
-                } else //noinspection UnqualifiedFieldAccess
-                            if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Admin) {
-                    @SuppressWarnings("UnqualifiedFieldAccess") User user = new User(userNameField.getText().toString(), passField.getText().toString(), 3);
-                                //noinspection UnqualifiedFieldAccess
-                                userList.add(user);
-                                //noinspection UnqualifiedFieldAccess
-                                currentUser = user;
-                                //noinspection UnqualifiedFieldAccess
-                                currentUser.setAccountType("Admin");
+                if (validateForm()) {
+                    createAccount(emailField.getText().toString(), passField.getText().toString());
+                } else {
+                    Log.d(TAG, "Failed validation");
                 }
-                // Passes information among models
-                Intent intent = new Intent(context, HomeActivity.class);
-                //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("ReportList", reportList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
-                startActivity(intent);
+
             }
 
         });
@@ -154,13 +162,9 @@ public class RegisterUserActivity extends Activity{
 
                 Intent intent = new Intent(context, WelcomePageActivity.class);
                 //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
-                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
 
             }
@@ -168,5 +172,101 @@ public class RegisterUserActivity extends Activity{
         });
     }
 
+    private void createAccount(String email, String password) {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(RegisterUserActivity.this, "Authentication failed: " + task.getException().toString(),
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(RegisterUserActivity.this, "You're in!",
+                                    Toast.LENGTH_SHORT).show();
+                            makeNewUser();
+                            goToHome();
+                        }
+                    }
+                });
+    }
+
+    /*
+      Determines what type of user to create based on selection. Then sets the current user to the user
+      created. Adds new user to Database.
+    */
+    private void makeNewUser() {
+        User newUser = new User(emailField.getText().toString(),
+                            passField.getText().toString(),
+                            mAuth.getCurrentUser().getUid(),
+                            1);
+
+        int permission = 1;
+        if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.User) {
+            newUser.setAccountType("User");
+        } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Worker) {
+            permission = 2;
+            newUser.setAccountType("Worker");
+        } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Manager) {
+            permission = 3;
+            newUser.setAccountType("Manager");
+        } else if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.Admin) {
+            permission = 4;
+            newUser.setAccountType("Admin");
+        }
+        newUser.setPermission(permission);
+        mUserReference.child(mAuth.getCurrentUser().getUid()).setValue(newUser);
+        CurrentUser.updateUser(newUser);
+    }
+
+    private void goToHome() {
+        Intent intent = new Intent(context, HomeActivity.class);
+        //noinspection UnqualifiedFieldAccess
+        intent.putParcelableArrayListExtra("ReportList", reportList);
+        //noinspection UnqualifiedFieldAccess
+        intent.putParcelableArrayListExtra("QualityList", qualityList);
+        startActivity(intent);
+    }
+
+    private boolean validateForm() {
+
+        boolean valid = true;
+
+        String email = emailField.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            emailField.setError("Required.");
+            valid = false;
+        } else {
+            emailField.setError(null);
+        }
+
+        String password = passField.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            passField.setError("Required.");
+            valid = false;
+        } else {
+            passField.setError(null);
+        }
+        return valid;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+        mUserReference.addValueEventListener(mUserListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
 
 }

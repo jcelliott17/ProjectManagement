@@ -27,8 +27,6 @@ public class WelcomePageActivity extends AppCompatActivity {
 
     Button button;
     Button button2;
-    //These lists allow for information to persist. Eventually will be replaced by data base
-    ArrayList<User> userList;
     ArrayList<Report> reportList;
     ArrayList<QualityReport> qualityList;
 
@@ -42,12 +40,10 @@ public class WelcomePageActivity extends AppCompatActivity {
         addListenerOnButton();
         addListenerOnButtonLogin();
         if (getIntent().getExtras() == null) {
-            this.userList = new ArrayList<>();
             this.reportList = new ArrayList<>();
             this.qualityList = new ArrayList<>();
         } else {
             Bundle b = getIntent().getExtras();
-            this.userList = b.getParcelableArrayList("UserList");
             this.reportList = b.getParcelableArrayList("ReportList");
             this.qualityList = b.getParcelableArrayList("QualityList");
         }
@@ -68,8 +64,6 @@ public class WelcomePageActivity extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, RegisterUserActivity.class);
-                //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
@@ -97,8 +91,6 @@ public class WelcomePageActivity extends AppCompatActivity {
             public void onClick(View arg0) {
 
                 Intent intent = new Intent(context, LoginActivity.class);
-                //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess

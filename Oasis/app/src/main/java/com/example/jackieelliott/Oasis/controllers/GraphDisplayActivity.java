@@ -38,10 +38,8 @@ public class GraphDisplayActivity extends Activity {
     private Button back;
     private PointsGraphSeries<DataPoint> series;
     private GraphView scatterPlot;
-    private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private User currentUser;
 
     @Override
     public final void onCreate(Bundle savedInstanceState) {
@@ -51,9 +49,7 @@ public class GraphDisplayActivity extends Activity {
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        userList = b.getParcelableArrayList("UserList");
         reportList = b.getParcelableArrayList("ReportList");
-        currentUser = b.getParcelable("CurrentUser");
         qualityList = b.getParcelableArrayList("QualityList");
         HistoryGraph historyGraph = b.getParcelable("Graph");
 
@@ -85,13 +81,9 @@ public class GraphDisplayActivity extends Activity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, HomeActivity.class);
                 //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
-                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 

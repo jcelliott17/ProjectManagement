@@ -17,6 +17,10 @@ import com.example.jackieelliott.Oasis.Model.WaterCondition;
 import com.example.jackieelliott.Oasis.Model.WaterType;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
+import com.example.jackieelliott.Oasis.Model.ReportType;
+import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -34,10 +38,8 @@ public class ReportActivity extends Activity {
     private EditText reportLongitude;
     private Spinner typeWaterSpinner;
     private Spinner conditionWaterSpinner;
-    private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private User currentUser;
 
     /**
      * Creates the Report Activity with the necessary information.
@@ -49,11 +51,8 @@ public class ReportActivity extends Activity {
         setContentView(R.layout.report_page);
 
         Bundle b = getIntent().getExtras();
-        this.userList = b.getParcelableArrayList("UserList");
         this.reportList = b.getParcelableArrayList("ReportList");
-        this.currentUser = b.getParcelable("CurrentUser");
         this.qualityList = b.getParcelableArrayList("QualityList");
-
 
         this.reportTitle = (EditText) findViewById(R.id.report_title_textedit);
         this.reportLatitude = (EditText) findViewById(R.id.latitude_text);
@@ -90,13 +89,9 @@ public class ReportActivity extends Activity {
 
                     Intent intent = new Intent(context, HomeActivity.class);
                     //noinspection UnqualifiedFieldAccess
-                    intent.putParcelableArrayListExtra("UserList", userList);
-                    //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("QualityList", qualityList);
-                    //noinspection UnqualifiedFieldAccess
-                    intent.putExtra("CurrentUser", currentUser);
                     startActivity(intent);
 
                 }
@@ -135,13 +130,9 @@ public class ReportActivity extends Activity {
 
                 Intent intent = new Intent(context, HomeActivity.class);
                 //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
-                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 

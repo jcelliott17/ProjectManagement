@@ -13,6 +13,7 @@ import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
+import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
 
 
 import java.util.ArrayList;
@@ -26,10 +27,8 @@ import java.util.ArrayList;
 
 public class QualityListActivity extends Activity {
     private Button backButton;
-    private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private User currentUser;
 
     /**
      * On the creation of the Home activity this
@@ -40,12 +39,12 @@ public class QualityListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quality_list);
         Bundle b = getIntent().getExtras();
-        this.userList = b.getParcelableArrayList("UserList");
-        this.currentUser = b.getParcelable("CurrentUser");
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
-        this.backButton = (Button) findViewById(R.id.back_button);
         ListView qualityReportList = (ListView) findViewById(R.id.quality_list);
+        addListenerOnButtonBack();
+
+        this.backButton = (Button) findViewById(R.id.back_button);
         addListenerOnButtonBack();
 
 
@@ -74,13 +73,9 @@ public class QualityListActivity extends Activity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, HomeActivity.class);
                 //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
-                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 
