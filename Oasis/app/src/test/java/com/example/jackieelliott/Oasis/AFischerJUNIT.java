@@ -14,6 +14,7 @@ import com.example.jackieelliott.Oasis.Model.QualityReport;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+@SuppressWarnings("ALL")
 public class AFischerJUNIT {
     /**
      * Example unit test method

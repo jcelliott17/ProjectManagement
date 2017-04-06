@@ -11,10 +11,12 @@ import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("ALL")
 public class SortReportsTest {
     /**
      * test method for sortReports located in QualityReports
      */
+    @SuppressWarnings("FeatureEnvy")
     @Test
     public final void testSortReports() {
 

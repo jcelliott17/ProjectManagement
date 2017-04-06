@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.example.jackieelliott.Oasis.Model.QualityReport;
@@ -53,7 +54,7 @@ public class QualityListActivity extends Activity {
             qualityReports[i] = this.qualityList.get(i).toString();
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.
+        ListAdapter adapter = new ArrayAdapter(this, android.
                 R.layout.simple_list_item_1, qualityReports);
         qualityReportList.setAdapter(adapter);
     }

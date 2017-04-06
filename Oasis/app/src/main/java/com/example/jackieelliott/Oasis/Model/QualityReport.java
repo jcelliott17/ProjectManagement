@@ -2,17 +2,14 @@ package com.example.jackieelliott.Oasis.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-<<<<<<< HEAD
 
 import com.example.jackieelliott.Oasis.controllers.GraphDisplayActivity;
 import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
 
-=======
 import android.util.Log;
 
 import java.util.ArrayList;
->>>>>>> e7e3904f90d63ba342033cdbe502d8e8a2293e61
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -254,15 +251,15 @@ public class QualityReport implements Parcelable {
             length = contaminants.length;
         }
         for (int i = 0; i < length; i++) {
-                    if ("Virus".equals(dataType)) {
-                        average += virus[i];
-                    } else {
-                        average += contaminants[i];
-                    }
+            if ("Virus".equals(dataType)) {
+                average += virus[i];
+            } else {
+                average += contaminants[i];
+            }
         }
         average = average / length;
         return (int) average;
-
+    }
     //Returns a list of quality reports in a given year
     //Use deprecated Date code because android wouldn't support localDateTime
     /**
@@ -275,8 +272,9 @@ public class QualityReport implements Parcelable {
      */
 
 
+     @SuppressWarnings("MagicNumber")
      public static LinkedList<QualityReport>[] sortReports(int year, double latitude, double longitude,
-                                                    ArrayList<QualityReport> qualityList) {
+                                                           Iterable<QualityReport> qualityList) {
         LinkedList<QualityReport>[] monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
         if (qualityList == null) {
             return monthlyQualityList;
