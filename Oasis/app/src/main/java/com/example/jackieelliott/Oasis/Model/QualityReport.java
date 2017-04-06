@@ -2,11 +2,17 @@ package com.example.jackieelliott.Oasis.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+<<<<<<< HEAD
 
 import com.example.jackieelliott.Oasis.controllers.GraphDisplayActivity;
 import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
 
+=======
+import android.util.Log;
+
+import java.util.ArrayList;
+>>>>>>> e7e3904f90d63ba342033cdbe502d8e8a2293e61
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -34,20 +40,13 @@ public class QualityReport implements Parcelable {
         this._reportName = name;
     }
 
-// --Commented out by Inspection START (4/2/17, 11:11 PM):
-//    /**
-//     * constructor
-//     * @param name name of report
-//     * @param latitude latitude of water
-//     * @param longitude longitude of water
-//     */
-//    public QualityReport(String name, double latitude, double longitude) {
-//        super();
-//        this._reportName = name;
-//        this._latitude = latitude;
-//        this._longitude = longitude;
-//    }
-// --Commented out by Inspection STOP (4/2/17, 11:11 PM)
+
+    public QualityReport(String name, double latitude, double longitude) {
+        super();
+        this._reportName = name;
+        this._latitude = latitude;
+        this._longitude = longitude;
+    }
 
 // --Commented out by Inspection START (4/2/17, 11:11 PM):
 //    /**
@@ -198,7 +197,8 @@ public class QualityReport implements Parcelable {
     @Override
 
     public String toString() {
-        return "Report Number: " + this._reportNumber + " Name: " + this._reportName + " Location: " + this._latitude + " " + this._longitude
+        return "Report Number: " + this._reportNumber + " Name: " + this._reportName + " Location: "
+                + this._latitude + " " + this._longitude
                 + " Virus PPM: " + this._virus + " Date: " + this._timeAndDate.toString();
     }
 
@@ -262,5 +262,35 @@ public class QualityReport implements Parcelable {
         }
         average = average / length;
         return (int) average;
+
+    //Returns a list of quality reports in a given year
+    //Use deprecated Date code because android wouldn't support localDateTime
+    /**
+     * Gets the reports from a specified year and sorts them by month
+     *
+     *
+     * @param year specified year for reports
+     * @param qualityList list of reports
+     * @return An array of linked lists
+     */
+
+
+     public static LinkedList<QualityReport>[] sortReports(int year, double latitude, double longitude,
+                                                    ArrayList<QualityReport> qualityList) {
+        LinkedList<QualityReport>[] monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
+        if (qualityList == null) {
+            return monthlyQualityList;
+        }
+        for (QualityReport report: qualityList) {
+            Date timeAndDate = report.getTimeAndDate();
+            if (timeAndDate.getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
+                if (monthlyQualityList[timeAndDate.getMonth()] == null) {
+                    monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<>();
+                }
+                monthlyQualityList[timeAndDate.getMonth()].add(report);
+            }
+        }
+        return monthlyQualityList;
+
     }
 }

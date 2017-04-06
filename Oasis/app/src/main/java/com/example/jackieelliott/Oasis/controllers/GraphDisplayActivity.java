@@ -38,10 +38,8 @@ public class GraphDisplayActivity extends Activity {
     private Button back;
     private PointsGraphSeries<DataPoint> series;
     private GraphView scatterPlot;
-    private ArrayList<User> userList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
-    private User currentUser;
 
     @Override
     public final void onCreate(Bundle savedInstanceState) {
@@ -51,9 +49,7 @@ public class GraphDisplayActivity extends Activity {
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        userList = b.getParcelableArrayList("UserList");
         reportList = b.getParcelableArrayList("ReportList");
-        currentUser = b.getParcelable("CurrentUser");
         qualityList = b.getParcelableArrayList("QualityList");
         HistoryGraph historyGraph = b.getParcelable("Graph");
 
@@ -85,13 +81,9 @@ public class GraphDisplayActivity extends Activity {
             public void onClick(View arg0) {
                 Intent intent = new Intent(context, HomeActivity.class);
                 //noinspection UnqualifiedFieldAccess
-                intent.putParcelableArrayListExtra("UserList", userList);
-                //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("ReportList", reportList);
                 //noinspection UnqualifiedFieldAccess
                 intent.putParcelableArrayListExtra("QualityList", qualityList);
-                //noinspection UnqualifiedFieldAccess
-                intent.putExtra("CurrentUser", currentUser);
                 startActivity(intent);
             }
 
@@ -106,7 +98,7 @@ public class GraphDisplayActivity extends Activity {
      */
     //dataType is virus or contaminant
     private void getData(int year, double latitude, double longitude, String dataType) {
-        LinkedList<QualityReport>[] reportsByYear = sortReports(year, latitude, longitude, qualityList);
+        LinkedList<QualityReport>[] reportsByYear = QualityReport.sortReports(year, latitude, longitude, qualityList);
         int month = 1;
         int max = 0;
         for (LinkedList<QualityReport> reportsByMonth: reportsByYear) {
@@ -140,35 +132,5 @@ public class GraphDisplayActivity extends Activity {
         vP.setXAxisBoundsManual(true);
 
         scatterPlot.addSeries(this.series);
-    }
-
-    //Returns a list of quality reports in a given year
-    //Use deprecated Date code because android wouldn't support localDateTime
-    /**
-     * Gets the reports from a specified year and sorts them by month
-     *
-     *
-     * @param year specified year for reports
-     * @param qualityList list of reports
-     * @return An array of linked lists
-     */
-
-
-    private LinkedList<QualityReport>[] sortReports(int year, double latitude, double longitude,
-                                                         ArrayList<QualityReport> qualityList) {
-        LinkedList<QualityReport>[] monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
-        if (qualityList == null) {
-            return monthlyQualityList;
-        }
-        for (QualityReport report: qualityList) {
-            Date timeAndDate = report.getTimeAndDate();
-            if (timeAndDate.getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
-                if (monthlyQualityList[timeAndDate.getMonth()] == null) {
-                    monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<>();
-                }
-                monthlyQualityList[timeAndDate.getMonth()].add(report);
-            }
-        }
-        return monthlyQualityList;
     }
 }
