@@ -2,7 +2,13 @@ package com.example.jackieelliott.Oasis.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.example.jackieelliott.Oasis.controllers.GraphDisplayActivity;
+import com.jjoe64.graphview.Viewport;
+import com.jjoe64.graphview.series.DataPoint;
+
 import java.util.Date;
+import java.util.LinkedList;
 
 /**
  * Created by JackieElliott on 2/20/17.
@@ -234,4 +240,27 @@ public class QualityReport implements Parcelable {
             return new QualityReport[size];
         }
     };
+
+    /**
+     * Gets the average data values for a given year and plots the points on the graph
+     **/
+    //dataType is virus or contaminant
+    public int getAverage(int[] contaminants, int[] virus, String dataType) {
+        double average = 0;
+        int length;
+        if (virus.length > contaminants.length) {
+            length = virus.length;
+        } else {
+            length = contaminants.length;
+        }
+        for (int i = 0; i < length; i++) {
+                    if ("Virus".equals(dataType)) {
+                        average += virus[i];
+                    } else {
+                        average += contaminants[i];
+                    }
+        }
+        average = average / length;
+        return (int) average;
+    }
 }
