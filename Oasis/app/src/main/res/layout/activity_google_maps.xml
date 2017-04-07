@@ -10,12 +10,6 @@ android:weightSum="1">
         android:layout_height="wrap_content"
         android:id="@+id/backButton2" />
 
-    <Button
-        android:text="Back"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/backButton" />
-
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/map"

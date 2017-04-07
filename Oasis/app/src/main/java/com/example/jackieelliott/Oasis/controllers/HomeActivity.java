@@ -17,11 +17,8 @@ import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
-import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
-import com.example.jackieelliott.Oasis.controllers.SelectReportTypeActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,13 +27,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-/**
- * Created by JackieElliott on 2/12/17.
- */
-
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+@SuppressWarnings({"ClassWithTooManyDependencies", "CyclicClassDependency",
+        "ClassWithTooManyDependencies"})
+
+/**
+ * Home Activity class
+ * loads the information and display for the homepage
+ */
 public class HomeActivity extends Activity {
 
     private Button logoutButton;
@@ -68,12 +68,14 @@ public class HomeActivity extends Activity {
         this.qualityList = b.getParcelableArrayList("QualityList");
         logoutButton = (Button) findViewById(R.id.logout_button);
         reportButton = (Button) findViewById(R.id.report_button);
-        qualityListButton = (Button) findViewById(R.id.qualitylist_button);
-        tempMap = (Button) findViewById(R.id.tempmap);
+        qualityListButton = (Button) findViewById(R.id.qualityList_button);
+        tempMap = (Button) findViewById(R.id.tempMap);
         graphButton = (Button) findViewById(R.id.graph_button);
         ListView reportsList = (ListView) findViewById(R.id.reports_list);
         mAuth = FirebaseAuth.getInstance();
+        //noinspection ChainedMethodCall
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        //noinspection ChainedMethodCall
         mUserReference = FirebaseDatabase.getInstance().getReference()
                 .child("user");
 
@@ -95,13 +97,21 @@ public class HomeActivity extends Activity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Loop through children for current user
-                Iterable<DataSnapshot> userlist = dataSnapshot.getChildren();
-                for (DataSnapshot user : userlist) {
+                Iterable<DataSnapshot> userList = dataSnapshot.getChildren();
+                for (DataSnapshot user : userList) {
                     User candidate = user.getValue(User.class);
                     Log.d(TAG, "looping!");
-                    if (candidate.getUserID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                        CurrentUser.updateUser(candidate);
-                        Log.d(TAG, "Updating user!");
+                    FirebaseAuth fa = FirebaseAuth.getInstance();
+                    if (fa != null) {
+                        FirebaseUser cu = fa.getCurrentUser();
+                        if (cu != null) {
+                            String id = cu.getUid();
+                            String uId = candidate.getUserID();
+                            if (uId.equals(id)) {
+                                CurrentUser.updateUser(candidate);
+                                Log.d(TAG, "Updating user!");
+                                }
+                        }
                     }
                 }
             }
@@ -125,7 +135,9 @@ public class HomeActivity extends Activity {
         reportsList.setAdapter(adapter);
 
 
-        if (CurrentUser.getUser().getPermission() <= 2) {
+        User current = CurrentUser.getUser();
+        //noinspection LawOfDemeter
+        if (current.getPermission() <= 2) {
             qualityListButton.setVisibility(View.GONE);
             graphButton.setVisibility(View.GONE);
         }
@@ -136,7 +148,7 @@ public class HomeActivity extends Activity {
         addListenerOnButtonLogout();
         addListenerOnButtonProfile();
         addListenerOnButtonReport();
-        addListenerOnButtontempmap();
+        addListenerOnButtonTempMap();
         addListenerOnButtonQualityList();
         addListenerOnButtonGraph();
     }
@@ -173,7 +185,7 @@ public class HomeActivity extends Activity {
     /**
      * Adds functionality to the profile button
      */
-    public void addListenerOnButtonProfile() {
+    private void addListenerOnButtonProfile() {
 
         /*
         Sets the user that you originally used to create
@@ -202,7 +214,7 @@ public class HomeActivity extends Activity {
     /**
      * Adds functionality to the report button
      */
-    public void addListenerOnButtonReport() {
+    private void addListenerOnButtonReport() {
 
         /*
         Sets the user that you originally used to create
@@ -221,7 +233,9 @@ public class HomeActivity extends Activity {
             @SuppressWarnings("UnqualifiedFieldAccess")
             @Override
             public void onClick(View arg0) {
-                if (CurrentUser.getUser().getPermission() >= 2) {
+                User current = CurrentUser.getUser();
+                //noinspection LawOfDemeter
+                if (current.getPermission() >= 2) {
                     Intent intent = new Intent(context, SelectReportTypeActivity.class);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);
@@ -242,9 +256,9 @@ public class HomeActivity extends Activity {
     }
 
         /**
-         * Adds functionality to the tempmap button
+         * Adds functionality to the tempMap button
          */
-    public void addListenerOnButtontempmap() {
+        private void addListenerOnButtonTempMap() {
 
         /*
         Sets the user that you originally used to create
@@ -274,7 +288,7 @@ public class HomeActivity extends Activity {
         /**
          * Adds functionality to the quality list button
          */
-    public void addListenerOnButtonQualityList() {
+        private void addListenerOnButtonQualityList() {
 
         /*
         Sets the user that you originally used to create
@@ -300,7 +314,7 @@ public class HomeActivity extends Activity {
         });
     }
 
-    public void addListenerOnButtonGraph() {
+    private void addListenerOnButtonGraph() {
         final Context context = this;
 
         this.graphButton.setOnClickListener(new View.OnClickListener() {

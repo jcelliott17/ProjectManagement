@@ -1,13 +1,9 @@
 package com.example.jackieelliott.Oasis.Model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-/**
- * Created by Alon on 2/16/17.
- */
-
 @SuppressWarnings("ClassNamingConvention")
+/**
+ * User class
+ */
 public class User {
 
     /**
@@ -24,23 +20,23 @@ public class User {
 
     /**
      * Default constructor required to store custom
-     * Java objects in Firebase
+     * Java objects in FireBase
      */
     public User() {
-        this("default", "default", "default", 1);
+        this("default", "default", "default");
     }
 
     /**
      * Constructor for User
+     * @param userID id of the user
      * @param userName username of user
      * @param password password of user
-     * @param permission user's permission level
      */
-    public User(String userName, String password, String userID, int permission) {
+    public User(String userName, String password, String userID) {
         super();
         this._username = userName;
         this._password = password;
-        this._permission = permission;
+        this._permission = 1;
         this._userID = userID;
         this._accountType = "";
         this._emailAddress = "";
@@ -111,8 +107,16 @@ public class User {
      */
     public void setEmailAddress(String emailAddress) { this._emailAddress = emailAddress; }
 
+    /**
+     * Getter
+     * @return user ID
+     */
     public String getUserID() { return _userID; }
 
+    /**
+     * Setter
+     * @param userID new user ID
+     */
     public void setUserID(String userID) { _userID = userID; }
 
 

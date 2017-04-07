@@ -1,7 +1,7 @@
 package com.example.jackieelliott.Oasis.Model;
 
 /**
- * Created by Alon on 2/16/17.
+ * Class AccountTypes (holds an enum left over from old implementation)
  */
 public class AccountTypes {
     /**

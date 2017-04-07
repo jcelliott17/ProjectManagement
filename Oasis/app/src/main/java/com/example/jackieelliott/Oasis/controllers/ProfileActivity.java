@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,13 +19,14 @@ import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by JackieElliott on 2/12/17.
- */
-
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+@SuppressWarnings("CyclicClassDependency")
+/**
+ * Profile Activity Class
+ * Created the functionality for the profile page and changes the layout
+ */
 public class ProfileActivity extends Activity {
 
     private EditText email;
@@ -45,24 +47,32 @@ public class ProfileActivity extends Activity {
         setContentView(R.layout.profile_page);
         addListenerOnButtonBack();
 
-        this.username.setText(CurrentUser.getUser().getUsername());
+        User current = CurrentUser.getUser();
+        //noinspection LawOfDemeter
+        this.username.setText(current.getUsername());
         this.email = (EditText) findViewById(R.id.emailText);
         this.homeAddress = (EditText) findViewById(R.id.addressText);
-        this.accountType.setText(CurrentUser.getUser().getAccountType());
-        Bundle b = getIntent().getExtras();
+        //noinspection LawOfDemeter
+        this.accountType.setText(current.getAccountType());
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
 
         // Gets the information of the current user if the email/ home
         // address already exists.
         if (CurrentUser.getUser() != null) {
-            if (CurrentUser.getUser().getEmailAddress() != null){
-                this.email.setText(CurrentUser.getUser().getEmailAddress());
+            //noinspection LawOfDemeter
+            if (current.getEmailAddress() != null){
+                //noinspection LawOfDemeter
+                this.email.setText(current.getEmailAddress());
             }
         }
         if (CurrentUser.getUser() != null) {
-            if (CurrentUser.getUser().getHomeAddress() != null) {
-                this.homeAddress.setText(CurrentUser.getUser().getHomeAddress());
+            //noinspection LawOfDemeter
+            if (current.getHomeAddress() != null) {
+                //noinspection LawOfDemeter
+                this.homeAddress.setText(current.getHomeAddress());
             }
         }
     }
@@ -89,15 +99,18 @@ public class ProfileActivity extends Activity {
 
                 Log.d("TESTING", "Entered Onclick");
 
+                User current = CurrentUser.getUser();
+                Editable e1 = email.getText();
+                Editable e2 = homeAddress.getText();
                 //noinspection UnqualifiedFieldAccess
-                if (email.getText() != null && CurrentUser.getUser() != null) {
-                    //noinspection UnqualifiedFieldAccess
-                    CurrentUser.getUser().setEmailAddress(email.getText().toString());
+                if ((email.getText() != null) && (CurrentUser.getUser() != null)) {
+                    //noinspection UnqualifiedFieldAccess,LawOfDemeter
+                    current.setEmailAddress(e1.toString());
                 }
                 //noinspection UnqualifiedFieldAccess
-                if (homeAddress.getText() != null && CurrentUser.getUser() != null) {
-                    //noinspection UnqualifiedFieldAccess
-                    CurrentUser.getUser().setHomeAddress(homeAddress.getText().toString());
+                if ((homeAddress.getText() != null) && (CurrentUser.getUser() != null)) {
+                    //noinspection UnqualifiedFieldAccess,LawOfDemeter
+                    current.setHomeAddress(e2.toString());
                 }
 
                 Intent intent = new Intent(context, HomeActivity.class);

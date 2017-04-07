@@ -11,7 +11,6 @@ import android.widget.ListView;
 
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
-import com.example.jackieelliott.Oasis.Model.User;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,6 +27,7 @@ import java.util.ArrayList;
 /**
  * Google maps activity controller
  */
+@SuppressWarnings("CyclicClassDependency")
 public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;

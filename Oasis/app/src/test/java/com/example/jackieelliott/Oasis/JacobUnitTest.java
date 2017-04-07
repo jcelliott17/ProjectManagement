@@ -1,9 +1,5 @@
 package com.example.jackieelliott.Oasis;
 
-/**
- * Created by ButlerJacob on 4/5/17.
- */
-
 import org.junit.Test;
 
 import static org.junit.Assert.*;

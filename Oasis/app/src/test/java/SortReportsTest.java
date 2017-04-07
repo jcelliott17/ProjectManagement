@@ -1,6 +1,3 @@
-/**
- * Created by JackieElliott on 4/4/17.
- */
 
 import org.junit.Test;
 import com.example.jackieelliott.Oasis.Model.QualityReport;

@@ -3,13 +3,14 @@ package com.example.jackieelliott.Oasis.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by JackieElliott on 3/28/17.
- */
 
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+/**
+ * History Graph class
+ * contains information about the graph being created
+ */
 public class HistoryGraph implements Parcelable {
 
     private final int year;

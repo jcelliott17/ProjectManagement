@@ -1,21 +1,15 @@
 package com.example.jackieelliott.Oasis.controllers;
 
-/**
- * Created by JackieElliott on 3/27/17.
- */
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.jackieelliott.Oasis.Model.HistoryGraph;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
-import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -24,7 +18,6 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -34,6 +27,7 @@ import java.util.LinkedList;
 /**
  * Graph display activity controller
  */
+@SuppressWarnings("CyclicClassDependency")
 public class GraphDisplayActivity extends Activity {
 
     private Button back;
@@ -61,12 +55,16 @@ public class GraphDisplayActivity extends Activity {
         //Sets labels on axises
 
         GridLabelRenderer gridLabel = scatterPlot.getGridLabelRenderer();
-        gridLabel.setVerticalAxisTitle(historyGraph.getYAxis() + " PPM");
+        if ((historyGraph != null ? historyGraph.getYAxis() : null) != null) {
+            gridLabel.setVerticalAxisTitle(historyGraph.getYAxis() + " PPM");
+        }
 
         this.series = new PointsGraphSeries<>();
 
-        getData(historyGraph.getYear(), historyGraph.getLatitude(),
-                historyGraph.getLongitude(), historyGraph.getYAxis());
+        getData(historyGraph != null ? historyGraph.getYear() : 0,
+                historyGraph != null ? historyGraph.getLatitude() : 0,
+                historyGraph != null ? historyGraph.getLongitude() : 0,
+                historyGraph != null ? historyGraph.getYAxis() : null);
 
         addListenerOnButtonBack();
     }
@@ -101,7 +99,8 @@ public class GraphDisplayActivity extends Activity {
     //dataType is virus or contaminant
     @SuppressWarnings({"FeatureEnvy", "MagicNumber"})
     private void getData(int year, double latitude, double longitude, String dataType) {
-        LinkedList<QualityReport>[] reportsByYear = QualityReport.sortReports(year, latitude, longitude, qualityList);
+        LinkedList<QualityReport>[] reportsByYear =
+                QualityReport.sortReports(year, latitude, longitude, qualityList);
         int month = 1;
         int max = 0;
         for (Deque<QualityReport> reportsByMonth: reportsByYear) {
