@@ -9,7 +9,6 @@
         android:text="@string/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/report_textView"
         android:textSize="24sp"
         android:layout_weight="0.03"
          />

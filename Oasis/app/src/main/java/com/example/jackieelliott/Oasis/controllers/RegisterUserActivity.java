@@ -37,7 +37,6 @@ import java.util.ArrayList;
 @SuppressWarnings("CyclicClassDependency")
 public class RegisterUserActivity extends Activity {
 
-    private Button registerButton;
     private Spinner accountTypeSpinner;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -126,7 +125,7 @@ public class RegisterUserActivity extends Activity {
 
         context = this;
 
-        registerButton = (Button) findViewById(R.id.registerOnRegisterPage);
+        Button registerButton = (Button) findViewById(R.id.registerOnRegisterPage);
         this.emailField = (EditText) findViewById(R.id.username_text);
         this.passField = (EditText) findViewById(R.id.editText3);
 

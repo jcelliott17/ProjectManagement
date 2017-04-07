@@ -32,7 +32,6 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     private GoogleMap mMap;
     private Button backButton2;
-    private ListView reportsList;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
 
@@ -51,7 +50,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         Bundle b = intent.getExtras();
         reportList = b.getParcelableArrayList("ReportList");
         qualityList = b.getParcelableArrayList("QualityList");
-        reportsList = (ListView) findViewById(R.id.reports_list);
+        ListView reportsList = (ListView) findViewById(R.id.reports_list);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         FragmentManager mF = getSupportFragmentManager();

@@ -43,7 +43,6 @@ public class HomeActivity extends Activity {
     private ArrayList<QualityReport> qualityList;
     private static final String TAG = "HomeActivity-TAG";
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
     private DatabaseReference mUserReference;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private ValueEventListener mUserListener;
@@ -69,7 +68,7 @@ public class HomeActivity extends Activity {
         ListView reportsList = (ListView) findViewById(R.id.reports_list);
         mAuth = FirebaseAuth.getInstance();
         //noinspection ChainedMethodCall
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         //noinspection ChainedMethodCall
         mUserReference = FirebaseDatabase.getInstance().getReference()
                 .child("user");
