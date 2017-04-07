@@ -3,8 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:weightSum="1">
-<<<<<<< HEAD
-=======
+
 <Button
     android:text="@string/back"
     android:layout_width="match_parent"
@@ -12,7 +11,6 @@ android:weightSum="1">
     android:id="@+id/backButton"
     android:layout_weight="0.04"
     />
->>>>>>> 20f256eb34dae125f00b22915e9e07b4657c3e66
 
     <Button
         android:text="Back"

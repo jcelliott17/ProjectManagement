@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,6 +20,8 @@ import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.concurrent.locks.Condition;
 
 /**
  * Created by JackieElliott on 3/13/17.
@@ -48,7 +51,8 @@ public class QualityReportActivity extends Activity {
 
         setContentView(R.layout.quality_report_page);
 
-        Bundle b = getIntent().getExtras();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
 
@@ -115,16 +119,22 @@ public class QualityReportActivity extends Activity {
             @Override
             public void onClick(View arg0) {
 
-                @SuppressWarnings("UnqualifiedFieldAccess") QualityReport newReport = new QualityReport(reportTitle.getText().toString());
-                newReport.setLatitude((Double.parseDouble(reportLatitude.getText().toString())));
+                Editable repT = reportTitle.getText();
+                Editable repLa = reportLatitude.getText();
+                Editable repLo = reportLongitude.getText();
+                Object condition = conditionWaterSpinner.getSelectedItem();
+                Editable virE = virusEdit.getText();
+                Editable contE = contaminantEdit.getText();
+                @SuppressWarnings("UnqualifiedFieldAccess") QualityReport newReport = new QualityReport(repT.toString());
+                newReport.setLatitude((Double.parseDouble(repLa.toString())));
                 //noinspection UnqualifiedFieldAccess
-                newReport.setLongitude((Double.parseDouble(reportLongitude.getText().toString())));
+                newReport.setLongitude((Double.parseDouble(repLo.toString())));
                 //noinspection UnqualifiedFieldAccess
-                newReport.setCondition(conditionWaterSpinner.getSelectedItem().toString());
+                newReport.setCondition(condition.toString());
                 //noinspection UnqualifiedFieldAccess
-                newReport.setVirus(Double.parseDouble(virusEdit.getText().toString()));
+                newReport.setVirus(Double.parseDouble(virE.toString()));
                 //noinspection UnqualifiedFieldAccess
-                newReport.setContaminant(Double.parseDouble(contaminantEdit.getText().toString()));
+                newReport.setContaminant(Double.parseDouble(contE.toString()));
                 //noinspection UnqualifiedFieldAccess
                 newReport.setReportNumber(reportList.size() + 1);
                 newReport.setTimeAndDate(new Date());

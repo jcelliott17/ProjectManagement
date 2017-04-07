@@ -41,7 +41,8 @@ public class SelectReportTypeActivity extends Activity {
 
         setContentView(R.layout.choose_report_type_page);
 
-        Bundle b = getIntent().getExtras();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
 
@@ -97,8 +98,10 @@ public class SelectReportTypeActivity extends Activity {
             @Override
             public void onClick(View arg0) {
 
+                Object type = chooseReportTypeSpinner.getSelectedItem();
+                String typeS = type.toString();
                 //noinspection UnqualifiedFieldAccess
-                if (chooseReportTypeSpinner.getSelectedItem().toString().equals("Quality")) {
+                if ("Quality".equals(typeS)) {
                     Intent intent = new Intent(context, QualityReportActivity.class);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);

@@ -39,7 +39,8 @@ public class QualityListActivity extends Activity {
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quality_list);
-        Bundle b = getIntent().getExtras();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
         ListView qualityReportList = (ListView) findViewById(R.id.quality_list);
@@ -51,7 +52,8 @@ public class QualityListActivity extends Activity {
 
         String[] qualityReports = new String[this.qualityList.size()];
         for (int i = 0; i < this.qualityList.size(); i++) {
-            qualityReports[i] = this.qualityList.get(i).toString();
+            QualityReport q = this.qualityList.get(i);
+            qualityReports[i] = q.toString();
         }
 
         ListAdapter adapter = new ArrayAdapter(this, android.

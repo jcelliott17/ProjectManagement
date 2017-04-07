@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Button;
@@ -62,11 +63,13 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login_page);
         addListenerOnButtonLogin();
         addListenerOnButtonCancel();
-        Bundle b = getIntent().getExtras();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         this.reportList  = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
 
         mAuth = FirebaseAuth.getInstance();
+        //noinspection ChainedMethodCall
         mUserReference = FirebaseDatabase.getInstance().getReference().child("user");
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -93,6 +96,7 @@ public class LoginActivity extends Activity {
                 for (DataSnapshot user : userlist) {
                     User candidate = user.getValue(User.class);
                     Log.d(TAG, "looping!");
+                    //noinspection ChainedMethodCall
                     if (candidate.getUserID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         CurrentUser.updateUser(candidate);
                         Log.d(TAG, "Updating user!");
@@ -118,8 +122,8 @@ public class LoginActivity extends Activity {
         Button login = (Button) findViewById(R.id.login_button);
         this.loginField = (EditText) findViewById(R.id.username_text);
         this.passField = (EditText) findViewById(R.id.editText2);
-        final AlertDialog alertDialog = new AlertDialog.Builder(LoginActivity
-                .this).create();
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        final AlertDialog alertDialog = builder.create();
         //Ignore this issue, portability issues
         alertDialog.setTitle("Error");
         alertDialog.setMessage("Wrong Username/Password");
@@ -147,8 +151,11 @@ public class LoginActivity extends Activity {
     }
 
     private void signIn() {
-        String email = loginField.getText().toString();
-        String password = passField.getText().toString();
+        Editable e1 = loginField.getText();
+        Editable e2 = passField.getText();
+        String email = e1.toString();
+        String password = e2.toString();
+        //noinspection ChainedMethodCall
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -160,12 +167,15 @@ public class LoginActivity extends Activity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast text = Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_LONG);
+                            text.show();
                         } else {
-                            Toast.makeText(LoginActivity.this, "You're in!",
-                                    Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, "Cur Perm: " + CurrentUser.getUser().getPermission());
+                            Toast text = Toast.makeText(LoginActivity.this, "You're in!",
+                                    Toast.LENGTH_SHORT);
+                            text.show();
+                            User current = CurrentUser.getUser();
+                            //noinspection LawOfDemeter
+                            Log.d(TAG, "Cur Perm: " + current.getPermission());
                             goToHome();
                         }
 
@@ -216,7 +226,8 @@ public class LoginActivity extends Activity {
     private boolean validateForm() {
         boolean valid = true;
 
-        String email = loginField.getText().toString();
+        Editable e1 = loginField.getText();
+        String email = e1.toString();
         if (TextUtils.isEmpty(email)) {
             loginField.setError("Required.");
             valid = false;
@@ -224,7 +235,8 @@ public class LoginActivity extends Activity {
             loginField.setError(null);
         }
 
-        String password = passField.getText().toString();
+        Editable e2 = passField.getText();
+        String password = e2.toString();
         if (TextUtils.isEmpty(password)) {
             passField.setError("Required.");
             valid = false;

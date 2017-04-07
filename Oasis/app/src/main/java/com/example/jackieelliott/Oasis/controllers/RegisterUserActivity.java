@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -69,10 +70,12 @@ public class RegisterUserActivity extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.accountTypeSpinner.setAdapter(adapter);
 
-        Bundle b = getIntent().getExtras();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
 
+        //noinspection ChainedMethodCall
         mUserReference = FirebaseDatabase.getInstance().getReference().child("user");
         mAuth = FirebaseAuth.getInstance();
 
@@ -95,11 +98,14 @@ public class RegisterUserActivity extends Activity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Loop through children for current user
+                FirebaseAuth fa = FirebaseAuth.getInstance();
                 Iterable<DataSnapshot> userlist = dataSnapshot.getChildren();
                 for (DataSnapshot user : userlist) {
                     User candidate = user.getValue(User.class);
                     Log.d(TAG, "looping!");
-                    if (candidate.getUserID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                    String id = candidate.getUserID();
+                    FirebaseUser cu = fa.getCurrentUser();
+                    if (id.equals(cu.getUid())) {
                         CurrentUser.updateUser(candidate);
                         Log.d(TAG, "Updating user!");
                         break;
@@ -134,8 +140,10 @@ public class RegisterUserActivity extends Activity {
                 // A warning should pop up here and let them know if that username already
                 // exists?
 
+                Editable em = emailField.getText();
+                Editable pass = passField.getText();
                 if (validateForm()) {
-                    createAccount(emailField.getText().toString(), passField.getText().toString());
+                    createAccount(em.toString(), pass.toString());
                 } else {
                     Log.d(TAG, "Failed validation");
                 }
@@ -173,6 +181,7 @@ public class RegisterUserActivity extends Activity {
     }
 
     private void createAccount(String email, String password) {
+        //noinspection ChainedMethodCall
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -183,11 +192,14 @@ public class RegisterUserActivity extends Activity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(RegisterUserActivity.this, "Authentication failed: " + task.getException().toString(),
-                                    Toast.LENGTH_SHORT).show();
+                            Exception e = task.getException();
+                            Toast t =  Toast.makeText(RegisterUserActivity.this, "Authentication failed: " + e.toString(),
+                                    Toast.LENGTH_SHORT);
+                            t.show();
                         } else {
-                            Toast.makeText(RegisterUserActivity.this, "You're in!",
-                                    Toast.LENGTH_SHORT).show();
+                            Toast t = Toast.makeText(RegisterUserActivity.this, "You're in!",
+                                    Toast.LENGTH_SHORT);
+                            t.show();
                             makeNewUser();
                             goToHome();
                         }
@@ -201,9 +213,12 @@ public class RegisterUserActivity extends Activity {
     */
     @SuppressWarnings("FeatureEnvy")
     private void makeNewUser() {
-        User newUser = new User(emailField.getText().toString(),
-                            passField.getText().toString(),
-                            mAuth.getCurrentUser().getUid(),
+        Editable em = emailField.getText();
+        Editable pass = passField.getText();
+        FirebaseUser cu = mAuth.getCurrentUser();
+        User newUser = new User(em.toString(),
+                            pass.toString(),
+                            cu.getUid(),
                             1);
 
         int permission = 1;
@@ -220,7 +235,8 @@ public class RegisterUserActivity extends Activity {
             newUser.setAccountType("Admin");
         }
         newUser.setPermission(permission);
-        mUserReference.child(mAuth.getCurrentUser().getUid()).setValue(newUser);
+        DatabaseReference child = mUserReference.child(cu.getUid());
+        child.setValue(newUser);
         CurrentUser.updateUser(newUser);
     }
 
@@ -237,7 +253,9 @@ public class RegisterUserActivity extends Activity {
 
         boolean valid = true;
 
-        String email = emailField.getText().toString();
+        Editable em = emailField.getText();
+        Editable pass = passField.getText();
+        String email = em.toString();
         if (TextUtils.isEmpty(email)) {
             emailField.setError("Required.");
             valid = false;
@@ -245,7 +263,7 @@ public class RegisterUserActivity extends Activity {
             emailField.setError(null);
         }
 
-        String password = passField.getText().toString();
+        String password = pass.toString();
         if (TextUtils.isEmpty(password)) {
             passField.setError("Required.");
             valid = false;

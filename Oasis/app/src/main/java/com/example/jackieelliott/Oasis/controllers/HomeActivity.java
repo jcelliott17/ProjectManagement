@@ -73,7 +73,9 @@ public class HomeActivity extends Activity {
         graphButton = (Button) findViewById(R.id.graph_button);
         ListView reportsList = (ListView) findViewById(R.id.reports_list);
         mAuth = FirebaseAuth.getInstance();
+        //noinspection ChainedMethodCall
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        //noinspection ChainedMethodCall
         mUserReference = FirebaseDatabase.getInstance().getReference()
                 .child("user");
 
@@ -99,6 +101,7 @@ public class HomeActivity extends Activity {
                 for (DataSnapshot user : userlist) {
                     User candidate = user.getValue(User.class);
                     Log.d(TAG, "looping!");
+                    //noinspection ChainedMethodCall
                     if (candidate.getUserID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                         CurrentUser.updateUser(candidate);
                         Log.d(TAG, "Updating user!");
@@ -125,7 +128,9 @@ public class HomeActivity extends Activity {
         reportsList.setAdapter(adapter);
 
 
-        if (CurrentUser.getUser().getPermission() <= 2) {
+        User current = CurrentUser.getUser();
+        //noinspection LawOfDemeter
+        if (current.getPermission() <= 2) {
             qualityListButton.setVisibility(View.GONE);
             graphButton.setVisibility(View.GONE);
         }
@@ -221,7 +226,9 @@ public class HomeActivity extends Activity {
             @SuppressWarnings("UnqualifiedFieldAccess")
             @Override
             public void onClick(View arg0) {
-                if (CurrentUser.getUser().getPermission() >= 2) {
+                User current = CurrentUser.getUser();
+                //noinspection LawOfDemeter
+                if (current.getPermission() >= 2) {
                     Intent intent = new Intent(context, SelectReportTypeActivity.class);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);

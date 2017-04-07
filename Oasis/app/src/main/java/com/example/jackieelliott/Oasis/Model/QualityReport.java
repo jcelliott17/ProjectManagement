@@ -281,7 +281,7 @@ public class QualityReport implements Parcelable {
         }
         for (QualityReport report: qualityList) {
             Date timeAndDate = report.getTimeAndDate();
-            if (timeAndDate.getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
+            if (((timeAndDate.getYear() == (year - 2000 + 100)) && (report.getLatitude() == latitude)) && (report.getLongitude() == longitude)) {
                 if (monthlyQualityList[timeAndDate.getMonth()] == null) {
                     monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<>();
                 }

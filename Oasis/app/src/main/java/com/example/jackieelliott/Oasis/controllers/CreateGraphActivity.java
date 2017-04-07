@@ -80,8 +80,10 @@ public class CreateGraphActivity extends Activity{
 
         createGraph.setOnClickListener(new View.OnClickListener() {
 
+            @SuppressWarnings("ChainedMethodCall")
             @Override
             public void onClick(View arg0) {
+                //noinspection ChainedMethodCall
                 historyGraphList = (new HistoryGraph(Integer.parseInt(year.getText().toString()),
                         Double.parseDouble(latitude.getText().toString()), Double.parseDouble(longitude
                         .getText().toString()), dataType.getSelectedItem().toString()));

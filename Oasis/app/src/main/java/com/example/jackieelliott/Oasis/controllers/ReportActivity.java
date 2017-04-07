@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -50,7 +51,8 @@ public class ReportActivity extends Activity {
 
         setContentView(R.layout.report_page);
 
-        Bundle b = getIntent().getExtras();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
 
@@ -115,16 +117,21 @@ public class ReportActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
+                Editable repT = reportTitle.getText();
+                Editable repLa = reportLatitude.getText();
+                Editable repLo = reportLongitude.getText();
+                Object condition = conditionWaterSpinner.getSelectedItem();
+                Object type = typeWaterSpinner.getSelectedItem();
 
-                @SuppressWarnings("UnqualifiedFieldAccess") Report newReport = new Report(reportTitle.getText().toString());
+                @SuppressWarnings("UnqualifiedFieldAccess") Report newReport = new Report(repT.toString());
                 //noinspection UnqualifiedFieldAccess
-                newReport.setLatitude((Double.parseDouble(reportLatitude.getText().toString())));
+                newReport.setLatitude((Double.parseDouble(repLa.toString())));
                 //noinspection UnqualifiedFieldAccess
-                newReport.setLongitude((Double.parseDouble(reportLongitude.getText().toString())));
+                newReport.setLongitude((Double.parseDouble(repLo.toString())));
                 //noinspection UnqualifiedFieldAccess
-                newReport.setCondition(conditionWaterSpinner.getSelectedItem().toString());
+                newReport.setCondition(condition.toString());
                 //noinspection UnqualifiedFieldAccess
-                newReport.setTypeOfWater(typeWaterSpinner.getSelectedItem().toString());
+                newReport.setTypeOfWater(type.toString());
                 //noinspection UnqualifiedFieldAccess
                 newReport.setReportNumber(reportList.size() + 1);
                 //noinspection UnqualifiedFieldAccess
