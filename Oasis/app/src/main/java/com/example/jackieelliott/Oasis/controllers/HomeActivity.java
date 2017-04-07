@@ -27,16 +27,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * Home Activity class
+ * loads the information and display for the homepage
+ */
+
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
 @SuppressWarnings({"ClassWithTooManyDependencies", "CyclicClassDependency",
         "ClassWithTooManyDependencies"})
 
-/**
- * Home Activity class
- * loads the information and display for the homepage
- */
 public class HomeActivity extends Activity {
 
     private Button logoutButton;

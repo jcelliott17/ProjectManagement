@@ -3,12 +3,13 @@ package com.example.jackieelliott.Oasis.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
-@SuppressWarnings({"ClassNamingConvention", "ClassWithTooManyDependents"})
 /**
  * Report class
  * keeps information about reports
  */
+
+@SuppressWarnings({"ClassNamingConvention", "ClassWithTooManyDependents"})
+
 public class Report implements Parcelable {
 
     private final String _reportName;

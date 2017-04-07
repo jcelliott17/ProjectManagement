@@ -32,15 +32,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
-//Overriding the toString() method
-//we do not want to override the toString method in this class
-
-@SuppressWarnings("CyclicClassDependency")
 /**
  * Login Activity class
  * adds functionality to the login page and updates the layout
  */
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
+@SuppressWarnings("CyclicClassDependency")
+
 public class LoginActivity extends Activity {
 
     private EditText loginField;

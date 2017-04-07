@@ -17,14 +17,16 @@ import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
 
-//Overriding the toString() method
-//we do not want to override the toString method in this class
-
-@SuppressWarnings("CyclicClassDependency")
 /**
  * Quality List Activity
  * Displays a list of quality reports if there are reports
  */
+
+//Overriding the toString() method
+//we do not want to override the toString method in this class
+
+@SuppressWarnings("CyclicClassDependency")
+
 public class QualityListActivity extends Activity {
     private Button backButton;
     private ArrayList<Report> reportList;

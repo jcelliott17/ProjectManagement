@@ -5,12 +5,13 @@ import android.os.Parcelable;
 
 import java.util.Date;
 import java.util.LinkedList;
-
-@SuppressWarnings("ClassWithTooManyDependents")
 /**
  * Quality Report Class
  * Contains the information about a quality report
  */
+
+@SuppressWarnings("ClassWithTooManyDependents")
+
 public class QualityReport implements Parcelable {
 
     private final String _reportName;

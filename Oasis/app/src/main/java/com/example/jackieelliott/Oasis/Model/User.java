@@ -1,9 +1,11 @@
 package com.example.jackieelliott.Oasis.Model;
 
-@SuppressWarnings("ClassNamingConvention")
 /**
  * User class
  */
+
+@SuppressWarnings("ClassNamingConvention")
+
 public class User {
 
     /**

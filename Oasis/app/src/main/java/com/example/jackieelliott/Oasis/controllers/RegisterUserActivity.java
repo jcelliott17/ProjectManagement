@@ -34,10 +34,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("CyclicClassDependency")
 /**
  * Register User activity class
  */
+
+@SuppressWarnings("CyclicClassDependency")
+
 public class RegisterUserActivity extends Activity {
 
     private Button registerButton;
