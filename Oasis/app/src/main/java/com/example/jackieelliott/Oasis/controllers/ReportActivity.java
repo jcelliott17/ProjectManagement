@@ -10,28 +10,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.jackieelliott.Oasis.Model.QualityReport;
-import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.WaterCondition;
 import com.example.jackieelliott.Oasis.Model.WaterType;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
-import com.example.jackieelliott.Oasis.Model.ReportType;
-import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-
-/**
- * Created by JackieElliott on 2/12/17.
- */
 
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+@SuppressWarnings("CyclicClassDependency")
 public class ReportActivity extends Activity {
 
     private EditText reportTitle;
@@ -56,19 +47,23 @@ public class ReportActivity extends Activity {
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
 
-        this.reportTitle = (EditText) findViewById(R.id.report_title_textedit);
+        this.reportTitle = (EditText) findViewById(R.id.report_title_textEdit);
         this.reportLatitude = (EditText) findViewById(R.id.latitude_text);
         this.reportLongitude = (EditText) findViewById(R.id.longitude_text);
 
         this.typeWaterSpinner = (Spinner) findViewById(R.id.type_water_spinner);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, WaterType.values());
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter(this, android.R.layout.simple_spinner_item,
+                        WaterType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.typeWaterSpinner.setAdapter(adapter);
 
         this.conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, WaterCondition.values());
+        ArrayAdapter<String> adapter2 =
+                new ArrayAdapter(this, android.R.layout.simple_spinner_item,
+                        WaterCondition.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.conditionWaterSpinner.setAdapter(adapter2);
         addListenerOnButtonBack();
@@ -123,7 +118,8 @@ public class ReportActivity extends Activity {
                 Object condition = conditionWaterSpinner.getSelectedItem();
                 Object type = typeWaterSpinner.getSelectedItem();
 
-                @SuppressWarnings("UnqualifiedFieldAccess") Report newReport = new Report(repT.toString());
+                @SuppressWarnings("UnqualifiedFieldAccess") Report newReport =
+                        new Report(repT.toString());
                 //noinspection UnqualifiedFieldAccess
                 newReport.setLatitude((Double.parseDouble(repLa.toString())));
                 //noinspection UnqualifiedFieldAccess

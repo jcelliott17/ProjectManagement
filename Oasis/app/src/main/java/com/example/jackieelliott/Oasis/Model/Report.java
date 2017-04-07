@@ -4,11 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 
-/**
- * Created by JackieElliott on 2/20/17.
- */
-
-@SuppressWarnings("ClassNamingConvention")
+@SuppressWarnings({"ClassNamingConvention", "ClassWithTooManyDependents"})
 public class Report implements Parcelable {
 
     private final String _reportName;
@@ -172,7 +168,9 @@ public class Report implements Parcelable {
      */
     @Override
     public String toString() {
-        return "Report Number: " + this._reportNumber + " Name: " + this._reportName + " Location: " + this._latitude + " " + this._longitude;
+        return "Report Number: " + this._reportNumber + " Name: "
+                + this._reportName + " Location: " + this._latitude
+                + " " + this._longitude;
     }
 
     /**

@@ -5,14 +5,14 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:text="@string/userpass"
+        android:text="@string/userPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
          />
 
     <TextView
-        android:text="@string/username"
+        android:text="@string/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
          />

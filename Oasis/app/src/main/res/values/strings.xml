@@ -4,7 +4,7 @@
     <!-- Strings related to login -->
     <string name="title_activity_google_maps">Map</string>
     <string name="back">Back</string>
-    <string name="userpass">Please Enter Your Username and Password</string>
+    <string name="userPass">Please Enter Your Username and Password</string>
     <string name="reportType">Select Type of Report</string>
     <string name="histGraph">Create History Graph</string>
     <string name="Uprofile">User Profile:</string>
@@ -13,7 +13,7 @@
     <string name="RegInf">Enter Registration Info:</string>
     <string name="profile">Profile</string>
     <string name="username">Username</string>
-    <string name="uname">Username:</string>
+    <string name="uName">Username:</string>
     <string name="year">Year:</string>
     <string name="RepTitle">Title of Report</string>
     <string name="WelImage">Welcome Screen Image</string>
@@ -48,4 +48,5 @@
     <string name="dataType">Date Type:</string>
     <string name="contaminant">Contaminant PPM</string>
     <string name="enterContaminant">Enter Contaminant PPM</string>
+    <string name="email">Email Address:</string>
 </resources>

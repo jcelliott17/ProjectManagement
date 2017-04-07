@@ -50,7 +50,7 @@
             android:text="@string/map"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tempmap"
+            android:id="@+id/tempMap"
             android:elevation="0dp"
             android:textSize="12sp"
             android:visibility="visible"
@@ -69,7 +69,7 @@
             android:text="@string/QRL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/qualitylist_button"
+            android:id="@+id/qualityList_button"
             android:textSize="12sp"
             tools:ignore="ButtonStyle" />
 

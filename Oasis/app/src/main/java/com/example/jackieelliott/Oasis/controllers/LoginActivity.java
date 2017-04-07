@@ -33,13 +33,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-/**
- * Created by JackieElliott on 2/8/17.
- */
-
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+@SuppressWarnings("CyclicClassDependency")
 public class LoginActivity extends Activity {
 
     private EditText loginField;
@@ -92,15 +89,23 @@ public class LoginActivity extends Activity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Loop through children for current user
-                Iterable<DataSnapshot> userlist = dataSnapshot.getChildren();
-                for (DataSnapshot user : userlist) {
+                Iterable<DataSnapshot> userList = dataSnapshot.getChildren();
+                for (DataSnapshot user : userList) {
                     User candidate = user.getValue(User.class);
                     Log.d(TAG, "looping!");
                     //noinspection ChainedMethodCall
-                    if (candidate.getUserID().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                        CurrentUser.updateUser(candidate);
-                        Log.d(TAG, "Updating user!");
-                        break;
+                    FirebaseAuth fa = FirebaseAuth.getInstance();
+                    if (fa != null) {
+                        FirebaseUser cu = fa.getCurrentUser();
+                        if (cu != null) {
+                            String id = cu.getUid();
+                            String uId = candidate.getUserID();
+                            if (uId.equals(id)) {
+                                CurrentUser.updateUser(candidate);
+                                Log.d(TAG, "Updating user!");
+                                break;
+                            }
+                        }
                     }
                 }
             }
@@ -116,8 +121,6 @@ public class LoginActivity extends Activity {
      * adds functionality to login button
      */
     private void addListenerOnButtonLogin() {
-
-        final Context context = this;
 
         Button login = (Button) findViewById(R.id.login_button);
         this.loginField = (EditText) findViewById(R.id.username_text);
@@ -167,7 +170,9 @@ public class LoginActivity extends Activity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
-                            Toast text = Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_LONG);
+                            Toast text = Toast.makeText(LoginActivity.this,
+                                    "Authentication failed.",
+                                    Toast.LENGTH_LONG);
                             text.show();
                         } else {
                             Toast text = Toast.makeText(LoginActivity.this, "You're in!",

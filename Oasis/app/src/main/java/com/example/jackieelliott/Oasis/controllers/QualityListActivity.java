@@ -12,20 +12,15 @@ import android.widget.ListView;
 
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
-import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
-import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
 
 
 import java.util.ArrayList;
 
-/**
- * Created by Alon on 3/15/17.
- */
-
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+@SuppressWarnings("CyclicClassDependency")
 public class QualityListActivity extends Activity {
     private Button backButton;
     private ArrayList<Report> reportList;

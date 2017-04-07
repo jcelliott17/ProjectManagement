@@ -10,26 +10,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import java.util.Date;
 
 import com.example.jackieelliott.Oasis.Model.PurityType;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
-import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.concurrent.locks.Condition;
-
-/**
- * Created by JackieElliott on 3/13/17.
- */
 
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+@SuppressWarnings("CyclicClassDependency")
 public class QualityReportActivity extends Activity {
 
     private EditText virusEdit;
@@ -56,7 +49,7 @@ public class QualityReportActivity extends Activity {
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
 
-        this.reportTitle = (EditText) findViewById(R.id.report_title_textedit);
+        this.reportTitle = (EditText) findViewById(R.id.report_title_textEdit);
         this.reportLatitude = (EditText) findViewById(R.id.latitude_text);
         this.reportLongitude = (EditText) findViewById(R.id.longitude_text);
         this.virusEdit = (EditText) findViewById(R.id.virusPPMText);
@@ -65,7 +58,9 @@ public class QualityReportActivity extends Activity {
 
         this.conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, PurityType.values());
+        ArrayAdapter<String> adapter2 =
+                new ArrayAdapter(this, android.R.layout.simple_spinner_item,
+                        PurityType.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.conditionWaterSpinner.setAdapter(adapter2);
         addListenerOnButtonBack();
@@ -80,8 +75,7 @@ public class QualityReportActivity extends Activity {
         final Context context = this;
 
         Button backButton = (Button) findViewById(R.id.backButton);
-        TextView reportText = (TextView) findViewById(R.id.report_textview);
-        this.reportTitle = (EditText) findViewById(R.id.report_title_textedit);
+        this.reportTitle = (EditText) findViewById(R.id.report_title_textEdit);
         this.conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 
 
@@ -125,7 +119,8 @@ public class QualityReportActivity extends Activity {
                 Object condition = conditionWaterSpinner.getSelectedItem();
                 Editable virE = virusEdit.getText();
                 Editable contE = contaminantEdit.getText();
-                @SuppressWarnings("UnqualifiedFieldAccess") QualityReport newReport = new QualityReport(repT.toString());
+                @SuppressWarnings("UnqualifiedFieldAccess") QualityReport newReport =
+                        new QualityReport(repT.toString());
                 newReport.setLatitude((Double.parseDouble(repLa.toString())));
                 //noinspection UnqualifiedFieldAccess
                 newReport.setLongitude((Double.parseDouble(repLo.toString())));

@@ -4,25 +4,11 @@
 android:layout_height="match_parent"
 android:weightSum="1">
 
-<Button
-    android:text="@string/back"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:id="@+id/backButton"
-    android:layout_weight="0.04"
-    />
-
     <Button
         android:text="Back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/backButton2" />
-
-    <Button
-        android:text="Back"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:id="@+id/backButton" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"

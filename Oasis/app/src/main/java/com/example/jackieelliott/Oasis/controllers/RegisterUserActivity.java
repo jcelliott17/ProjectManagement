@@ -34,14 +34,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-
-/**
- * Created by JackieElliott on 2/8/17.
- */
-
+@SuppressWarnings("CyclicClassDependency")
 public class RegisterUserActivity extends Activity {
 
-    Button registerButton;
+    private Button registerButton;
     private Spinner accountTypeSpinner;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -49,10 +45,10 @@ public class RegisterUserActivity extends Activity {
     private static final String TAG = "RegUserActivity-TAG";
     private DatabaseReference mUserReference;
     private Context context;
-    EditText emailField;
-    EditText passField;
-    ArrayList<Report> reportList;
-    ArrayList<QualityReport> qualityList;
+    private EditText emailField;
+    private EditText passField;
+    private ArrayList<Report> reportList;
+    private ArrayList<QualityReport> qualityList;
 
     /**
      * Creates the report activity page.
@@ -66,7 +62,9 @@ public class RegisterUserActivity extends Activity {
 
         this.accountTypeSpinner = (Spinner) findViewById(R.id.spinner);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, AccountTypes.AccountType.values());
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+                        AccountTypes.AccountType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.accountTypeSpinner.setAdapter(adapter);
 
@@ -99,13 +97,13 @@ public class RegisterUserActivity extends Activity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Loop through children for current user
                 FirebaseAuth fa = FirebaseAuth.getInstance();
-                Iterable<DataSnapshot> userlist = dataSnapshot.getChildren();
-                for (DataSnapshot user : userlist) {
+                Iterable<DataSnapshot> userList = dataSnapshot.getChildren();
+                for (DataSnapshot user : userList) {
                     User candidate = user.getValue(User.class);
                     Log.d(TAG, "looping!");
                     String id = candidate.getUserID();
                     FirebaseUser cu = fa.getCurrentUser();
-                    if (id.equals(cu.getUid())) {
+                    if (id.equals(cu != null ? cu.getUid() : null)) {
                         CurrentUser.updateUser(candidate);
                         Log.d(TAG, "Updating user!");
                         break;
@@ -192,8 +190,10 @@ public class RegisterUserActivity extends Activity {
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Exception e = task.getException();
-                            Toast t =  Toast.makeText(RegisterUserActivity.this, "Authentication failed: " + e.toString(),
+                            @SuppressWarnings("ThrowableResultOfMethodCallIgnored") Exception e =
+                                    task.getException();
+                            Toast t =  Toast.makeText(RegisterUserActivity.this,
+                                    "Authentication failed: " + (e != null ? e.toString() : null),
                                     Toast.LENGTH_SHORT);
                             t.show();
                         } else {
@@ -208,7 +208,8 @@ public class RegisterUserActivity extends Activity {
     }
 
     /*
-      Determines what type of user to create based on selection. Then sets the current user to the user
+      Determines what type of user to create based on selection.
+      Then sets the current user to the user
       created. Adds new user to Database.
     */
     @SuppressWarnings("FeatureEnvy")
@@ -218,8 +219,8 @@ public class RegisterUserActivity extends Activity {
         FirebaseUser cu = mAuth.getCurrentUser();
         User newUser = new User(em.toString(),
                             pass.toString(),
-                            cu.getUid(),
-                            1);
+                cu != null ? cu.getUid() : null
+        );
 
         int permission = 1;
         if (accountTypeSpinner.getSelectedItem() == AccountTypes.AccountType.User) {
@@ -235,7 +236,8 @@ public class RegisterUserActivity extends Activity {
             newUser.setAccountType("Admin");
         }
         newUser.setPermission(permission);
-        DatabaseReference child = mUserReference.child(cu.getUid());
+        @SuppressWarnings("ConstantConditions") DatabaseReference child =
+                mUserReference.child(cu != null ? cu.getUid() : null);
         child.setValue(newUser);
         CurrentUser.updateUser(newUser);
     }

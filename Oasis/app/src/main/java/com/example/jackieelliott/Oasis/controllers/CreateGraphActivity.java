@@ -13,18 +13,15 @@ import android.widget.Spinner;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.HistoryGraph;
-import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by JackieElliott on 3/27/17.
- */
 
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+@SuppressWarnings("CyclicClassDependency")
 public class CreateGraphActivity extends Activity{
 
     private Button createGraph;
@@ -85,7 +82,8 @@ public class CreateGraphActivity extends Activity{
             public void onClick(View arg0) {
                 //noinspection ChainedMethodCall
                 historyGraphList = (new HistoryGraph(Integer.parseInt(year.getText().toString()),
-                        Double.parseDouble(latitude.getText().toString()), Double.parseDouble(longitude
+                        Double.parseDouble(latitude.getText().toString()),
+                        Double.parseDouble(longitude
                         .getText().toString()), dataType.getSelectedItem().toString()));
                 Intent intent = new Intent(context, GraphDisplayActivity.class);
                 //noinspection UnqualifiedFieldAccess

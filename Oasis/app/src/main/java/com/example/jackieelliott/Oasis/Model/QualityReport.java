@@ -3,20 +3,10 @@ package com.example.jackieelliott.Oasis.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.example.jackieelliott.Oasis.controllers.GraphDisplayActivity;
-import com.jjoe64.graphview.Viewport;
-import com.jjoe64.graphview.series.DataPoint;
-
-import android.util.Log;
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
-/**
- * Created by JackieElliott on 2/20/17.
- */
-
+@SuppressWarnings("ClassWithTooManyDependents")
 public class QualityReport implements Parcelable {
 
     private final String _reportName;
@@ -132,7 +122,7 @@ public class QualityReport implements Parcelable {
      * @return double latitude
      */
 
-    public double getLatitude () { return this._latitude; }
+    private double getLatitude() { return this._latitude; }
 
     /**
      * set latitude
@@ -144,7 +134,7 @@ public class QualityReport implements Parcelable {
      * get longitude
      * @return double longitude
      */
-    public double getLongitude () { return this._longitude; }
+    private double getLongitude() { return this._longitude; }
 
     /**
      * set longitude
@@ -158,7 +148,7 @@ public class QualityReport implements Parcelable {
      * get time and date
      * @return int time and date
      */
-    public Date getTimeAndDate() {
+    private Date getTimeAndDate() {
         return this._timeAndDate;
     }
 
@@ -273,15 +263,19 @@ public class QualityReport implements Parcelable {
 
 
      @SuppressWarnings("MagicNumber")
-     public static LinkedList<QualityReport>[] sortReports(int year, double latitude, double longitude,
+     public static LinkedList<QualityReport>[] sortReports(int year, double latitude,
+                                                           double longitude,
                                                            Iterable<QualityReport> qualityList) {
-        LinkedList<QualityReport>[] monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
+        LinkedList<QualityReport>[] monthlyQualityList =
+                (LinkedList<QualityReport>[]) new LinkedList[12];
         if (qualityList == null) {
             return monthlyQualityList;
         }
         for (QualityReport report: qualityList) {
             Date timeAndDate = report.getTimeAndDate();
-            if (((timeAndDate.getYear() == (year - 2000 + 100)) && (report.getLatitude() == latitude)) && (report.getLongitude() == longitude)) {
+            if (((timeAndDate.getYear() == (year - 2000 + 100))
+                    && (report.getLatitude() == latitude))
+                    && (report.getLongitude() == longitude)) {
                 if (monthlyQualityList[timeAndDate.getMonth()] == null) {
                     monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<>();
                 }

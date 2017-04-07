@@ -12,19 +12,14 @@ import android.widget.Spinner;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.ReportType;
-import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
-import java.util.Objects;
-
-/**
- * Created by JackieElliott on 3/13/17.
- */
 
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+@SuppressWarnings("CyclicClassDependency")
 public class SelectReportTypeActivity extends Activity {
 
     private Spinner chooseReportTypeSpinner;
@@ -48,7 +43,9 @@ public class SelectReportTypeActivity extends Activity {
 
         this.chooseReportTypeSpinner = (Spinner) findViewById(R.id.select_report_type);
 
-        ArrayAdapter<String> adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ReportType.values());
+        ArrayAdapter<String> adapter1 =
+                new ArrayAdapter(this, android.R.layout.simple_spinner_item,
+                        ReportType.values());
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.chooseReportTypeSpinner.setAdapter(adapter1);
 
