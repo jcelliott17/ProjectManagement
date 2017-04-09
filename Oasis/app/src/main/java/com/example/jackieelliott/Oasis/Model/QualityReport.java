@@ -281,15 +281,15 @@ public class QualityReport implements Parcelable {
      public static LinkedList<QualityReport>[] sortReports(int year, double latitude,
                                                            double longitude,
                                                            Iterable<QualityReport> qualityList) {
-        LinkedList<QualityReport>[] monthlyQualityList =
-                (LinkedList<QualityReport>[]) new LinkedList[12];
+        @SuppressWarnings("unchecked") LinkedList<QualityReport>[] monthlyQualityList =
+                new LinkedList<>[12];
         if (qualityList == null) {
             return monthlyQualityList;
         }
         for (QualityReport report: qualityList) {
             Date timeAndDate = report.getTimeAndDate();
             //noinspection deprecation
-            if (((timeAndDate.getYear() == (year - 2000 + 100))
+            if (((timeAndDate.getYear() == ((year - 2000) + 100))
                     && (report.getLatitude() == latitude))
                     && (report.getLongitude() == longitude)) {
                 //noinspection deprecation

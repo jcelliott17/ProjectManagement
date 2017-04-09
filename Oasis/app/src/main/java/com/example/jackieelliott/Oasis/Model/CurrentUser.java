@@ -4,12 +4,13 @@ package com.example.jackieelliott.Oasis.Model;
  * Current User class
  * keeps track of the user currently using the application
  */
+@SuppressWarnings("UtilityClass")
 public class CurrentUser {
 
-    private static final String TAG = "LoginActivity-TAG";
     private static User currentUser;
 
     CurrentUser(User curUser) {
+        //noinspection AssignmentToStaticFieldFromInstanceMethod
         currentUser = curUser;
     }
 

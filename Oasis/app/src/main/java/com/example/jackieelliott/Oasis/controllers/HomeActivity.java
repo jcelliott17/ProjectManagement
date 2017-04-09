@@ -128,7 +128,7 @@ public class HomeActivity extends Activity {
             reports[i] = r.toString();
         }
 
-        ListAdapter adapter = new ArrayAdapter(this, android.
+        ListAdapter adapter = new ArrayAdapter<>(this, android.
                 R.layout.simple_list_item_1, reports);
         reportsList.setAdapter(adapter);
 

@@ -61,10 +61,10 @@ public class GraphDisplayActivity extends Activity {
 
         this.series = new PointsGraphSeries<>();
 
-        getData(historyGraph != null ? historyGraph.getYear() : 0,
-                historyGraph != null ? historyGraph.getLatitude() : 0,
-                historyGraph != null ? historyGraph.getLongitude() : 0,
-                historyGraph != null ? historyGraph.getYAxis() : null);
+        getData((historyGraph != null) ? historyGraph.getYear() : 0,
+                (historyGraph != null) ? historyGraph.getLatitude() : 0,
+                (historyGraph != null) ? historyGraph.getLongitude() : 0,
+                (historyGraph != null) ? historyGraph.getYAxis() : null);
 
         addListenerOnButtonBack();
     }

@@ -11,13 +11,11 @@ public class User {
     /**
      * Attributes of the User class
      */
-    private String _username;
-    private String _password;
-    //private Profile _profile;
+    private final String _username;
     private String _homeAddress;
     private String _emailAddress;
     private String _accountType;
-    private String _userID;
+    private final String _userID;
     private int _permission;
 
     /**
@@ -68,24 +66,6 @@ public class User {
     public CharSequence getUsername() { return this._username; }
 
     /**
-     * Setter
-     * @param userName username
-     */
-    public void setUsername(String userName) { this._username = userName; }
-
-    /**
-     * Getter
-     * @return password
-     */
-    public String getPassword() { return this._password; }
-
-    /**
-     * Setter
-     * @param password password
-     */
-    public void setPassword(String password) { this._password = password; }
-
-    /**
      * Getter
      * @return homeAddress
      */
@@ -114,12 +94,6 @@ public class User {
      * @return user ID
      */
     public String getUserID() { return _userID; }
-
-    /**
-     * Setter
-     * @param userID new user ID
-     */
-    public void setUserID(String userID) { _userID = userID; }
 
 
     /**

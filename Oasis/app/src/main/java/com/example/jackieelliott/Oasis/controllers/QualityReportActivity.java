@@ -61,7 +61,7 @@ public class QualityReportActivity extends Activity {
 
         this.conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 
-        ArrayAdapter<String> adapter2 =
+        @SuppressWarnings("unchecked") ArrayAdapter<String> adapter2 =
                 new ArrayAdapter(this, android.R.layout.simple_spinner_item,
                         PurityType.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

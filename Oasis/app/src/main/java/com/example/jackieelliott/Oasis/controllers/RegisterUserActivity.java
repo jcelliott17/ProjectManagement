@@ -66,7 +66,7 @@ public class RegisterUserActivity extends Activity {
 
         this.accountTypeSpinner = (Spinner) findViewById(R.id.spinner);
 
-        ArrayAdapter<String> adapter =
+        @SuppressWarnings("unchecked") ArrayAdapter<String> adapter =
                 new ArrayAdapter(this,android.R.layout.simple_spinner_item,
                         AccountTypes.AccountType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -107,7 +107,7 @@ public class RegisterUserActivity extends Activity {
                     Log.d(TAG, "looping!");
                     String id = candidate.getUserID();
                     FirebaseUser cu = fa.getCurrentUser();
-                    if (id.equals(cu != null ? cu.getUid() : null)) {
+                    if (id.equals((cu != null) ? cu.getUid() : null)) {
                         CurrentUser.updateUser(candidate);
                         Log.d(TAG, "Updating user!");
                         break;
@@ -223,7 +223,7 @@ public class RegisterUserActivity extends Activity {
         FirebaseUser cu = mAuth.getCurrentUser();
         User newUser = new User(em.toString(),
                             pass.toString(),
-                cu != null ? cu.getUid() : null
+                (cu != null) ? cu.getUid() : null
         );
 
         int permission = 1;
@@ -241,7 +241,7 @@ public class RegisterUserActivity extends Activity {
         }
         newUser.setPermission(permission);
         @SuppressWarnings("ConstantConditions") DatabaseReference child =
-                mUserReference.child(cu != null ? cu.getUid() : null);
+                mUserReference.child((cu != null) ? cu.getUid() : null);
         child.setValue(newUser);
         CurrentUser.updateUser(newUser);
     }

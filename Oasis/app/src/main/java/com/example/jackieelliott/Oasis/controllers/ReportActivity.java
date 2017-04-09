@@ -58,7 +58,7 @@ public class ReportActivity extends Activity {
 
         this.typeWaterSpinner = (Spinner) findViewById(R.id.type_water_spinner);
 
-        ArrayAdapter<String> adapter =
+        @SuppressWarnings("unchecked") ArrayAdapter<String> adapter =
                 new ArrayAdapter(this, android.R.layout.simple_spinner_item,
                         WaterType.values());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -66,7 +66,7 @@ public class ReportActivity extends Activity {
 
         this.conditionWaterSpinner = (Spinner) findViewById(R.id.water_condition_spinner);
 
-        ArrayAdapter<String> adapter2 =
+        @SuppressWarnings("unchecked") ArrayAdapter<String> adapter2 =
                 new ArrayAdapter(this, android.R.layout.simple_spinner_item,
                         WaterCondition.values());
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

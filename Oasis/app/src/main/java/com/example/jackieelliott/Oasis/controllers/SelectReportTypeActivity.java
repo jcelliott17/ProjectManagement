@@ -48,7 +48,7 @@ public class SelectReportTypeActivity extends Activity {
 
         this.chooseReportTypeSpinner = (Spinner) findViewById(R.id.select_report_type);
 
-        ArrayAdapter<String> adapter1 =
+        @SuppressWarnings("unchecked") ArrayAdapter<String> adapter1 =
                 new ArrayAdapter(this, android.R.layout.simple_spinner_item,
                         ReportType.values());
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
