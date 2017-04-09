@@ -16,10 +16,15 @@ import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
 
+/**
+ * Select Report Type Activity
+ */
+
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
 @SuppressWarnings("CyclicClassDependency")
+
 public class SelectReportTypeActivity extends Activity {
 
     private Spinner chooseReportTypeSpinner;

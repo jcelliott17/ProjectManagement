@@ -22,7 +22,10 @@ import java.util.ArrayList;
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
-@SuppressWarnings("CyclicClassDependency")
+//"CyclicClassDependency"
+/**
+ * Quality report activity
+ */
 public class QualityReportActivity extends Activity {
 
     private EditText virusEdit;

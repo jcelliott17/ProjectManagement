@@ -19,7 +19,6 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
     /**
      * Test method
-     * @throws Exception if not equal exception thrown
      */
     @Test
     public final void useAppContext() {

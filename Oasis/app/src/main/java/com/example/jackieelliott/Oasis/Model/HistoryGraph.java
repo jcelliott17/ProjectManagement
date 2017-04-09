@@ -7,6 +7,10 @@ import android.os.Parcelable;
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+/**
+ * History Graph class
+ * contains information about the graph being created
+ */
 public class HistoryGraph implements Parcelable {
 
     private final int year;

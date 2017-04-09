@@ -27,11 +27,17 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+/**
+ * Home Activity class
+ * loads the information and display for the homepage
+ */
+
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
 @SuppressWarnings({"ClassWithTooManyDependencies", "CyclicClassDependency",
         "ClassWithTooManyDependencies"})
+
 public class HomeActivity extends Activity {
 
     private Button logoutButton;
@@ -67,8 +73,6 @@ public class HomeActivity extends Activity {
         graphButton = (Button) findViewById(R.id.graph_button);
         ListView reportsList = (ListView) findViewById(R.id.reports_list);
         mAuth = FirebaseAuth.getInstance();
-        //noinspection ChainedMethodCall
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         //noinspection ChainedMethodCall
         mUserReference = FirebaseDatabase.getInstance().getReference()
                 .child("user");

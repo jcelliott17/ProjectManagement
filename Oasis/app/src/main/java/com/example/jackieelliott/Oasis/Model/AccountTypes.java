@@ -1,5 +1,8 @@
 package com.example.jackieelliott.Oasis.Model;
 
+/**
+ * Class AccountTypes (holds an enum left over from old implementation)
+ */
 public class AccountTypes {
     /**
      * possible user account types allowed

@@ -19,10 +19,16 @@ import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
 
+/**
+ * Profile Activity Class
+ * Created the functionality for the profile page and changes the layout
+ */
+
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
 @SuppressWarnings("CyclicClassDependency")
+
 public class ProfileActivity extends Activity {
 
     private EditText email;

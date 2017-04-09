@@ -3,11 +3,17 @@ package com.example.jackieelliott.Oasis.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Profile class
+ * Stores the profile information associated with a user
+ */
+
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
 
 @SuppressWarnings("ClassNamingConvention")
+
 public final class Profile implements Parcelable {
 
     /*

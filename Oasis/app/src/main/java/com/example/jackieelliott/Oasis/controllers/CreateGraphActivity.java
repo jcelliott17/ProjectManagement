@@ -16,13 +16,21 @@ import com.example.jackieelliott.Oasis.Model.HistoryGraph;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
-
+/**
+ * Create Graph Activity class
+ * creates the page with the graph creating information
+ */
 
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
 @SuppressWarnings("CyclicClassDependency")
+
 public class CreateGraphActivity extends Activity{
+    /**
+     * Create Graph Activity class
+     * creates the page with the graph creating information
+     */
 
     private Button createGraph;
     private Button back;

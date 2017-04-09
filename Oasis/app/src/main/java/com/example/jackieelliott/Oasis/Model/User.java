@@ -1,6 +1,11 @@
 package com.example.jackieelliott.Oasis.Model;
 
+/**
+ * User class
+ */
+
 @SuppressWarnings("ClassNamingConvention")
+
 public class User {
 
     /**
@@ -25,6 +30,7 @@ public class User {
 
     /**
      * Constructor for User
+     * @param userID id of the user
      * @param userName username of user
      * @param password password of user
      */
@@ -103,8 +109,16 @@ public class User {
      */
     public void setEmailAddress(String emailAddress) { this._emailAddress = emailAddress; }
 
+    /**
+     * Getter
+     * @return user ID
+     */
     public String getUserID() { return _userID; }
 
+    /**
+     * Setter
+     * @param userID new user ID
+     */
     public void setUserID(String userID) { _userID = userID; }
 
 

@@ -19,10 +19,15 @@ import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
 
+/**
+ * Report Activity class
+ */
+
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
 @SuppressWarnings("CyclicClassDependency")
+
 public class ReportActivity extends Activity {
 
     private EditText reportTitle;

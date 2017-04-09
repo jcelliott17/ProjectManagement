@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
@@ -50,7 +49,6 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         Bundle b = intent.getExtras();
         reportList = b.getParcelableArrayList("ReportList");
         qualityList = b.getParcelableArrayList("QualityList");
-        ListView reportsList = (ListView) findViewById(R.id.reports_list);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         FragmentManager mF = getSupportFragmentManager();

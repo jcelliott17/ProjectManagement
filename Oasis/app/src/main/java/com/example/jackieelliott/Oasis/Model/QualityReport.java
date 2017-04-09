@@ -5,8 +5,13 @@ import android.os.Parcelable;
 
 import java.util.Date;
 import java.util.LinkedList;
+/**
+ * Quality Report Class
+ * Contains the information about a quality report
+ */
 
 @SuppressWarnings("ClassWithTooManyDependents")
+
 public class QualityReport implements Parcelable {
 
     private final String _reportName;
@@ -27,7 +32,12 @@ public class QualityReport implements Parcelable {
         this._reportName = name;
     }
 
-
+    /**
+     * Quality report constructor
+     * @param name name of report
+     * @param latitude latitude of report location
+     * @param longitude longitude of report location
+     */
     public QualityReport(String name, double latitude, double longitude) {
         super();
         this._reportName = name;
@@ -230,6 +240,10 @@ public class QualityReport implements Parcelable {
 
     /**
      * Gets the average data values for a given year and plots the points on the graph
+     * @param contaminants contaminant values
+     * @param dataType type to average
+     * @param virus virus values
+     * @return the average of contaminant level
      **/
     //dataType is virus or contaminant
     public int getAverage(int[] contaminants, int[] virus, String dataType) {
@@ -255,7 +269,8 @@ public class QualityReport implements Parcelable {
     /**
      * Gets the reports from a specified year and sorts them by month
      *
-     *
+     * @param latitude latitude
+     * @param longitude longitude
      * @param year specified year for reports
      * @param qualityList list of reports
      * @return An array of linked lists
@@ -273,12 +288,16 @@ public class QualityReport implements Parcelable {
         }
         for (QualityReport report: qualityList) {
             Date timeAndDate = report.getTimeAndDate();
+            //noinspection deprecation
             if (((timeAndDate.getYear() == (year - 2000 + 100))
                     && (report.getLatitude() == latitude))
                     && (report.getLongitude() == longitude)) {
+                //noinspection deprecation
                 if (monthlyQualityList[timeAndDate.getMonth()] == null) {
+                    //noinspection deprecation
                     monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<>();
                 }
+                //noinspection deprecation
                 monthlyQualityList[timeAndDate.getMonth()].add(report);
             }
         }
