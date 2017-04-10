@@ -2,15 +2,15 @@ package com.example.jackieelliott.Oasis.Model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
-
 /**
- * Created by JackieElliott on 2/20/17.
+ * Quality Report Class
+ * Contains the information about a quality report
  */
+
+@SuppressWarnings("ClassWithTooManyDependents")
 
 public class QualityReport implements Parcelable {
 
@@ -32,7 +32,12 @@ public class QualityReport implements Parcelable {
         this._reportName = name;
     }
 
-
+    /**
+     * Quality report constructor
+     * @param name name of report
+     * @param latitude latitude of report location
+     * @param longitude longitude of report location
+     */
     public QualityReport(String name, double latitude, double longitude) {
         super();
         this._reportName = name;
@@ -127,7 +132,7 @@ public class QualityReport implements Parcelable {
      * @return double latitude
      */
 
-    public double getLatitude () { return this._latitude; }
+    private double getLatitude() { return this._latitude; }
 
     /**
      * set latitude
@@ -139,7 +144,7 @@ public class QualityReport implements Parcelable {
      * get longitude
      * @return double longitude
      */
-    public double getLongitude () { return this._longitude; }
+    private double getLongitude() { return this._longitude; }
 
     /**
      * set longitude
@@ -153,7 +158,7 @@ public class QualityReport implements Parcelable {
      * get time and date
      * @return int time and date
      */
-    public Date getTimeAndDate() {
+    private Date getTimeAndDate() {
         return this._timeAndDate;
     }
 
@@ -233,33 +238,70 @@ public class QualityReport implements Parcelable {
         }
     };
 
+    /**
+     * Gets the average data values for a given year and plots the points on the graph
+     * @param contaminants contaminant values
+     * @param dataType type to average
+     * @param virus virus values
+     * @return the average of contaminant level
+     **/
+    //dataType is virus or contaminant
+    public int getAverage(int[] contaminants, int[] virus, String dataType) {
+        double average = 0;
+        int length;
+        if (virus.length > contaminants.length) {
+            length = virus.length;
+        } else {
+            length = contaminants.length;
+        }
+        for (int i = 0; i < length; i++) {
+            if ("Virus".equals(dataType)) {
+                average += virus[i];
+            } else {
+                average += contaminants[i];
+            }
+        }
+        average = average / length;
+        return (int) average;
+    }
     //Returns a list of quality reports in a given year
     //Use deprecated Date code because android wouldn't support localDateTime
     /**
      * Gets the reports from a specified year and sorts them by month
      *
-     *
+     * @param latitude latitude
+     * @param longitude longitude
      * @param year specified year for reports
      * @param qualityList list of reports
      * @return An array of linked lists
      */
 
 
-     public static LinkedList<QualityReport>[] sortReports(int year, double latitude, double longitude,
-                                                    ArrayList<QualityReport> qualityList) {
-        LinkedList<QualityReport>[] monthlyQualityList = (LinkedList<QualityReport>[]) new LinkedList[12];
+     @SuppressWarnings("MagicNumber")
+     public static LinkedList<QualityReport>[] sortReports(int year, double latitude,
+                                                           double longitude,
+                                                           Iterable<QualityReport> qualityList) {
+        @SuppressWarnings("unchecked") LinkedList<QualityReport>[] monthlyQualityList =
+                new LinkedList<>[12];
         if (qualityList == null) {
             return monthlyQualityList;
         }
         for (QualityReport report: qualityList) {
             Date timeAndDate = report.getTimeAndDate();
-            if (timeAndDate.getYear() == (year - 2000 + 100) && report.getLatitude() == latitude && report.getLongitude() == longitude) {
+            //noinspection deprecation
+            if (((timeAndDate.getYear() == ((year - 2000) + 100))
+                    && (report.getLatitude() == latitude))
+                    && (report.getLongitude() == longitude)) {
+                //noinspection deprecation
                 if (monthlyQualityList[timeAndDate.getMonth()] == null) {
+                    //noinspection deprecation
                     monthlyQualityList[timeAndDate.getMonth()] = new LinkedList<>();
                 }
+                //noinspection deprecation
                 monthlyQualityList[timeAndDate.getMonth()].add(report);
             }
         }
         return monthlyQualityList;
+
     }
 }

@@ -12,18 +12,18 @@ import android.widget.Spinner;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.ReportType;
-import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
- * Created by JackieElliott on 3/13/17.
+ * Select Report Type Activity
  */
 
 //Overriding the toString() method
 //we do not want to override the toString method in this class
+
+@SuppressWarnings("CyclicClassDependency")
 
 public class SelectReportTypeActivity extends Activity {
 
@@ -41,13 +41,16 @@ public class SelectReportTypeActivity extends Activity {
 
         setContentView(R.layout.choose_report_type_page);
 
-        Bundle b = getIntent().getExtras();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
 
         this.chooseReportTypeSpinner = (Spinner) findViewById(R.id.select_report_type);
 
-        ArrayAdapter<String> adapter1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ReportType.values());
+        @SuppressWarnings("unchecked") ArrayAdapter<String> adapter1 =
+                new ArrayAdapter(this, android.R.layout.simple_spinner_item,
+                        ReportType.values());
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.chooseReportTypeSpinner.setAdapter(adapter1);
 
@@ -97,8 +100,10 @@ public class SelectReportTypeActivity extends Activity {
             @Override
             public void onClick(View arg0) {
 
+                Object type = chooseReportTypeSpinner.getSelectedItem();
+                String typeS = type.toString();
                 //noinspection UnqualifiedFieldAccess
-                if (chooseReportTypeSpinner.getSelectedItem().toString().equals("Quality")) {
+                if ("Quality".equals(typeS)) {
                     Intent intent = new Intent(context, QualityReportActivity.class);
                     //noinspection UnqualifiedFieldAccess
                     intent.putParcelableArrayListExtra("ReportList", reportList);

@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
     <TextView
-        android:text="Enter Registration Info:"
+        android:text="@string/RegInf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24sp"
-        android:layout_weight="0.09" />
+        android:layout_weight="0.09"
+         />
 
     <TextView
-        android:text="Username:"
+        android:text="@string/email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+         />
 
     <EditText
         android:layout_width="match_parent"
@@ -24,7 +27,7 @@
         android:id="@+id/username_text" />
 
     <TextView
-        android:text="Password:"
+        android:text="@string/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -36,7 +39,7 @@
         android:id="@+id/editText3" />
 
     <TextView
-        android:text="Account:"
+        android:text="@string/account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -47,14 +50,15 @@
         android:layout_weight="0.05" />
 
     <Button
-        android:text="Register"
+        android:text="@string/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/registerOnRegisterPage"
-        android:elevation="0dp" />
+        android:elevation="0dp"
+        tools:ignore="UnusedAttribute" />
 
     <Button
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/cancelOnRegisterPage" />

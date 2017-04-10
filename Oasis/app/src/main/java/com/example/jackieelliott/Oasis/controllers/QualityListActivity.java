@@ -7,23 +7,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
-import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
-import com.example.jackieelliott.Oasis.controllers.GoogleMapsActivity;
 
 
 import java.util.ArrayList;
 
 /**
- * Created by Alon on 3/15/17.
+ * Quality List Activity
+ * Displays a list of quality reports if there are reports
  */
 
 //Overriding the toString() method
 //we do not want to override the toString method in this class
+
+@SuppressWarnings("CyclicClassDependency")
 
 public class QualityListActivity extends Activity {
     private Button backButton;
@@ -38,7 +40,8 @@ public class QualityListActivity extends Activity {
     public final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quality_list);
-        Bundle b = getIntent().getExtras();
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
         this.reportList = b.getParcelableArrayList("ReportList");
         this.qualityList = b.getParcelableArrayList("QualityList");
         ListView qualityReportList = (ListView) findViewById(R.id.quality_list);
@@ -50,10 +53,11 @@ public class QualityListActivity extends Activity {
 
         String[] qualityReports = new String[this.qualityList.size()];
         for (int i = 0; i < this.qualityList.size(); i++) {
-            qualityReports[i] = this.qualityList.get(i).toString();
+            QualityReport q = this.qualityList.get(i);
+            qualityReports[i] = q.toString();
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter(this, android.
+        ListAdapter adapter = new ArrayAdapter<>(this, android.
                 R.layout.simple_list_item_1, qualityReports);
         qualityReportList.setAdapter(adapter);
     }

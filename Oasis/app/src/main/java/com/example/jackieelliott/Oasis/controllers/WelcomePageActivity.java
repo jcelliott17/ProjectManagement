@@ -9,7 +9,6 @@ import android.widget.Button;
 
 
 import com.example.jackieelliott.Oasis.Model.QualityReport;
-import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.R;
 

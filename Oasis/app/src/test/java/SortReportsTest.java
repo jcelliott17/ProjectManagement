@@ -1,6 +1,3 @@
-/**
- * Created by JackieElliott on 4/4/17.
- */
 
 import org.junit.Test;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
@@ -11,10 +8,12 @@ import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("ALL")
 public class SortReportsTest {
     /**
      * test method for sortReports located in QualityReports
      */
+    @SuppressWarnings("FeatureEnvy")
     @Test
     public final void testSortReports() {
 

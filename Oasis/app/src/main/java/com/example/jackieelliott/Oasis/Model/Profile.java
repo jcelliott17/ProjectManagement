@@ -4,7 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by Alon on 2/16/17.
+ * Profile class
+ * Stores the profile information associated with a user
  */
 
 //Overriding the toString() method
@@ -12,6 +13,7 @@ import android.os.Parcelable;
 
 
 @SuppressWarnings("ClassNamingConvention")
+
 public final class Profile implements Parcelable {
 
     /*

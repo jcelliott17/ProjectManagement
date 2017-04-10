@@ -14,14 +14,14 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+@SuppressWarnings("unused")
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     /**
      * Test method
-     * @throws Exception if not equal exception thrown
      */
     @Test
-    public final void useAppContext() throws Exception {
+    public final void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 

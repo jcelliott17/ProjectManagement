@@ -6,20 +6,22 @@
     android:weightSum="1">
 
     <TextView
-        android:text="Create History Graph"
+        android:text="@string/histGraph"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.03"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        />
 
     <TextView
-        android:text="Year:"
+        android:text="@string/year"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.03"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        />
 
     <EditText
         android:layout_width="match_parent"
@@ -27,10 +29,11 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/year_editText"
-        android:backgroundTint="@android:color/holo_green_light" />
+        android:backgroundTint="@android:color/holo_green_light"
+        tools:ignore="UnusedAttribute" />
 
     <TextView
-        android:text="Location:"
+        android:text="@string/loc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.03"
@@ -52,7 +55,7 @@
             tools:ignore="NestedWeights">
 
             <TextView
-                android:text="Latitude"
+                android:text="@string/lat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -72,7 +75,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:text="Longitude"
+                android:text="@string/longitude"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -87,7 +90,7 @@
     </LinearLayout>
 
     <TextView
-        android:text="Data Type:"
+        android:text="@string/dataType"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -101,14 +104,14 @@
         android:layout_weight="0.11" />
 
     <Button
-        android:text="Create Graph"
+        android:text="@string/createGraph"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/create_graph_button"
         android:layout_weight="0.03" />
 
     <Button
-        android:text="Back"
+        android:text="@string/back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/back_button"

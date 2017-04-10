@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1">
 
     <TextView
-        android:text="Submit a report:"
+        android:text="@string/submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/report_textview"
         android:textSize="24sp"
-        android:layout_weight="0.03" />
+        android:layout_weight="0.03"
+         />
 
     <TextView
-        android:text="Title of Report"
+        android:text="@string/RepTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.03" />
+        android:layout_weight="0.03"
+         />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Enter report name"
+        android:text="@string/enterRepName"
         android:ems="10"
-        android:id="@+id/report_title_textedit"
+        android:id="@+id/report_title_textEdit"
         android:layout_weight="0.03"
         android:selectAllOnFocus="true" />
 
     <TextView
-        android:text="Location"
+        android:text="@string/location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -41,7 +43,7 @@
         <EditText
             android:layout_width="197dp"
             android:layout_height="wrap_content"
-            android:text="Enter latitude"
+            android:text="@string/enterLat"
             android:ems="10"
             android:id="@+id/latitude_text"
             android:layout_weight="1"
@@ -51,7 +53,7 @@
         <EditText
             android:layout_width="187dp"
             android:layout_height="wrap_content"
-            android:text="Enter longitude"
+            android:text="@string/enterLong"
             android:ems="10"
             android:id="@+id/longitude_text"
             android:layout_weight="1"
@@ -60,7 +62,7 @@
     </LinearLayout>
 
     <TextView
-        android:text="Condition of Water"
+        android:text="@string/waterCond"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.03" />
@@ -72,7 +74,7 @@
         android:layout_weight="0.03" />
 
     <TextView
-        android:text="Virus PPM"
+        android:text="@string/virus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.03" />
@@ -80,7 +82,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Virus PPM"
+        android:text="@string/enterVirus"
         android:ems="10"
         android:id="@+id/virusPPMText"
         android:layout_weight="0.03"
@@ -88,7 +90,7 @@
         android:inputType="numberDecimal" />
 
     <TextView
-        android:text="Contaminant PPM"
+        android:text="@string/contaminant"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.03" />
@@ -96,7 +98,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter Contaminant PPM"
+        android:text="@string/enterContaminant"
         android:ems="10"
         android:id="@+id/contaminantPPMText"
         android:layout_weight="0.03"
@@ -104,14 +106,14 @@
         android:inputType="numberDecimal" />
 
     <Button
-        android:text="Create Report"
+        android:text="@string/createRep"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/create_report_button"
         android:layout_weight="0.03" />
 
     <Button
-        android:text="Back"
+        android:text="@string/back"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/backButton"

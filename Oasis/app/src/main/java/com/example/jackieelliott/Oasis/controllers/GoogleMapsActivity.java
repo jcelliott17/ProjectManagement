@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
-import com.example.jackieelliott.Oasis.Model.User;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,11 +26,11 @@ import java.util.ArrayList;
 /**
  * Google maps activity controller
  */
+@SuppressWarnings("CyclicClassDependency")
 public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private Button backButton;
-    private ListView reportsList;
+    private Button backButton2;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
 
@@ -44,14 +42,13 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
-        backButton = (Button) findViewById(R.id.backButton);
+        backButton2 = (Button) findViewById(R.id.backButton2);
         setContentView(R.layout.activity_google_maps);
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         reportList = b.getParcelableArrayList("ReportList");
         qualityList = b.getParcelableArrayList("QualityList");
-        reportsList = (ListView) findViewById(R.id.reports_list);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         FragmentManager mF = getSupportFragmentManager();
@@ -68,9 +65,9 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         final Context context = this;
 
-        backButton = (Button)findViewById(R.id.backButton);
+        backButton2 = (Button)findViewById(R.id.backButton2);
 
-        backButton.setOnClickListener(new View.OnClickListener() {
+        backButton2.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0a) {
@@ -97,6 +94,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+    @SuppressWarnings("FeatureEnvy")
     @Override
 
     public final void onMapReady(GoogleMap googleMap) {
@@ -104,6 +102,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
+            @SuppressWarnings("FeatureEnvy")
             @Override
             public void onMapClick(LatLng latLng) {
 

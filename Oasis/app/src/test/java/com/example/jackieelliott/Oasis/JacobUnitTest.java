@@ -1,9 +1,5 @@
 package com.example.jackieelliott.Oasis;
 
-/**
- * Created by ButlerJacob on 4/5/17.
- */
-
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,6 +9,7 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+@SuppressWarnings("ALL")
 public class JacobUnitTest {
     /**
      * Example unit test method

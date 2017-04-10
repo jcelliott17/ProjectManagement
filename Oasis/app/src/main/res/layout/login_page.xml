@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:text="Please enter your username and password"
+        android:text="@string/userPass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+         />
 
     <TextView
-        android:text="Username"
+        android:text="@string/email"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+         />
 
     <EditText
         android:layout_width="match_parent"
@@ -22,7 +25,7 @@
         android:id="@+id/username_text" />
 
     <TextView
-        android:text="Password"
+        android:text="@string/pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -34,13 +37,14 @@
         android:id="@+id/editText2" />
 
     <Button
-        android:text="Login"
+        android:text="@string/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/login_button" />
+        android:id="@+id/login_button"
+        />
 
     <Button
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/login_Cancel" />

@@ -13,19 +13,24 @@ import android.widget.Spinner;
 import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.HistoryGraph;
-import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
 
 import java.util.ArrayList;
-
 /**
- * Created by JackieElliott on 3/27/17.
+ * Create Graph Activity class
+ * creates the page with the graph creating information
  */
 
 //Overriding the toString() method
 //we do not want to override the toString method in this class
 
+@SuppressWarnings("CyclicClassDependency")
+
 public class CreateGraphActivity extends Activity{
+    /**
+     * Create Graph Activity class
+     * creates the page with the graph creating information
+     */
 
     private Button createGraph;
     private Button back;
@@ -57,7 +62,8 @@ public class CreateGraphActivity extends Activity{
         dataType = (Spinner) findViewById(R.id.data_type_spinner);
 
         String[] spinnerItems = {"Contaminant","Virus"};
-        ArrayAdapter<String> adapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item,
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_spinner_item,
                 spinnerItems);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dataType.setAdapter(adapter);
@@ -80,10 +86,13 @@ public class CreateGraphActivity extends Activity{
 
         createGraph.setOnClickListener(new View.OnClickListener() {
 
+            @SuppressWarnings("ChainedMethodCall")
             @Override
             public void onClick(View arg0) {
+                //noinspection ChainedMethodCall
                 historyGraphList = (new HistoryGraph(Integer.parseInt(year.getText().toString()),
-                        Double.parseDouble(latitude.getText().toString()), Double.parseDouble(longitude
+                        Double.parseDouble(latitude.getText().toString()),
+                        Double.parseDouble(longitude
                         .getText().toString()), dataType.getSelectedItem().toString()));
                 Intent intent = new Intent(context, GraphDisplayActivity.class);
                 //noinspection UnqualifiedFieldAccess

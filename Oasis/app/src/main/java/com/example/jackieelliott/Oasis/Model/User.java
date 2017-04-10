@@ -1,46 +1,42 @@
 package com.example.jackieelliott.Oasis.Model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
- * Created by Alon on 2/16/17.
+ * User class
  */
 
 @SuppressWarnings("ClassNamingConvention")
+
 public class User {
 
     /**
      * Attributes of the User class
      */
-    private String _username;
-    private String _password;
-    //private Profile _profile;
+    private final String _username;
     private String _homeAddress;
     private String _emailAddress;
     private String _accountType;
-    private String _userID;
+    private final String _userID;
     private int _permission;
 
     /**
      * Default constructor required to store custom
-     * Java objects in Firebase
+     * Java objects in FireBase
      */
     public User() {
-        this("default", "default", "default", 1);
+        this("default", "default", "default");
     }
 
     /**
      * Constructor for User
+     * @param userID id of the user
      * @param userName username of user
      * @param password password of user
-     * @param permission user's permission level
      */
-    public User(String userName, String password, String userID, int permission) {
+    public User(String userName, String password, String userID) {
         super();
         this._username = userName;
         this._password = password;
-        this._permission = permission;
+        this._permission = 1;
         this._userID = userID;
         this._accountType = "";
         this._emailAddress = "";
@@ -67,31 +63,13 @@ public class User {
      * Getter
      * @return username
      */
-    public String getUsername() { return this._username; }
-
-    /**
-     * Setter
-     * @param userName username
-     */
-    public void setUsername(String userName) { this._username = userName; }
-
-    /**
-     * Getter
-     * @return password
-     */
-    public String getPassword() { return this._password; }
-
-    /**
-     * Setter
-     * @param password password
-     */
-    public void setPassword(String password) { this._password = password; }
+    public CharSequence getUsername() { return this._username; }
 
     /**
      * Getter
      * @return homeAddress
      */
-    public String getHomeAddress() { return this._homeAddress; }
+    public CharSequence getHomeAddress() { return this._homeAddress; }
 
     /**
      * Setter
@@ -103,7 +81,7 @@ public class User {
      * Getter
      * @return emailAddress
      */
-    public String getEmailAddress() { return this._emailAddress; }
+    public CharSequence getEmailAddress() { return this._emailAddress; }
 
     /**
      * Setter
@@ -111,16 +89,18 @@ public class User {
      */
     public void setEmailAddress(String emailAddress) { this._emailAddress = emailAddress; }
 
+    /**
+     * Getter
+     * @return user ID
+     */
     public String getUserID() { return _userID; }
-
-    public void setUserID(String userID) { _userID = userID; }
 
 
     /**
      * Getter
      * @return accountType
      */
-    public String getAccountType() { return this._accountType; }
+    public CharSequence getAccountType() { return this._accountType; }
 
     /**
      * Setter

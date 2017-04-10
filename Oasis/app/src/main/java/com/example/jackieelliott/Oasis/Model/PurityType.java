@@ -1,9 +1,9 @@
 package com.example.jackieelliott.Oasis.Model;
 
 /**
- * Created by Caleb on 3/15/2017.
+ * Purity Type Enum
+ * contains information about the purity type of water at a location
  */
-
 public enum PurityType {
     @SuppressWarnings("EnumeratedConstantNamingConvention")Safe,
     @SuppressWarnings("EnumeratedConstantNamingConvention")Treatable,

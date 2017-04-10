@@ -3,12 +3,13 @@ package com.example.jackieelliott.Oasis.Model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
 /**
- * Created by JackieElliott on 2/20/17.
+ * Report class
+ * keeps information about reports
  */
 
-@SuppressWarnings("ClassNamingConvention")
+@SuppressWarnings({"ClassNamingConvention", "ClassWithTooManyDependents"})
+
 public class Report implements Parcelable {
 
     private final String _reportName;
@@ -172,7 +173,9 @@ public class Report implements Parcelable {
      */
     @Override
     public String toString() {
-        return "Report Number: " + this._reportNumber + " Name: " + this._reportName + " Location: " + this._latitude + " " + this._longitude;
+        return "Report Number: " + this._reportNumber + " Name: "
+                + this._reportName + " Location: " + this._latitude
+                + " " + this._longitude;
     }
 
     /**
