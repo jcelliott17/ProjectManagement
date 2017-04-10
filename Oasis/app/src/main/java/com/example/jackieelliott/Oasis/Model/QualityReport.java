@@ -264,6 +264,21 @@ public class QualityReport implements Parcelable {
         average = average / length;
         return (int) average;
     }
+
+    /**
+     * Gets the logitude and latitude and multiplies them together (created this method
+     *    for the sake of making a JUnit to test it as there weren't any more interesting
+     *    methods to use)
+     * @param _longitude the longitude of the water quality entry
+     * @param _latitude the latitude of the water quality entry
+     * @return a double of the latitude times the longitude
+     */
+    public double getLongLat(double _longitude, double _latitude) {
+        double longlat = 0;
+        longlat = _longitude * _latitude;
+        return longlat;
+    }
+
     //Returns a list of quality reports in a given year
     //Use deprecated Date code because android wouldn't support localDateTime
     /**
@@ -282,7 +297,7 @@ public class QualityReport implements Parcelable {
                                                            double longitude,
                                                            Iterable<QualityReport> qualityList) {
         @SuppressWarnings("unchecked") LinkedList<QualityReport>[] monthlyQualityList =
-                new LinkedList<>[12];
+                new LinkedList[12];
         if (qualityList == null) {
             return monthlyQualityList;
         }
