@@ -32,7 +32,7 @@ public class CHessJUnit {
         QualityReport test = new QualityReport("TestReport");
 
         assertEquals("Virus PPM is greater", test.greaterPPMVal(v1, c1));
-        assertEquals("Contaminant PPM is greater", test.greaterPPMVal(v1, c1));
-        assertEquals("Virus and Contaminant PPM are equal", test.greaterPPMVal(v1, c1));
+        assertEquals("Contaminant PPM is greater", test.greaterPPMVal(v2, c2));
+        assertEquals("Virus and Contaminant PPM are equal", test.greaterPPMVal(v3, c3));
     }
 }
