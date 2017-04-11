@@ -1,38 +1,39 @@
+package com.example.jackieelliott.Oasis;
+
 import org.junit.Test;
 import com.example.jackieelliott.Oasis.Model.User;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by ldouglas7 on 4/10/17.
- */
-
+@SuppressWarnings({"FeatureEnvy", "JavaDoc"})
 public class LdouglasUnitTest {
     /**
      * test method for sortReports located in QualityReports
      */
+    @SuppressWarnings("OverlyLongMethod")
     @Test
     public final void testFindUserNames() {
-        User user1 = new User("Username1", "Password1", "ID1", 1);
-        User user2 = new User("Username2", "Password2", "ID2", 2);
-        User user3 = new User("Username3", "Password3", "ID3", 3);
-        User user4 = new User("Username4", "Password4", "ID4", 4);
-        User user5 = new User("Username5", "Password5", "ID5", 5);
-        User user6 = new User("Username6", "Password6", "ID6", 6);
-        User user7 = new User("Username7", "Password7", "ID7", 7);
-        User user8 = new User("Username8", "Password8", "ID8", 8);
-        User user9 = new User("Username9", "Password9", "ID9", 9);
-        User user10 = new User("Username10", "Password10", "ID10", 10);
-        User userNull = new User(null, null, null, 0);
+        User user1 = new User("Username1", "Password1", "ID1");
+        User user2 = new User("Username2", "Password2", "ID2");
+        User user3 = new User("Username3", "Password3", "ID3");
+        User user4 = new User("Username4", "Password4", "ID4");
+        User user5 = new User("Username5", "Password5", "ID5");
+        User user6 = new User("Username6", "Password6", "ID6");
+        User user7 = new User("Username7", "Password7", "ID7");
+        User user8 = new User("Username8", "Password8", "ID8");
+        User user9 = new User("Username9", "Password9", "ID9");
+        User user10 = new User("Username10", "Password10", "ID10");
+        User userNull = new User(null, null, null);
         User defaultUser = new User();
 
         //Creates the lists of users to get the usernames out of
-        ArrayList<User> emptyUserArrayList = new ArrayList<>();
-        ArrayList<User> allUserArrayList = new ArrayList<>();
-        ArrayList<User>  nullUserArrayList = new ArrayList<>();
-        ArrayList<User> defaultUserArrayList = new ArrayList<>();
-        ArrayList<User> oneUserArrayList = new ArrayList<>();
+        List<User> emptyUserArrayList = new ArrayList<>();
+        List<User> allUserArrayList = new ArrayList<>();
+        List<User> nullUserArrayList = new ArrayList<>();
+        List<User> defaultUserArrayList = new ArrayList<>();
+        List<User> oneUserArrayList = new ArrayList<>();
 
         allUserArrayList.add(user1);
         allUserArrayList.add(user2);
@@ -59,22 +60,32 @@ public class LdouglasUnitTest {
 
         //String lists for comparing
         String[] emptyList = new String[0];
-        String[] fullList = new String[]{"Username1", "Username2", "Username3", "Username4", "Username5",
-                "Username6", "Username7", "Username8", "Username9", "Username10"};
-        String[] nullList = new String[]{"Username1", "Username4", null, "Username6"};
-        String[] defaultList = new String[]{"Username2", "Username5", "default", "Username9"};
+        String[] fullList = new String[]{"Username1", "Username2",
+                "Username3", "Username4", "Username5",
+                "Username6", "Username7", "Username8",
+                "Username9", "Username10"};
+        String[] nullList = new String[]{"Username1",
+                "Username4", null, "Username6"};
+        String[] defaultList = new String[]{"Username2",
+                "Username5", "default", "Username9"};
         String[] oneList = new String[]{"Username1"};
 
         //actual testing
-        assertArrayEquals("Passing an empty User list should return an empty array", emptyList,
+        assertArrayEquals("Passing an empty User list should return " +
+                        "an empty array",
+                emptyList,
                 User.findUserNames(emptyUserArrayList));
-        assertArrayEquals("Passing a full User list should return list of usernames of the same length", fullList,
+        assertArrayEquals("Passing a full User list should return " +
+                        "list of usernames of the same length", fullList,
                 User.findUserNames(allUserArrayList));
-        assertArrayEquals("Passing a User list with a null should return list of usernames of the same length with a null",
+        assertArrayEquals("Passing a User list with a null should " +
+                        "return list of usernames of the same length with a null",
                 nullList, User.findUserNames(nullUserArrayList));
-        assertArrayEquals("Passing a default User list should return list of usernames of the same length with default",
+        assertArrayEquals("Passing a default User list should return " +
+                        "list of usernames of the same length with default",
                 defaultList, User.findUserNames(defaultUserArrayList));
-        assertArrayEquals("Passing a User list with one user should return list of usernames of the same length",
+        assertArrayEquals("Passing a User list with one user should " +
+                        "return list of usernames of the same length",
                 oneList, User.findUserNames(oneUserArrayList));
     }
 }

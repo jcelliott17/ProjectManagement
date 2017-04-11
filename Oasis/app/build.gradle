@@ -1,3 +1,6 @@
+//noinspection GradleCompatible
+//noinspection GradleCompatible
+//noinspection GradleCompatible
 apply plugin: 'com.android.application'
 
 //noinspection GroovyMissingReturnStatement
@@ -37,7 +40,7 @@ dependencies {
     compile 'com.google.firebase:firebase-database:9.8.0'
     compile 'com.google.gms:google-services:3.0.0'
     //compile 'com.google.android.gms:play-services:9.6.0'
-    //noinspection GradleDependency
+    //noinspection UseOfBundledGooglePlayServices,GradleDependency
     compile 'com.google.android.gms:play-services:9.8.0'
     //noinspection GradleDependency
     compile 'com.google.android.gms:play-services-maps:9.8.0' // was 9.6.0

@@ -280,6 +280,8 @@ public class QualityReport implements Parcelable {
     /**
      * Blah blah JUnits, returns the greater value between Virus/Contaminant PPM
      *
+     * @param _virus virus
+     * @param _contaminant contaminant
      * @return string indicating whichever value is greater
      */
     public String greaterPPMVal(double _virus, double _contaminant) {

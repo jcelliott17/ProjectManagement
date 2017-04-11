@@ -1,5 +1,7 @@
 package com.example.jackieelliott.Oasis.Model;
 
+import java.util.List;
+
 /**
  * User class
  */
@@ -65,7 +67,7 @@ public class User {
      * Getter
      * @return username
      */
-    public CharSequence getUsername() { return this._username; }
+    public String getUsername() { return this._username; }
 
     /**
      * Getter
@@ -111,17 +113,15 @@ public class User {
     public void setAccountType(String accountType) { this._accountType = accountType; }
 
     /**
-     * Returns a list of the usernames from array of Users
-     * @param userList
+     * Returns a list of the userNames from array of Users
+     * @param userList List of Users
      * @return returnList
      */
-    public static String[] findUserNames(ArrayList<User> userList) {
+    public static String[] findUserNames(List<User> userList) {
         String[] returnList = new String[userList.size()];
-        if (userList == null) {
-            return null;
-        }
         for (int i = 0; i < userList.size(); i++) {
-            returnList[i] = userList.get(i).getUsername();
+            User u = userList.get(i);
+            returnList[i] = u.getUsername();
         }
         return returnList;
     }
