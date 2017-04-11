@@ -266,7 +266,7 @@ public class QualityReport implements Parcelable {
     }
 
     /**
-     * Gets the logitude and latitude and multiplies them together (created this method
+     * Gets the longitude and latitude and multiplies them together (created this method
      *    for the sake of making a JUnit to test it as there weren't any more interesting
      *    methods to use)
      * @param _longitude the longitude of the water quality entry
@@ -274,9 +274,7 @@ public class QualityReport implements Parcelable {
      * @return a double of the latitude times the longitude
      */
     public double getLongLat(double _longitude, double _latitude) {
-        double longlat = 0;
-        longlat = _longitude * _latitude;
-        return longlat;
+        return _longitude * _latitude;
     }
 
     //Returns a list of quality reports in a given year

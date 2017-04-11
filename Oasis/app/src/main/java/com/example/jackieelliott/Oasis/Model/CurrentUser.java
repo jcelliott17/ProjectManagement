@@ -9,6 +9,7 @@ public class CurrentUser {
 
     private static User currentUser;
 
+    @SuppressWarnings("unused")
     CurrentUser(User curUser) {
         //noinspection AssignmentToStaticFieldFromInstanceMethod
         currentUser = curUser;

@@ -15,7 +15,8 @@ public class User {
     private String _homeAddress;
     private String _emailAddress;
     private String _accountType;
-    private String _password;
+    @SuppressWarnings({"unused", "FieldCanBeLocal"})
+    private final String _password;
     private final String _userID;
     private int _permission;
 

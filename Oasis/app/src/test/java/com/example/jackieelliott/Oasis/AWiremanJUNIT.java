@@ -9,14 +9,16 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+@SuppressWarnings("ALL")
 public class AWiremanJUNIT {
     /**
      * Example unit test method
      *
      * @throws Exception when not equal
      */
+    @SuppressWarnings("unused")
     @Test
-    public final void checkLongLat() throws Exception {
+    public final void checkLongLat() {
         double latitude = 9.03;
         double longitude = 1.03;
 
