@@ -110,4 +110,20 @@ public class User {
      */
     public void setAccountType(String accountType) { this._accountType = accountType; }
 
+    /**
+     * Returns a list of the usernames from array of Users
+     * @param userList
+     * @return returnList
+     */
+    public static String[] findUserNames(ArrayList<User> userList) {
+        String[] returnList = new String[userList.size()];
+        if (userList == null) {
+            return null;
+        }
+        for (int i = 0; i < userList.size(); i++) {
+            returnList[i] = userList.get(i).getUsername();
+        }
+        return returnList;
+    }
+
 }

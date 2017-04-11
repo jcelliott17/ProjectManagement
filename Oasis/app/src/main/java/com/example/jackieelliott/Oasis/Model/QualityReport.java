@@ -277,6 +277,20 @@ public class QualityReport implements Parcelable {
         return _longitude * _latitude;
     }
 
+    /**
+     * Blah blah JUnits, returns the greater value between Virus/Contaminant PPM
+     *
+     * @return string indicating whichever value is greater
+     */
+    public String greaterPPMVal(double _virus, double _contaminant) {
+        if (_virus > _contaminant) {
+            return "Virus PPM is greater";
+        } else if (_virus < _contaminant) {
+            return "Contaminant PPM is greater";
+        }
+        return "Virus and Contaminant PPM are equal";
+    }
+
     //Returns a list of quality reports in a given year
     //Use deprecated Date code because android wouldn't support localDateTime
     /**
