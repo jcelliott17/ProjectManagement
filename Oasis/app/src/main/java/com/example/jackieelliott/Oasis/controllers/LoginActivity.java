@@ -157,6 +157,40 @@ public class LoginActivity extends Activity {
 
     }
 
+    /**
+     * Adds functionality to forgot-password button
+     */
+    private void addListenerOnButtonForgotPassword() {
+        Button forgotPassword = (Button) findViewById(R.id.forgot_password);
+        this.loginField = (EditText) findViewById(R.id.username_text);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        final AlertDialog alertDialog = builder.create();
+        //Ignore this issue, portability issues
+        alertDialog.setTitle("Error");
+        alertDialog.setMessage("You haven't supplied an email");
+        alertDialog.setButton(DialogInterface.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                if (!TextUtils.isEmpty(loginField.getText())) {
+                    sendResetEmail();
+                } else {
+                    alertDialog.show();
+                }
+            }
+
+        });
+    }
+
     private void signIn() {
         Editable e1 = loginField.getText();
         Editable e2 = passField.getText();
@@ -254,6 +288,20 @@ public class LoginActivity extends Activity {
         }
 
         return valid;
+    }
+
+    private void sendResetEmail() {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        auth.sendPasswordResetEmail(loginField.getText().toString())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "Email sent.");
+                        }
+                    }
+                });
     }
 
     @Override
