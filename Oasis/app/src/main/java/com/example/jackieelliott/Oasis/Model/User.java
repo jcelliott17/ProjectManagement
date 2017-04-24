@@ -13,13 +13,13 @@ public class User {
     /**
      * Attributes of the User class
      */
-    private final String _username;
+    private String _username;
     private String _homeAddress;
     private String _emailAddress;
     private String _accountType;
     @SuppressWarnings({"unused", "FieldCanBeLocal"})
-    private final String _password;
-    private final String _userID;
+    private String _password;
+    private String _userID;
     private int _permission;
 
     /**
@@ -126,4 +126,9 @@ public class User {
         return returnList;
     }
 
+    // Firebase's necessary setters
+    public void setUsername(String username) { _username = username; }
+    public void setPassword(String password) {_password = password; }
+    public void setUserID (String uID) { _userID = uID; }
+    
 }

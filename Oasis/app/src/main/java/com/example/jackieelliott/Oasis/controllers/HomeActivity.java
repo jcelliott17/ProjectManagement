@@ -99,9 +99,9 @@ public class HomeActivity extends Activity {
                 for (DataSnapshot user : userList) {
                     User candidate = user.getValue(User.class);
                     Log.d(TAG, "looping!");
-                    FirebaseAuth fa = FirebaseAuth.getInstance();
-                    if (fa != null) {
-                        FirebaseUser cu = fa.getCurrentUser();
+                    //FirebaseAuth fa = FirebaseAuth.getInstance();
+                    if (mAuth != null) {
+                        FirebaseUser cu = mAuth.getCurrentUser();
                         if (cu != null) {
                             String id = cu.getUid();
                             String uId = candidate.getUserID();

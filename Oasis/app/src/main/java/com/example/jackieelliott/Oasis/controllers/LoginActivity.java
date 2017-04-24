@@ -99,9 +99,9 @@ public class LoginActivity extends Activity {
                     User candidate = user.getValue(User.class);
                     Log.d(TAG, "looping!");
                     //noinspection ChainedMethodCall
-                    FirebaseAuth fa = FirebaseAuth.getInstance();
-                    if (fa != null) {
-                        FirebaseUser cu = fa.getCurrentUser();
+                    //FirebaseAuth fa = FirebaseAuth.getInstance();
+                    if (mAuth != null) {
+                        FirebaseUser cu = mAuth.getCurrentUser();
                         if (cu != null) {
                             String id = cu.getUid();
                             String uId = candidate.getUserID();
@@ -182,7 +182,7 @@ public class LoginActivity extends Activity {
 
             @Override
             public void onClick(View arg0) {
-                if (!TextUtils.isEmpty(loginField.getText())) {
+                if (!TextUtils.isEmpty(loginField.getText().toString())) {
                     sendResetEmail();
                 } else {
                     alertDialog.show();
@@ -209,17 +209,13 @@ public class LoginActivity extends Activity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
-                            Toast text = Toast.makeText(LoginActivity.this,
-                                    "Authentication failed.",
-                                    Toast.LENGTH_LONG);
-                            text.show();
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast text = Toast.makeText(LoginActivity.this, "You're in!",
-                                    Toast.LENGTH_SHORT);
-                            text.show();
-                            User current = CurrentUser.getUser();
-                            //noinspection LawOfDemeter
-                            Log.d(TAG, "Cur Perm: " + current.getPermission());
+                            Toast.makeText(LoginActivity.this, "You're in!",
+                                    Toast.LENGTH_SHORT).show();
+                            //Log.d(TAG, "Cur Perm: " + CurrentUser.getUser().getPermission());
+                            mUserReference.addValueEventListener(mUserListener);
                             goToHome();
                         }
 
@@ -292,17 +288,20 @@ public class LoginActivity extends Activity {
     }
 
     private void sendResetEmail() {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
+        //FirebaseAuth auth = FirebaseAuth.getInstance();
         Log.d(TAG, "Try.");
-        auth.sendPasswordResetEmail(loginField.getText().toString())
+        mAuth.sendPasswordResetEmail(loginField.getText().toString())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        Toast text;
                         if (task.isSuccessful()) {
-                            Log.d(TAG, "Email sent.");
+                            text = Toast.makeText(LoginActivity.this, "Email sent!",
+                                    Toast.LENGTH_SHORT);
                         } else {
-                            Log.d(TAG, "FAILURE.");
-                        }
+                            text = Toast.makeText(LoginActivity.this, "Email not found.",
+                                    Toast.LENGTH_SHORT);                        }
+                        text.show();
                     }
                 });
     }
