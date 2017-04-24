@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:weightSum="1">
 
     <TextView
         android:text="@string/userPass"
@@ -48,4 +49,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/login_Cancel" />
+
+    <Button
+        android:id="@+id/forgot_password"
+        android:layout_width="412dp"
+        android:layout_height="28dp"
+        android:layout_weight="0.03"
+        android:background="@color/cast_expanded_controller_ad_container_white_stripe_color"
+        android:text="Forgot your password?"
+        android:textColor="?android:attr/colorEdgeEffect" />
+
 </LinearLayout>

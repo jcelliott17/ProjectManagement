@@ -64,6 +64,7 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login_page);
         addListenerOnButtonLogin();
         addListenerOnButtonCancel();
+        addListenerOnButtonForgotPassword();
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         this.reportList  = b.getParcelableArrayList("ReportList");
@@ -292,13 +293,15 @@ public class LoginActivity extends Activity {
 
     private void sendResetEmail() {
         FirebaseAuth auth = FirebaseAuth.getInstance();
-
+        Log.d(TAG, "Try.");
         auth.sendPasswordResetEmail(loginField.getText().toString())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "Email sent.");
+                        } else {
+                            Log.d(TAG, "FAILURE.");
                         }
                     }
                 });
