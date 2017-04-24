@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.jackieelliott.Oasis.Model.CurrentUser;
@@ -16,6 +17,9 @@ import com.example.jackieelliott.Oasis.Model.QualityReport;
 import com.example.jackieelliott.Oasis.Model.Report;
 import com.example.jackieelliott.Oasis.Model.User;
 import com.example.jackieelliott.Oasis.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -37,6 +41,8 @@ public class ProfileActivity extends Activity {
     private TextView accountType;
     private ArrayList<Report> reportList;
     private ArrayList<QualityReport> qualityList;
+    private ImageView profile_image;
+
 
     /**
      * Creates the Profile activity which has the necessary information
@@ -54,6 +60,7 @@ public class ProfileActivity extends Activity {
         this.username.setText(current.getUsername());
         this.email = (EditText) findViewById(R.id.emailText);
         this.homeAddress = (EditText) findViewById(R.id.addressText);
+        this.profile_image = (ImageView) findViewById(R.id.profileImage);
         //noinspection LawOfDemeter
         this.accountType.setText(current.getAccountType());
         Intent intent = getIntent();
@@ -76,6 +83,17 @@ public class ProfileActivity extends Activity {
                 //noinspection LawOfDemeter
                 this.homeAddress.setText(current.getHomeAddress());
             }
+        }
+
+        User curr = CurrentUser.getUser();
+        if (curr.getPermission() == 1) {
+            this.profile_image.setImageResource(R.drawable.user_profile);
+        } else if (curr.getPermission() == 2) {
+            this.profile_image.setImageResource(R.drawable.worker_profile);
+        } else if (curr.getPermission() == 3) {
+            this.profile_image.setImageResource(R.drawable.manager_profile);
+        } else if (curr.getPermission() == 4) {
+            this.profile_image.setImageResource(R.drawable.admin_profile);
         }
     }
 
