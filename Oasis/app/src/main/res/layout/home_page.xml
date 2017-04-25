@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -7,87 +8,127 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="48dp">
-
-        <Button
-            android:text="@string/profile"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/button2"
-            android:elevation="0dp"
-            android:layout_weight="1.71"
-            android:backgroundTint="@color/wallet_holo_blue_light"
-            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-            tools:ignore="ButtonStyle,UnusedAttribute" />
-
-        <Button
-            android:text="@string/submitRep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/report_button"
-            android:backgroundTint="@android:color/holo_blue_dark"
-            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-            tools:ignore="ButtonStyle,UnusedAttribute" />
-
-        <Button
-            android:text="@string/logout"
-            android:layout_width="123dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/logout_button"
-            android:backgroundTint="@android:color/holo_blue_bright"
-            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-            tools:ignore="ButtonStyle,UnusedAttribute" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="1">
 
-        <Button
-            android:text="@string/map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tempMap"
-            android:elevation="0dp"
-            android:textSize="12sp"
-            android:visibility="visible"
-            tools:ignore="ButtonStyle,UnusedAttribute" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <Button
-            android:text="@string/trends"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/graph_button"
-            android:textSize="12sp"
-            android:layout_weight="1.03"
-            tools:ignore="ButtonStyle" />
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/drips" />
 
-        <Button
-            android:text="@string/QRL"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/qualityList_button"
-            android:textSize="12sp"
-            tools:ignore="ButtonStyle" />
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/report_button"
+                android:layout_toStartOf="@+id/report_button"
+                android:layout_weight="1.71"
+                android:backgroundTint="@color/wallet_holo_blue_light"
+                android:elevation="0dp"
+                android:text="@string/profile"
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
+            <Button
+                android:id="@+id/report_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="@android:color/holo_blue_dark"
+                android:text="@string/submitRep"
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+                tools:ignore="ButtonStyle,UnusedAttribute" />
+
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="123dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:backgroundTint="@android:color/holo_blue_bright"
+                android:text="@string/logout"
+                android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+                tools:ignore="ButtonStyle,UnusedAttribute" />
+
+            <Button
+                android:id="@+id/tempMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/button2"
+                android:layout_toLeftOf="@+id/report_button"
+                android:layout_toStartOf="@+id/report_button"
+                android:elevation="0dp"
+                android:text="@string/map"
+                android:textSize="12sp"
+                android:visibility="visible"
+                tools:ignore="ButtonStyle,UnusedAttribute" />
+
+            <Button
+                android:id="@+id/graph_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/button2"
+                android:layout_toEndOf="@+id/button2"
+                android:layout_toLeftOf="@+id/logout_button"
+                android:layout_toRightOf="@+id/button2"
+                android:layout_weight="0.41"
+                android:text="@string/trends"
+                android:textSize="12sp"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/qualityList_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/graph_button"
+                android:layout_alignBottom="@+id/graph_button"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="@string/QRL"
+                android:textSize="12sp"
+                tools:ignore="ButtonStyle" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tempMap"
+                android:fontFamily="sans-serif"
+                android:text="@string/repList"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="36sp"
+                android:typeface="normal"
+                tools:ignore="UnusedAttribute" />
+
+            <ListView
+                android:id="@+id/reports_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/textView3" />
+
+        </RelativeLayout>
     </LinearLayout>
-
-    <TextView
-        android:text="@string/repList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="36sp"
-        android:typeface="normal"
-        android:fontFamily="sans-serif"
-        android:textColor="@color/colorPrimaryDark"
-        tools:ignore="UnusedAttribute" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/reports_list" />
 
 </LinearLayout>

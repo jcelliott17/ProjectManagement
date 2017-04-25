@@ -106,17 +106,21 @@
         android:inputType="numberDecimal" />
 
     <Button
-        android:text="@string/createRep"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/create_report_button"
-        android:layout_weight="0.03" />
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_weight="0.03"
+        android:background="@drawable/wave"
+        android:text="@string/createRep" />
 
     <Button
-        android:text="@string/back"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/backButton"
-        android:layout_weight="0.04" />
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_weight="0.04"
+        android:background="@drawable/wave"
+        android:text="@string/back"
+        android:visibility="visible" />
 
 </LinearLayout>
