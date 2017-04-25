@@ -56,26 +56,26 @@
                 android:id="@+id/logout_button"
                 android:layout_width="123dp"
                 android:layout_height="50dp"
+                android:layout_above="@+id/tempMap"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:backgroundTint="@android:color/holo_blue_bright"
                 android:text="@string/logout"
                 android:textColor="@color/common_google_signin_btn_text_dark_pressed"
-                tools:ignore="ButtonStyle,UnusedAttribute"
-                android:layout_above="@+id/tempMap"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
             <Button
                 android:id="@+id/tempMap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/button2"
+                android:layout_alignStart="@+id/button2"
+                android:layout_below="@+id/button2"
                 android:elevation="0dp"
                 android:text="@string/map"
                 android:textSize="12sp"
                 android:visibility="visible"
-                tools:ignore="ButtonStyle,UnusedAttribute"
-                android:layout_below="@+id/button2"
-                android:layout_alignLeft="@+id/button2"
-                android:layout_alignStart="@+id/button2" />
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
             <Button
                 android:id="@+id/graph_button"
@@ -105,24 +105,23 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/qualityList_button"
                 android:fontFamily="sans-serif"
                 android:text="@string/repList"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="36sp"
-                android:typeface="normal"
-                tools:ignore="UnusedAttribute"
-                android:layout_below="@+id/qualityList_button"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                tools:ignore="UnusedAttribute" />
 
             <ListView
                 android:id="@+id/reports_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/textView3"
                 android:layout_alignLeft="@+id/tempMap"
-                android:layout_alignStart="@+id/tempMap" />
+                android:layout_alignStart="@+id/tempMap"
+                android:layout_below="@+id/textView3" />
 
         </RelativeLayout>
     </LinearLayout>
